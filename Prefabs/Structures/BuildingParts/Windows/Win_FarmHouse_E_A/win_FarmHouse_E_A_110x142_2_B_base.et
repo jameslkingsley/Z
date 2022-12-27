@@ -1,0 +1,10 @@
+Building : "{2B188379767C8461}Prefabs/Structures/Core/DestructibleWindow_Base.et" {
+ ID "5104B6C51D848E98"
+ {
+  Z_LootContainerEntity : "{647C2A674ACADF0E}Prefabs/Loot/Z_LootContainer_EssentialsGeneral.et" {
+   ID "5B34F9FE459E10A0"
+   coords -0.005 -0.569 0.079
+   scale 0.44
+  }
+ }
+}

@@ -1,0 +1,8 @@
+GameProject {
+ ID "Z"
+ GUID "5B34DB3A897B8B2B"
+ TITLE "Z"
+ Dependencies {
+  "59636E668EA37AD7" "58D0FB3206B6F859"
+ }
+}

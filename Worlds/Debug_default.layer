@@ -1,0 +1,32 @@
+EL_GameModeRoleplay GameMode_Roleplay1 : "{03913608C59017A3}Prefabs/MP/Modes/Roleplay/GameMode_Roleplay.et" {
+ components {
+  EL_PersistenceManagerComponent "{59D28944F1C3532E}" {
+  }
+ }
+ coords -25.905 -0 68.021
+}
+EL_SpawnPoint {
+ coords -23.75 0.956 63.586
+ m_fSpawnRadius 5
+}
+SCR_DestructibleBuildingEntity : "{2A0DFE1E88D6D508}Prefabs/Structures/Houses/Village/House_Village_E_1L03/House_Village_E_1L03t_yellow.et" {
+ coords -20.755 0 92.725
+ angleY -179.735
+}
+SCR_DestructibleBuildingEntity : "{4942F5A04C472230}Prefabs/Structures/Houses/Village/House_Village_E_1I04/House_Village_E_1I04sf_red.et" {
+ coords -48.897 0.179 90.176
+ angleY 177.774
+}
+SCR_DestructibleBuildingEntity : "{60333F74EE12B52F}Prefabs/Structures/Houses/Village/House_Village_E_1I05/House_Village_E_1I05s.et" {
+ coords -64.416 0.102 67.855
+ angleY -90.675
+}
+SCR_DestructibleBuildingEntity : "{678574044F58E1CA}Prefabs/Structures/Houses/Village/House_Mountain_E_1I01/House_Mountain_E_1I01_short.et" {
+ coords -44.842 0.203 48.397
+}
+SCR_DestructibleBuildingEntity : "{ABF506279E60CA67}Prefabs/Structures/Military/Houses/Barracks_E_02/Barracks_E_02_camo.et" {
+ coords 8.742 -0.135 62.479
+}
+SCR_DestructibleBuildingEntity : "{BEF9077AF9F93AE7}Prefabs/Structures/Houses/Village/House_Mountain_E_1I01/House_Mountain_E_1I01.et" {
+ coords -26.299 0.13 48.034
+}

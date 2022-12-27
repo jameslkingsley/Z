@@ -1,0 +1,52 @@
+Z_LootVolumeEntity {
+ ID "5B32CE2512212B2F"
+ coords 108.755 1.001 137.683
+ m_LootVolumes {
+  Z_LootVolume "{5B32CE22C5F4FC45}" {
+  }
+  Z_LootVolume "{5B32CE22C2749AB9}" {
+   m_Category Sustenance
+   m_Rarity Uncommon
+  }
+  Z_LootVolume "{5B32CE22C2401F94}" {
+   m_Category Medical
+   m_Rarity Uncommon
+  }
+  Z_LootVolume "{5B32CE22C2A8E42F}" {
+   m_Category Equipment
+   m_Rarity Uncommon
+  }
+  Z_LootVolume "{5B32CE22C2B51272}" {
+   m_Category ClothingCivilian
+   m_Rarity Uncommon
+  }
+  Z_LootVolume "{5B32CE22C2816F4C}" {
+   m_Category Agricultural
+   m_Rarity Uncommon
+  }
+  Z_LootVolume "{5B32CE22C2E8D78B}" {
+   m_Category Industrial
+   m_Rarity Uncommon
+  }
+  Z_LootVolume "{5B32CE22C2F55FD8}" {
+   m_Category Ammunition
+   m_Rarity Uncommon
+  }
+  Z_LootVolume "{5B32CE22C2C06B08}" {
+   m_Category Attachments
+   m_Rarity Rare
+  }
+  Z_LootVolume "{5B34F9FB48713E84}" {
+   m_Category WeaponsSmall
+   m_Rarity Rare
+  }
+  Z_LootVolume "{5B34F9FB488FBC7B}" {
+   m_Category WeaponsLarge
+   m_Rarity Epic
+  }
+  Z_LootVolume "{5B355D6DF14476C5}" {
+   m_Category ClothingMilitary
+   m_Rarity Rare
+  }
+ }
+}

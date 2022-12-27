@@ -1,0 +1,9 @@
+Z_LootContainerEntity : "{EBE9660A3A74C747}Prefabs/Loot/Z_LootContainer_Base.et" {
+ ID "5B3147C482D4B55A"
+ components {
+  Z_LootContainerComponent "{5B3147C377374C4B}" {
+  }
+ }
+ coords -0.414 1.196 0.204
+ scale 0.44
+}

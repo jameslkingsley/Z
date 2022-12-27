@@ -1,0 +1,17 @@
+GenericEntity : "{533AC2E8A0F5272A}Prefabs/Structures/BuildingParts/BuildingParts_Base.et" {
+ ID "5111E74D4E7A8DB6"
+ {
+  $grp Z_LootContainerEntity : "{98BFDEED8C442568}Prefabs/Loot/Z_LootContainer_MilitaryMixed.et" {
+   {
+    ID "5B3542472D2D0E50"
+    coords -0.509 2.026 -0.017
+    scale 0.56
+   }
+   {
+    ID "5B3542472D2D0E79"
+    coords 0.408 2.026 -0.017
+    scale 0.56
+   }
+  }
+ }
+}

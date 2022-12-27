@@ -1,0 +1,27 @@
+GenericEntity : "{4CC2C69DE1AEF103}Prefabs/Props/Core/Destructible_Props_Base.et" {
+ ID "6093E737DD535EDA"
+ {
+  $grp Z_LootContainerEntity : "{647C2A674ACADF0E}Prefabs/Loot/Z_LootContainer_DomesticShelf.et" {
+   {
+    ID "5B330576BB13AAC2"
+    coords -1.651 2.59 0.168
+    scale 0.44
+   }
+   {
+    ID "5B330576BB13AACC"
+    coords -1.848 1.145 0.332
+    scale 0.44
+   }
+   {
+    ID "5B330576BB13AAF9"
+    coords -0.48 2.59 0.168
+    scale 0.44
+   }
+   {
+    ID "5B330576BB13AB1E"
+    coords -1.194 1.145 0.332
+    scale 0.44
+   }
+  }
+ }
+}

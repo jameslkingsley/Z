@@ -1,0 +1,53 @@
+Z_LootVolumeEntity {
+ ID "5B3542442471474F"
+ coords 0.075 -1.285 -1.27
+ m_LootVolumes {
+  Z_LootVolume "{5B354244F4429E15}" {
+   m_Category Industrial
+   m_Rarity Impossible
+  }
+  Z_LootVolume "{5B354244F4AE9B70}" {
+   m_Category Agricultural
+   m_Rarity Impossible
+  }
+  Z_LootVolume "{5B354244F4BBD426}" {
+   m_Rarity Impossible
+  }
+  Z_LootVolume "{5B354244F48427DC}" {
+   m_Category Sustenance
+   m_Rarity Rare
+  }
+  Z_LootVolume "{5B354244F4EE43A9}" {
+   m_Category Equipment
+   m_Rarity Rare
+  }
+  Z_LootVolume "{5B354244F4F9EDF8}" {
+   m_Category ClothingCivilian
+   m_Rarity Epic
+  }
+  Z_LootVolume "{5B354244F4C0C6EB}" {
+   m_Category ClothingMilitary
+   m_Rarity Rare
+  }
+  Z_LootVolume "{5B355D719AB8BE0A}" {
+   m_Category Medical
+   m_Rarity Rare
+  }
+  Z_LootVolume "{5B355D719A828572}" {
+   m_Category Attachments
+   m_Rarity Epic
+  }
+  Z_LootVolume "{5B355D719AED14AE}" {
+   m_Category Ammunition
+   m_Rarity Rare
+  }
+  Z_LootVolume "{5B355D719AF56C9E}" {
+   m_Category WeaponsSmall
+   m_Rarity Rare
+  }
+  Z_LootVolume "{5B355D719BA96A8A}" {
+   m_Category WeaponsLarge
+   m_Rarity Epic
+  }
+ }
+}

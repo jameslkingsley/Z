@@ -1,0 +1,10 @@
+GenericEntity : "{10C26F96EF7A8CF5}Prefabs/Props/Core/Props_Base.et" {
+ ID "F0DBA538AC2A0552"
+ {
+  Z_LootContainerEntity : "{C0E03D0B856DF3E7}Prefabs/Loot/Z_LootContainer_Basket.et" {
+   ID "5B330576E5BF3974"
+   coords 0.001 0.268 -0.047
+   scale 0.44
+  }
+ }
+}

@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{33C8C16C9503C5B1}Prefabs/Props/Industrial/BenchIndustrial_01/BenchIndustrial_01_base.et"
+ Configurations {
+  EntityTemplateResourceClass PC {
+  }
+  EntityTemplateResourceClass XBOX_ONE : PC {
+  }
+  EntityTemplateResourceClass XBOX_SERIES : PC {
+  }
+  EntityTemplateResourceClass PS4 : PC {
+  }
+  EntityTemplateResourceClass HEADLESS : PC {
+  }
+ }
+}

@@ -1,0 +1,10 @@
+GenericEntity : "{4CC2C69DE1AEF103}Prefabs/Props/Core/Destructible_Props_Base.et" {
+ ID "F0DBA538AC2A0552"
+ {
+  Z_LootContainerEntity : "{98BFDEED8C442568}Prefabs/Loot/Z_LootContainer_MilitaryMixed.et" {
+   ID "5B354247045096F2"
+   coords -0.006 1.965 0.009
+   scale 0.62
+  }
+ }
+}

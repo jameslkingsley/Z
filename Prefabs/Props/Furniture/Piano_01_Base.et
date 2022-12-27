@@ -1,0 +1,17 @@
+GenericEntity : "{10C26F96EF7A8CF5}Prefabs/Props/Core/Props_Base.et" {
+ ID "F0DBA538AC2A0552"
+ {
+  $grp Z_LootContainerEntity : "{647C2A674ACADF0E}Prefabs/Loot/Z_LootContainer_EssentialsGeneral.et" {
+   {
+    ID "5B34F9FE22122F18"
+    coords -0.601 1.642 0.238
+    scale 0.44
+   }
+   {
+    ID "5B34F9FE22122F3E"
+    coords 0.389 1.642 0.238
+    scale 0.44
+   }
+  }
+ }
+}

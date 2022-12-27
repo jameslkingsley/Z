@@ -1,0 +1,37 @@
+EL_GameModeRoleplay {
+ ID "59751433747FB462"
+ components {
+  EL_RespawnSytemComponent "{5A10698A884816E6}" {
+   Enabled 0
+  }
+  EL_RespawnSytemComponent "{5B34DB3EC1935859}" {
+   m_aDefaultCharacterPrefabs {
+    "{CE23D4366B47E9B9}Prefabs/Characters/Presets/White_Male_01.et" "{BFD6AFB8A1D8E2F9}Prefabs/Characters/Presets/Black_Male_02.et" "{C465F15DDF56A6D8}Prefabs/Characters/Presets/Asian_Male_02.et"
+   }
+   m_aDefaultCharacterItems {
+    EL_DefaultLoadoutItem "{5B34DB3ED68146FF}" {
+     m_rPrefab "{DCF980831E880F6A}Prefabs/Characters/Uniforms/Pants_M88.et"
+    }
+    EL_DefaultLoadoutItem "{5B34DB3EEFDC9C23}" {
+     m_rPrefab "{D262D2102B9931C6}Prefabs/Characters/Uniforms/Jacket_M88_rolledup.et"
+     m_aStoredItems {
+      EL_DefaultLoadoutItem "{5B34DB3EE52B9C4F}" {
+       m_rPrefab "{A81F501D3EF6F38E}Prefabs/Items/Medicine/FieldDressing_US_01.et"
+       m_iAmount 2
+      }
+     }
+    }
+    EL_DefaultLoadoutItem "{5B34DB3EEC25FA61}" {
+     m_rPrefab "{C7923961D7235D70}Prefabs/Characters/Footwear/CombatBoots_Soviet_01.et"
+    }
+   }
+  }
+  Z_LootGameModeComponent "{5B34F9F3FF724477}" {
+   m_LootContainerExpiryInSeconds 60
+   m_LootContainerCollectionIntervalInSeconds 2
+   m_LootContainerQueryRadius 50
+   m_LootContainerCooldownInSeconds 60
+  }
+ }
+ PlayerControllerPrefab "{CC42DCDAD458D66C}Prefabs/Characters/Core/PlayerControllerRoleplayMP.et"
+}

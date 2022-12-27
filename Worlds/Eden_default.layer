@@ -1,0 +1,56 @@
+EL_GameModeRoleplay GameMode_Roleplay1 : "{03913608C59017A3}Prefabs/MP/Modes/Roleplay/GameMode_Roleplay.et" {
+ components {
+  Z_LootGameModeComponent "{5B34F9F3FF724477}" {
+   m_LootContainerQueryRadius 100
+  }
+ }
+ coords 9687.663 13.439 1546.795
+}
+EL_SpawnPoint {
+ coords 5734.377 218.813 7071.045
+ m_fSpawnRadius 50
+}
+$grp Z_LootVolumeEntity : "{618E44E8874ABDB0}Prefabs/Loot/Z_LootVolume_Military.et" {
+ {
+  coords 5305.369 47.632 10553.095
+ }
+ {
+  coords 4636.622 28.238 11167.88
+ }
+ {
+  coords 4922.534 28.595 11856.796
+ }
+}
+Z_LootVolumeEntity : "{AE58375B8F4B3024}Prefabs/Loot/Z_LootVolume_Base.et" {
+ coords 9688.498 13.458 1547.868
+}
+$grp Z_LootVolumeEntity : "{E952E2FDEA2D9172}Prefabs/Loot/Z_LootVolume_Domestic.et" {
+ {
+  coords 4509.139 20.545 10781.64
+ }
+ {
+  coords 5246.104 38.782 11367.779
+ }
+ {
+  coords 5756.13 29.374 10209.188
+ }
+ {
+  coords 5745.45 218.087 7062.193
+ }
+}
+Vehicle M151A1 : "{F649585ABB3706C4}Prefabs/Vehicles/Wheeled/M151A2/M151A2.et" {
+ components {
+  BaseVehicleNodeComponent "{20FB66C5B2237133}" {
+   components {
+    SCR_CarControllerComponent "{20FB66C5BC92275B}" {
+     MaxStartupAttempts 1
+    }
+   }
+  }
+  SCR_VehicleDamageManagerComponent "{141326E9FD94FE40}" {
+   m_fVehicleDestroyDamage 8980.1
+  }
+ }
+ coords 5492.309 44.644 10527.494
+ angleY 170.387
+}

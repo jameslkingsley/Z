@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{21AA3BBF84D7705D}Prefabs/Loot/Z_LootContainer_StorageShelf.et"
+ Configurations {
+  EntityTemplateResourceClass PC {
+  }
+  EntityTemplateResourceClass XBOX_ONE : PC {
+  }
+  EntityTemplateResourceClass XBOX_SERIES : PC {
+  }
+  EntityTemplateResourceClass PS4 : PC {
+  }
+  EntityTemplateResourceClass HEADLESS : PC {
+  }
+ }
+}
