@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{5F97E54397247954}Prefabs/Structures/Military/Houses/Barracks_01/Barracks_01_military_base.et"
+ Name "{28411B0C79460DF8}Prefabs/Structures/Core/BuildingFurniture_base.et"
  Configurations {
   EntityTemplateResourceClass PC {
   }

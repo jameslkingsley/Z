@@ -4,22 +4,22 @@ class Z_LootGameModeComponentClass: SCR_BaseGameModeComponentClass
 
 class Z_LootGameModeComponent: SCR_BaseGameModeComponent
 {
-	[Attribute("300", UIWidgets.Auto, "Seconds before loot containers are dehydrated")]
-	int m_LootContainerExpiryInSeconds;
+	[Attribute("300", UIWidgets.Auto, "Seconds before loot volumes are dehydrated")]
+	int m_LootVolumeExpiryInSeconds;
 	
-	[Attribute("10", UIWidgets.Auto, "Interval in seconds for when nearby loot containers are collected")]
-	int m_LootContainerCollectionIntervalInSeconds;
+	[Attribute("10", UIWidgets.Auto, "Interval in seconds for when nearby loot volumes are collected")]
+	int m_LootVolumeCollectionIntervalInSeconds;
 	
-	[Attribute("500", UIWidgets.Auto, "Radius of the loot container collection sphere around players")]
-	int m_LootContainerQueryRadius;
+	[Attribute("100", UIWidgets.Auto, "Radius of the loot volume collection sphere around players")]
+	int m_LootVolumeQueryRadius;
 	
-	[Attribute("3600", UIWidgets.Auto, "Cooldown in seconds before loot containers refill")]
-	int m_LootContainerCooldownInSeconds;
+	[Attribute("3600", UIWidgets.Auto, "Cooldown in seconds before loot volumes refill")]
+	int m_LootVolumeCooldownInSeconds;
+
+	[Attribute("{82F1EADE5E5A0569}Config/Z_LootTableConfig.conf", UIWidgets.ResourceNamePicker, "Loot table config")]
+	ResourceName m_LootTableConfig;
 	
-	[Attribute("{EEEF74405A235519}Config/Z_LootTableDefinitionsConfig.conf", UIWidgets.ResourceNamePicker, "Loot table definitions config")]
-	ResourceName m_LootTableDefinitionsConfig;
-	
-	ref array<Z_LootVolumeEntity> m_LootVolumeEntities = {};
+	ref array<Z_LootRegionComponent> m_LootRegions = {};
 	
 	static Z_LootGameModeComponent GetInstance()
 	{
@@ -32,75 +32,59 @@ class Z_LootGameModeComponent: SCR_BaseGameModeComponent
 	
 	override void OnPostInit(IEntity owner)
 	{
-		GetGame().GetCallqueue().CallLater(CollectLootContainers, m_LootContainerCollectionIntervalInSeconds * 1000, true);
+		GetGame().GetCallqueue().CallLater(CollectLootVolumes, m_LootVolumeCollectionIntervalInSeconds * 1000, true);
 	}
 	
-	int GetLootContainerCooldown()
+	int GetLootVolumeCooldown()
 	{
-		return m_LootContainerCooldownInSeconds;
+		return m_LootVolumeCooldownInSeconds;
 	}
-	
-	ref array<ref Z_LootTableDefinition> GetLootTableDefinitions()
+
+	ref array<ref Z_LootTable> GetLootTables()
 	{
-		Resource container = BaseContainerTools.LoadContainer(m_LootTableDefinitionsConfig);
+		Resource container = BaseContainerTools.LoadContainer(m_LootTableConfig);
 					
-		Z_LootTableDefinitionsConfig config = Z_LootTableDefinitionsConfig.Cast(
+		Z_LootTableConfig config = Z_LootTableConfig.Cast(
 			BaseContainerTools.CreateInstanceFromContainer(container.GetResource().ToBaseContainer())
 		);
 		
-		return config.m_LootTableDefinitions;
+		return config.m_LootTables;
 	}
 	
-	Z_LootTableDefinition GetLootTableDefinition(Z_LootCategory category)
+	void RegisterLootRegion(Z_LootRegionComponent region)
 	{
-		foreach (ref Z_LootTableDefinition table : GetLootTableDefinitions())
+		if (m_LootRegions.Contains(region))
+			return;
+		
+		m_LootRegions.Insert(region);
+	}
+	
+	Z_LootRegionComponent GetLootRegionThatSurroundsEntity(IEntity ent)
+	{
+		foreach (Z_LootRegionComponent region : m_LootRegions)
 		{
-			if (table.m_Category == category) {
-				return table;
-			}
+			PolylineArea area = region.GetPolylineArea();
+			
+			if (! area)
+				continue;
+			
+			if (region.GetPolylineArea().IsEntityInside(ent))
+				return region;
 		}
 		
 		return null;
 	}
 	
-	ref array<Z_LootVolumeEntity> GetLootVolumeEntities(bool withNonEmptyLootVolumes = true)
+	void HydrateLootVolume(Z_LootVolumeEntity ent)
 	{
-		if (withNonEmptyLootVolumes) {
-			ref array<Z_LootVolumeEntity> vols = {};
-			
-			foreach (Z_LootVolumeEntity v : m_LootVolumeEntities)
-			{
-				if (v.HasLootVolumes()) {
-					vols.Insert(v);
-				}
-			}
-			
-			return vols;
-		}
+		GetGame().GetCallqueue().RemoveByName(ent, "Dehydrate");
 		
-		return m_LootVolumeEntities;
+		GetGame().GetCallqueue().CallLaterByName(ent, "Dehydrate", m_LootVolumeExpiryInSeconds * 1000, false);
+		
+		GetGame().GetCallqueue().CallByName(ent, "Hydrate");
 	}
 	
-	void RegisterLootVolume(Z_LootVolumeEntity ent)
-	{
-		if (!ent)
-			return;
-		
-		m_LootVolumeEntities.Insert(ent);
-	}
-	
-	void HydrateLootContainer(IEntity ent)
-	{
-		Z_LootContainerComponent container = Z_LootContainerComponent.Cast(ent.FindComponent(Z_LootContainerComponent));
-		
-		GetGame().GetCallqueue().RemoveByName(container, "Dehydrate");
-		
-		GetGame().GetCallqueue().CallLaterByName(container, "Dehydrate", m_LootContainerExpiryInSeconds * 1000, false, ent);
-		
-		container.Hydrate(ent);
-	}
-	
-	void CollectLootContainers()
+	void CollectLootVolumes()
 	{
 		array<int> players = {};
 		GetGame().GetPlayerManager().GetPlayers(players);
@@ -112,55 +96,31 @@ class Z_LootGameModeComponent: SCR_BaseGameModeComponent
 			if (! playerEnt)
 				continue;
 			
+			// TODO Might be faster to loop all registered
+			// loot volumes and check distance to each player.
 			GetGame().GetWorld().QueryEntitiesBySphere(
 				playerEnt.GetOrigin(),
-				m_LootContainerQueryRadius,
-				GetLootContainerEntity,
-				FilterLootContainerEntities,
+				m_LootVolumeQueryRadius,
+				GetLootVolumeEntity,
+				FilterLootVolumeEntities,
 				EQueryEntitiesFlags.ALL
 			);
 		}
 	}
 	
-	bool GetLootContainerEntity(IEntity ent)
+	bool GetLootVolumeEntity(IEntity ent)
 	{
-		if (ent.FindComponent(Z_LootContainerComponent))
-			HydrateLootContainer(ent);
-		
-		if (ent.GetChildren())
-		{
-			IEntity child = ent.GetChildren();
-						
-			while (child)
-			{
-				if (child.FindComponent(Z_LootContainerComponent))
-					HydrateLootContainer(child);
-				
-				child = child.GetSibling();
-			}			
+		if (ent.Type() == Z_LootVolumeEntity) {
+			HydrateLootVolume(Z_LootVolumeEntity.Cast(ent));
 		}
 
 		return true;
 	}
 	
-	bool FilterLootContainerEntities(IEntity ent)
+	bool FilterLootVolumeEntities(IEntity ent)
 	{
-		if (ent.FindComponent(Z_LootContainerComponent)) {
+		if (ent.Type() == Z_LootVolumeEntity) {
 			return true;
-		}
-		
-		if (ent.GetChildren())
-		{
-			IEntity child = ent.GetChildren();
-						
-			while (child)
-			{
-				if (child.FindComponent(Z_LootContainerComponent)) {
-					return true;
-				}
-				
-				child = child.GetSibling();
-			}			
 		}
 
 		return false;

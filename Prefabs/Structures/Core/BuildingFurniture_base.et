@@ -1,0 +1,9 @@
+GenericEntity {
+ ID "56A8CBB92342240A"
+ {
+  Z_LootParentalIntegrityEntity {
+   ID "5B36D5756D99DB04"
+   coords 0 0 0
+  }
+ }
+}

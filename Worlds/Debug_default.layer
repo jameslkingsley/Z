@@ -2,12 +2,126 @@ EL_GameModeRoleplay GameMode_Roleplay1 : "{03913608C59017A3}Prefabs/MP/Modes/Rol
  components {
   EL_PersistenceManagerComponent "{59D28944F1C3532E}" {
   }
+  Z_LootGameModeComponent "{5B34F9F3FF724477}" {
+   m_LootVolumeExpiryInSeconds 60
+   m_LootVolumeCollectionIntervalInSeconds 5
+   m_LootVolumeCooldownInSeconds 60
+  }
  }
- coords -25.905 -0 68.021
+ coords -25.905 0 68.021
 }
 EL_SpawnPoint {
  coords -23.75 0.956 63.586
  m_fSpawnRadius 5
+}
+$grp PolylineArea {
+ {
+  components {
+   Z_LootRegionComponent "{5B374E1CFC0CAA72}" {
+    m_LootRegionTiers {
+     Z_LootRegionTier "{5B374E1CFD2F88CA}" {
+      m_LootTier Tier1
+      m_ProbabilityMin 0.3
+      m_ProbabilityMax 0.5
+     }
+     Z_LootRegionTier "{5B374E1CFD1FC165}" {
+      m_LootTier Tier2
+      m_ProbabilityMin 0.1
+      m_ProbabilityMax 0.3
+     }
+     Z_LootRegionTier "{5B374E1CFD777302}" {
+      m_LootTier Tier3
+      m_ProbabilityMin 0.01
+      m_ProbabilityMax 0.1
+     }
+    }
+   }
+  }
+  coords 0 0 0
+  {
+   PolylineShapeEntity {
+    components {
+     Hierarchy "{5B374E1CD464A735}" {
+     }
+    }
+    coords 0 0 0
+    Points {
+     ShapePoint "{5B3749E31C9A87A2}" {
+      Position 0 0 0
+     }
+     ShapePoint "{5B3749E31C9A853E}" {
+      Position 5 0 0
+     }
+     ShapePoint "{5B3749E3181C4E9F}" {
+      Position 45.985 0 49.211
+     }
+     ShapePoint "{5B3749E31971AA89}" {
+      Position 41.03 0 123.623
+     }
+     ShapePoint "{5B3749E319FBFE38}" {
+      Position -109.145 0 131.222
+     }
+     ShapePoint "{5B3749E316121314}" {
+      Position -78.553 0 27.407
+     }
+     ShapePoint "{5B3749E3152512A3}" {
+      Position -6.781 0 -0.007
+     }
+    }
+    IsClosed 1
+   }
+  }
+ }
+ {
+  components {
+   Z_LootRegionComponent "{5B380D7E4E792B70}" {
+    m_LootRegionTiers {
+     Z_LootRegionTier "{5B380D7E4ED61325}" {
+      m_LootTier Tier1
+     }
+     Z_LootRegionTier "{5B380D7E4F239072}" {
+      m_LootTier Tier2
+     }
+     Z_LootRegionTier "{5B380D7E4F31DD34}" {
+      m_LootTier Tier3
+      m_ProbabilityMin 1
+      m_ProbabilityMax 1
+     }
+    }
+   }
+  }
+  coords 0 0 0
+  {
+   PolylineShapeEntity {
+    components {
+     Hierarchy "{5B380D7E32D24D6C}" {
+     }
+    }
+    coords 0 0 0
+    Points {
+     ShapePoint "{5B380D7E24B73DE3}" {
+      Position 34.647 0 72.806
+     }
+     ShapePoint "{5B380D7E25D3B978}" {
+      Position -7.609 0 71.586
+     }
+     ShapePoint "{5B380D7E2044D669}" {
+      Position -19.502 0 71.172
+     }
+     ShapePoint "{5B380D7E21032E62}" {
+      Position -19.457 0 53.778
+     }
+     ShapePoint "{5B380D7E3E5C365E}" {
+      Position 36.266 0 53.244
+     }
+     ShapePoint "{5B380D7E3F62E234}" {
+      Position 35.323 0 70.939
+     }
+    }
+    IsClosed 1
+   }
+  }
+ }
 }
 SCR_DestructibleBuildingEntity : "{2A0DFE1E88D6D508}Prefabs/Structures/Houses/Village/House_Village_E_1L03/House_Village_E_1L03t_yellow.et" {
  coords -20.755 0 92.725
@@ -25,7 +139,7 @@ SCR_DestructibleBuildingEntity : "{678574044F58E1CA}Prefabs/Structures/Houses/Vi
  coords -44.842 0.203 48.397
 }
 SCR_DestructibleBuildingEntity : "{ABF506279E60CA67}Prefabs/Structures/Military/Houses/Barracks_E_02/Barracks_E_02_camo.et" {
- coords 8.742 -0.135 62.479
+ coords 8.742 0.001 62.479
 }
 SCR_DestructibleBuildingEntity : "{BEF9077AF9F93AE7}Prefabs/Structures/Houses/Village/House_Mountain_E_1I01/House_Mountain_E_1I01.et" {
  coords -26.299 0.13 48.034

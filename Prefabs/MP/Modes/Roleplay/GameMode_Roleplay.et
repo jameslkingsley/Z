@@ -27,10 +27,25 @@ EL_GameModeRoleplay {
    }
   }
   Z_LootGameModeComponent "{5B34F9F3FF724477}" {
-   m_LootContainerExpiryInSeconds 60
-   m_LootContainerCollectionIntervalInSeconds 2
-   m_LootContainerQueryRadius 50
-   m_LootContainerCooldownInSeconds 60
+  }
+  Z_LootRegionComponent "{5B3826F7ADA5ADB8}" {
+   m_LootRegionTiers {
+    Z_LootRegionTier "{5B3826F7AAE31303}" {
+     m_LootTier Tier1
+     m_ProbabilityMin 0.12
+     m_ProbabilityMax 0.5
+    }
+    Z_LootRegionTier "{5B3826F7AACD937F}" {
+     m_LootTier Tier2
+     m_ProbabilityMin 0.06
+     m_ProbabilityMax 0.12
+    }
+    Z_LootRegionTier "{5B3826F7AAD8A420}" {
+     m_LootTier Tier3
+     m_ProbabilityMin 0.01
+     m_ProbabilityMax 0.06
+    }
+   }
   }
  }
  PlayerControllerPrefab "{CC42DCDAD458D66C}Prefabs/Characters/Core/PlayerControllerRoleplayMP.et"
