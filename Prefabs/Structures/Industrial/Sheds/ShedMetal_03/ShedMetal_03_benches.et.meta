@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{94D3BD5DD76E3D0C}Prefabs/Structures/Industrial/Sheds/ShedMetal_03/ShedMetal_03_benches.et"
+ Configurations {
+  EntityTemplateResourceClass PC {
+  }
+  EntityTemplateResourceClass XBOX_ONE : PC {
+  }
+  EntityTemplateResourceClass XBOX_SERIES : PC {
+  }
+  EntityTemplateResourceClass PS4 : PC {
+  }
+  EntityTemplateResourceClass HEADLESS : PC {
+  }
+ }
+}

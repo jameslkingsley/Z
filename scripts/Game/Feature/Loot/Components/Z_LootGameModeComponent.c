@@ -32,6 +32,8 @@ class Z_LootGameModeComponent: SCR_BaseGameModeComponent
 	
 	override void OnPostInit(IEntity owner)
 	{
+		if (! EL_PersistenceManager.IsPersistenceMaster()) return;
+		
 		GetGame().GetCallqueue().CallLater(CollectLootVolumes, m_LootVolumeCollectionIntervalInSeconds * 1000, true);
 	}
 	

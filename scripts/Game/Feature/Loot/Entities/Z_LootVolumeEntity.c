@@ -13,11 +13,13 @@ class Z_LootVolumeEntity: GenericEntity
 	
 	ref array<Z_LootContainerEntity> m_Containers = new ref array<Z_LootContainerEntity>();
 	
+	ref map<Z_LootTier, int> m_SpawnedTiers = new ref map<Z_LootTier, int>();
+	
 	bool m_IsHydrated = false;
 	
 	bool m_IsIgnored = false;
 	
-	ref map<Z_LootTier, int> m_SpawnedTiers = new ref map<Z_LootTier, int>();
+	bool m_DebugUseAllContainers = false;
 	
 	void Z_LootVolumeEntity(IEntitySource src, IEntity parent)
 	{
@@ -33,6 +35,16 @@ class Z_LootVolumeEntity: GenericEntity
 	{
 		super.EOnInit(owner);
 		
+		if (! EL_PersistenceManager.IsPersistenceMaster()) return;
+		
+		if (m_Categories.IsEmpty() || m_Locations.IsEmpty()) {
+			Print("Loot volume has no configured categories or locations", LogLevel.SPAM);
+			
+			m_IsIgnored = true;
+			
+			return;
+		}
+		
 		IEntity parent = GetParent();
 		
 		if (! parent)
@@ -45,26 +57,21 @@ class Z_LootVolumeEntity: GenericEntity
 	
 	void Hydrate()
 	{
-		// TODO Re-add cooldown
 		if (m_IsIgnored || m_IsHydrated)
 			return;
-		
-		if (m_Categories.IsEmpty() || m_Locations.IsEmpty()) {
-			Print("Loot volume has no configured categories or locations");
-			
-			return;
-		}
 		
 		// If this volume doesn't have any containers
 		// then just mark it as ignored and forget about it.
 		// It will never gain containers mid-session.
 		if (m_Containers.IsEmpty()) {
-			Print("Volume does not contain any containers");
+			Print("Volume does not contain any containers", LogLevel.ERROR);
 			
 			m_IsIgnored = true;
 			
 			return;
 		}
+		
+		int hydratedCount = 0;
 		
 		ref array<Z_LootContainerEntity> containersForNewHydrations = {};
 		
@@ -84,25 +91,39 @@ class Z_LootVolumeEntity: GenericEntity
 			
 			container.SpawnOwnLootable(this);
 			
-			Print("Hydrated loot volume from previous state");
+			hydratedCount++;
 		}
 		
 		Z_LootRegionComponent region = GetLootRegion();
+		
+		Print("Chose loot region: " + region.GetRegionSummary(), LogLevel.DEBUG);
 		
 		vector pos = GetOrigin();
 		
 		int containerCount = containersForNewHydrations.Count();
 		
-		int countOfContainersToUse = Math.RandomInt((int) Math.Ceil(containerCount / 2), containerCount);
+		int countOfContainersToUse = Math.RandomInt((int) Math.Ceil(containerCount * region.GetMinimumContainerUsePercentage()), containerCount);
+		
+		if (m_DebugUseAllContainers) {
+			countOfContainersToUse = containersForNewHydrations.Count();
+		}
+		
+		Print("Using " + countOfContainersToUse + " loot containers for volume", LogLevel.DEBUG);
 		
 		for (int i = 0; i < countOfContainersToUse; i++)
 		{
-			Z_LootContainerEntity container = containersForNewHydrations.GetRandomElement();
+			Z_LootContainerEntity container;
 			
-			if (container.IsInCooldown())
+			if (m_DebugUseAllContainers) {
+				container = containersForNewHydrations.Get(i);
+			} else {
+				container = containersForNewHydrations.GetRandomElement();
+			}
+			
+			if (container.IsInCooldown() || container.HasSpawned())
 				continue;
 			
-			array<ref Z_LootTier> acceptableTiers = GetAcceptableTiers();
+			array<ref Z_LootTier> acceptableTiers = GetAcceptableTiers(region);
 			
 			ref array<ref Z_LootTable> tables = Z_LootTableUtilities.GetTablesHaving(
 				// TODO Possibly add acceptable category limit as well
@@ -110,26 +131,39 @@ class Z_LootVolumeEntity: GenericEntity
 			);
 			
 			if (tables.IsEmpty()) {
+				Print("No loot table matching parameters: " + m_Categories + " / " + m_Locations + " / " + acceptableTiers, LogLevel.WARNING);
+				
 				break;
 			}
 			
-			Z_LootTier tier = region.PickTier(acceptableTiers);
+			Z_LootRegionTier tier = region.PickTier(acceptableTiers);
 			
-			Z_LootTable table = Z_LootTableUtilities.GetRandomTable(tables, tier);
-			
-			if (! table)
+			if (! tier) {
+				// Print("Could not pick tier (unlucky)");
+				
 				continue;
+			}
+			
+			Z_LootTable table = Z_LootTableUtilities.GetRandomTable(tables, tier.m_LootTier);
+			
+			if (! table) {
+				Print("Could not pick random table for tier", LogLevel.WARNING);
+				
+				continue;
+			}
 			
 			container.SpawnLootTable(table, this);
 			
 			IncrementSpawnedTiers(table.m_Tier);
+			
+			hydratedCount++;
 			
 			// TODO Record and limit by resource name?
 		}
 		
 		m_IsHydrated = true;
 		
-		Print("Hydrated loot volume with new state");
+		Print("Hydrated loot volume: " + hydratedCount + " lootables", LogLevel.DEBUG);
 	}
 	
 	Z_LootRegionComponent GetLootRegion()
@@ -178,7 +212,7 @@ class Z_LootVolumeEntity: GenericEntity
 		
 		GetGame().GetWorld().QueryEntitiesBySphere(
 			GetOrigin(),
-			dist / 1.5,
+			dist,
 			GetLootContainerEntity,
 			FilterLootContainerEntities,
 			EQueryEntitiesFlags.ALL
@@ -207,7 +241,7 @@ class Z_LootVolumeEntity: GenericEntity
 		return false;
 	}
 	
-	array<ref Z_LootTier> GetAcceptableTiers()
+	array<ref Z_LootTier> GetAcceptableTiers(Z_LootRegionComponent region)
 	{
 		array<ref Z_LootTier> result = {};
 		
@@ -215,8 +249,11 @@ class Z_LootVolumeEntity: GenericEntity
 		
 		foreach (int tier : tiers)
 		{
-			if (HasReachedTierLimit(tier))
+			if (HasReachedTierLimit(tier, region)) {
+				Print("Tier has reached limit in volume: " + tier, LogLevel.DEBUG);
+				
 				continue;
+			}
 			
 			result.Insert(tier);
 		}
@@ -224,18 +261,18 @@ class Z_LootVolumeEntity: GenericEntity
 		return result;
 	}
 	
-	bool HasReachedTierLimit(Z_LootTier tier)
+	bool HasReachedTierLimit(Z_LootTier tier, Z_LootRegionComponent region)
 	{
 		int tierSpawns = m_SpawnedTiers.Get(tier);
 		
 		if (! tierSpawns)
 			tierSpawns = 0;
 		
-		// TODO Replace with proper region checking
-		// Region defines lower/upper limit for maximum tier spawns per volume
-		// Harder to reach areas are more rewarding
-		// return false;
-		return tierSpawns > Math.RandomInt(1, 10);
+		int regionTierSpawns = region.GetTierSpawns(tier);
+		
+		Print("Checking tier spawns: " + tierSpawns + " >= " + regionTierSpawns, LogLevel.DEBUG);
+
+		return tierSpawns >= regionTierSpawns;
 	}
 	
 	void IncrementSpawnedTiers(Z_LootTier tier)
@@ -269,6 +306,6 @@ class Z_LootVolumeEntity: GenericEntity
 		
 		m_IsHydrated = false;
 		
-		Print("Dehydrated loot volume");
+		Print("Dehydrated loot volume", LogLevel.DEBUG);
 	}
 }

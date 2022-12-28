@@ -1,0 +1,191 @@
+SCR_DestructibleBuildingEntity : "{E35EA41864A3B0ED}Prefabs/Structures/Industrial/Houses/Warehouse_01/Warehouse_01_Base.et" {
+ ID "51DC7DF1903152C8"
+ {
+  $grp Z_LootContainerEntity : "{EBE9660A3A74C747}Prefabs/Loot/Z_LootContainer_Base.et" {
+   {
+    ID "5B38A36AAABB8520"
+    coords -16.993 1.184 -5.153
+    scale 0.66
+   }
+   {
+    ID "5B38A36AAABB852A"
+    coords 5.461 1.26 -6.009
+    scale 0.65
+   }
+   {
+    ID "5B38A36AAABB8531"
+    coords 3.934 1.26 -6.009
+    scale 0.65
+   }
+   {
+    ID "5B38A36AAABB853C"
+    coords 11.627 3.096 3.423
+    angleY -4.41
+   }
+   {
+    ID "5B38A36AAABB8540"
+    coords -8.658 4.294 5.636
+    angleY -2.412
+   }
+   {
+    ID "5B38A36AAABB854A"
+    coords -8.706 1.89 5.525
+    angleY -2.412
+   }
+   {
+    ID "5B38A36AAABB8552"
+    coords -8.371 4.292 -2.04
+    angleY -2.932
+   }
+   {
+    ID "5B38A36AAABB8559"
+    coords -8.478 4.292 0.039
+    angleY -2.932
+   }
+   {
+    ID "5B38A36AAABB8562"
+    coords -4.553 4.295 -1.9
+    angleY -3.463
+   }
+   {
+    ID "5B38A36AAABB8569"
+    coords -4.81 4.297 3.512
+    angleY -1.932
+   }
+   {
+    ID "5B38A36AAABB8571"
+    coords -4.879 4.297 5.56
+    angleY -1.932
+   }
+   {
+    ID "5B38A36AAABB8578"
+    coords -8.569 4.294 3.522
+    angleY -2.412
+   }
+   {
+    ID "5B38A36AAABB8585"
+    coords -4.678 3.095 0.167
+    angleY -3.463
+   }
+   {
+    ID "5B38A36AAABB8599"
+    coords -4.678 4.295 0.167
+    angleY -3.463
+   }
+   {
+    ID "5B38A36AAABB85A3"
+    coords 3.464 3.093 2.866
+   }
+   {
+    ID "5B38A36AAABB85A9"
+    coords 3.343 0.692 4.683
+   }
+   {
+    ID "5B38A36AAABB85B0"
+    coords -4.59 1.898 -2.27
+   }
+   {
+    ID "5B38A36AAABB85BC"
+    coords -4.552 3.095 -1.907
+    angleY -3.463
+   }
+   {
+    ID "5B38A36AAABB85C5"
+    coords 7.393 4.297 5.185
+   }
+   {
+    ID "5B38A36AAABB85CE"
+    coords 3.444 4.297 2.881
+   }
+   {
+    ID "5B38A36AAABB85DA"
+    coords 3.319 4.289 4.914
+   }
+   {
+    ID "5B38A36AAABB85E5"
+    coords -1.108 2.293 -0.773
+   }
+   {
+    ID "5B38A36AAABB85EF"
+    coords -3.117 1.332 -3.452
+   }
+   {
+    ID "5B38A36AAABB85F7"
+    coords -3.171 1.312 -6.032
+   }
+   {
+    ID "5B38A36AAABB85FE"
+    coords 7.618 4.289 3.117
+   }
+   {
+    ID "5B38A36AAABBFA02"
+    coords 9.433 4.286 -5.955
+    angleY -5.632
+   }
+   {
+    ID "5B38A36AAABBFA09"
+    coords 13.352 4.288 -5.748
+    angleY -5.632
+   }
+   {
+    ID "5B38A36AAABBFA13"
+    coords 15.354 4.288 -5.733
+    angleY -5.632
+   }
+   {
+    ID "5B38A36AAABBFA1B"
+    coords 0.358 1.113 -0.632
+   }
+   {
+    ID "5B38A36AAABBFA28"
+    coords 11.48 3.088 -5.933
+    angleY -5.632
+   }
+   {
+    ID "5B38A36AAABBFA34"
+    coords 11.48 4.288 -5.933
+    angleY -5.632
+   }
+   {
+    ID "5B38A36AAABBFA41"
+    coords 15.351 1.899 -5.6
+    angleY -5.632
+   }
+   {
+    ID "5B38A36AAABBFA4D"
+    coords 13.279 1.899 -5.804
+    angleY -5.632
+   }
+   {
+    ID "5B38A36AAABBFA56"
+    coords 9.433 1.899 -5.955
+    angleY -5.632
+   }
+   {
+    ID "5B38A36AAABBFA5F"
+    coords 9.433 3.088 -5.955
+    angleY -5.632
+   }
+   {
+    ID "5B38A36AAABBFA67"
+    coords 12.97 1.179 6.128
+    scale 0.64
+   }
+   {
+    ID "5B38A36AAABBFA75"
+    coords 15.351 0.707 -5.6
+    angleY -5.632
+   }
+   {
+    ID "5B38A36AAABBFA98"
+    coords 11.462 4.29 5.587
+    angleY -4.362
+   }
+   {
+    ID "5B38A36AAABBFABF"
+    coords 11.627 4.29 3.423
+    angleY -4.362
+   }
+  }
+ }
+}

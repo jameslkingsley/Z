@@ -4,7 +4,7 @@ class Z_LootContainerLootable
 	Z_LootTier tier;
 	vector origin;
 	vector yawPitchRoll;
-	bool dropFromHeight = false;
+	bool usePhysics = false;
 	
 	// TODO Damage states (magazine filled)
 }
@@ -25,10 +25,25 @@ class Z_LootContainerEntity: GenericEntity
 	
 	void Z_LootContainerEntity(IEntitySource src, IEntity parent)
 	{
+		// SetEventMask(EntityEvent.INIT);
+		
 		if (! parent)
 			return;
 		
 		parent.AddChild(this, -1, EAddChildFlags.RECALC_LOCAL_TRANSFORM);
+	}
+	
+	override event protected void EOnInit(IEntity owner)
+	{
+		super.EOnInit(owner);
+		
+		IEntity child = GetChildren();
+		
+		if (! child)
+			return;
+		
+		Print("Hydrating container from child entity");
+		m_LootableEntity = child;
 	}
 	
 	bool HasSpawned()
@@ -61,7 +76,10 @@ class Z_LootContainerEntity: GenericEntity
 		if (m_LootableEntity.GetOrigin() != m_Lootable.origin) {
 			m_LootedAtTimestampInSeconds = System.GetTickCount() / 1000;
 			
-			Print("Loot container was looted - setting cooldown");
+			// EnablePersistenceComponent(m_LootableEntity);
+			// RemoveChild(m_LootableEntity);
+			
+			Print("Loot container was looted - setting cooldown", LogLevel.DEBUG);
 			
 			return false;
 		}
@@ -77,9 +95,9 @@ class Z_LootContainerEntity: GenericEntity
 		
 		lootable.resource = table.m_Resource;
 		lootable.tier = table.m_Tier;
-		lootable.origin = GetOrigin();
-		lootable.yawPitchRoll = Vector(40, GetYawPitchRoll()[1], 90);
-		lootable.dropFromHeight = true;
+		lootable.origin = GetOrigin() + Vector(0, Math.RandomFloat(0.5, 1), 0);
+		lootable.yawPitchRoll = Vector(Math.RandomInt(-180, 180), Math.RandomInt(-90, 90), Math.RandomInt(-90, 90));
+		lootable.usePhysics = true;
 		
 		m_Lootable = lootable;
 		
@@ -95,40 +113,91 @@ class Z_LootContainerEntity: GenericEntity
 		if (! m_Lootable)
 			return;
 		
-		Z_LootContainerLootable lootable = m_Lootable;
-		
-		vector origin = lootable.origin;
-		
-		if (lootable.dropFromHeight)
-			origin += Vector(0, 0.25, 0);
-		
 		EntitySpawnParams spawnParams = EntitySpawnParams();
 		spawnParams.TransformMode = ETransformMode.WORLD;
-		spawnParams.Transform[3] = origin;
+		spawnParams.Transform[3] = m_Lootable.origin;
 		
 		m_LootableEntity = GetGame().SpawnEntityPrefab(
-			Resource.Load(lootable.resource),
+			Resource.Load(m_Lootable.resource),
 			GetGame().GetWorld(),
 			spawnParams
 		);
 		
-		m_LootableEntity.SetYawPitchRoll(lootable.yawPitchRoll);
+		m_LootableEntity.SetYawPitchRoll(m_Lootable.yawPitchRoll);
 		
-		if (! m_LootableEntity.GetPhysics()) {
+		m_LootableEntity.Update();
+		
+		// AddChild(m_LootableEntity, -1, EAddChildFlags.RECALC_LOCAL_TRANSFORM);
+		
+		// DisablePersistenceComponent(m_LootableEntity);
+		
+		if (m_Lootable.usePhysics) {
+			ActivatePhysics(m_LootableEntity);
+		}
+		
+		GetGame().GetCallqueue().CallLaterByName(this, "AfterEntityFinishedDrop", 5000, false, volume);
+	}
+	
+	void DisablePersistenceComponent(IEntity ent)
+	{
+		EL_PersistenceComponent persistence = EL_PersistenceComponent.Cast(ent.FindComponent(EL_PersistenceComponent));
+		
+		if (! persistence)
+			return;
+		
+		EL_PersistenceManagerInternal persistenceManager = EL_PersistenceManagerInternal.GetInternalInstance();
+
+		persistenceManager.UnregisterSaveRoot(persistence);
+	}
+	
+	void EnablePersistenceComponent(IEntity ent)
+	{
+		EL_PersistenceComponent persistence = EL_PersistenceComponent.Cast(ent.FindComponent(EL_PersistenceComponent));
+		
+		if (! persistence)
+			return;
+		
+		EL_PersistenceManagerInternal persistenceManager = EL_PersistenceManagerInternal.GetInternalInstance();
+
+		persistenceManager.RegisterSaveRoot(persistence, true);
+	}
+	
+	void ActivatePhysics(IEntity ent)
+	{
+		if (! ent.GetPhysics())
+		{
+			// Print("Lootable is missing physics: " + m_Lootable.resource.GetPath(), LogLevel.WARNING);
+			
 			return;
 		}
 		
-		if (lootable.dropFromHeight) {
-			m_OriginalInteractionLayer = GetParent().GetPhysics().GetInteractionLayer();
-			GetParent().GetPhysics().SetInteractionLayer(EPhysicsLayerDefs.Static);
+		if (! ent.GetPhysics().IsDynamic())
+		{
+			// Print("Lootable physics is not dynamic: " + m_Lootable.resource.GetPath(), LogLevel.WARNING);
 			
-			m_LootableEntity.GetPhysics().SetActive(ActiveState.ALWAYS_ACTIVE);
-			m_LootableEntity.GetPhysics().ChangeSimulationState(SimulationState.SIMULATION);
-			m_LootableEntity.GetPhysics().EnableGravity(true);
-			m_LootableEntity.GetPhysics().SetInteractionLayer(EPhysicsLayerDefs.Static);
+			float massInKilos = ent.GetPhysics().GetMass();
+			
+			if (massInKilos <= 0) massInKilos = 10;
+			
+			ent.GetPhysics().Destroy();
+			
+			Physics.CreateDynamic(ent, massInKilos, -1);
+			
+			if (! ent.GetPhysics())
+			{
+				Print("Failed to create dynamic physics for lootable", LogLevel.ERROR);
+				
+				return;
+			}
 		}
 		
-		GetGame().GetCallqueue().CallLaterByName(this, "AfterEntityFinishedDrop", 3000, false, volume);
+		m_OriginalInteractionLayer = GetParent().GetPhysics().GetInteractionLayer();
+		GetParent().GetPhysics().SetInteractionLayer(EPhysicsLayerDefs.Dynamic);
+		
+		ent.GetPhysics().SetActive(ActiveState.ACTIVE);
+		ent.GetPhysics().ChangeSimulationState(SimulationState.SIMULATION);
+		ent.GetPhysics().EnableGravity(true);
+		ent.GetPhysics().SetInteractionLayer(EPhysicsLayerDefs.Dynamic);
 	}
 	
 	void AfterEntityFinishedDrop(notnull Z_LootVolumeEntity volume)
@@ -136,8 +205,7 @@ class Z_LootContainerEntity: GenericEntity
 		if (! m_LootableEntity)
 			return;
 		
-		m_LootableEntity.GetPhysics().SetActive(ActiveState.INACTIVE);
-		m_LootableEntity.GetPhysics().ChangeSimulationState(SimulationState.NONE);
+		m_LootableEntity.GetPhysics().ChangeSimulationState(SimulationState.COLLISION);
 		m_LootableEntity.GetPhysics().SetInteractionLayer(EPhysicsLayerDefs.None);
 		
 		if (m_OriginalInteractionLayer) {
@@ -146,6 +214,6 @@ class Z_LootContainerEntity: GenericEntity
 		
 		m_Lootable.origin = m_LootableEntity.GetOrigin();
 		m_Lootable.yawPitchRoll = m_LootableEntity.GetYawPitchRoll();
-		m_Lootable.dropFromHeight = false;
+		m_Lootable.usePhysics = false;
 	}
 }

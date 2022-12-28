@@ -3,6 +3,20 @@ GameProject {
  GUID "5B34DB3A897B8B2B"
  TITLE "Z"
  Dependencies {
-  "59636E668EA37AD7" "58D0FB3206B6F859"
+  "58D0FB3206B6F859" "59636E668EA37AD7"
+ }
+ Configurations {
+  GameProjectConfig PC {
+   PhysicsSettings PhysicsSettings "{50C8B06FB4D5FA52}" {
+   }
+  }
+  GameProjectConfig XBOX_ONE {
+  }
+  GameProjectConfig XBOX_SERIES {
+  }
+  GameProjectConfig PS4 {
+  }
+  GameProjectConfig HEADLESS {
+  }
  }
 }

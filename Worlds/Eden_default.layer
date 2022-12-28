@@ -1,11 +1,240 @@
 EL_GameModeRoleplay GameMode_Roleplay1 : "{03913608C59017A3}Prefabs/MP/Modes/Roleplay/GameMode_Roleplay.et" {
  components {
   Z_LootGameModeComponent "{5B34F9F3FF724477}" {
+   m_LootVolumeCollectionIntervalInSeconds 2
   }
  }
  coords 9687.663 13.439 1546.795
 }
 EL_SpawnPoint {
- coords 4768.123 164.249 7093.676
+ coords 4554.058 17.904 10774.323
+ angleY 80.933
  m_fSpawnRadius 10
+}
+$grp PolylineArea {
+ AirfieldLootRegion {
+  components {
+   Z_LootRegionComponent "{5B38A36F4C72397D}" {
+    m_LootRegionTiers {
+     Z_LootRegionTier "{5B38A36F4D1D8D28}" {
+      m_LootTier Tier1
+      m_ProbabilityMin 0.4
+      m_ProbabilityMax 0.6
+      m_SpawnRangeLower 4
+      m_SpawnRangeUpper 18
+     }
+     Z_LootRegionTier "{5B38A36F4D69B0A3}" {
+      m_LootTier Tier2
+      m_ProbabilityMin 0.15
+      m_ProbabilityMax 0.4
+      m_SpawnRangeLower 4
+      m_SpawnRangeUpper 12
+     }
+     Z_LootRegionTier "{5B38A36F4D74AE3D}" {
+      m_LootTier Tier3
+      m_ProbabilityMin 0.04
+      m_ProbabilityMax 0.15
+      m_SpawnRangeLower 4
+      m_SpawnRangeUpper 8
+     }
+    }
+   }
+  }
+  coords 4718.642 24.783 12083.714
+  {
+   PolylineShapeEntity {
+    components {
+     Hierarchy "{5B38A36F300830AB}" {
+     }
+    }
+    coords 0 0 0
+    Points {
+     ShapePoint "{5B38A36F23945619}" {
+      Position 0 -0.001 0
+     }
+     ShapePoint "{5B38A36F23945742}" {
+      Position 5 -0.491 0
+     }
+     ShapePoint "{5B38A36F20FE7D93}" {
+      Position 311.964 0 -27.053
+     }
+     ShapePoint "{5B38A36F3F795106}" {
+      Position 264.238 0 -1095.775
+     }
+     ShapePoint "{5B38A36F3CF98E89}" {
+      Position -145.343 0 -989.381
+     }
+     ShapePoint "{5B38A36F3A6B4F58}" {
+      Position -203.326 0 -809.334
+     }
+     ShapePoint "{5B38A36F3B34E9EB}" {
+      Position -112.887 0 -710.081
+     }
+     ShapePoint "{5B38A36F3BE60E83}" {
+      Position -81.389 0 -591.527
+     }
+     ShapePoint "{5B38A36F3999C430}" {
+      Position -64.989 0 -183.427
+     }
+     ShapePoint "{5B38A36F368A5FEB}" {
+      Position -38.183 0 -9.546
+     }
+    }
+    IsClosed 1
+   }
+  }
+ }
+ StPhillipeLootRegion {
+  components {
+   Z_LootRegionComponent "{5B38B051EDF36594}" {
+    m_LootRegionTiers {
+     Z_LootRegionTier "{5B38B051EAD1E152}" {
+      m_LootTier Tier1
+      m_ProbabilityMin 0.12
+      m_ProbabilityMax 0.5
+      m_SpawnRangeLower 4
+      m_SpawnRangeUpper 16
+     }
+     Z_LootRegionTier "{5B38B051EB3FA303}" {
+      m_LootTier Tier2
+      m_ProbabilityMin 0.075
+      m_ProbabilityMax 0.12
+      m_SpawnRangeLower 3
+      m_SpawnRangeUpper 12
+     }
+     Z_LootRegionTier "{5B38B051EB088F4B}" {
+      m_LootTier Tier3
+      m_ProbabilityMin 0.01
+      m_ProbabilityMax 0.075
+      m_SpawnRangeLower 2
+      m_SpawnRangeUpper 6
+     }
+    }
+    m_DiceRolls 5
+   }
+  }
+  coords 4602.715 22.313 11005.689
+  {
+   PolylineShapeEntity {
+    components {
+     Hierarchy "{5B38B051D7EE1F6E}" {
+     }
+    }
+    coords 0 0 0
+    Points {
+     ShapePoint "{5B38B051B1ADF64A}" {
+      Position 0 -0.001 0
+     }
+     ShapePoint "{5B38B051B1ADF7D7}" {
+      Position 5 0.567 0
+     }
+     ShapePoint "{5B38B051CE0682B5}" {
+      Position 199.199 0 -276.898
+     }
+     ShapePoint "{5B38B051CEC372F3}" {
+      Position 309.195 0 -339.902
+     }
+     ShapePoint "{5B38B051CFAD0BBD}" {
+      Position 328.286 0 -486.009
+     }
+     ShapePoint "{5B38B051CC6D9A52}" {
+      Position 13.035 0 -687.74
+     }
+     ShapePoint "{5B38B051CD0EAE25}" {
+      Position -144.886 0 -676.271
+     }
+     ShapePoint "{5B38B051CA25FFA2}" {
+      Position -430.432 0 -525.579
+     }
+     ShapePoint "{5B38B051CB5E64F6}" {
+      Position -600.727 0 -375.467
+     }
+     ShapePoint "{5B38B051C8702727}" {
+      Position -593.594 0 -290.606
+     }
+     ShapePoint "{5B38B051C90EE6AC}" {
+      Position -351.339 0 -235.742
+     }
+     ShapePoint "{5B38B051C6967F32}" {
+      Position -385.781 0 -11.561
+     }
+     ShapePoint "{5B38B051C7579659}" {
+      Position -245.964 0 248.588
+     }
+     ShapePoint "{5B38B051C4B6D376}" {
+      Position -116.854 0 249.335
+     }
+     ShapePoint "{5B38B051C0425606}" {
+      Position -41.398 0 77.021
+     }
+     ShapePoint "{5B38B051DE5AC075}" {
+      Position -12.532 0 77.296
+     }
+     ShapePoint "{5B38B051DF31B19E}" {
+      Position 15.203 0 64.736
+     }
+    }
+    IsClosed 1
+   }
+  }
+ }
+ MilitaryTrainingLootRegion {
+  components {
+   Z_LootRegionComponent "{5B38FC8E3A5BEF45}" {
+    m_LootRegionTiers {
+     Z_LootRegionTier "{5B38FC8E49D292E4}" {
+      m_LootTier Tier1
+      m_ProbabilityMin 0.2
+      m_ProbabilityMax 0.5
+      m_SpawnRangeLower 12
+      m_SpawnRangeUpper 24
+     }
+     Z_LootRegionTier "{5B38FC8E463FF9F2}" {
+      m_LootTier Tier2
+      m_ProbabilityMin 0.1
+      m_ProbabilityMax 0.2
+      m_SpawnRangeLower 6
+      m_SpawnRangeUpper 12
+     }
+     Z_LootRegionTier "{5B38FC8E460DA125}" {
+      m_LootTier Tier3
+      m_ProbabilityMin 0.01
+      m_ProbabilityMax 0.1
+      m_SpawnRangeLower 3
+      m_SpawnRangeUpper 6
+     }
+    }
+    m_MinimumContainerUsePercentage 1
+    m_DiceRolls 5
+   }
+  }
+  coords 7784.065 11.971 8158.904
+  {
+   PolylineShapeEntity {
+    components {
+     Hierarchy "{5B38FC8E3F322E0E}" {
+     }
+    }
+    coords 0 0 0
+    Points {
+     ShapePoint "{5B38FC8E27106B90}" {
+      Position 0 -0.001 0
+     }
+     ShapePoint "{5B38FC8E271068E1}" {
+      Position 5 -0.096 0
+     }
+     ShapePoint "{5B38FC8E241902DB}" {
+      Position -156.325 0 165.743
+     }
+     ShapePoint "{5B38FC8E25320BC9}" {
+      Position -322.681 0 -12.523
+     }
+     ShapePoint "{5B38FC8E2220C2F6}" {
+      Position -106.388 0 -137.384
+     }
+    }
+    IsClosed 1
+   }
+  }
+ }
 }
