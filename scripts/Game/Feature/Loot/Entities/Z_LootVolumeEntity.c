@@ -93,6 +93,26 @@ class Z_LootVolumeEntity: GenericEntity
 		return IsPointInsideBBox(mins[0], maxs[2], maxs[0], mins[2], origin[0], origin[2]);
 	}
 	
+	bool HasPlayersInside()
+	{
+		array<int> players = {};
+		GetGame().GetPlayerManager().GetPlayers(players);
+		
+		vector mins, maxs;
+		GetParent().GetWorldBounds(mins, maxs);
+		
+		for (int i = 0, count = players.Count(); i < count; i++)
+		{
+			IEntity playerEnt = GetGame().GetPlayerManager().GetPlayerControlledEntity(players.Get(i));
+			
+			if (! playerEnt) continue;
+			
+			if (IsEntityInsideBBox(mins, maxs, playerEnt)) return true;
+		}
+		
+		return false;
+	}
+	
 	// Volume is considered sufficiently filled if its bounding box contains lootables
 	// This item-hungry approach also means players dropping loot inside
 	// buildings will prevent those buildings from spawning too much stuff.

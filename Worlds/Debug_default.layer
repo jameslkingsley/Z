@@ -37,6 +37,7 @@ EL_GameModeRoleplay GameMode_Roleplay1 : "{03913608C59017A3}Prefabs/MP/Modes/Rol
   }
   Z_LootGameModeComponent "{5B34F9F3FF724477}" {
    m_LootVolumeCollectionIntervalInSeconds 2
+   m_LootVolumeCooldownInSeconds 5
   }
   Z_LootRegionComponent "{5B3826F7ADA5ADB8}" {
    m_LootRegionTiers {

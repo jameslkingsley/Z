@@ -156,12 +156,9 @@ class Z_LootGameModeComponent: SCR_BaseGameModeComponent
 			
 			ref array<IEntity> lootables = new array<IEntity>();
 			
-			if (vol.HasSufficientLoot(lootables))
-			{
-				Print("Loot volume has sufficient loot");
-				
-				return true;
-			}
+			if (vol.HasSufficientLoot(lootables)) return true;
+			
+			if (vol.HasPlayersInside()) return true;
 			
 			RefillLootVolume(vol, lootables);
 		}
