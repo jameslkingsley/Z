@@ -10,11 +10,14 @@ class Z_LootGameModeComponent: SCR_BaseGameModeComponent
 	[Attribute("100", UIWidgets.Auto, "Radius of the loot volume collection sphere around players")]
 	int m_LootVolumeQueryRadius;
 	
-	[Attribute("3600", UIWidgets.Auto, "Cooldown in seconds before loot volumes refill")]
+	[Attribute("3600", UIWidgets.Auto, "Cooldown in seconds before loot volumes refill (if insufficiently filled)")]
 	int m_LootVolumeCooldownInSeconds;
 	
-	[Attribute("0.5", UIWidgets.Slider, "Percentage of empty containers within volumes until they are deemed insufficiently filled", "0 1 0.1")]
+	[Attribute("0.8", UIWidgets.Slider, "Percentage of empty containers within volumes until they are deemed insufficiently filled", "0 1 0.1")]
 	float m_VolumeInsufficiencyPercentage;
+	
+	[Attribute("2", UIWidgets.Auto, "Age of a lootable in hours before it is considered stale (and will be cleaned up on next restart)", "1 168")]
+	int m_LootableStaleAgeInHours;
 
 	[Attribute("{82F1EADE5E5A0569}Config/Z_LootTableConfig.conf", UIWidgets.ResourceNamePicker, "Loot table config")]
 	ResourceName m_LootTableConfig;
@@ -42,6 +45,11 @@ class Z_LootGameModeComponent: SCR_BaseGameModeComponent
 	int GetLootVolumeCooldown()
 	{
 		return m_LootVolumeCooldownInSeconds;
+	}
+	
+	int GetLootableStaleAgeInHours()
+	{
+		return m_LootableStaleAgeInHours;
 	}
 	
 	float GetVolumeInsufficiencyPercentage()

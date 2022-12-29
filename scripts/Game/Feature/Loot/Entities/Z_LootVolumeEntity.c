@@ -19,13 +19,15 @@ class Z_LootVolumeEntity: GenericEntity
 	
 	int m_RefilledAtTimestampInSeconds;
 	
+	private bool m_DebugLogs = false;
+	
 	void Z_LootVolumeEntity(IEntitySource src, IEntity parent)
 	{
 		SetEventMask(EntityEvent.INIT);
 		
 		if (! parent)
 		{
-			Print("Loot volume has no parent entity", LogLevel.SPAM);
+			Log("Loot volume has no parent entity", LogLevel.SPAM);
 			
 			m_IsIgnored = true;
 			
@@ -42,7 +44,7 @@ class Z_LootVolumeEntity: GenericEntity
 		if (! EL_PersistenceManager.IsPersistenceMaster()) return;
 		
 		if (m_Categories.IsEmpty() || m_Locations.IsEmpty()) {
-			Print("Loot volume has no configured categories or locations", LogLevel.SPAM);
+			Log("Loot volume has no configured categories or locations", LogLevel.SPAM);
 			
 			m_IsIgnored = true;
 			
@@ -54,6 +56,13 @@ class Z_LootVolumeEntity: GenericEntity
 		SetVolumeOriginToParentCentroid(parent);
 		
 		CacheLootContainers(parent);
+	}
+	
+	private void Log(string message, LogLevel level = LogLevel.NORMAL)
+	{
+		if (! m_DebugLogs) return;
+		
+		Print(message, level);
 	}
 	
 	bool IsInCooldown()
@@ -97,7 +106,7 @@ class Z_LootVolumeEntity: GenericEntity
 		
 		float insufficiency = Z_LootGameModeComponent.GetInstance().GetVolumeInsufficiencyPercentage();
 		
-		Print("Checking active entities: " + entities.Count());
+		Log("Checking active entities: " + entities.Count());
 		
 		foreach (IEntity ent : entities)
 		{
@@ -116,7 +125,7 @@ class Z_LootVolumeEntity: GenericEntity
 		
 		float pc = ((float) emptyContainers / (float) m_Containers.Count());
 		
-		Print("HasSufficientLoot: " + pc + " >= " + insufficiency + " | " + emptyContainers + " / " + m_Containers.Count());
+		Log("HasSufficientLoot: " + pc + " >= " + insufficiency + " | " + emptyContainers + " / " + m_Containers.Count());
 		
 		return pc < insufficiency;
 	}
@@ -128,7 +137,7 @@ class Z_LootVolumeEntity: GenericEntity
 		// It will never gain containers mid-session.
 		if (m_Containers.IsEmpty())
 		{
-			Print("Volume does not contain any containers", LogLevel.ERROR);
+			Log("Volume does not contain any containers", LogLevel.ERROR);
 			
 			m_IsIgnored = true;
 			
@@ -148,20 +157,20 @@ class Z_LootVolumeEntity: GenericEntity
 		int hydratedCount = 0;
 		
 		Z_LootRegionComponent region = GetLootRegion();
-		Print("Chose loot region: " + region.GetRegionSummary());
+		Log("Chose loot region: " + region.GetRegionSummary());
 		
 		vector pos = GetOrigin();
 		
 		ref array<Z_LootContainerEntity> emptyContainers = GetEmptyContainers(lootables);
 		
-		Print("Empty containers: " + emptyContainers.Count());
+		Log("Empty containers: " + emptyContainers.Count());
 		
 		int countOfContainersToUse = Math.RandomInt(
 			(int) Math.Ceil(emptyContainers.Count() * region.GetMinimumContainerUsePercentage()),
 			emptyContainers.Count()
 		);
 		
-		Print("Using " + countOfContainersToUse + " loot containers for volume");
+		Log("Using " + countOfContainersToUse + " loot containers for volume");
 		
 		for (int i = 0; i < countOfContainersToUse; i++)
 		{
@@ -176,7 +185,7 @@ class Z_LootVolumeEntity: GenericEntity
 			
 			if (tables.IsEmpty())
 			{
-				Print("No loot table matching parameters: " + m_Categories + " / " + m_Locations + " / " + acceptableTiers, LogLevel.WARNING);
+				Log("No loot table matching parameters: " + m_Categories + " / " + m_Locations + " / " + acceptableTiers, LogLevel.WARNING);
 				
 				break;
 			}
@@ -189,7 +198,7 @@ class Z_LootVolumeEntity: GenericEntity
 			
 			if (! table)
 			{
-				Print("Could not pick random table for tier", LogLevel.WARNING);
+				Log("Could not pick random table for tier", LogLevel.WARNING);
 				
 				continue;
 			}
@@ -207,7 +216,7 @@ class Z_LootVolumeEntity: GenericEntity
 		
 		MarkAsRefilled();
 		
-		Print("Refilled loot volume: " + hydratedCount + " lootables");
+		Log("Refilled loot volume: " + hydratedCount + " lootables");
 	}
 	
 	void MarkAsRefilled()
@@ -237,16 +246,16 @@ class Z_LootVolumeEntity: GenericEntity
 			}
 		}
 		
-		Print("Hydrated spawned tier 1: " + m_SpawnedTiers.Get(0));
-		Print("Hydrated spawned tier 2: " + m_SpawnedTiers.Get(1));
-		Print("Hydrated spawned tier 3: " + m_SpawnedTiers.Get(2));
+		Log("Hydrated spawned tier 1: " + m_SpawnedTiers.Get(0));
+		Log("Hydrated spawned tier 2: " + m_SpawnedTiers.Get(1));
+		Log("Hydrated spawned tier 3: " + m_SpawnedTiers.Get(2));
 	}
 	
 	ref array<Z_LootContainerEntity> GetEmptyContainers(array<IEntity> lootables)
 	{
 		if (! lootables) return m_Containers;
 		
-		Print("Found lootables " + lootables.Count());
+		Log("Found lootables " + lootables.Count());
 		
 		if (lootables.IsEmpty()) return m_Containers;
 		
@@ -365,7 +374,7 @@ class Z_LootVolumeEntity: GenericEntity
 		{
 			if (HasReachedTierLimit(tier, region))
 			{
-				// Print("Tier has reached limit in volume: " + tier);
+				// Log("Tier has reached limit in volume: " + tier);
 				
 				continue;
 			}
@@ -384,7 +393,7 @@ class Z_LootVolumeEntity: GenericEntity
 		
 		int regionTierSpawns = region.GetTierSpawns(tier);
 		
-		// Print("Checking tier spawns: " + tierSpawns + " >= " + regionTierSpawns);
+		// Log("Checking tier spawns: " + tierSpawns + " >= " + regionTierSpawns);
 
 		return tierSpawns >= regionTierSpawns;
 	}

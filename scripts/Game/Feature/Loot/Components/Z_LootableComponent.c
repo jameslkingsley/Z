@@ -6,22 +6,22 @@ class Z_LootableComponentClass: ScriptComponentClass
 class Z_LootableComponent : ScriptComponent
 {
 	vector m_InitialSpawnOrigin;
-	int m_CleanupAtYear, m_CleanupAtMonth, m_CleanupAtDay, m_CleanupAtHour, m_CleanupAtMinute, m_CleanupAtSecond;
+	int m_InitialSpawnTimestampInHours;
 	
 	override event void OnPostInit(IEntity owner)
 	{
+		super.OnPostInit(owner);
+		
 		if (! EL_PersistenceManager.IsPersistenceMaster()) return;
 		
-		if (owner)
-		{
-			Z_LootGameModeComponent gameMode = Z_LootGameModeComponent.GetInstance();
-			
-			if (gameMode) gameMode.RegisterLootableEntity(owner);
-		}
+		// Must be called next frame so that this component has the correct data to use
+		GetGame().GetCallqueue().Call(PostInitPostFrame);
 	}
 	
 	override event protected void OnDelete(IEntity owner)
 	{
+		super.OnDelete(owner);
+		
 		if (! EL_PersistenceManager.IsPersistenceMaster()) return;
 		
 		if (owner)
@@ -29,83 +29,104 @@ class Z_LootableComponent : ScriptComponent
 			Z_LootGameModeComponent gameMode = Z_LootGameModeComponent.GetInstance();
 			
 			if (gameMode) gameMode.UnregisterLootableEntity(owner);
-			
-			// TODO Not working
-			// CleanupIfStale();
 		}
 	}
 	
-	void CleanupIfStale()
+	void PostInitPostFrame()
 	{
-		if (! m_InitialSpawnOrigin) return;
+		IEntity owner = GetOwner();
 		
-		if (! IsStale()) return;
+		if (owner)
+		{
+			Z_LootGameModeComponent gameMode = Z_LootGameModeComponent.GetInstance();
+			
+			if (gameMode)
+			{
+				// Register the lootable if it wasn't cleaned up
+				if (! CleanupIfStale())
+				{
+					gameMode.RegisterLootableEntity(owner);
+				}
+			}
+		}
+	}
+	
+	vector GetInitialSpawnOrigin()
+	{
+		return m_InitialSpawnOrigin;
+	}
+	
+	void SetInitialSpawnOrigin(vector origin)
+	{
+		m_InitialSpawnOrigin = origin;
+	}
+	
+	int GetInitialSpawnTimestampInHours()
+	{
+		return m_InitialSpawnTimestampInHours;
+	}
+	
+	void SetInitialSpawnTimestampInHours(int hours)
+	{
+		m_InitialSpawnTimestampInHours = hours;
+	}
+	
+	bool CleanupIfStale()
+	{
+		if (! m_InitialSpawnOrigin) return false;
 		
-		if (GetOwner().GetOrigin() != m_InitialSpawnOrigin) return;
+		if (! IsStale()) return false;
 		
-		Print("Cleaning up stale lootable");
+		// If the current position is different from the initially spawned position,
+		// then do not cleanup the item. This likely means a player moved it.
+		if (GetOwner().GetOrigin() != m_InitialSpawnOrigin) return false;
 		
 		delete GetOwner();
+		
+		return true;
 	}
 	
 	bool IsStale()
 	{
-		ref array<int> cleanupAt = GetCleanupAt();
-		ref array<int> current = GetCurrentTimestamp();
+		if (! m_InitialSpawnTimestampInHours) return false;
 		
-		Print("Checking if stale: " + cleanupAt + " " + current);
+		Z_LootGameModeComponent gameMode = Z_LootGameModeComponent.GetInstance();
+			
+		if (! gameMode) return false;
 		
-		foreach (int i, int value : cleanupAt)
-		{
-			if (! value && current[i] > value)
-			{
-				return true;
-			}
-		}
+		int current = GetCurrentTimestampInHours();
 		
-		Print("Cleanup at timestamp not in past");
+		int diff = current - m_InitialSpawnTimestampInHours;
 		
-		return false;
+		int stalenessAgeInHours = gameMode.GetLootableStaleAgeInHours();
+		
+		return diff >= stalenessAgeInHours;
 	}
 	
-	ref array<int> GetCleanupAt()
+	void SetInitialSpawnState()
 	{
-		ref array<int> timestamp = {m_CleanupAtYear, m_CleanupAtMonth, m_CleanupAtDay, m_CleanupAtHour, m_CleanupAtMinute, m_CleanupAtSecond};
+		m_InitialSpawnOrigin = GetOwner().GetOrigin();
 		
-		return timestamp;
+		m_InitialSpawnTimestampInHours = GetCurrentTimestampInHours();
+		
+		EL_PersistenceComponent persistence = EL_PersistenceComponent.Cast(GetOwner().FindComponent(EL_PersistenceComponent));
+		
+		persistence.Save();
 	}
 	
-	ref array<int> GetCurrentTimestamp()
+	int GetCurrentTimestampInHours()
 	{
-		ref array<int> timestamp = {};
+		int epochYear = 2021;
 		int year, month, day, hour, minute, second;
 		
 		System.GetYearMonthDayUTC(year, month, day);
 		System.GetHourMinuteSecondUTC(hour, minute, second);
 		
-		timestamp = {year, month, day, hour, minute, second};
+		year = (year - epochYear) * 8760;
+		month = month * 730;
+		day = day * 24;
 		
-		return timestamp;
-	}
-	
-	void SetInitialSpawnState()
-	{
-		Print("Setting initial spawn state");
-		
-		m_InitialSpawnOrigin = GetOwner().GetOrigin();
-		
-		ref array<int> current = GetCurrentTimestamp();
-		
-		m_CleanupAtYear = current[0];
-		m_CleanupAtMonth = current[1];
-		m_CleanupAtDay = current[2];
-		m_CleanupAtHour = current[3];
-		m_CleanupAtMinute = current[4] + 1;
-		m_CleanupAtSecond = current[5];
-		
-		EL_PersistenceComponent persistence = EL_PersistenceComponent.Cast(GetOwner().FindComponent(EL_PersistenceComponent));
-		
-		persistence.Save();
+		return year + month + day + hour;
 	}
 	
 	Z_LootTier GetLootTier()

@@ -56,7 +56,9 @@ class Z_LootContainerEntity: GenericEntity
 		{
 			delete ent;
 			
-			Debug.Error("Lootable entity does not have lootable component: " + lootable.resource.GetPath());
+			Print("Lootable entity does not have lootable component: " + lootable.resource.GetPath(), LogLevel.ERROR);
+			
+			return;
 		}
 		
 		if (lootable.usePhysics) {

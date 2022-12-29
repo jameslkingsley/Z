@@ -34,15 +34,6 @@ enum Z_LootTier
 	Tier3
 }
 
-enum Z_LootRarity
-{
-	Common,
-	Uncommon,
-	Rare,
-	Epic,
-	Impossible
-}
-
 [BaseContainerProps(description: "Loot Table")]
 class Z_LootTable
 {
