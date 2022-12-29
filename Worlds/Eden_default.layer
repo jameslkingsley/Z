@@ -1,7 +1,8 @@
 EL_GameModeRoleplay GameMode_Roleplay1 : "{03913608C59017A3}Prefabs/MP/Modes/Roleplay/GameMode_Roleplay.et" {
  components {
   Z_LootGameModeComponent "{5B34F9F3FF724477}" {
-   m_LootVolumeCollectionIntervalInSeconds 2
+   m_LootVolumeCollectionIntervalInSeconds 5
+   m_LootVolumeQueryRadius 500
    m_VolumeInsufficiencyPercentage 0.8
   }
   Z_LootRegionComponent "{5B3826F7ADA5ADB8}" {
@@ -110,14 +111,14 @@ $grp PolylineArea {
       m_ProbabilityMin 0.12
       m_ProbabilityMax 0.5
       m_SpawnRangeLower 2
-      m_SpawnRangeUpper 8
+      m_SpawnRangeUpper 6
      }
      Z_LootRegionTier "{5B38B051EB3FA303}" {
       m_LootTier Tier2
       m_ProbabilityMin 0.075
       m_ProbabilityMax 0.12
       m_SpawnRangeLower 2
-      m_SpawnRangeUpper 6
+      m_SpawnRangeUpper 4
      }
      Z_LootRegionTier "{5B38B051EB088F4B}" {
       m_LootTier Tier3
