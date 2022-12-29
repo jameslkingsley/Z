@@ -1,0 +1,15 @@
+GenericEntity {
+ ID "CFBAA4B725411E45"
+ components {
+  EL_PersistenceComponent "{5A28749C602565F8}" {
+   m_pSaveData EL_ItemSaveData "{5A28749F9ED6F91D}" {
+    m_aComponents {
+     Z_LootableEntitySaveData "{5B3938E23AA2A388}" {
+     }
+    }
+   }
+  }
+  Z_LootableComponent "{5B3938CB628ED1A2}" {
+  }
+ }
+}

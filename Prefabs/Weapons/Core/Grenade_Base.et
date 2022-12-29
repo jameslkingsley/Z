@@ -1,0 +1,15 @@
+GenericEntity : "{A9EF01A7A6FE60CD}Prefabs/Weapons/Core/Throw_Base.et" {
+ ID "1F80A73AAE197BBE"
+ components {
+  EL_PersistenceComponent "{5A4C75593ABDD0CB}" {
+   m_pSaveData EL_ItemSaveData "{5A4C755938B9370E}" {
+    m_aComponents {
+     Z_LootableEntitySaveData "{5B3938E2233E0376}" {
+     }
+    }
+   }
+  }
+  Z_LootableComponent "{5B3938CB6994701F}" {
+  }
+ }
+}

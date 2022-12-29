@@ -2,12 +2,29 @@ EL_GameModeRoleplay GameMode_Roleplay1 : "{03913608C59017A3}Prefabs/MP/Modes/Rol
  components {
   Z_LootGameModeComponent "{5B34F9F3FF724477}" {
    m_LootVolumeCollectionIntervalInSeconds 2
+   m_VolumeInsufficiencyPercentage 0.8
+  }
+  Z_LootRegionComponent "{5B3826F7ADA5ADB8}" {
+   m_LootRegionTiers {
+    Z_LootRegionTier "{5B3826F7AAE31303}" {
+     m_SpawnRangeLower 2
+     m_SpawnRangeUpper 8
+    }
+    Z_LootRegionTier "{5B3826F7AACD937F}" {
+     m_SpawnRangeLower 2
+     m_SpawnRangeUpper 6
+    }
+    Z_LootRegionTier "{5B3826F7AAD8A420}" {
+     m_SpawnRangeLower 1
+     m_SpawnRangeUpper 3
+    }
+   }
   }
  }
  coords 9687.663 13.439 1546.795
 }
 EL_SpawnPoint {
- coords 4554.058 17.904 10774.323
+ coords 4567.333 17.904 10780.678
  angleY 80.933
  m_fSpawnRadius 10
 }
@@ -92,25 +109,24 @@ $grp PolylineArea {
       m_LootTier Tier1
       m_ProbabilityMin 0.12
       m_ProbabilityMax 0.5
-      m_SpawnRangeLower 4
-      m_SpawnRangeUpper 16
+      m_SpawnRangeLower 2
+      m_SpawnRangeUpper 8
      }
      Z_LootRegionTier "{5B38B051EB3FA303}" {
       m_LootTier Tier2
       m_ProbabilityMin 0.075
       m_ProbabilityMax 0.12
-      m_SpawnRangeLower 3
-      m_SpawnRangeUpper 12
+      m_SpawnRangeLower 2
+      m_SpawnRangeUpper 6
      }
      Z_LootRegionTier "{5B38B051EB088F4B}" {
       m_LootTier Tier3
       m_ProbabilityMin 0.01
       m_ProbabilityMax 0.075
-      m_SpawnRangeLower 2
-      m_SpawnRangeUpper 6
+      m_SpawnRangeLower 1
+      m_SpawnRangeUpper 3
      }
     }
-    m_DiceRolls 5
    }
   }
   coords 4602.715 22.313 11005.689

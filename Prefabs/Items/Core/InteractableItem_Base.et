@@ -1,0 +1,7 @@
+GenericEntity : "{8B993DEBBF41116C}Prefabs/Items/Core/RoleplayItem_Base.et" {
+ ID "0000000000000001"
+ components {
+  Z_LootableComponent "{5B3938CB5628E4BE}" {
+  }
+ }
+}

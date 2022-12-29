@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{EEC781AC391B7400}Prefabs/Props/Commercial/ShoppingCart_01.et"
+ Name "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et"
  Configurations {
   EntityTemplateResourceClass PC {
   }

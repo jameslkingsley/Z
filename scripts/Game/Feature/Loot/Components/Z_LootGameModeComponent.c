@@ -4,9 +4,6 @@ class Z_LootGameModeComponentClass: SCR_BaseGameModeComponentClass
 
 class Z_LootGameModeComponent: SCR_BaseGameModeComponent
 {
-	[Attribute("300", UIWidgets.Auto, "Seconds before loot volumes are dehydrated")]
-	int m_LootVolumeExpiryInSeconds;
-	
 	[Attribute("10", UIWidgets.Auto, "Interval in seconds for when nearby loot volumes are collected")]
 	int m_LootVolumeCollectionIntervalInSeconds;
 	
@@ -15,11 +12,16 @@ class Z_LootGameModeComponent: SCR_BaseGameModeComponent
 	
 	[Attribute("3600", UIWidgets.Auto, "Cooldown in seconds before loot volumes refill")]
 	int m_LootVolumeCooldownInSeconds;
+	
+	[Attribute("0.5", UIWidgets.Slider, "Percentage of empty containers within volumes until they are deemed insufficiently filled", "0 1 0.1")]
+	float m_VolumeInsufficiencyPercentage;
 
 	[Attribute("{82F1EADE5E5A0569}Config/Z_LootTableConfig.conf", UIWidgets.ResourceNamePicker, "Loot table config")]
 	ResourceName m_LootTableConfig;
 	
 	ref array<Z_LootRegionComponent> m_LootRegions = {};
+	
+	ref array<IEntity> m_LootableEntities = {};
 	
 	static Z_LootGameModeComponent GetInstance()
 	{
@@ -41,6 +43,11 @@ class Z_LootGameModeComponent: SCR_BaseGameModeComponent
 	{
 		return m_LootVolumeCooldownInSeconds;
 	}
+	
+	float GetVolumeInsufficiencyPercentage()
+	{
+		return m_VolumeInsufficiencyPercentage;
+	}
 
 	ref array<ref Z_LootTable> GetLootTables()
 	{
@@ -61,6 +68,29 @@ class Z_LootGameModeComponent: SCR_BaseGameModeComponent
 		m_LootRegions.Insert(region);
 	}
 	
+	void RegisterLootableEntity(IEntity ent)
+	{
+		if (m_LootableEntities.Contains(ent))
+			return;
+		
+		m_LootableEntities.Insert(ent);
+	}
+	
+	void UnregisterLootableEntity(IEntity ent)
+	{
+		int index = m_LootableEntities.Find(ent);
+		
+		if (index > -1)
+		{
+			m_LootableEntities.Remove(index);
+		}
+	}
+	
+	ref array<IEntity> GetLootableEntities()
+	{
+		return m_LootableEntities;
+	}
+	
 	Z_LootRegionComponent GetLootRegionThatSurroundsEntity(IEntity ent)
 	{
 		foreach (Z_LootRegionComponent region : m_LootRegions)
@@ -77,13 +107,9 @@ class Z_LootGameModeComponent: SCR_BaseGameModeComponent
 		return null;
 	}
 	
-	void HydrateLootVolume(Z_LootVolumeEntity ent)
+	void RefillLootVolume(Z_LootVolumeEntity ent, array<IEntity> lootables)
 	{
-		GetGame().GetCallqueue().RemoveByName(ent, "Dehydrate");
-		
-		GetGame().GetCallqueue().CallLaterByName(ent, "Dehydrate", m_LootVolumeExpiryInSeconds * 1000, false);
-		
-		GetGame().GetCallqueue().CallByName(ent, "Hydrate");
+		GetGame().GetCallqueue().CallByName(ent, "Refill", lootables);
 	}
 	
 	void CollectLootVolumes()
@@ -91,12 +117,14 @@ class Z_LootGameModeComponent: SCR_BaseGameModeComponent
 		array<int> players = {};
 		GetGame().GetPlayerManager().GetPlayers(players);
 		
+		// TODO Group players together by position
+		// No point running near enough the same query if two players are together
+		
 		for (int i = 0, count = players.Count(); i < count; i++)
 		{
 			IEntity playerEnt = GetGame().GetPlayerManager().GetPlayerControlledEntity(players.Get(i));
 			
-			if (! playerEnt)
-				continue;
+			if (! playerEnt) continue;
 			
 			// TODO Might be faster to loop all registered
 			// loot volumes and check distance to each player.
@@ -112,8 +140,22 @@ class Z_LootGameModeComponent: SCR_BaseGameModeComponent
 	
 	bool GetLootVolumeEntity(IEntity ent)
 	{
-		if (ent.Type() == Z_LootVolumeEntity) {
-			HydrateLootVolume(Z_LootVolumeEntity.Cast(ent));
+		if (ent.Type() == Z_LootVolumeEntity)
+		{
+			Z_LootVolumeEntity vol = Z_LootVolumeEntity.Cast(ent);
+			
+			if (vol.IsIgnored() || vol.IsInCooldown()) return true;
+			
+			ref array<IEntity> lootables = new array<IEntity>();
+			
+			if (vol.HasSufficientLoot(lootables))
+			{
+				Print("Loot volume has sufficient loot");
+				
+				return true;
+			}
+			
+			RefillLootVolume(vol, lootables);
 		}
 
 		return true;
@@ -121,7 +163,8 @@ class Z_LootGameModeComponent: SCR_BaseGameModeComponent
 	
 	bool FilterLootVolumeEntities(IEntity ent)
 	{
-		if (ent.Type() == Z_LootVolumeEntity) {
+		if (ent.Type() == Z_LootVolumeEntity)
+		{
 			return true;
 		}
 
