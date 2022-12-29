@@ -34,19 +34,35 @@ EL_GameModeRoleplay {
      m_LootTier Tier1
      m_ProbabilityMin 0.12
      m_ProbabilityMax 0.5
+     m_SpawnRangeLower 4
+     m_SpawnRangeUpper 8
     }
     Z_LootRegionTier "{5B3826F7AACD937F}" {
      m_LootTier Tier2
      m_ProbabilityMin 0.06
      m_ProbabilityMax 0.12
+     m_SpawnRangeLower 3
+     m_SpawnRangeUpper 6
     }
     Z_LootRegionTier "{5B3826F7AAD8A420}" {
      m_LootTier Tier3
      m_ProbabilityMin 0.01
      m_ProbabilityMax 0.06
+     m_SpawnRangeLower 1
+     m_SpawnRangeUpper 2
     }
    }
   }
  }
  PlayerControllerPrefab "{CC42DCDAD458D66C}Prefabs/Characters/Core/PlayerControllerRoleplayMP.et"
+ {
+  TimeAndWeatherManagerEntity : "{A3BAF78F6F03315B}Prefabs/World/Game/TimeAndWeatherManager.et" {
+   ID "5B3AB1B74BFFB1D9"
+   coords 0 0 0
+  }
+  ProjectileSoundsManager : "{B4DA8B0024536625}Prefabs/World/Game/ProjectileSoundsManager.et" {
+   ID "5B3AB1B75F72B617"
+   coords 0 0 0
+  }
+ }
 }

@@ -1,0 +1,6 @@
+SubScene {
+ Parent "worlds/Arland/Arland.ent"
+}
+Layer default {
+ Index 0
+}

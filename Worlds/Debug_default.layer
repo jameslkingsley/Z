@@ -69,9 +69,20 @@ EL_GameModeRoleplay GameMode_Roleplay1 : "{03913608C59017A3}Prefabs/MP/Modes/Rol
  }
  coords 27.468 0 68.021
 }
-EL_SpawnPoint {
- coords 11.518 0.956 68.01
- m_fSpawnRadius 5
+TimeAndWeatherManagerEntity TimeAndWeatherManager_5B3AB1B65C50BC07 : "{A3BAF78F6F03315B}Prefabs/World/Game/TimeAndWeatherManager.et" {
+ coords 12.036 -0 60.032
+}
+ProjectileSoundsManager : "{B4DA8B0024536625}Prefabs/World/Game/ProjectileSoundsManager.et" {
+ coords 11.904 -0 63.311
+}
+$grp EL_SpawnPoint {
+ {
+  coords 11.518 0.956 68.01
+  m_fSpawnRadius 5
+ }
+ {
+  coords 18.125 0.286 63.013
+ }
 }
 GenericEntity Backpack_ALICE_Medium_assembled_5B3938C6FBD5FD64 : "{5C5C6EE05EE2FF1A}Prefabs/Items/Equipment/Backpacks/Backpack_ALICE_Medium_assembled.et" {
  coords 11.101 0.376 72.113

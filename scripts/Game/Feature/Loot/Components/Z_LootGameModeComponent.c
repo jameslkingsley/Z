@@ -154,11 +154,11 @@ class Z_LootGameModeComponent: SCR_BaseGameModeComponent
 			
 			if (vol.IsIgnored() || vol.IsInCooldown()) return true;
 			
+			if (vol.HasPlayersInside()) return true;
+			
 			ref array<IEntity> lootables = new array<IEntity>();
 			
 			if (vol.HasSufficientLoot(lootables)) return true;
-			
-			if (vol.HasPlayersInside()) return true;
 			
 			RefillLootVolume(vol, lootables);
 		}
