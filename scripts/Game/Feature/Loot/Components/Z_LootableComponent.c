@@ -8,21 +8,22 @@ class Z_LootableComponent : ScriptComponent
 	vector m_InitialSpawnOrigin;
 	int m_InitialSpawnTimestampInHours;
 	
-	override event void OnPostInit(IEntity owner)
+	protected override void EOnInit(IEntity owner)
 	{
-		super.OnPostInit(owner);
-		
-		if (! EL_PersistenceManager.IsPersistenceMaster()) return;
-		
+		if (! Replication.IsServer()) return;
+				
 		// Must be called next frame so that this component has the correct data to use
-		GetGame().GetCallqueue().Call(PostInitPostFrame);
+		GetGame().GetCallqueue().CallLater(SetupLootable, 2000);
+	}
+	
+	protected override void OnPostInit(IEntity owner)
+	{
+		SetEventMask(owner, EntityEvent.INIT);
 	}
 	
 	override event protected void OnDelete(IEntity owner)
 	{
-		super.OnDelete(owner);
-		
-		if (! EL_PersistenceManager.IsPersistenceMaster()) return;
+		if (! Replication.IsServer()) return;
 		
 		if (owner)
 		{
@@ -32,8 +33,10 @@ class Z_LootableComponent : ScriptComponent
 		}
 	}
 	
-	void PostInitPostFrame()
+	void SetupLootable()
 	{
+		if (! Replication.IsServer()) return;
+		
 		IEntity owner = GetOwner();
 		
 		if (owner)
@@ -45,6 +48,7 @@ class Z_LootableComponent : ScriptComponent
 				// Register the lootable if it wasn't cleaned up
 				if (! CleanupIfStale())
 				{
+					
 					gameMode.RegisterLootableEntity(owner);
 				}
 			}
@@ -105,6 +109,8 @@ class Z_LootableComponent : ScriptComponent
 	
 	void SetInitialSpawnState()
 	{
+		if (! Replication.IsServer()) return;
+		
 		m_InitialSpawnOrigin = GetOwner().GetOrigin();
 		
 		m_InitialSpawnTimestampInHours = GetCurrentTimestampInHours();

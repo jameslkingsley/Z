@@ -24,43 +24,29 @@ class Z_LootVolumeEntity: GenericEntity
 	void Z_LootVolumeEntity(IEntitySource src, IEntity parent)
 	{
 		SetEventMask(EntityEvent.INIT);
-		
-		if (! parent)
-		{
-			Log("Loot volume has no parent entity", LogLevel.SPAM);
-			
-			m_IsIgnored = true;
-			
-			return;
-		}
-		
-		parent.AddChild(this, -1, EAddChildFlags.RECALC_LOCAL_TRANSFORM);
 	}
 	
 	override protected void EOnInit(IEntity owner)
 	{
-		super.EOnInit(owner);
+		if (! Replication.IsServer())
+		{
+			return;
+		}
 		
-		if (! EL_PersistenceManager.IsPersistenceMaster()) return;
-		
-		GetGame().GetCallqueue().Call(PostInit);
-	}
-	
-	void PostInit()
-	{
-		if (m_Categories.IsEmpty() || m_Locations.IsEmpty()) {
-			Log("Loot volume has no configured categories or locations", LogLevel.SPAM);
+		if (m_Categories.IsEmpty() || m_Locations.IsEmpty())
+		{
+			Print("Loot volume has no configured categories or locations", LogLevel.ERROR);
 			
 			m_IsIgnored = true;
 			
 			return;
 		}
 		
-		IEntity parent = GetParent();
+		// Random delay here is to spread the workload a bit so
+		// not all volumes are caching their containers all at once
+		int delay = Math.RandomInt(1000, 10000);
 		
-		SetVolumeOriginToParentCentroid(parent);
-		
-		CacheLootContainers(parent);
+		GetGame().GetCallqueue().CallLater(CacheLootContainers, delay);
 	}
 	
 	private void Log(string message, LogLevel level = LogLevel.NORMAL)
@@ -70,37 +56,30 @@ class Z_LootVolumeEntity: GenericEntity
 		Print(message, level);
 	}
 	
-	void SetVolumeOriginToParentCentroid(IEntity parent)
+	void CacheLootContainers()
 	{
-		vector mins, maxs;
+		if (! GetGame().GetWorld()) return;
 		
-		parent.GetWorldBounds(mins, maxs);
+		if (! Replication.IsServer()) return;
 		
-		vector center = vector.Lerp(mins, maxs, 0.5);
+		IEntity parent = GetParent();
 		
-		SetOrigin(center);
-	}
-	
-	void CacheLootContainers(IEntity parent)
-	{
-		// This function sucks but for some reason furniture
-		// isn't properly added as children of their building parents...
-		// so you can't iterate down the tree.
+		if (! parent)
+		{
+			Print("No parent for volume", LogLevel.ERROR);
+			
+			return;
+		}
 		
 		// TODO Replace this with a Workbench plugin that caches this
 		
-		if (! parent || ! GetGame().GetWorld())
-			return;
-		
 		vector mins, maxs;
 		
 		parent.GetWorldBounds(mins, maxs);
 		
-		float dist = vector.Distance(mins, maxs);
-		
-		GetGame().GetWorld().QueryEntitiesBySphere(
-			GetOrigin(),
-			dist,
+		GetGame().GetWorld().QueryEntitiesByAABB(
+			mins,
+			maxs,
 			GetLootContainerEntity,
 			FilterLootContainerEntities,
 			EQueryEntitiesFlags.ALL
@@ -112,6 +91,8 @@ class Z_LootVolumeEntity: GenericEntity
 		if (ent.Type() == Z_LootContainerEntity)
 		{
 			Z_LootContainerEntity container = Z_LootContainerEntity.Cast(ent);
+			
+			if (! container) return true;
 			
 			if (! m_Containers.Contains(container))
 			{
@@ -130,6 +111,12 @@ class Z_LootVolumeEntity: GenericEntity
 		}
 
 		return false;
+	}
+	
+	bool IsReady()
+	{
+		return m_Containers != null
+			&& ! m_Containers.IsEmpty();
 	}
 
 	bool IsInCooldown()
@@ -185,6 +172,8 @@ class Z_LootVolumeEntity: GenericEntity
 	// buildings will prevent those buildings from spawning too much stuff.
 	bool HasSufficientLoot(notnull out array<IEntity> lootables)
 	{
+		if (! m_Containers) return true;
+		
 		vector mins, maxs;
 		
 		GetParent().GetWorldBounds(mins, maxs);
@@ -192,8 +181,6 @@ class Z_LootVolumeEntity: GenericEntity
 		ref array<IEntity> entities = Z_LootGameModeComponent.GetInstance().GetLootableEntities();
 		
 		float insufficiency = Z_LootGameModeComponent.GetInstance().GetVolumeInsufficiencyPercentage();
-		
-		Log("Checking active entities: " + entities.Count());
 		
 		foreach (IEntity ent : entities)
 		{
@@ -210,15 +197,15 @@ class Z_LootVolumeEntity: GenericEntity
 		
 		int emptyContainers = m_Containers.Count() - lootables.Count();
 		
-		float pc = ((float) emptyContainers / (float) m_Containers.Count());
+		float percent = (float) emptyContainers / (float) m_Containers.Count();
 		
-		Log("HasSufficientLoot: " + pc + " >= " + insufficiency + " | " + emptyContainers + " / " + m_Containers.Count());
-		
-		return pc < insufficiency;
+		return percent < insufficiency;
 	}
 	
 	void Refill(array<IEntity> lootables)
 	{
+		if (! Replication.IsServer()) return;
+		
 		// If this volume doesn't have any containers
 		// then just mark it as ignored and forget about it.
 		// It will never gain containers mid-session.
@@ -244,20 +231,15 @@ class Z_LootVolumeEntity: GenericEntity
 		int hydratedCount = 0;
 		
 		Z_LootRegionComponent region = GetLootRegion();
-		Log("Chose loot region: " + region.GetRegionSummary());
 		
 		vector pos = GetOrigin();
 		
 		ref array<Z_LootContainerEntity> emptyContainers = GetEmptyContainers(lootables);
 		
-		Log("Empty containers: " + emptyContainers.Count());
-		
 		int countOfContainersToUse = Math.RandomInt(
 			(int) Math.Ceil(emptyContainers.Count() * region.GetMinimumContainerUsePercentage()),
 			emptyContainers.Count()
 		);
-		
-		Log("Using " + countOfContainersToUse + " loot containers for volume");
 		
 		for (int i = 0; i < countOfContainersToUse; i++)
 		{
@@ -272,7 +254,7 @@ class Z_LootVolumeEntity: GenericEntity
 			
 			if (tables.IsEmpty())
 			{
-				Log("No loot table matching parameters: " + m_Categories + " / " + m_Locations + " / " + acceptableTiers, LogLevel.WARNING);
+				Log("No loot table matching parameters: " + m_Categories + " / " + m_Locations + " / " + acceptableTiers, LogLevel.SPAM);
 				
 				break;
 			}
@@ -285,16 +267,16 @@ class Z_LootVolumeEntity: GenericEntity
 			
 			if (! table)
 			{
-				Log("Could not pick random table for tier", LogLevel.WARNING);
+				Log("Could not pick random table for tier", LogLevel.SPAM);
 				
 				continue;
 			}
 			
-			// Print("Spawning item of tier " + tier.m_LootTier + " out of current count " + m_SpawnedTiers.Get(tier.m_LootTier));
+			IEntity lootable = container.SpawnLootable(table.m_Resource, table.m_Tier);
 			
-			Z_LootContainerLootable lootable = container.CreateLootableFromTable(table);
+			if (! lootable) continue;
 			
-			container.SpawnLootable(lootable);
+			Z_LootGameModeComponent.GetInstance().RegisterLootableEntity(lootable);
 			
 			IncrementSpawnedTiers(table.m_Tier);
 			
@@ -332,17 +314,11 @@ class Z_LootVolumeEntity: GenericEntity
 				IncrementSpawnedTiers(tier);
 			}
 		}
-		
-		Log("Hydrated spawned tier 1: " + m_SpawnedTiers.Get(0));
-		Log("Hydrated spawned tier 2: " + m_SpawnedTiers.Get(1));
-		Log("Hydrated spawned tier 3: " + m_SpawnedTiers.Get(2));
 	}
 	
 	ref array<Z_LootContainerEntity> GetEmptyContainers(array<IEntity> lootables)
 	{
 		if (! lootables) return m_Containers;
-		
-		Log("Found lootables " + lootables.Count());
 		
 		if (lootables.IsEmpty()) return m_Containers;
 		
@@ -373,7 +349,6 @@ class Z_LootVolumeEntity: GenericEntity
 	
 	Z_LootRegionComponent GetLootRegion()
 	{
-		// TODO Not working for some reason...
 		Z_LootRegionComponent region = Z_LootGameModeComponent.GetInstance().GetLootRegionThatSurroundsEntity(this);
 		
 		if (! region)
@@ -397,12 +372,7 @@ class Z_LootVolumeEntity: GenericEntity
 		
 		foreach (int tier : tiers)
 		{
-			if (HasReachedTierLimit(tier, region))
-			{
-				// Log("Tier has reached limit in volume: " + tier);
-				
-				continue;
-			}
+			if (HasReachedTierLimit(tier, region)) continue;
 			
 			result.Insert(tier);
 		}
@@ -417,8 +387,6 @@ class Z_LootVolumeEntity: GenericEntity
 		if (! tierSpawns) tierSpawns = 0;
 		
 		int regionTierSpawns = region.GetTierSpawns(tier);
-		
-		// Log("Checking tier spawns: " + tierSpawns + " >= " + regionTierSpawns);
 
 		return tierSpawns >= regionTierSpawns;
 	}

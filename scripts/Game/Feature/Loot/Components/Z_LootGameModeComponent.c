@@ -22,6 +22,8 @@ class Z_LootGameModeComponent: SCR_BaseGameModeComponent
 	[Attribute("{82F1EADE5E5A0569}Config/Z_LootTableConfig.conf", UIWidgets.ResourceNamePicker, "Loot table config")]
 	ResourceName m_LootTableConfig;
 	
+	ref Z_LootTableConfig m_LootTableConfigCache;
+	
 	ref array<Z_LootRegionComponent> m_LootRegions = {};
 	
 	ref array<IEntity> m_LootableEntities = {};
@@ -37,8 +39,17 @@ class Z_LootGameModeComponent: SCR_BaseGameModeComponent
 	
 	override void OnPostInit(IEntity owner)
 	{
-		if (! EL_PersistenceManager.IsPersistenceMaster()) return;
+		Print("---- ReforgerZ Loot PostInit Start ----");
 		
+		if (! Replication.IsServer()) return;
+		
+		GetGame().GetCallqueue().CallLater(StartCollectingLootVolumes, 10000);
+		
+		Print("---- ReforgerZ Loot PostInit End ----");
+	}
+	
+	void StartCollectingLootVolumes()
+	{
 		GetGame().GetCallqueue().CallLater(CollectLootVolumes, m_LootVolumeCollectionIntervalInSeconds * 1000, true);
 	}
 	
@@ -59,13 +70,18 @@ class Z_LootGameModeComponent: SCR_BaseGameModeComponent
 
 	ref array<ref Z_LootTable> GetLootTables()
 	{
+		if (m_LootTableConfigCache)
+		{
+			return m_LootTableConfigCache.m_LootTables;
+		}
+		
 		Resource container = BaseContainerTools.LoadContainer(m_LootTableConfig);
 					
-		Z_LootTableConfig config = Z_LootTableConfig.Cast(
+		m_LootTableConfigCache = Z_LootTableConfig.Cast(
 			BaseContainerTools.CreateInstanceFromContainer(container.GetResource().ToBaseContainer())
 		);
 		
-		return config.m_LootTables;
+		return m_LootTableConfigCache.m_LootTables;
 	}
 
 	void RegisterLootRegion(Z_LootRegionComponent region)
@@ -115,15 +131,14 @@ class Z_LootGameModeComponent: SCR_BaseGameModeComponent
 		return null;
 	}
 	
-	void RefillLootVolume(Z_LootVolumeEntity ent, array<IEntity> lootables)
-	{
-		GetGame().GetCallqueue().CallByName(ent, "Refill", lootables);
-	}
-	
 	void CollectLootVolumes()
 	{
+		if (! Replication.IsServer()) return;
+		
 		array<int> players = {};
 		GetGame().GetPlayerManager().GetPlayers(players);
+		
+		if (! players) return;
 		
 		// TODO Group players together by position
 		// No point running near enough the same query if two players are together
@@ -134,8 +149,6 @@ class Z_LootGameModeComponent: SCR_BaseGameModeComponent
 			
 			if (! playerEnt) continue;
 			
-			// TODO Might be faster to loop all registered
-			// loot volumes and check distance to each player.
 			GetGame().GetWorld().QueryEntitiesBySphere(
 				playerEnt.GetOrigin(),
 				m_LootVolumeQueryRadius,
@@ -152,7 +165,7 @@ class Z_LootGameModeComponent: SCR_BaseGameModeComponent
 		{
 			Z_LootVolumeEntity vol = Z_LootVolumeEntity.Cast(ent);
 			
-			if (vol.IsIgnored() || vol.IsInCooldown()) return true;
+			if (! vol.IsReady() || vol.IsIgnored() || vol.IsInCooldown()) return true;
 			
 			if (vol.HasPlayersInside()) return true;
 			
@@ -160,7 +173,7 @@ class Z_LootGameModeComponent: SCR_BaseGameModeComponent
 			
 			if (vol.HasSufficientLoot(lootables)) return true;
 			
-			RefillLootVolume(vol, lootables);
+			vol.Refill(lootables);
 		}
 
 		return true;

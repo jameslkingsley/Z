@@ -1,13 +1,3 @@
-class Z_LootContainerLootable
-{
-	ResourceName resource;
-	Z_LootTier tier;
-	vector origin;
-	vector yawPitchRoll;
-	bool usePhysics = false;
-	// TODO Damage states (magazine filled)
-}
-
 [EntityEditorProps(category: "Z/Entities", description: "")]
 class Z_LootContainerEntityClass: GenericEntityClass
 {}
@@ -16,39 +6,31 @@ class Z_LootContainerEntity: GenericEntity
 {
 	void Z_LootContainerEntity(IEntitySource src, IEntity parent)
 	{
-		if (! parent) return;
-		
-		parent.AddChild(this, -1, EAddChildFlags.RECALC_LOCAL_TRANSFORM);
+		SetEventMask(EntityEvent.INIT);
 	}
 	
-	notnull Z_LootContainerLootable CreateLootableFromTable(Z_LootTable table)
+	override event protected void EOnInit(IEntity owner)
 	{
-		Z_LootContainerLootable lootable = new Z_LootContainerLootable();
-		
-		lootable.resource = table.m_Resource;
-		lootable.tier = table.m_Tier;
-		lootable.origin = GetOrigin() + Vector(0, Math.RandomFloat(0.5, 1), 0);
-		lootable.yawPitchRoll = Vector(Math.RandomInt(-180, 180), Math.RandomInt(-90, 90), Math.RandomInt(-90, 90));
-		lootable.usePhysics = true;
-		
-		return lootable;
+		if (! Replication.IsServer()) return;
 	}
 	
-	void SpawnLootable(Z_LootContainerLootable lootable)
+	IEntity SpawnLootable(ResourceName resource, Z_LootTier tier)
 	{
+		if (! Replication.IsServer()) return null;
+		
 		IEntity ent;
 		
 		EntitySpawnParams spawnParams = EntitySpawnParams();
 		spawnParams.TransformMode = ETransformMode.WORLD;
-		spawnParams.Transform[3] = lootable.origin;
+		spawnParams.Transform[3] = GetOrigin() + Vector(0, Math.RandomFloat(0.5, 1), 0);
 		
 		ent = GetGame().SpawnEntityPrefab(
-			Resource.Load(lootable.resource),
+			Resource.Load(resource),
 			GetGame().GetWorld(),
 			spawnParams
 		);
 		
-		ent.SetYawPitchRoll(lootable.yawPitchRoll);
+		ent.SetYawPitchRoll(Vector(Math.RandomInt(-180, 180), Math.RandomInt(-90, 90), Math.RandomInt(-90, 90)));
 		
 		Z_LootableComponent lootableComponent = Z_LootableComponent.Cast(ent.FindComponent(Z_LootableComponent));
 		
@@ -56,14 +38,16 @@ class Z_LootContainerEntity: GenericEntity
 		{
 			delete ent;
 			
-			Print("Lootable entity does not have lootable component: " + lootable.resource.GetPath(), LogLevel.ERROR);
+			Print("Lootable entity does not have lootable component: " + resource.GetPath(), LogLevel.ERROR);
 			
-			return;
+			return null;
 		}
 		
-		if (lootable.usePhysics) {
+		return ent;
+		
+		/*if (lootable.usePhysics) {
 			ActivatePhysics(ent);
-		}
+		}*/
 	}
 	
 	void ActivatePhysics(IEntity ent)

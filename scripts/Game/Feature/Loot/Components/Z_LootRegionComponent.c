@@ -65,33 +65,31 @@ class Z_LootRegionComponent: ScriptComponent
 	[Attribute("3", UIWidgets.Slider, "Number of dice rolls (higher = luckier)", "1 20 1")]
 	int m_DiceRolls;
 	
+	protected RplComponent m_RplComponent;
+	
 	override event void OnPostInit(IEntity owner)
 	{
-		if (! EL_PersistenceManager.IsPersistenceMaster()) return;
+		SetEventMask(owner, EntityEvent.INIT);
+	}
+	
+	protected override void EOnInit(IEntity owner)
+	{
+		m_RplComponent = RplComponent.Cast(GetOwner().FindComponent(RplComponent));
+		
+		if (! m_RplComponent) return;
+		
+		if (IsProxy()) return;
 		
 		Z_LootGameModeComponent gameMode = Z_LootGameModeComponent.GetInstance();
 		
-		if (! gameMode)
-			return;
+		if (! gameMode) return;
 		
 		gameMode.RegisterLootRegion(this);
 	}
 	
-	string GetRegionSummary()
+	bool IsProxy()
 	{
-		string result = "| ";
-		
-		if (! m_LootRegionTiers)
-			return result;
-		
-		foreach (Z_LootRegionTier tier : m_LootRegionTiers)
-		{
-			string line = "" + tier.m_LootTier + ": " + tier.m_ProbabilityMin + " - " + tier.m_ProbabilityMax;
-			
-			result += line + " | ";
-		}
-		
-		return result;
+		return (m_RplComponent && m_RplComponent.IsProxy());
 	}
 	
 	array<Z_LootRegionTier> GetRegionTiersWithConcreteProbabilities(array<ref Z_LootTier> tiers)
