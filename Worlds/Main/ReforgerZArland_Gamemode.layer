@@ -29,7 +29,3 @@ EL_GameModeRoleplay GameMode_Survival1 : "{E87F79D982AFE933}Prefabs/MP/Modes/Rol
   }
  }
 }
-EL_SpawnPoint {
- coords 3193.316 5.051 1205.99
- m_fSpawnRadius 10
-}

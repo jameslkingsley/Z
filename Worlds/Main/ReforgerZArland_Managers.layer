@@ -1,4 +1,28 @@
-SCR_SpawnPoint : "{AAEC4F0DEE5617F9}Prefabs/MP/PlayerSpawn.et" {
- coords 3190.879 6.083 1205.763
+SCR_SpawnPoint : "{AAEC4F0DEE5617F9}Prefabs/MP/PlayerSpawn_Base.et" {
+ coords 3400.085 1.58 1266.472
  angleY 0
+}
+$grp EL_SpawnPoint : "{F380E0551C8682AF}Prefabs/MP/PlayerSpawn_01.et" {
+ {
+  coords 3398.011 2.728 1270.978
+  m_fSpawnRadius 10
+ }
+ {
+  coords 3540.427 1.693 1424.648
+ }
+ {
+  coords 3554.966 1.216 1720.225
+ }
+ {
+  coords 3456.276 2.055 1993.072
+ }
+ {
+  coords 3395.035 2.028 2165.015
+ }
+ {
+  coords 3493.783 2.141 2370.036
+ }
+ {
+  coords 3741.329 1.772 2646.448
+ }
 }
