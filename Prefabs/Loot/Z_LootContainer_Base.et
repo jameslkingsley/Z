@@ -4,6 +4,7 @@ Z_LootContainerEntity {
   Hierarchy "{5B3CE43A98E69FE3}" {
   }
   RplComponent "{5B3B5539AFF517BA}" {
+   Streamable Disabled
   }
  }
  coords 4316.349 4.886 10751.912
