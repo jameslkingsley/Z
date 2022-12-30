@@ -1,0 +1,25 @@
+SCR_SpawnPoint {
+ ID "5B3CE42FA0979CAB"
+ components {
+  Hierarchy "{596559E5AD4DD841}" {
+  }
+  SCR_MapDescriptorComponent "{596559E5AD4DD83F}" {
+   VisibleOnMap 0
+   MainType Spawnpoint
+  }
+  RplComponent "{596559E5AD4DD828}" {
+   "Self Insert" 0
+   Streamable Disabled
+  }
+ }
+ coords 4471.855 21.689 10535.136
+ angleY -46.431
+ m_fSpawnRadius 25
+ m_fNoPlayerRadius 5
+ m_fNoSightRadius 0
+ m_sFaction "US"
+ m_Info SCR_UIInfo "{596559E5AD4DDBF7}" {
+  Name "US Point"
+  Icon "{D05ADBFA295E4072}UI/Textures/Flags/czechrepublic_ca.edds"
+ }
+}

@@ -4,3 +4,6 @@ SubScene {
 Layer Gamemode {
  Index 0
 }
+Layer Managers {
+ Index 1
+}

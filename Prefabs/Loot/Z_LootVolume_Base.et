@@ -1,6 +1,8 @@
 Z_LootVolumeEntity {
  ID "5B32CE2512212B2F"
  components {
+  Hierarchy "{5B3CE43A9E891C82}" {
+  }
   RplComponent "{5B3B5539A4B7115C}" {
   }
  }

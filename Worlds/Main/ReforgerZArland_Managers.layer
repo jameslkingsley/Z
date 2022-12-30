@@ -1,0 +1,4 @@
+SCR_SpawnPoint : "{AAEC4F0DEE5617F9}Prefabs/MP/PlayerSpawn.et" {
+ coords 3190.879 6.083 1205.763
+ angleY 0
+}

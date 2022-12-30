@@ -1,0 +1,35 @@
+EL_GameModeRoleplay GameMode_Survival1 : "{E87F79D982AFE933}Prefabs/MP/Modes/Roleplay/GameMode_Survival.et" {
+ components {
+  EL_RespawnSytemComponent "{5A10698A884816E6}" {
+   m_aDefaultCharacterItems {
+    EL_DefaultLoadoutItem "{5B3CE432EF81A080}" {
+     m_rPrefab "{5C5C6EE05EE2FF1A}Prefabs/Items/Equipment/Backpacks/Backpack_ALICE_Medium_assembled.et"
+    }
+   }
+  }
+  Z_LootGameModeComponent "{5B3B1D91A44EE9B8}" {
+   m_LootVolumeCollectionIntervalInSeconds 2
+   m_LootVolumeCooldownInSeconds 5
+  }
+  Z_LootRegionComponent "{5B3B1D91BA5A1071}" {
+   m_LootRegionTiers {
+    Z_LootRegionTier "{5B3B1D91B81298A8}" {
+     m_SpawnRangeLower 1
+     m_SpawnRangeUpper 1
+    }
+    Z_LootRegionTier "{5B3B1D91B87EA1D8}" {
+     m_SpawnRangeLower 1
+     m_SpawnRangeUpper 1
+    }
+    Z_LootRegionTier "{5B3B1D91B84F1C17}" {
+     m_SpawnRangeUpper 1
+    }
+   }
+   m_MinimumContainerUsePercentage 1
+  }
+ }
+}
+EL_SpawnPoint {
+ coords 3193.316 5.051 1205.99
+ m_fSpawnRadius 10
+}

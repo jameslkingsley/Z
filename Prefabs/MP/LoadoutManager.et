@@ -1,0 +1,12 @@
+SCR_LoadoutManager {
+ ID "5B3CE42FBB6CCFC3"
+ coords 32.281 -1.257 7.336
+ Flags 0
+ m_aPlayerLoadouts {
+  SCR_FactionPlayerLoadout "{596498904FC1150E}" {
+   m_sLoadoutResource "{1E1884289029DCA4}Prefabs/Characters/Factions/INDFOR/FIA/Character_FIA_M9_Empty.et"
+   m_sLoadoutImage "{0F62C575785D87CD}UI/Textures/EditorPreviews/Characters/INDFOR/FIA/Character_FIA_Unarmed.edds"
+   m_sAffiliatedFaction "US"
+  }
+ }
+}

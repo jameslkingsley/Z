@@ -1,0 +1,33 @@
+{
+    "dedicatedServerId": "f4df7159-ab4e-4917-8aad-48e8adbd58ae",
+    "region": "EU",
+    "adminPassword": "admin",
+    "gameHostBindAddress": "",
+    "gameHostBindPort": 2001,
+    "gameHostRegisterBindAddress": "",
+    "gameHostRegisterPort": 2001,
+    "a2sQueryEnabled": true,
+    "steamQueryPort": 17777,
+    "game": {
+        "name": "ReforgerZ Arland",
+        "password": "",
+        "scenarioId": "{C1A19ED967A2924D}Missions/Eden.conf",
+        "playerCountLimit": 64,
+        "autoJoinable": false,
+        "visible": true,
+        "gameProperties": {
+            "serverMaxViewDistance": 2500,
+            "serverMinGrassDistance": 50,
+            "networkViewDistance": 1000,
+            "disableThirdPerson": true,
+            "fastValidation": true,
+            "battlEye": false
+        },
+        "mods": [
+            {
+                "modId": "5B34DB3A897B8B2B",
+                "name": "ReforgerZ"
+            }
+        ]
+    }
+}

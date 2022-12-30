@@ -1,6 +1,8 @@
 Z_LootContainerEntity {
  ID "5B3147C482D4B55A"
  components {
+  Hierarchy "{5B3CE43A98E69FE3}" {
+  }
   RplComponent "{5B3B5539AFF517BA}" {
   }
  }

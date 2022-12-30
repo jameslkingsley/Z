@@ -1,6 +1,0 @@
-EL_GameModeRoleplay GameMode_Survival1 : "{E87F79D982AFE933}Prefabs/MP/Modes/Roleplay/GameMode_Survival.et" {
-}
-EL_SpawnPoint {
- coords 3310.983 1.634 1235.697
- m_fSpawnRadius 10
-}
