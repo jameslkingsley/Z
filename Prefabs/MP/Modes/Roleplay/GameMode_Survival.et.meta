@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{03913608C59017A3}Prefabs/MP/Modes/Roleplay/GameMode_Roleplay.et"
+ Name "{E87F79D982AFE933}Prefabs/MP/Modes/Roleplay/GameMode_Survival.et"
  Configurations {
   EntityTemplateResourceClass PC {
   }

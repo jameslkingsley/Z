@@ -1,0 +1,35 @@
+EL_GameModeRoleplay : "{03913608C59017A3}Prefabs/MP/Modes/Roleplay/GameMode_Roleplay.et" {
+ ID "59751433747FB462"
+ components {
+  EL_RespawnSytemComponent "{5A10698A884816E6}" {
+  }
+  Z_LootGameModeComponent "{5B3B1D91A44EE9B8}" {
+  }
+  Z_LootRegionComponent "{5B3B1D91BA5A1071}" {
+   m_LootRegionTiers {
+    Z_LootRegionTier "{5B3B1D91B81298A8}" {
+     m_LootTier Tier1
+     m_ProbabilityMin 0.33
+     m_ProbabilityMax 0.77
+     m_SpawnRangeLower 4
+     m_SpawnRangeUpper 12
+    }
+    Z_LootRegionTier "{5B3B1D91B87EA1D8}" {
+     m_LootTier Tier2
+     m_ProbabilityMin 0.12
+     m_ProbabilityMax 0.33
+     m_SpawnRangeLower 3
+     m_SpawnRangeUpper 6
+    }
+    Z_LootRegionTier "{5B3B1D91B84F1C17}" {
+     m_LootTier Tier3
+     m_ProbabilityMin 0.01
+     m_ProbabilityMax 0.12
+     m_SpawnRangeLower 1
+     m_SpawnRangeUpper 3
+    }
+   }
+  }
+ }
+ PlayerControllerPrefab "{CC42DCDAD458D66C}Prefabs/Characters/Core/PlayerControllerRoleplayMP.et"
+}
