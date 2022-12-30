@@ -48,4 +48,10 @@ class Z_LootTable
 	
 	[Attribute("", UIWidgets.ComboBox, "Locations that this item can be spawned in", "", ParamEnumArray.FromEnum(Z_LootLocation))]
 	ref array<ref Z_LootLocation> m_Locations;
+	
+	[Attribute("0 0 0", UIWidgets.Coords, "Transform offset the item should have when spawned in")]
+	vector m_TransformOffset;
+	
+	[Attribute("0 0 0", UIWidgets.Coords, "Yaw pitch roll the item should have when spawned in")]
+	vector m_YawPitchRoll;
 }

@@ -19,7 +19,7 @@ class Z_LootVolumeEntity: GenericEntity
 	
 	int m_RefilledAtTimestampInSeconds;
 	
-	private bool m_DebugLogs = false;
+	private bool m_DebugLogs = true;
 	
 	void Z_LootVolumeEntity(IEntitySource src, IEntity parent)
 	{
@@ -45,6 +45,8 @@ class Z_LootVolumeEntity: GenericEntity
 		// Random delay here is to spread the workload a bit so
 		// not all volumes are caching their containers all at once
 		int delay = Math.RandomInt(1000, 10000);
+		
+		Log("Caching loot containers in " + delay + " seconds");
 		
 		GetGame().GetCallqueue().CallLater(CacheLootContainers, delay);
 	}
@@ -241,9 +243,13 @@ class Z_LootVolumeEntity: GenericEntity
 			emptyContainers.Count()
 		);
 		
+		array<Z_LootContainerEntity> touchedContainers = {};
+		
 		for (int i = 0; i < countOfContainersToUse; i++)
 		{
 			Z_LootContainerEntity container = emptyContainers.GetRandomElement();
+			
+			if (touchedContainers.Contains(container)) continue;
 			
 			array<ref Z_LootTier> acceptableTiers = GetAcceptableTiers(region);
 			
@@ -272,13 +278,15 @@ class Z_LootVolumeEntity: GenericEntity
 				continue;
 			}
 			
-			IEntity lootable = container.SpawnLootable(table.m_Resource, table.m_Tier);
+			//IEntity lootable = container.SpawnLootable(table);
 			
-			if (! lootable) continue;
+			//if (! lootable) continue;
 			
-			Z_LootGameModeComponent.GetInstance().RegisterLootableEntity(lootable);
+			//Z_LootGameModeComponent.GetInstance().RegisterLootableEntity(lootable);
 			
 			IncrementSpawnedTiers(table.m_Tier);
+			
+			touchedContainers.Insert(container);
 			
 			hydratedCount++;
 		}
@@ -318,9 +326,19 @@ class Z_LootVolumeEntity: GenericEntity
 	
 	ref array<Z_LootContainerEntity> GetEmptyContainers(array<IEntity> lootables)
 	{
-		if (! lootables) return m_Containers;
+		if (! lootables)
+		{
+			Print("No lootables (null), returning all containers", LogLevel.WARNING);
+			
+			return m_Containers;
+		}
 		
-		if (lootables.IsEmpty()) return m_Containers;
+		if (lootables.IsEmpty())
+		{
+			Print("No lootables (empty), returning all containers", LogLevel.WARNING);
+			
+			return m_Containers;
+		}
 		
 		ref array<Z_LootContainerEntity> empty = {};
 		
@@ -335,6 +353,8 @@ class Z_LootVolumeEntity: GenericEntity
 				if (distance < 2)
 				{
 					containerIsEmpty = false;
+					
+					break;
 				}
 			}
 			

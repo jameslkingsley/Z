@@ -1,5 +1,8 @@
 EL_GameModeRoleplay GameMode_Survival1 : "{E87F79D982AFE933}Prefabs/MP/Modes/Roleplay/GameMode_Survival.et" {
  components {
+  EL_PersistenceManagerComponent "{59D28944F1C3532E}" {
+   m_fInterval 60
+  }
   EL_RespawnSytemComponent "{5A10698A884816E6}" {
    m_aDefaultCharacterItems {
     EL_DefaultLoadoutItem "{5B3CE432EF81A080}" {
@@ -9,23 +12,21 @@ EL_GameModeRoleplay GameMode_Survival1 : "{E87F79D982AFE933}Prefabs/MP/Modes/Rol
   }
   Z_LootGameModeComponent "{5B3B1D91A44EE9B8}" {
    m_LootVolumeCollectionIntervalInSeconds 2
-   m_LootVolumeCooldownInSeconds 5
+   m_VolumeInsufficiencyPercentage 0.01
   }
   Z_LootRegionComponent "{5B3B1D91BA5A1071}" {
    m_LootRegionTiers {
     Z_LootRegionTier "{5B3B1D91B81298A8}" {
-     m_SpawnRangeLower 1
-     m_SpawnRangeUpper 1
     }
     Z_LootRegionTier "{5B3B1D91B87EA1D8}" {
-     m_SpawnRangeLower 1
-     m_SpawnRangeUpper 1
+     m_SpawnRangeLower 2
+     m_SpawnRangeUpper 8
     }
     Z_LootRegionTier "{5B3B1D91B84F1C17}" {
-     m_SpawnRangeUpper 1
+     m_ProbabilityMin 0.01
+     m_ProbabilityMax 0.12
     }
    }
-   m_MinimumContainerUsePercentage 1
   }
  }
 }

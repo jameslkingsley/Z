@@ -43,7 +43,7 @@ class Z_LootGameModeComponent: SCR_BaseGameModeComponent
 		
 		if (! Replication.IsServer()) return;
 		
-		GetGame().GetCallqueue().CallLater(StartCollectingLootVolumes, 10000);
+		// GetGame().GetCallqueue().CallLater(StartCollectingLootVolumes, 1000); // Set to 10s
 		
 		Print("---- ReforgerZ Loot PostInit End ----");
 	}

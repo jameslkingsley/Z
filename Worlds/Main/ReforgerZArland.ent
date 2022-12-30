@@ -7,3 +7,6 @@ Layer Gamemode {
 Layer Managers {
  Index 1
 }
+Layer Regions {
+ Index 2
+}
