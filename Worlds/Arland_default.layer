@@ -1,39 +1,6 @@
-EL_GameModeRoleplay GameMode_Roleplay1 : "{03913608C59017A3}Prefabs/MP/Modes/Roleplay/GameMode_Roleplay.et" {
- {
-  TimeAndWeatherManagerEntity TimeAndWeatherManager_5B3AB1B751F83CE5 {
-   ID "5B3AB1B74BFFB1D9"
-  }
- }
+EL_GameModeRoleplay GameMode_Survival1 : "{E87F79D982AFE933}Prefabs/MP/Modes/Roleplay/GameMode_Survival.et" {
 }
-$grp EL_SpawnPoint {
- {
-  coords 1413.649 1.994 985.099
- }
- {
-  coords 1977.515 1.27 779.146
- }
- {
-  coords 2272.169 4.129 690.351
- }
- {
-  coords 2543.262 0.882 755.647
- }
- {
-  coords 2839.808 2.589 944.006
- }
- {
-  coords 3001.09 1.343 1104.515
- }
- {
-  coords 3417.326 1.232 1271.8
- }
- {
-  coords 3513.567 1.541 1899.017
- }
- {
-  coords 3426.994 1.247 2254.716
- }
- {
-  coords 3422.48 1.686 2058.81
- }
+EL_SpawnPoint {
+ coords 3310.983 1.634 1235.697
+ m_fSpawnRadius 10
 }

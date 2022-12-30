@@ -43,6 +43,11 @@ class Z_LootVolumeEntity: GenericEntity
 		
 		if (! EL_PersistenceManager.IsPersistenceMaster()) return;
 		
+		GetGame().GetCallqueue().Call(PostInit);
+	}
+	
+	void PostInit()
+	{
 		if (m_Categories.IsEmpty() || m_Locations.IsEmpty()) {
 			Log("Loot volume has no configured categories or locations", LogLevel.SPAM);
 			
@@ -65,6 +70,68 @@ class Z_LootVolumeEntity: GenericEntity
 		Print(message, level);
 	}
 	
+	void SetVolumeOriginToParentCentroid(IEntity parent)
+	{
+		vector mins, maxs;
+		
+		parent.GetWorldBounds(mins, maxs);
+		
+		vector center = vector.Lerp(mins, maxs, 0.5);
+		
+		SetOrigin(center);
+	}
+	
+	void CacheLootContainers(IEntity parent)
+	{
+		// This function sucks but for some reason furniture
+		// isn't properly added as children of their building parents...
+		// so you can't iterate down the tree.
+		
+		// TODO Replace this with a Workbench plugin that caches this
+		
+		if (! parent || ! GetGame().GetWorld())
+			return;
+		
+		vector mins, maxs;
+		
+		parent.GetWorldBounds(mins, maxs);
+		
+		float dist = vector.Distance(mins, maxs);
+		
+		GetGame().GetWorld().QueryEntitiesBySphere(
+			GetOrigin(),
+			dist,
+			GetLootContainerEntity,
+			FilterLootContainerEntities,
+			EQueryEntitiesFlags.ALL
+		);
+	}
+	
+	bool GetLootContainerEntity(IEntity ent)
+	{
+		if (ent.Type() == Z_LootContainerEntity)
+		{
+			Z_LootContainerEntity container = Z_LootContainerEntity.Cast(ent);
+			
+			if (! m_Containers.Contains(container))
+			{
+				m_Containers.Insert(container);
+			}
+		}
+
+		return true;
+	}
+	
+	bool FilterLootContainerEntities(IEntity ent)
+	{
+		if (ent.Type() == Z_LootContainerEntity)
+		{
+			return true;
+		}
+
+		return false;
+	}
+
 	bool IsInCooldown()
 	{
 		if (! m_RefilledAtTimestampInSeconds) return false;
@@ -320,68 +387,6 @@ class Z_LootVolumeEntity: GenericEntity
 		return Z_LootRegionComponent.Cast(
 			GetGame().GetGameMode().FindComponent(Z_LootRegionComponent)
 		);
-	}
-	
-	void SetVolumeOriginToParentCentroid(IEntity parent)
-	{
-		vector mins, maxs;
-		
-		parent.GetWorldBounds(mins, maxs);
-		
-		vector center = vector.Lerp(mins, maxs, 0.5);
-		
-		SetOrigin(center);
-	}
-	
-	void CacheLootContainers(IEntity parent)
-	{
-		// This function sucks but for some reason furniture
-		// isn't properly added as children of their building parents...
-		// so you can't iterate down the tree.
-		
-		// TODO Replace this with a Workbench plugin that caches this
-		
-		if (! parent || ! GetGame().GetWorld())
-			return;
-		
-		vector mins, maxs;
-		
-		parent.GetWorldBounds(mins, maxs);
-		
-		float dist = vector.Distance(mins, maxs);
-		
-		GetGame().GetWorld().QueryEntitiesBySphere(
-			GetOrigin(),
-			dist,
-			GetLootContainerEntity,
-			FilterLootContainerEntities,
-			EQueryEntitiesFlags.ALL
-		);
-	}
-	
-	bool GetLootContainerEntity(IEntity ent)
-	{
-		if (ent.Type() == Z_LootContainerEntity)
-		{
-			Z_LootContainerEntity container = Z_LootContainerEntity.Cast(ent);
-			
-			if (! m_Containers.Contains(container))
-			{
-				m_Containers.Insert(container);
-			}
-		}
-
-		return true;
-	}
-	
-	bool FilterLootContainerEntities(IEntity ent)
-	{
-		if (ent.Type() == Z_LootContainerEntity)
-		{
-			return true;
-		}
-
-		return false;
 	}
 	
 	array<ref Z_LootTier> GetAcceptableTiers(Z_LootRegionComponent region)

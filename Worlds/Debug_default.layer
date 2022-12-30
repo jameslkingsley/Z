@@ -8,7 +8,7 @@ EL_GameModeRoleplay GameMode_Roleplay1 : "{03913608C59017A3}Prefabs/MP/Modes/Rol
    Enabled 0
   }
   EL_RespawnSytemComponent "{5B34DB3EC1935859}" {
-   m_aDefaultCharacterPrefabs +{
+   m_aDefaultCharacterPrefabs {
    }
    m_aDefaultCharacterItems {
     EL_DefaultLoadoutItem "{5B34DB3ED68146FF}" {
@@ -40,27 +40,6 @@ EL_GameModeRoleplay GameMode_Roleplay1 : "{03913608C59017A3}Prefabs/MP/Modes/Rol
    m_LootVolumeCooldownInSeconds 5
   }
   Z_LootRegionComponent "{5B3826F7ADA5ADB8}" {
-   m_LootRegionTiers {
-    Z_LootRegionTier "{5B3826F7AAE31303}" {
-     m_ProbabilityMin 1
-     m_ProbabilityMax 1
-     m_SpawnRangeLower 4
-     m_SpawnRangeUpper 12
-    }
-    Z_LootRegionTier "{5B3826F7AACD937F}" {
-     m_ProbabilityMin 1
-     m_ProbabilityMax 1
-     m_SpawnRangeLower 2
-     m_SpawnRangeUpper 10
-    }
-    Z_LootRegionTier "{5B3826F7AAD8A420}" {
-     m_ProbabilityMax 0.1
-     m_SpawnRangeLower 1
-     m_SpawnRangeUpper 3
-    }
-   }
-   m_MinimumContainerUsePercentage 1
-   m_DiceRolls 5
   }
   RplComponent "{597514327E500A0C}" {
    "Rpl State Override" Static
@@ -69,23 +48,9 @@ EL_GameModeRoleplay GameMode_Roleplay1 : "{03913608C59017A3}Prefabs/MP/Modes/Rol
  }
  coords 27.468 0 68.021
 }
-TimeAndWeatherManagerEntity TimeAndWeatherManager_5B3AB1B65C50BC07 : "{A3BAF78F6F03315B}Prefabs/World/Game/TimeAndWeatherManager.et" {
- coords 12.036 -0 60.032
-}
-ProjectileSoundsManager : "{B4DA8B0024536625}Prefabs/World/Game/ProjectileSoundsManager.et" {
- coords 11.904 -0 63.311
-}
-$grp EL_SpawnPoint {
- {
-  coords 11.518 0.956 68.01
-  m_fSpawnRadius 5
- }
- {
-  coords 18.125 0.286 63.013
- }
-}
-GenericEntity Backpack_ALICE_Medium_assembled_5B3938C6FBD5FD64 : "{5C5C6EE05EE2FF1A}Prefabs/Items/Equipment/Backpacks/Backpack_ALICE_Medium_assembled.et" {
- coords 11.101 0.376 72.113
+EL_SpawnPoint {
+ coords 11.518 0.525 64.009
+ m_fSpawnRadius 5
 }
 SCR_DestructibleBuildingEntity : "{CFE8511B2B7E8AAA}Prefabs/Structures/Commercial/Shops/ShopModern_E_01.et" {
  coords 20.426 0.389 80.438

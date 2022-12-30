@@ -51,7 +51,7 @@ class Z_LootGameModeComponent: SCR_BaseGameModeComponent
 	{
 		return m_LootableStaleAgeInHours;
 	}
-	
+
 	float GetVolumeInsufficiencyPercentage()
 	{
 		return m_VolumeInsufficiencyPercentage;
@@ -67,7 +67,7 @@ class Z_LootGameModeComponent: SCR_BaseGameModeComponent
 		
 		return config.m_LootTables;
 	}
-	
+
 	void RegisterLootRegion(Z_LootRegionComponent region)
 	{
 		if (m_LootRegions.Contains(region))
@@ -75,7 +75,7 @@ class Z_LootGameModeComponent: SCR_BaseGameModeComponent
 		
 		m_LootRegions.Insert(region);
 	}
-	
+
 	void RegisterLootableEntity(IEntity ent)
 	{
 		if (m_LootableEntities.Contains(ent))
@@ -93,7 +93,7 @@ class Z_LootGameModeComponent: SCR_BaseGameModeComponent
 			m_LootableEntities.Remove(index);
 		}
 	}
-	
+
 	ref array<IEntity> GetLootableEntities()
 	{
 		return m_LootableEntities;

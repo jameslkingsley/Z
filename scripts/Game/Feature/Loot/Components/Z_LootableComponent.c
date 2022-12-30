@@ -70,7 +70,7 @@ class Z_LootableComponent : ScriptComponent
 	{
 		m_InitialSpawnTimestampInHours = hours;
 	}
-	
+
 	bool CleanupIfStale()
 	{
 		if (! m_InitialSpawnOrigin) return false;
