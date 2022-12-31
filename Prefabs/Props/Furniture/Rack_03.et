@@ -1,3 +1,47 @@
 GenericEntity : "{4CC2C69DE1AEF103}Prefabs/Props/Core/Destructible_Props_Base.et" {
  ID "F0DBA538AC2A0552"
+ {
+  $grp Z_LootContainerEntity : "{EBE9660A3A74C747}Prefabs/Loot/Z_LootContainer_Base.et" {
+   {
+    ID "5B3E275203D8B425"
+    coords -2.632 0.136 0.382
+   }
+   {
+    ID "5B3E275203D8B443"
+    coords -2.685 1.155 0.351
+   }
+   {
+    ID "5B3E275203D8B44C"
+    coords -0.832 1.662 0.349
+   }
+   {
+    ID "5B3E275203D8B453"
+    coords -2.693 1.662 0.334
+   }
+   {
+    ID "5B3E275203D8B459"
+    coords -0.777 2.173 0.334
+   }
+   {
+    ID "5B3E275203D8B45F"
+    coords -2.698 2.173 0.359
+   }
+   {
+    ID "5B3E275203D8B468"
+    coords -0.816 0.645 0.345
+   }
+   {
+    ID "5B3E275203D8B470"
+    coords -2.684 0.647 0.321
+   }
+   {
+    ID "5B3E275203D8B47C"
+    coords -0.787 1.153 0.32
+   }
+   {
+    ID "5B3E275203D8B48E"
+    coords -0.815 0.136 0.381
+   }
+  }
+ }
 }

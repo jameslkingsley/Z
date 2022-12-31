@@ -1,3 +1,4 @@
 EL_SpawnPoint : "{F380E0551C8682AF}Prefabs/MP/PlayerSpawn_01.et" {
- coords 3255.987 2.345 2873.987
+ coords 3200.171 8.953 2831.208
+ angleY -29.68
 }

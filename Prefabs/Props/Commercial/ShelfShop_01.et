@@ -1,0 +1,67 @@
+GenericEntity : "{10C26F96EF7A8CF5}Prefabs/Props/Core/Props_Base.et" {
+ ID "F0DBA538AC2A0552"
+ {
+  $grp Z_LootContainerEntity : "{EBE9660A3A74C747}Prefabs/Loot/Z_LootContainer_Base.et" {
+   {
+    ID "5B3E275760C3C149"
+    coords -0.797 1.173 0.17
+    scale 0.27
+   }
+   {
+    ID "5B3E275760C3C150"
+    coords 0.861 0.102 0.346
+    scale 0.29
+   }
+   {
+    ID "5B3E275760C3C161"
+    coords 0.85 0.818 0.186
+    scale 0.3
+   }
+   {
+    ID "5B3E275760C3C169"
+    coords 0.049 0.818 0.186
+    scale 0.3
+   }
+   {
+    ID "5B3E275760C3C171"
+    coords -0.776 0.818 0.186
+    scale 0.3
+   }
+   {
+    ID "5B3E275760C3C178"
+    coords 0.85 1.173 0.17
+    scale 0.27
+   }
+   {
+    ID "5B3E275760C3C17F"
+    coords 0.038 1.173 0.17
+    scale 0.27
+   }
+   {
+    ID "5B3E275760C3C184"
+    coords 0.841 0.427 0.289
+    scale 0.3
+   }
+   {
+    ID "5B3E275760C3C18E"
+    coords 0.037 0.427 0.289
+    scale 0.3
+   }
+   {
+    ID "5B3E275760C3C195"
+    coords -0.766 0.427 0.289
+    scale 0.3
+   }
+   {
+    ID "5B3E275760C3C1BA"
+    coords -0.828 0.102 0.346
+    scale 0.29
+   }
+   {
+    ID "5B3E275760C3C1DF"
+    coords 0.024 0.102 0.346
+    scale 0.29
+   }
+  }
+ }
+}

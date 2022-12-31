@@ -52,8 +52,6 @@ class Z_LootVolumeEntity: GenericEntity
 		CacheLootContainers();
 		
 		m_IsSetup = true;
-		
-		Print("Loot volume setup");
 	}
 	
 	void CacheLootContainers()
@@ -149,6 +147,13 @@ class Z_LootVolumeEntity: GenericEntity
 	bool HasSufficientLoot(notnull out array<IEntity> lootables)
 	{
 		if (! m_Containers) return true;
+		
+		if (m_Containers.IsEmpty())
+		{
+			m_IsIgnored = true;
+			
+			return true;
+		}
 		
 		vector mins, maxs;
 		
@@ -309,8 +314,6 @@ class Z_LootVolumeEntity: GenericEntity
 		
 		if (lootables.IsEmpty())
 		{
-			Print("No lootables (empty), returning all containers", LogLevel.WARNING);
-			
 			return m_Containers;
 		}
 		

@@ -1,0 +1,9 @@
+SCR_DestructibleBuildingEntity : "{7A83D5480DED6B76}Prefabs/Structures/Houses/Wooden/House_Wooden_E_1I01/House_Wooden_E_1I01_Base.et" {
+ ID "5192B80A2562B4EF"
+ {
+  Z_LootVolumeEntity : "{1F96459CFAD1408A}Prefabs/Loot/Z_LootVolume_House.et" {
+   ID "5B3E27567E34C275"
+   coords 0 0 0
+  }
+ }
+}

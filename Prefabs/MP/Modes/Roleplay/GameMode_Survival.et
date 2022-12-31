@@ -2,6 +2,23 @@ EL_GameModeRoleplay : "{03913608C59017A3}Prefabs/MP/Modes/Roleplay/GameMode_Role
  ID "59751433747FB462"
  components {
   EL_RespawnSytemComponent "{5A10698A884816E6}" {
+   Enabled 0
+  }
+  EL_RespawnSytemComponent "{5B3E275AE32D97DA}" {
+   m_aDefaultCharacterPrefabs {
+    "{CE23D4366B47E9B9}Prefabs/Characters/Presets/White_Male_01.et" "{C465F15DDF56A6D8}Prefabs/Characters/Presets/Asian_Male_02.et" "{BFD6AFB8A1D8E2F9}Prefabs/Characters/Presets/Black_Male_02.et"
+   }
+   m_aDefaultCharacterItems {
+    EL_DefaultLoadoutItem "{5B3E275AFDF13F0C}" {
+     m_rPrefab "{D262D2102B9931C6}Prefabs/Characters/Uniforms/Jacket_M88_rolledup.et"
+    }
+    EL_DefaultLoadoutItem "{5B3E275AFDDA2A89}" {
+     m_rPrefab "{DCF980831E880F6A}Prefabs/Characters/Uniforms/Pants_M88.et"
+    }
+    EL_DefaultLoadoutItem "{5B3E275AFA2744C0}" {
+     m_rPrefab "{C7923961D7235D70}Prefabs/Characters/Footwear/CombatBoots_Soviet_01.et"
+    }
+   }
   }
   Z_LootGameModeComponent "{5B3B1D91A44EE9B8}" {
   }

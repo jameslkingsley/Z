@@ -1,0 +1,75 @@
+PolylineArea BeauregardLootRegion {
+ components {
+  Z_LootRegionComponent "{5B3E275492BA18F8}" {
+   m_LootRegionTiers {
+    Z_LootRegionTier "{5B3E2754B5B4EB96}" {
+     m_ProbabilityMin 0.12
+     m_ProbabilityMax 0.5
+     m_SpawnRangeLower 4
+     m_SpawnRangeUpper 8
+    }
+    Z_LootRegionTier "{5B3E2754B59CA45C}" {
+     m_ProbabilityMin 0.04
+     m_ProbabilityMax 0.12
+     m_SpawnRangeLower 2
+     m_SpawnRangeUpper 4
+    }
+    Z_LootRegionTier "{5B3E2754B5E9EEBF}" {
+     m_LootTier Tier3
+     m_ProbabilityMin 0.01
+     m_ProbabilityMax 0.04
+     m_SpawnRangeLower 1
+     m_SpawnRangeUpper 2
+    }
+   }
+  }
+  RplComponent "{5B3E2754A4D22B7B}" {
+  }
+ }
+ coords 3158.796 23.901 2587.855
+ {
+  PolylineShapeEntity {
+   components {
+    Hierarchy "{5B3E275485E7D206}" {
+    }
+   }
+   coords 0 0 0
+   Points {
+    ShapePoint "{5B3E275570242463}" {
+     Position 0 -0.001 0
+    }
+    ShapePoint "{5B3E275570241A1D}" {
+     Position 5 -0.19 0
+    }
+    ShapePoint "{5B3E275570C0CA8D}" {
+     Position -208.962 0 119.877
+    }
+    ShapePoint "{5B3E27548E432C8F}" {
+     Position -151.505 0 301.4
+    }
+    ShapePoint "{5B3E27548C27CB24}" {
+     Position -66.021 0 459.785
+    }
+    ShapePoint "{5B3E27548CCA3B40}" {
+     Position 8.518 0 488.501
+    }
+    ShapePoint "{5B3E27548DB453DE}" {
+     Position 117.715 0 374.591
+    }
+    ShapePoint "{5B3E27548AE6B100}" {
+     Position 235.314 0 293.887
+    }
+    ShapePoint "{5B3E27548BA18E7B}" {
+     Position 186.005 0 230.067
+    }
+    ShapePoint "{5B3E27548842A625}" {
+     Position 88.24 0 110.374
+    }
+    ShapePoint "{5B3E2754897F936C}" {
+     Position 28.662 0 12.79
+    }
+   }
+   IsClosed 1
+  }
+ }
+}
