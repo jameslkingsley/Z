@@ -1,0 +1,23 @@
+SCR_DestructibleBuildingEntity : "{A43A100E3C377DB2}Prefabs/Structures/Core/Building_Base.et" {
+ ID "F0DBA538AC2A0552"
+ {
+  Z_LootVolumeEntity : "{94CE0A1435FF913F}Prefabs/Loot/Z_LootVolume_VegFruit.et" {
+   ID "5B3EE287AE43DFDB"
+   coords 0 0 0
+  }
+  $grp Z_LootContainerEntity : "{EBE9660A3A74C747}Prefabs/Loot/Z_LootContainer_Base.et" {
+   {
+    ID "5B3EE2878F7D10A6"
+    coords -1.075 0.209 0.557
+   }
+   {
+    ID "5B3EE2878F7D10B0"
+    coords -0.009 0.259 -1.16
+   }
+   {
+    ID "5B3EE2878F7D10CC"
+    coords 1.084 0.232 0.562
+   }
+  }
+ }
+}

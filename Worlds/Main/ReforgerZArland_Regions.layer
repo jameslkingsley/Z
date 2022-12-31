@@ -1,75 +1,362 @@
-PolylineArea BeauregardLootRegion {
- components {
-  Z_LootRegionComponent "{5B3E275492BA18F8}" {
-   m_LootRegionTiers {
-    Z_LootRegionTier "{5B3E2754B5B4EB96}" {
-     m_ProbabilityMin 0.12
-     m_ProbabilityMax 0.5
-     m_SpawnRangeLower 4
-     m_SpawnRangeUpper 8
-    }
-    Z_LootRegionTier "{5B3E2754B59CA45C}" {
-     m_ProbabilityMin 0.04
-     m_ProbabilityMax 0.12
-     m_SpawnRangeLower 2
-     m_SpawnRangeUpper 4
-    }
-    Z_LootRegionTier "{5B3E2754B5E9EEBF}" {
-     m_LootTier Tier3
-     m_ProbabilityMin 0.01
-     m_ProbabilityMax 0.04
-     m_SpawnRangeLower 1
-     m_SpawnRangeUpper 2
+$grp PolylineArea {
+ BeauregardLootRegion {
+  components {
+   Z_LootRegionComponent "{5B3E275492BA18F8}" {
+    m_LootRegionTiers {
+     Z_LootRegionTier "{5B3E2754B5B4EB96}" {
+      m_ProbabilityMin 0.14
+      m_ProbabilityMax 0.66
+      m_SpawnRangeLower 4
+      m_SpawnRangeUpper 8
+     }
+     Z_LootRegionTier "{5B3E2754B59CA45C}" {
+      m_ProbabilityMin 0.08
+      m_ProbabilityMax 0.14
+      m_SpawnRangeLower 3
+      m_SpawnRangeUpper 6
+     }
+     Z_LootRegionTier "{5B3E2754B5E9EEBF}" {
+      m_LootTier Tier3
+      m_ProbabilityMin 0.01
+      m_ProbabilityMax 0.08
+      m_SpawnRangeLower 1
+      m_SpawnRangeUpper 3
+     }
     }
    }
+   RplComponent "{5B3E2754A4D22B7B}" {
+   }
   }
-  RplComponent "{5B3E2754A4D22B7B}" {
+  coords 3158.796 23.901 2587.855
+  {
+   PolylineShapeEntity {
+    components {
+     Hierarchy "{5B3E275485E7D206}" {
+     }
+    }
+    coords 0 0 0
+    Points {
+     ShapePoint "{5B3E275570242463}" {
+      Position 0 -0.001 0
+     }
+     ShapePoint "{5B3E275570241A1D}" {
+      Position 5 -0.19 0
+     }
+     ShapePoint "{5B3E275570C0CA8D}" {
+      Position -208.962 0 119.877
+     }
+     ShapePoint "{5B3E27548E432C8F}" {
+      Position -151.505 0 301.4
+     }
+     ShapePoint "{5B3E27548C27CB24}" {
+      Position -66.021 0 459.785
+     }
+     ShapePoint "{5B3E27548CCA3B40}" {
+      Position 8.518 0 488.501
+     }
+     ShapePoint "{5B3E27548DB453DE}" {
+      Position 117.715 0 374.591
+     }
+     ShapePoint "{5B3E27548AE6B100}" {
+      Position 235.314 0 293.887
+     }
+     ShapePoint "{5B3E27548BA18E7B}" {
+      Position 186.005 0 230.067
+     }
+     ShapePoint "{5B3E27548842A625}" {
+      Position 88.24 0 110.374
+     }
+     ShapePoint "{5B3E2754897F936C}" {
+      Position 28.662 0 12.79
+     }
+    }
+    IsClosed 1
+   }
   }
  }
- coords 3158.796 23.901 2587.855
- {
-  PolylineShapeEntity {
-   components {
-    Hierarchy "{5B3E275485E7D206}" {
+ AirfieldLootRegion {
+  components {
+   Z_LootRegionComponent "{5B3F08A6AE3F9036}" {
+    m_LootRegionTiers {
+     Z_LootRegionTier "{5B3F08A6AD2AF8CD}" {
+      m_LootTier Tier1
+      m_ProbabilityMin 0.36
+      m_ProbabilityMax 0.66
+      m_SpawnRangeLower 4
+      m_SpawnRangeUpper 8
+     }
+     Z_LootRegionTier "{5B3F08A6AD3901F9}" {
+      m_LootTier Tier2
+      m_ProbabilityMin 0.18
+      m_ProbabilityMax 0.36
+      m_SpawnRangeLower 4
+      m_SpawnRangeUpper 8
+     }
+     Z_LootRegionTier "{5B3F08A6AD026C79}" {
+      m_LootTier Tier3
+      m_ProbabilityMin 0.04
+      m_ProbabilityMax 0.18
+      m_SpawnRangeLower 1
+      m_SpawnRangeUpper 6
+     }
     }
    }
-   coords 0 0 0
-   Points {
-    ShapePoint "{5B3E275570242463}" {
-     Position 0 -0.001 0
+   RplComponent "{5B3F08A6AF432A06}" {
+   }
+  }
+  coords 555.139 28.754 2463.326
+  {
+   PolylineShapeEntity {
+    components {
+     Hierarchy "{5B3F08A4537DFDBB}" {
+     }
     }
-    ShapePoint "{5B3E275570241A1D}" {
-     Position 5 -0.19 0
+    coords 0 0 0
+    Points {
+     ShapePoint "{5B3F08A413B44334}" {
+      Position 0 -0.001 0
+     }
+     ShapePoint "{5B3F08A413B44049}" {
+      Position 5 -0.011 0
+     }
+     ShapePoint "{5B3F08A410AC9F3B}" {
+      Position -17.525 0 76.593
+     }
+     ShapePoint "{5B3F08A411C6B888}" {
+      Position 25.754 0 209.188
+     }
+     ShapePoint "{5B3F08A42A701556}" {
+      Position 508.971 0 567.659
+     }
+     ShapePoint "{5B3F08A428DC4223}" {
+      Position 576.587 0 506.449
+     }
+     ShapePoint "{5B3F08A42999FE39}" {
+      Position 607.079 0 547.899
+     }
+     ShapePoint "{5B3F08A427765ABD}" {
+      Position 881.838 0 606.704
+     }
+     ShapePoint "{5B3F08A4259B4B6A}" {
+      Position 1025.53 0 700.424
+     }
+     ShapePoint "{5B3F08A43F94C4B6}" {
+      Position 1119.414 0 616.768
+     }
+     ShapePoint "{5B3F08A43C85B8EC}" {
+      Position 1145.176 0 611.365
+     }
+     ShapePoint "{5B3F08A43AA9F2A0}" {
+      Position 1269.649 0 478.137
+     }
+     ShapePoint "{5B3F08A4386E1145}" {
+      Position 1298.842 0 351.188
+     }
+     ShapePoint "{5B3F08A4360B0605}" {
+      Position 1026.295 0 277.946
+     }
+     ShapePoint "{5B3F08A4354419F3}" {
+      Position 972.23 0 164.047
+     }
+     ShapePoint "{5B3F08A4330B0ACF}" {
+      Position 918.801 0 130.34
+     }
+     ShapePoint "{5B3F08A433FE8D2E}" {
+      Position 878.224 0 88.321
+     }
+     ShapePoint "{5B3F08A44DBF2A4A}" {
+      Position 873.128 0 -136.542
+     }
+     ShapePoint "{5B3F08A44685093A}" {
+      Position 915.733 0 -182.783
+     }
+     ShapePoint "{5B3F08A445DFAEC0}" {
+      Position 908.963 0 -273.301
+     }
+     ShapePoint "{5B3F08A4400356A6}" {
+      Position 975.333 0 -355.744
+     }
+     ShapePoint "{5B3F08A441971FAD}" {
+      Position 762.4 0 -501.098
+     }
+     ShapePoint "{5B3F08A45DA2B787}" {
+      Position 349.801 0 87.341
+     }
+     ShapePoint "{5B3F08A456F35BBF}" {
+      Position 18.753 0 5.756
+     }
     }
-    ShapePoint "{5B3E275570C0CA8D}" {
-     Position -208.962 0 119.877
-    }
-    ShapePoint "{5B3E27548E432C8F}" {
-     Position -151.505 0 301.4
-    }
-    ShapePoint "{5B3E27548C27CB24}" {
-     Position -66.021 0 459.785
-    }
-    ShapePoint "{5B3E27548CCA3B40}" {
-     Position 8.518 0 488.501
-    }
-    ShapePoint "{5B3E27548DB453DE}" {
-     Position 117.715 0 374.591
-    }
-    ShapePoint "{5B3E27548AE6B100}" {
-     Position 235.314 0 293.887
-    }
-    ShapePoint "{5B3E27548BA18E7B}" {
-     Position 186.005 0 230.067
-    }
-    ShapePoint "{5B3E27548842A625}" {
-     Position 88.24 0 110.374
-    }
-    ShapePoint "{5B3E2754897F936C}" {
-     Position 28.662 0 12.79
+    IsClosed 1
+   }
+  }
+ }
+ CoastalMilitaryLootRegion {
+  components {
+   Z_LootRegionComponent "{5B3F08A752DAB3C2}" {
+    m_LootRegionTiers {
+     Z_LootRegionTier "{5B3F08A753E8ED05}" {
+      m_LootTier Tier1
+      m_ProbabilityMin 0.24
+      m_ProbabilityMax 0.5
+      m_SpawnRangeLower 4
+      m_SpawnRangeUpper 8
+     }
+     Z_LootRegionTier "{5B3F08A753C4F49F}" {
+      m_LootTier Tier2
+      m_ProbabilityMin 0.12
+      m_ProbabilityMax 0.24
+      m_SpawnRangeLower 4
+      m_SpawnRangeUpper 8
+     }
+     Z_LootRegionTier "{5B3F08A7501EC20A}" {
+      m_LootTier Tier3
+      m_ProbabilityMin 0.04
+      m_ProbabilityMax 0.12
+      m_SpawnRangeLower 1
+      m_SpawnRangeUpper 4
+     }
     }
    }
-   IsClosed 1
+   RplComponent "{5B3F08A7555FBCAD}" {
+   }
+  }
+  coords 1607.144 12.106 2040.848
+  {
+   PolylineShapeEntity {
+    components {
+     Hierarchy "{5B3F08A7826B0998}" {
+     }
+    }
+    coords 0 0 0
+    Points {
+     ShapePoint "{5B3F08A47794A9ED}" {
+      Position 0 -0.001 0
+     }
+     ShapePoint "{5B3F08A47794AF31}" {
+      Position 5 1.376 0
+     }
+     ShapePoint "{5B3F08A4749A11FE}" {
+      Position 9.116 0 -126.728
+     }
+     ShapePoint "{5B3F08A475871F19}" {
+      Position -112.082 0 -204.003
+     }
+     ShapePoint "{5B3F08A47270BC81}" {
+      Position -152.817 0 -263.723
+     }
+     ShapePoint "{5B3F08A473D6093E}" {
+      Position -291.758 0 -249.622
+     }
+     ShapePoint "{5B3F08A471F7F0A1}" {
+      Position -542.355 0 -150.338
+     }
+     ShapePoint "{5B3F08A78EAF3890}" {
+      Position -718.834 0 -90.99
+     }
+     ShapePoint "{5B3F08A78EC13643}" {
+      Position -752.577 0 28.362
+     }
+     ShapePoint "{5B3F08A78F690395}" {
+      Position -657.707 0 68.765
+     }
+     ShapePoint "{5B3F08A78C0E174D}" {
+      Position -540.8 0 -12.37
+     }
+     ShapePoint "{5B3F08A78A33431D}" {
+      Position -474.168 0 -0.968
+     }
+     ShapePoint "{5B3F08A78A8B4060}" {
+      Position -400.593 0 -63.385
+     }
+     ShapePoint "{5B3F08A78B17DD2C}" {
+      Position -320.063 0 -103.947
+     }
+     ShapePoint "{5B3F08A788404CA1}" {
+      Position -207.234 0 -90.679
+     }
+     ShapePoint "{5B3F08A78932B16B}" {
+      Position -121.328 0 -59.869
+     }
+     ShapePoint "{5B3F08A7861760A8}" {
+      Position -19.871 0 -8.375
+     }
+    }
+    IsClosed 1
+   }
+  }
+ }
+ ArlevilleLootRegion {
+  components {
+   Z_LootRegionComponent "{5B3F08A73191486A}" {
+    m_LootRegionTiers {
+     Z_LootRegionTier "{5B3F08A74EB5FBCE}" {
+      m_LootTier Tier1
+      m_ProbabilityMin 0.14
+      m_ProbabilityMax 0.66
+      m_SpawnRangeLower 4
+      m_SpawnRangeUpper 8
+     }
+     Z_LootRegionTier "{5B3F08A74E9FBEF0}" {
+      m_LootTier Tier2
+      m_ProbabilityMin 0.08
+      m_ProbabilityMax 0.14
+      m_SpawnRangeLower 2
+      m_SpawnRangeUpper 6
+     }
+     Z_LootRegionTier "{5B3F08A74EEFACA5}" {
+      m_LootTier Tier3
+      m_ProbabilityMin 0.01
+      m_ProbabilityMax 0.08
+      m_SpawnRangeLower 1
+      m_SpawnRangeUpper 3
+     }
+    }
+   }
+   RplComponent "{5B3F08A7306AEC4B}" {
+   }
+  }
+  coords 2744.065 56.977 1464.688
+  {
+   PolylineShapeEntity {
+    components {
+     Hierarchy "{5B3F08A7DEA0985B}" {
+     }
+    }
+    coords 0 0 0
+    Points {
+     ShapePoint "{5B3F08A7CBDA3865}" {
+      Position 0 -0.011 0
+     }
+     ShapePoint "{5B3F08A7CBDA3980}" {
+      Position 5 0.469 0
+     }
+     ShapePoint "{5B3F08A7C8BD1CB8}" {
+      Position -179.923 0 220.297
+     }
+     ShapePoint "{5B3F08A7C8D488E4}" {
+      Position -119.109 0 369.62
+     }
+     ShapePoint "{5B3F08A7C94B10CD}" {
+      Position 13.116 0 393.554
+     }
+     ShapePoint "{5B3F08A7C9C73FCD}" {
+      Position 153.848 0 340.201
+     }
+     ShapePoint "{5B3F08A7C682123E}" {
+      Position 277.512 0 281.447
+     }
+     ShapePoint "{5B3F08A7C499205B}" {
+      Position 372.941 0 98.842
+     }
+     ShapePoint "{5B3F08A7C55B03DD}" {
+      Position 296.167 0 44.487
+     }
+     ShapePoint "{5B3F08A7C2327C72}" {
+      Position 134.488 0 45.82
+     }
+    }
+    IsClosed 1
+   }
   }
  }
 }

@@ -48,11 +48,16 @@ EL_GameModeRoleplay GameMode_Roleplay1 : "{03913608C59017A3}Prefabs/MP/Modes/Rol
  }
  coords 27.468 0 68.021
 }
-EL_SpawnPoint {
- coords 11.518 0.525 64.009
- m_fSpawnRadius 5
+Z_LootTableTestEntity {
+ coords 19.644 0.906 71.662
 }
-SCR_DestructibleBuildingEntity : "{CFE8511B2B7E8AAA}Prefabs/Structures/Commercial/Shops/ShopModern_E_01.et" {
- coords 20.426 0.389 80.438
- angleY 174.867
+SCR_LoadoutManager : "{A7986593CF41C82B}Prefabs/MP/LoadoutManager.et" {
+ coords 25.203 -0 63.504
+}
+SCR_SpawnPoint : "{AAEC4F0DEE5617F9}Prefabs/MP/PlayerSpawn_Base.et" {
+ coords 26.577 -0 66.209
+ angleY 0
+}
+EL_SpawnPoint : "{F380E0551C8682AF}Prefabs/MP/PlayerSpawn_01.et" {
+ coords 26.044 -0 65.003
 }

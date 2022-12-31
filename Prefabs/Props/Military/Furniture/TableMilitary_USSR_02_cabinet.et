@@ -1,0 +1,10 @@
+StaticModelEntity : "{5EC6836A5694F691}Prefabs/Props/Military/Furniture/FurnitureMilitary_base.et" {
+ ID "5272E314F01B2DBE"
+ {
+  Z_LootContainerEntity : "{EBE9660A3A74C747}Prefabs/Loot/Z_LootContainer_Base.et" {
+   ID "5B3F08A5DC0644CB"
+   coords -0.018 0.902 0.002
+   scale 0.34
+  }
+ }
+}

@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{EB1E33520AE4EB79}Prefabs/Structures/Industrial/Sheds/ShedMetal_03/ShedMetal_03_base.et"
+ Configurations {
+  EntityTemplateResourceClass PC {
+  }
+  EntityTemplateResourceClass XBOX_ONE : PC {
+  }
+  EntityTemplateResourceClass XBOX_SERIES : PC {
+  }
+  EntityTemplateResourceClass PS4 : PC {
+  }
+  EntityTemplateResourceClass HEADLESS : PC {
+  }
+ }
+}

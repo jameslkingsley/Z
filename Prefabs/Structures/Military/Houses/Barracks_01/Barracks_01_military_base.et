@@ -1,0 +1,9 @@
+SCR_DestructibleBuildingEntity : "{80D7D3EAABADBD44}Prefabs/Structures/Military/Houses/Barracks_01/Barracks_01_Base.et" {
+ ID "F0DBA538AC2A0552"
+ {
+  Z_LootVolumeEntity : "{356BE4AAF76476CD}Prefabs/Loot/Z_LootVolume_MilitaryBunker.et" {
+   ID "5B3F08A5BC6A2A2E"
+   coords 0 0 0
+  }
+ }
+}

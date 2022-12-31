@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{356BE4AAF76476CD}Prefabs/Loot/Z_LootVolume_MilitaryBunker.et"
+ Configurations {
+  EntityTemplateResourceClass PC {
+  }
+  EntityTemplateResourceClass XBOX_ONE : PC {
+  }
+  EntityTemplateResourceClass XBOX_SERIES : PC {
+  }
+  EntityTemplateResourceClass PS4 : PC {
+  }
+  EntityTemplateResourceClass HEADLESS : PC {
+  }
+ }
+}

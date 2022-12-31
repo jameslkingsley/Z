@@ -1,0 +1,9 @@
+SCR_DestructibleBuildingEntity : "{A43A100E3C377DB2}Prefabs/Structures/Core/Building_Base.et" {
+ ID "F0DBA538AC2A0552"
+ {
+  Z_LootVolumeEntity : "{7FB529218A676885}Prefabs/Loot/Z_LootVolume_Shed.et" {
+   ID "5B3EE28615BFAE6F"
+   coords 0 0 0
+  }
+ }
+}

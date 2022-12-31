@@ -1,0 +1,10 @@
+GenericEntity : "{2E13D01A2CB8C2E7}Prefabs/Props/Military/AmmoBoxes/EquipmentBoxStack/EquipmentBoxStack_01_V5_base.et" {
+ ID "F0DBA538AC2A0552"
+ {
+  Z_LootContainerEntity : "{EBE9660A3A74C747}Prefabs/Loot/Z_LootContainer_Base.et" {
+   ID "5B3F08A5AFA9114D"
+   coords 0.011 0.734 0.156
+   scale 0.18
+  }
+ }
+}

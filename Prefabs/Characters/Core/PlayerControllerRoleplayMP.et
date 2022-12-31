@@ -3,6 +3,9 @@ SCR_PlayerController : "{225E51284CC95CFA}Prefabs/Characters/Core/DefaultPlayerC
  components {
   SCR_HUDManagerComponent "{2FDC275D9EBCDB8B}" {
    InfoDisplays {
+    SCR_NameTagDisplay "{571C8C61DF3C2747}" {
+     m_bIsEnabled 0
+    }
    }
   }
  }

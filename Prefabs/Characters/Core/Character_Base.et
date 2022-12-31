@@ -1,0 +1,20 @@
+SCR_ChimeraCharacter {
+ ID "520EC961A090B1EE"
+ components {
+  SCR_CharacterVicinityComponent "{529A70D96D401B33}" {
+   DiscoveryRadius 3
+  }
+  CharacterAnimationComponent "{520EA1D2F659C994}" {
+   components {
+    SCR_CharacterCommandHandlerComponent "{520EA1D2F659C99A}" {
+     MoveSettings ScriptCharacterCommandMoveSettings "{520EA1D2F659C99B}" {
+      m_fSpeed_Erect_Normal_Strafe 2.3
+      m_fSpeed_Erect_Fast_Strafe 3.8
+      SpeedMultiplierADS 0.7
+      AutoAlignHeadingOffsetThreshold 90
+     }
+    }
+   }
+  }
+ }
+}

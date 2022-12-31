@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{80EE6A6892B66463}Prefabs/Loot/Z_LootVolume_MilitaryOffice.et"
+ Configurations {
+  EntityTemplateResourceClass PC {
+  }
+  EntityTemplateResourceClass XBOX_ONE : PC {
+  }
+  EntityTemplateResourceClass XBOX_SERIES : PC {
+  }
+  EntityTemplateResourceClass PS4 : PC {
+  }
+  EntityTemplateResourceClass HEADLESS : PC {
+  }
+ }
+}

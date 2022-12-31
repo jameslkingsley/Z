@@ -1,0 +1,9 @@
+Z_LootVolumeEntity : "{AE58375B8F4B3024}Prefabs/Loot/Z_LootVolume_Base.et" {
+ ID "5B32CE2512212B2F"
+ m_Categories {
+  2 6 7
+ }
+ m_Locations {
+  5
+ }
+}

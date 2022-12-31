@@ -51,6 +51,9 @@ class Z_LootVolumeEntity: GenericEntity
 		
 		CacheLootContainers();
 		
+		if (m_Containers)
+			Print("Cached loot containers: " + m_Containers.Count());
+		
 		m_IsSetup = true;
 	}
 	
@@ -66,8 +69,6 @@ class Z_LootVolumeEntity: GenericEntity
 			
 			return;
 		}
-		
-		// TODO Replace this with a Workbench plugin that caches this
 		
 		vector mins, maxs;
 		

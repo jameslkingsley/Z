@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{A42808C98FD3A19F}Prefabs/Structures/Commercial/Pubs/PubVillage_E_1L01/PubVillage_E_1L01_base.et"
+ Configurations {
+  EntityTemplateResourceClass PC {
+  }
+  EntityTemplateResourceClass XBOX_ONE : PC {
+  }
+  EntityTemplateResourceClass XBOX_SERIES : PC {
+  }
+  EntityTemplateResourceClass PS4 : PC {
+  }
+  EntityTemplateResourceClass HEADLESS : PC {
+  }
+ }
+}

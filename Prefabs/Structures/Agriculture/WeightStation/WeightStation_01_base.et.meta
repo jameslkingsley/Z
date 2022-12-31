@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{F3C04211BAE932F2}Prefabs/Structures/Agriculture/WeightStation/WeightStation_01_base.et"
+ Configurations {
+  EntityTemplateResourceClass PC {
+  }
+  EntityTemplateResourceClass XBOX_ONE : PC {
+  }
+  EntityTemplateResourceClass XBOX_SERIES : PC {
+  }
+  EntityTemplateResourceClass PS4 : PC {
+  }
+  EntityTemplateResourceClass HEADLESS : PC {
+  }
+ }
+}

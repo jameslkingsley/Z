@@ -5,24 +5,14 @@ class Z_LootTableTestEntityClass: GenericEntityClass
 
 class Z_LootTableTestEntity : GenericEntity
 {
-	[Attribute("0", UIWidgets.CheckBox, "Enable of disable the debug tool")]
-	bool m_Enabled;
-	
-	void Z_LootVolumeEntity(IEntitySource src, IEntity parent)
+	void Z_LootTableTestEntity(IEntitySource src, IEntity parent)
 	{
 		SetEventMask(EntityEvent.INIT);
 	}
 	
 	override protected void EOnInit(IEntity owner)
 	{
-		if (! m_Enabled || ! GetGame().InPlayMode()) return;
-		
-		if (! Replication.IsServer())
-		{
-			return;
-		}
-		
-		GetGame().GetCallqueue().CallLater(DoSpawn, 100);
+		DoSpawn();
 	}
 	
 	void DoSpawn()
@@ -48,7 +38,7 @@ class Z_LootTableTestEntity : GenericEntity
 			currentOffset++;
 		}
 		
-		Print("Spawned entire loot table for testing");
+		Print("Spawned entire loot table for testing", LogLevel.WARNING);
 	}
 	
 	vector GetSpawnOrigin(Z_LootTable table)

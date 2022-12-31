@@ -1,0 +1,61 @@
+SCR_DestructibleBuildingEntity : "{A43A100E3C377DB2}Prefabs/Structures/Core/Building_Base.et" {
+ ID "2A6B282EBC14CAC8"
+ {
+  Z_LootVolumeEntity : "{94A643D16C5722E4}Prefabs/Loot/Z_LootVolume_Commercial.et" {
+   ID "5B3EE28605ADD7C3"
+   coords 0 0 0
+  }
+  $grp Z_LootContainerEntity : "{EBE9660A3A74C747}Prefabs/Loot/Z_LootContainer_Base.et" {
+   {
+    ID "5B3EE28608D2BD45"
+    coords -0.647 1.92 1.99
+    scale 0.26
+   }
+   {
+    ID "5B3EE28608D2BD4C"
+    coords -0.758 1.2 -2.069
+    scale 0.26
+   }
+   {
+    ID "5B3EE28608D2BD52"
+    coords -0.852 1.2 1.427
+    scale 0.32
+   }
+   {
+    ID "5B3EE28608D2BD57"
+    coords -0.357 1.563 -2.249
+    scale 0.22
+   }
+   {
+    ID "5B3EE28608D2BD64"
+    coords -0.959 1.92 -1.612
+    scale 0.28
+   }
+   {
+    ID "5B3EE28608D2BD6E"
+    coords -0.939 1.563 1.302
+    scale 0.25
+   }
+   {
+    ID "5B3EE28608D2BD75"
+    coords -0.957 1.92 1.298
+    scale 0.28
+   }
+   {
+    ID "5B3EE28608D2BD7E"
+    coords -0.65 1.563 1.971
+    scale 0.28
+   }
+   {
+    ID "5B3EE28608D2BD98"
+    coords -0.939 1.563 -1.623
+    scale 0.24
+   }
+   {
+    ID "5B3EE28608D2BDBD"
+    coords -0.347 1.92 -2.254
+    scale 0.23
+   }
+  }
+ }
+}
