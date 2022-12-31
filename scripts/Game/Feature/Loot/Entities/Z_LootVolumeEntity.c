@@ -17,39 +17,11 @@ class Z_LootVolumeEntity: GenericEntity
 	
 	bool m_IsIgnored = false;
 	
+	bool m_IsSetup = false;
+	
 	int m_RefilledAtTimestampInSeconds;
 	
-	private bool m_DebugLogs = true;
-	
-	void Z_LootVolumeEntity(IEntitySource src, IEntity parent)
-	{
-		SetEventMask(EntityEvent.INIT);
-	}
-	
-	override protected void EOnInit(IEntity owner)
-	{
-		if (! Replication.IsServer())
-		{
-			return;
-		}
-		
-		if (m_Categories.IsEmpty() || m_Locations.IsEmpty())
-		{
-			Print("Loot volume has no configured categories or locations", LogLevel.ERROR);
-			
-			m_IsIgnored = true;
-			
-			return;
-		}
-		
-		// Random delay here is to spread the workload a bit so
-		// not all volumes are caching their containers all at once
-		int delay = Math.RandomInt(1000, 10000);
-		
-		Log("Caching loot containers in " + delay + " seconds");
-		
-		GetGame().GetCallqueue().CallLater(CacheLootContainers, delay);
-	}
+	private bool m_DebugLogs = false;
 	
 	private void Log(string message, LogLevel level = LogLevel.NORMAL)
 	{
@@ -58,17 +30,41 @@ class Z_LootVolumeEntity: GenericEntity
 		Print(message, level);
 	}
 	
+	bool IsSetup()
+	{
+		return m_IsSetup;
+	}
+	
+	void Setup()
+	{
+		if (m_IsSetup) return;
+		
+		if (m_Categories.IsEmpty() || m_Locations.IsEmpty())
+		{
+			Print("Loot volume has no configured categories or locations", LogLevel.ERROR);
+			
+			m_IsSetup = true;
+			m_IsIgnored = true;
+			
+			return;
+		}
+		
+		CacheLootContainers();
+		
+		m_IsSetup = true;
+		
+		Print("Loot volume setup");
+	}
+	
 	void CacheLootContainers()
 	{
-		if (! GetGame().GetWorld()) return;
-		
-		if (! Replication.IsServer()) return;
-		
 		IEntity parent = GetParent();
 		
 		if (! parent)
 		{
 			Print("No parent for volume", LogLevel.ERROR);
+			
+			m_IsIgnored = true;
 			
 			return;
 		}
@@ -79,13 +75,7 @@ class Z_LootVolumeEntity: GenericEntity
 		
 		parent.GetWorldBounds(mins, maxs);
 		
-		GetGame().GetWorld().QueryEntitiesByAABB(
-			mins,
-			maxs,
-			GetLootContainerEntity,
-			FilterLootContainerEntities,
-			EQueryEntitiesFlags.ALL
-		);
+		GetGame().GetWorld().QueryEntitiesByAABB(mins, maxs, GetLootContainerEntity);
 	}
 	
 	bool GetLootContainerEntity(IEntity ent)
@@ -103,22 +93,6 @@ class Z_LootVolumeEntity: GenericEntity
 		}
 
 		return true;
-	}
-	
-	bool FilterLootContainerEntities(IEntity ent)
-	{
-		if (ent.Type() == Z_LootContainerEntity)
-		{
-			return true;
-		}
-
-		return false;
-	}
-	
-	bool IsReady()
-	{
-		return m_Containers != null
-			&& ! m_Containers.IsEmpty();
 	}
 
 	bool IsInCooldown()
@@ -206,7 +180,7 @@ class Z_LootVolumeEntity: GenericEntity
 	
 	void Refill(array<IEntity> lootables)
 	{
-		if (! Replication.IsServer()) return;
+		if (! IsSetup()) return;
 		
 		// If this volume doesn't have any containers
 		// then just mark it as ignored and forget about it.
@@ -278,11 +252,11 @@ class Z_LootVolumeEntity: GenericEntity
 				continue;
 			}
 			
-			//IEntity lootable = container.SpawnLootable(table);
+			IEntity lootable = container.SpawnLootable(table);
 			
-			//if (! lootable) continue;
+			if (! lootable) continue;
 			
-			//Z_LootGameModeComponent.GetInstance().RegisterLootableEntity(lootable);
+			Z_LootGameModeComponent.GetInstance().RegisterLootableEntity(lootable);
 			
 			IncrementSpawnedTiers(table.m_Tier);
 			

@@ -1,8 +1,5 @@
-SCR_SpawnPoint : "{AAEC4F0DEE5617F9}Prefabs/MP/PlayerSpawn_Base.et" {
- coords 3400.085 1.58 1266.472
- angleY 0
+SCR_FactionManager FactionManager_Base1 : "{A242612865F2A48E}Prefabs/MP/Managers/Factions/FactionManager_Base.et" {
+ m_bCanChangeFactionsPlayable 0
 }
-EL_SpawnPoint : "{F380E0551C8682AF}Prefabs/MP/PlayerSpawn_01.et" {
- coords 3250.938 2.24 2880.685
- angleY -31.022
+SCR_LoadoutManager : "{AA4E7419A1FF65B0}Prefabs/MP/Managers/Loadouts/LoadoutManager_Base.et" {
 }

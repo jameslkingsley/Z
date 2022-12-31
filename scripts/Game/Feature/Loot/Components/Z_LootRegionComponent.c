@@ -65,31 +65,25 @@ class Z_LootRegionComponent: ScriptComponent
 	[Attribute("3", UIWidgets.Slider, "Number of dice rolls (higher = luckier)", "1 20 1")]
 	int m_DiceRolls;
 	
-	protected RplComponent m_RplComponent;
-	
-	override event void OnPostInit(IEntity owner)
+	protected override void OnPostInit(IEntity owner)
 	{
-		SetEventMask(owner, EntityEvent.INIT);
-	}
-	
-	protected override void EOnInit(IEntity owner)
-	{
-		m_RplComponent = RplComponent.Cast(GetOwner().FindComponent(RplComponent));
+		RplComponent rplComponent = RplComponent.Cast(owner.FindComponent(RplComponent));
 		
-		if (! m_RplComponent) return;
+		if (! rplComponent)
+		{
+			Print("Loot region owner entity is missing RplComponent", LogLevel.ERROR);
+			
+			return;
+		}
 		
-		if (IsProxy()) return;
+		if (rplComponent.Role() == RplRole.Authority)
+		{
+			Z_LootGameModeComponent gameMode = Z_LootGameModeComponent.GetInstance();
 		
-		Z_LootGameModeComponent gameMode = Z_LootGameModeComponent.GetInstance();
-		
-		if (! gameMode) return;
-		
-		gameMode.RegisterLootRegion(this);
-	}
-	
-	bool IsProxy()
-	{
-		return (m_RplComponent && m_RplComponent.IsProxy());
+			if (! gameMode) return;
+			
+			gameMode.RegisterLootRegion(this);
+		}
 	}
 	
 	array<Z_LootRegionTier> GetRegionTiersWithConcreteProbabilities(array<ref Z_LootTier> tiers)

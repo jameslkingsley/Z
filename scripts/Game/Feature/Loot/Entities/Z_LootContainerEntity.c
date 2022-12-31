@@ -4,20 +4,8 @@ class Z_LootContainerEntityClass: GenericEntityClass
 
 class Z_LootContainerEntity: GenericEntity
 {
-	void Z_LootContainerEntity(IEntitySource src, IEntity parent)
-	{
-		SetEventMask(EntityEvent.INIT);
-	}
-	
-	override event protected void EOnInit(IEntity owner)
-	{
-		if (! Replication.IsServer()) return;
-	}
-	
 	IEntity SpawnLootable(Z_LootTable table)
 	{
-		if (! Replication.IsServer()) return null;
-		
 		IEntity ent;
 		
 		EntitySpawnParams spawnParams = EntitySpawnParams();
@@ -36,7 +24,7 @@ class Z_LootContainerEntity: GenericEntity
 		
 		if (! lootableComponent)
 		{
-			delete ent;
+			RplComponent.DeleteRplEntity(ent, false);
 			
 			Print("Lootable entity does not have lootable component: " + table.m_Resource.GetPath(), LogLevel.ERROR);
 			

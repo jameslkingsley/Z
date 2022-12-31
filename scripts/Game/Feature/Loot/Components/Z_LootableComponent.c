@@ -8,24 +8,23 @@ class Z_LootableComponent : ScriptComponent
 	vector m_InitialSpawnOrigin;
 	int m_InitialSpawnTimestampInHours;
 	
-	protected override void EOnInit(IEntity owner)
-	{
-		if (! Replication.IsServer()) return;
-				
-		// Must be called next frame so that this component has the correct data to use
-		GetGame().GetCallqueue().CallLater(SetupLootable, 2000);
-	}
-	
 	protected override void OnPostInit(IEntity owner)
 	{
-		SetEventMask(owner, EntityEvent.INIT);
+		RplComponent rplComponent = RplComponent.Cast(owner.FindComponent(RplComponent));
+		
+		if (rplComponent && rplComponent.Role() == RplRole.Authority)
+		{
+			SetupLootable();
+		}
 	}
 	
-	override event protected void OnDelete(IEntity owner)
+	override protected void OnDelete(IEntity owner)
 	{
-		if (! Replication.IsServer()) return;
+		super.OnDelete(owner);
 		
-		if (owner)
+		RplComponent rplComponent = RplComponent.Cast(owner.FindComponent(RplComponent));
+		
+		if (rplComponent && rplComponent.Role() == RplRole.Authority)
 		{
 			Z_LootGameModeComponent gameMode = Z_LootGameModeComponent.GetInstance();
 			
@@ -35,8 +34,6 @@ class Z_LootableComponent : ScriptComponent
 	
 	void SetupLootable()
 	{
-		if (! Replication.IsServer()) return;
-		
 		IEntity owner = GetOwner();
 		
 		if (owner)
@@ -48,7 +45,6 @@ class Z_LootableComponent : ScriptComponent
 				// Register the lootable if it wasn't cleaned up
 				if (! CleanupIfStale())
 				{
-					
 					gameMode.RegisterLootableEntity(owner);
 				}
 			}
@@ -85,9 +81,16 @@ class Z_LootableComponent : ScriptComponent
 		// then do not cleanup the item. This likely means a player moved it.
 		if (GetOwner().GetOrigin() != m_InitialSpawnOrigin) return false;
 		
-		delete GetOwner();
+		GetGame().GetCallqueue().Call(DeleteLootable);
 		
 		return true;
+	}
+	
+	void DeleteLootable()
+	{
+		IEntity owner = GetOwner();
+		
+		if (owner) RplComponent.DeleteRplEntity(owner, false);
 	}
 	
 	bool IsStale()
@@ -109,8 +112,6 @@ class Z_LootableComponent : ScriptComponent
 	
 	void SetInitialSpawnState()
 	{
-		if (! Replication.IsServer()) return;
-		
 		m_InitialSpawnOrigin = GetOwner().GetOrigin();
 		
 		m_InitialSpawnTimestampInHours = GetCurrentTimestampInHours();

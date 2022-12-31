@@ -1,5 +1,12 @@
 EL_SpawnPoint {
  ID "5B3CE42081DA29A0"
+ components {
+  Hierarchy "{5B3D62D66A46DE48}" {
+  }
+  RplComponent "{5B3D62D66E7BA163}" {
+   Streamable Disabled
+  }
+ }
  coords 3398.011 2.728 1270.978
  m_fSpawnRadius 10
 }

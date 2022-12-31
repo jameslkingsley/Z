@@ -31,26 +31,20 @@ class Z_LootGameModeComponent: SCR_BaseGameModeComponent
 	static Z_LootGameModeComponent GetInstance()
 	{
 		BaseGameMode gameMode = GetGame().GetGameMode();
+		
 		if (gameMode)
 			return Z_LootGameModeComponent.Cast(gameMode.FindComponent(Z_LootGameModeComponent));
 		else
 			return null;
 	}
 	
-	override void OnPostInit(IEntity owner)
+	override void OnWorldPostProcess(World world)
 	{
-		Print("---- ReforgerZ Loot PostInit Start ----");
+		if (! Replication.IsServer() || ! GetGame().InPlayMode()) return;
 		
-		if (! Replication.IsServer()) return;
-		
-		// GetGame().GetCallqueue().CallLater(StartCollectingLootVolumes, 1000); // Set to 10s
-		
-		Print("---- ReforgerZ Loot PostInit End ----");
-	}
-	
-	void StartCollectingLootVolumes()
-	{
 		GetGame().GetCallqueue().CallLater(CollectLootVolumes, m_LootVolumeCollectionIntervalInSeconds * 1000, true);
+		
+		Print("---- ReforgerZ Loot OnWorldPostProcess Complete ----");
 	}
 	
 	int GetLootVolumeCooldown()
@@ -133,7 +127,7 @@ class Z_LootGameModeComponent: SCR_BaseGameModeComponent
 	
 	void CollectLootVolumes()
 	{
-		if (! Replication.IsServer()) return;
+		if (! Replication.Runtime()) return;
 		
 		array<int> players = {};
 		GetGame().GetPlayerManager().GetPlayers(players);
@@ -165,11 +159,13 @@ class Z_LootGameModeComponent: SCR_BaseGameModeComponent
 		{
 			Z_LootVolumeEntity vol = Z_LootVolumeEntity.Cast(ent);
 			
-			if (! vol.IsReady() || vol.IsIgnored() || vol.IsInCooldown()) return true;
+			if (! vol.IsSetup()) vol.Setup();
+			
+			if (vol.IsIgnored() || vol.IsInCooldown()) return true;
 			
 			if (vol.HasPlayersInside()) return true;
 			
-			ref array<IEntity> lootables = new array<IEntity>();
+			ref array<IEntity> lootables = new ref array<IEntity>();
 			
 			if (vol.HasSufficientLoot(lootables)) return true;
 			

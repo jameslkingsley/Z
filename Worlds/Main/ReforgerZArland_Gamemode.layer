@@ -11,20 +11,15 @@ EL_GameModeRoleplay GameMode_Survival1 : "{E87F79D982AFE933}Prefabs/MP/Modes/Rol
    }
   }
   Z_LootGameModeComponent "{5B3B1D91A44EE9B8}" {
-   m_LootVolumeCollectionIntervalInSeconds 2
-   m_VolumeInsufficiencyPercentage 0.01
+   m_VolumeInsufficiencyPercentage 0.66
   }
   Z_LootRegionComponent "{5B3B1D91BA5A1071}" {
    m_LootRegionTiers {
     Z_LootRegionTier "{5B3B1D91B81298A8}" {
     }
     Z_LootRegionTier "{5B3B1D91B87EA1D8}" {
-     m_SpawnRangeLower 2
-     m_SpawnRangeUpper 8
     }
     Z_LootRegionTier "{5B3B1D91B84F1C17}" {
-     m_ProbabilityMin 0.01
-     m_ProbabilityMax 0.12
     }
    }
   }

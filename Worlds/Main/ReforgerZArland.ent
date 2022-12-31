@@ -10,3 +10,6 @@ Layer Managers {
 Layer Regions {
  Index 2
 }
+Layer Spawns {
+ Index 3
+}
