@@ -1,7 +1,10 @@
-SCR_AIWorld : "{E0A05C76552E7F58}Prefabs/AI/SCR_AIWorld.et" {
- coords 0 9.358 0
-}
 SCR_FactionManager FactionManager_Base1 : "{A242612865F2A48E}Prefabs/MP/Managers/Factions/FactionManager_Base.et" {
+ Factions {
+  SCR_FreeForAllFaction "{5C4400B11B926FF2}" {
+   FactionKey "Gang"
+   m_bIsPlayable 0
+  }
+ }
  m_bCanChangeFactionsPlayable 0
 }
 SCR_LoadoutManager : "{AA4E7419A1FF65B0}Prefabs/MP/Managers/Loadouts/LoadoutManager_Base.et" {

@@ -76,6 +76,14 @@ $grp PolylineArea {
  }
  AirfieldLootRegion {
   components {
+   EL_PersistenceComponent "{5C44B09F6163F8FB}" {
+    m_pSaveData Z_RegionSaveData "{5C453894370858A9}" {
+     m_aComponents {
+      Z_ScavRegionComponentSaveData "{5C453894356B3C94}" {
+      }
+     }
+    }
+   }
    Z_LootRegionComponent "{5B3F08A6AE3F9036}" {
     m_LootRegionTiers {
      Z_LootRegionTier "{5B3F08A6AD2AF8CD}" {
@@ -98,6 +106,13 @@ $grp PolylineArea {
       m_ProbabilityMax 0.18
       m_SpawnRangeLower 1
       m_SpawnRangeUpper 6
+     }
+    }
+   }
+   Z_ScavRegionComponent "{5C44B0A6E39E8D43}" {
+    m_Difficulty Insane
+    m_AllowedTasks {
+     Z_ScavTaskPatrol "{5C44B0AE550C7993}" {
      }
     }
    }

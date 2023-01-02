@@ -13,3 +13,9 @@ Layer Regions {
 Layer Spawns {
  Index 3
 }
+Layer AI {
+ Index 4
+}
+Layer Tasks {
+ Index 5
+}
