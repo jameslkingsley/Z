@@ -37,6 +37,8 @@ class Z_ScavGameModeComponent: SCR_BaseGameModeComponent
 	{
 		foreach (Z_ScavRegionComponent region : m_ScavRegions)
 		{
+			if (! region.m_Tasks.IsEmpty()) continue;
+			
 			Z_PersistentScavTask task = Z_PersistentScavTask.Create(Z_ScavTaskPatrol.NAME, Vector(1311.074, 39.011, 2746.414));
 			
 			region.RegisterTask(task);

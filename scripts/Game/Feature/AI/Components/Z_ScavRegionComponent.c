@@ -22,12 +22,12 @@ class Z_ScavRegionComponent : ScriptComponent
 	
 	ref array<ref Z_ScavEncounter> m_Encounters;
 	
-	ref map<string, Z_PersistentScavTask> m_Tasks;
+	ref map<string, ref Z_PersistentScavTask> m_Tasks;
 	
 	void Z_ScavRegionComponent()
 	{
 		m_Encounters = new array<ref Z_ScavEncounter>();
-		m_Tasks = new map<string, Z_PersistentScavTask>();
+		m_Tasks = new map<string, ref Z_PersistentScavTask>();
 	}
 	
 	// Similar to loot volume - this class is responsible for choosing where to spawn things but does not do the spawning itself
@@ -75,7 +75,7 @@ class Z_ScavRegionComponent : ScriptComponent
 			
 			gameMode.RegisterScavRegion(this);
 			
-			LoadTasksAsync();
+			GetGame().GetCallqueue().CallLater(LoadTasksAsync, 500);
 		}
 	}
 	
@@ -91,7 +91,7 @@ class Z_ScavRegionComponent : ScriptComponent
 		}
 		
 		array<string> taskIds();
-		foreach (string id, Z_PersistentScavTask task : m_Tasks)
+		foreach (string id, ref Z_PersistentScavTask task : m_Tasks)
 		{
 			taskIds.Insert(id);
 		}
@@ -118,20 +118,11 @@ class Z_ScavRegionComponent : ScriptComponent
 	void RegisterTask(Z_PersistentScavTask task)
 	{
 		m_Tasks.Set(task.GetPersistentId(), task);
-		
-		Print("Region has new task: " + task.GetPersistentId());
-		
-		foreach (string id, auto _ : m_Tasks)
-		{
-			Print("- " + id);
-		}
 	}
 	
 	void UnregisterTask(Z_PersistentScavTask task)
 	{
 		m_Tasks.Remove(task.GetPersistentId());
-		
-		Print("Region removed existing task: " + task.GetPersistentId());
 	}
 	
 	PolylineArea GetPolylineArea()

@@ -15,10 +15,9 @@ class Z_ScavRegionComponentSaveData : EL_ComponentSaveDataBase
 		
 		array<string> taskIds();
 		
-		foreach (string id, Z_PersistentScavTask task : region.m_Tasks)
+		foreach (string id, ref Z_PersistentScavTask task : region.m_Tasks)
 		{
 			taskIds.Insert(id);
-			Print("Plucking task from component: " + id);
 		}
 		
 		m_TaskIds = taskIds;
@@ -32,12 +31,11 @@ class Z_ScavRegionComponentSaveData : EL_ComponentSaveDataBase
 		
 		region.m_Attrition = m_Attrition;
 		
-		map<string, Z_PersistentScavTask> tasks();
+		map<string, ref Z_PersistentScavTask> tasks();
 		
 		foreach (string id : m_TaskIds)
 		{
 			tasks.Set(id, null);
-			Print("Prepping task for component: " + id);
 		}
 		
 		region.m_Tasks = tasks;

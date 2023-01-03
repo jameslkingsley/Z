@@ -3,7 +3,7 @@ class Z_ScavTaskPatrol : Z_ScavTaskBase
 {
 	static const string NAME = "Patrol";
 	
-	override void Spawn(inout Z_PersistentScavTask task)
+	override void Spawn(inout Z_PersistentScavTask task, inout map<IEntity, ref Z_ScavTaskEntityStub> entities)
 	{
 		Print("Spawning patrol task");
 		
@@ -12,7 +12,8 @@ class Z_ScavTaskPatrol : Z_ScavTaskBase
 			Print("Spawning new AI group");
 			
 			// TODO replace with attribute
-			Resource agentPrefab = Resource.Load("{E552DABF3636C2AD}Prefabs/Groups/OPFOR/Group_USSR_RifleSquad.et");
+			ResourceName res = "{E552DABF3636C2AD}Prefabs/Groups/OPFOR/Group_USSR_RifleSquad.et";
+			Resource agentPrefab = Resource.Load(res);
 			
 			EntitySpawnParams spawnParams = EntitySpawnParams();
 			spawnParams.TransformMode = ETransformMode.WORLD;
@@ -44,21 +45,12 @@ class Z_ScavTaskPatrol : Z_ScavTaskBase
 				return;
 			}
 			
-			array<AIAgent> agents = new array<AIAgent>();
-			group.GetAgents(agents);
+			Z_ScavTaskEntityStub stub = new Z_ScavTaskEntityStub();
+			stub.Fill(entGroup);
+			stub.Fill(group);
 			
-			foreach (AIAgent agent : agents)
-			{
-				IEntity agentEnt = agent.GetControlledEntity();
-				
-				Z_ScavTaskEntityStub stub = new Z_ScavTaskEntityStub();
-				stub.resource = agentEnt.GetPrefabData().GetPrefabName();
-				stub.origin = agentEnt.GetOrigin();
-				stub.yawPitchRoll = agentEnt.GetYawPitchRoll();
-				stub.ent = agentEnt;
-				
-				task.m_EntityStubs.Insert(stub);
-			}
+			task.m_EntityStubs.Insert(stub);
+			entities.Set(entGroup, stub);
 			
 			Print("Saved entity stubs: " + task.m_EntityStubs.Count());
 			
@@ -86,9 +78,44 @@ class Z_ScavTaskPatrol : Z_ScavTaskBase
 					spawnParams
 				);
 				
-				ent.SetYawPitchRoll(stub.yawPitchRoll);
+				SCR_AIGroup group = SCR_AIGroup.Cast(ent);
 				
-				stub.ent = ent;
+				array<AIAgent> agents = new array<AIAgent>();
+				group.GetAgents(agents);
+				
+				foreach (int i, AIAgent agent : agents)
+				{
+					if (! stub.items.IsIndexValid(i))
+					{
+						Print("Index invalid, killing agent", LogLevel.WARNING);
+						
+						SCR_ChimeraCharacter char = SCR_ChimeraCharacter.Cast(agent.GetControlledEntity());
+		
+						if (! char) continue;
+		
+						CharacterControllerComponent characterController = CharacterControllerComponent.Cast(char.FindComponent(CharacterControllerComponent));
+						if (characterController) characterController.ForceDeath();
+						
+						continue;
+					}
+					
+					Z_ScavTaskEntityStubItem item = stub.items.Get(i);
+					
+					agent.GetControlledEntity().SetOrigin(item.origin);
+					agent.GetControlledEntity().SetYawPitchRoll(item.yawPitchRoll);
+					
+					if (! item.alive)
+					{
+						SCR_ChimeraCharacter char = SCR_ChimeraCharacter.Cast(agent.GetControlledEntity());
+		
+						if (! char) continue;
+		
+						CharacterControllerComponent characterController = CharacterControllerComponent.Cast(char.FindComponent(CharacterControllerComponent));
+						if (characterController) characterController.ForceDeath();
+					}
+				}
+				
+				entities.Set(ent, stub);
 			}
 		}
 	}
