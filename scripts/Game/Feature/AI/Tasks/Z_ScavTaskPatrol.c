@@ -1,128 +1,75 @@
-[BaseContainerProps(), Z_ScavTaskTitle()]
+[Z_ScavTask(Z_ScavTaskPatrol, "Patrol"), Z_ScavTaskTitle(), BaseContainerProps()]
 class Z_ScavTaskPatrol : Z_ScavTaskBase
 {
-	static const string NAME = "Patrol";
+	[Attribute("", UIWidgets.ResourcePickerThumbnail, "Prefab to spawn")]
+	ResourceName m_AIGroupPrefab;
 	
-	override void Spawn(inout Z_PersistentScavTask task, inout map<IEntity, ref Z_ScavTaskEntityStub> entities)
+	override ref map<IEntity, ref Z_ScavTaskEntityStub> SpawnEntityStubs(array<ref Z_ScavTaskEntityStub> stubs)
 	{
-		Print("Spawning patrol task");
+		ref map<IEntity, ref Z_ScavTaskEntityStub> watchers();
 		
-		if (task.m_EntityStubs.IsEmpty())
+		foreach (ref Z_ScavTaskEntityStub stub : stubs)
 		{
-			Print("Spawning new AI group");
-			
-			// TODO replace with attribute
-			ResourceName res = "{E552DABF3636C2AD}Prefabs/Groups/OPFOR/Group_USSR_RifleSquad.et";
-			Resource agentPrefab = Resource.Load(res);
-			
 			EntitySpawnParams spawnParams = EntitySpawnParams();
 			spawnParams.TransformMode = ETransformMode.WORLD;
-			spawnParams.Transform[3] = task.m_Origin;
+			spawnParams.Transform[3] = stub.origin;
 			
-			IEntity entGroup = GetGame().SpawnEntityPrefab(
-				agentPrefab,
+			IEntity ent = GetGame().SpawnEntityPrefab(
+				Resource.Load(stub.resource),
 				GetGame().GetWorld(),
 				spawnParams
 			);
 			
-			if (! entGroup)
-			{
-				Print(string.Format("Z_ScavTaskPatrol could not spawn '%1'", agentPrefab), LogLevel.ERROR);
-				
-				return;
-			}
+			SCR_AIGroup group = SCR_AIGroup.Cast(ent);
 			
-			SCR_AIGroup group = SCR_AIGroup.Cast(entGroup);
+			Resource wpPrefab = Resource.Load("{22A875E30470BD4F}Prefabs/AI/Waypoints/AIWaypoint_Patrol.et");
 			
-			if (! group)
-			{
-				Print(string.Format("Z_ScavTaskPatrol spawned entity '%1' that is not of SCR_AIGroup type, deleting!", agentPrefab), LogLevel.ERROR);
-				
-				RplComponent.DeleteRplEntity(entGroup, false);
-				
-				delete task;
-				
-				return;
-			}
+			AIWaypoint wp = AIWaypoint.Cast(GetGame().SpawnEntityPrefab(wpPrefab));
+			wp.SetOrigin(stub.origin + Vector(Math.RandomInt(200, 500), 0, Math.RandomInt(200, 500)));
 			
-			Z_ScavTaskEntityStub stub = new Z_ScavTaskEntityStub();
-			stub.Fill(entGroup);
-			stub.Fill(group);
+			Print("Distance to waypoint: " + vector.Distance(stub.origin, wp.GetOrigin()));
 			
-			task.m_EntityStubs.Insert(stub);
-			entities.Set(entGroup, stub);
+			group.AddWaypointToGroup(wp);
 			
-			Print("Saved entity stubs: " + task.m_EntityStubs.Count());
+			// Register event listeners on SCR_AIGroup
+			// - Record encounters for when AI are killed
 			
-			/*
-			ScriptInvoker onAgentAdded = group.GetOnAgentAdded();
-			ScriptInvoker onAgentRemoved = group.GetOnAgentRemoved();
-			
-			onAgentAdded.Insert(OnAgentAdded);
-			onAgentRemoved.Insert(OnAgentRemoved);
-			*/
+			watchers.Set(ent, stub);
 		}
-		else
-		{
-			Print("Spawning previous AI group using stubs");
-			
-			foreach (ref Z_ScavTaskEntityStub stub : task.m_EntityStubs)
-			{
-				EntitySpawnParams spawnParams = EntitySpawnParams();
-				spawnParams.TransformMode = ETransformMode.WORLD;
-				spawnParams.Transform[3] = stub.origin;
-				
-				IEntity ent = GetGame().SpawnEntityPrefab(
-					Resource.Load(stub.resource),
-					GetGame().GetWorld(),
-					spawnParams
-				);
-				
-				SCR_AIGroup group = SCR_AIGroup.Cast(ent);
-				
-				array<AIAgent> agents = new array<AIAgent>();
-				group.GetAgents(agents);
-				
-				foreach (int i, AIAgent agent : agents)
-				{
-					if (! stub.items.IsIndexValid(i))
-					{
-						Print("Index invalid, killing agent", LogLevel.WARNING);
-						
-						SCR_ChimeraCharacter char = SCR_ChimeraCharacter.Cast(agent.GetControlledEntity());
 		
-						if (! char) continue;
-		
-						CharacterControllerComponent characterController = CharacterControllerComponent.Cast(char.FindComponent(CharacterControllerComponent));
-						if (characterController) characterController.ForceDeath();
-						
-						continue;
-					}
-					
-					Z_ScavTaskEntityStubItem item = stub.items.Get(i);
-					
-					agent.GetControlledEntity().SetOrigin(item.origin);
-					agent.GetControlledEntity().SetYawPitchRoll(item.yawPitchRoll);
-					
-					if (! item.alive)
-					{
-						SCR_ChimeraCharacter char = SCR_ChimeraCharacter.Cast(agent.GetControlledEntity());
-		
-						if (! char) continue;
-		
-						CharacterControllerComponent characterController = CharacterControllerComponent.Cast(char.FindComponent(CharacterControllerComponent));
-						if (characterController) characterController.ForceDeath();
-					}
-				}
-				
-				entities.Set(ent, stub);
-			}
-		}
+		return watchers;
 	}
 	
-	void OnAgentAdded(AIGroup group, AIAgent agent)
-	{}
+	override ref array<ref Z_ScavTaskEntityStub> UpdateEntityStubs(map<IEntity, ref Z_ScavTaskEntityStub> watchers)
+	{
+		ref array<ref Z_ScavTaskEntityStub> stubs();
+		
+		foreach (IEntity ent, ref Z_ScavTaskEntityStub stub : watchers)
+		{
+			if (! ent) continue;
+			
+			ref Z_ScavTaskEntityStub newStub();
+			
+			newStub.resource = stub.resource;
+			newStub.origin = ent.GetOrigin();
+			
+			stubs.Insert(newStub);
+		}
+		
+		return stubs;
+	}
 	
-	void OnAgentRemoved(AIGroup group, AIAgent agent)
-	{}
+	override ref array<ref Z_ScavTaskEntityStub> GetEntityStubs(Z_PersistentScavTask task)
+	{
+		ref array<ref Z_ScavTaskEntityStub> stubs();
+		
+		ref Z_ScavTaskEntityStub stub();
+		
+		stub.resource = m_AIGroupPrefab;
+		stub.origin = task.m_Origin;
+		
+		stubs.Insert(stub);
+		
+		return stubs;
+	}
 };

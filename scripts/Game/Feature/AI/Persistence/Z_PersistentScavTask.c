@@ -6,59 +6,72 @@ class Z_PersistentScavTaskSaveData : EL_ScriptedStateSaveDataBase
     ref array<ref Z_ScavTaskEntityStub> m_EntityStubs;
 }
 
-[EL_PersistentScriptedStateSettings(Z_PersistentScavTask, Z_PersistentScavTaskSaveData, autoSave: false, shutDownSave: true, selfDelete: false)]
+[EL_PersistentScriptedStateSettings(Z_PersistentScavTask, Z_PersistentScavTaskSaveData, autoSave: true, shutDownSave: true, selfDelete: false)]
 class Z_PersistentScavTask : EL_PersistentScriptedStateBase
 {
 	string m_Task;
 	vector m_Origin;
 	ref array<ref Z_ScavTaskEntityStub> m_EntityStubs;
 	
-	static Z_PersistentScavTask Create(string task, vector origin)
+	static Z_PersistentScavTask Create(typename taskType, vector origin)
 	{
 		Z_PersistentScavTask instance();
 		
+		string task = Z_ScavTask.Get(taskType);
+		
+		Z_ScavTaskBase taskInstance = Z_ScavTaskFactory.Make(task);
+		
 		instance.m_Task = task;
 		instance.m_Origin = origin;
-		instance.m_EntityStubs = new array<ref Z_ScavTaskEntityStub>();
-		
-		instance.Save();
+		instance.m_EntityStubs = taskInstance.GetEntityStubs(instance);
 		
 		return instance;
 	}
 	
-	void Spawn()
+	static Z_PersistentScavTask Create(Z_ScavTaskBase task, vector origin)
+	{
+		Z_PersistentScavTask instance();
+		
+		instance.m_Task = Z_ScavTask.Get(task.Type());
+		instance.m_Origin = origin;
+		instance.m_EntityStubs = task.GetEntityStubs(instance);
+		
+		return instance;
+	}
+	
+	void Spawn(IEntity region)
 	{
 		Z_ScavTaskBase task = Z_ScavTaskFactory.Make(m_Task);
 		
-		map<IEntity, ref Z_ScavTaskEntityStub> entities();
-		
-		task.Spawn(this, entities);
-		
-		GetGame().GetCallqueue().CallLaterByName(this, "Watch", 2000, true, entities);
-	}
-	
-	void Watch(map<IEntity, ref Z_ScavTaskEntityStub> entities)
-	{
-		Print("Updating scav task entities: " + entities.Count());
-		
-		ref array<ref Z_ScavTaskEntityStub> newStubs();
-		
-		foreach (IEntity ent, ref Z_ScavTaskEntityStub stub : entities)
-		{
-			stub.Fill(ent);
-			
-			newStubs.Insert(stub);
-		}
-		
-		m_EntityStubs = newStubs;
+		ref map<IEntity, ref Z_ScavTaskEntityStub> entities = task.SpawnEntityStubs(m_EntityStubs);
 		
 		Save();
+		
+		GetGame().GetCallqueue().CallLater(Watch, 2000, true, region, entities);
 	}
 	
-	override void Delete()
+	void Watch(IEntity region, map<IEntity, ref Z_ScavTaskEntityStub> entities)
 	{
+		if (entities.IsEmpty()) return;
+		
+		Z_ScavTaskBase task = Z_ScavTaskFactory.Make(m_Task);
+		
+		m_EntityStubs = task.UpdateEntityStubs(entities);
+		
+		if (! m_EntityStubs.IsEmpty()) return;
+		
 		GetGame().GetCallqueue().Remove(Watch);
 		
-		super.Delete();
+		if (! region) return;
+		
+		Z_ScavRegionComponent regionComponent = Z_ScavRegionComponent.Cast(region.FindComponent(Z_ScavRegionComponent));
+		
+		if (! regionComponent) return;
+		
+		string persistentId = GetPersistentId();
+		
+		Delete();
+		
+		GetGame().GetCallqueue().CallByName(regionComponent, "UnregisterTask", persistentId);
 	}
 }

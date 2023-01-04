@@ -112,7 +112,8 @@ $grp PolylineArea {
    Z_ScavRegionComponent "{5C44B0A6E39E8D43}" {
     m_Difficulty Insane
     m_AllowedTasks {
-     Z_ScavTaskPatrol "{5C44B0AE550C7993}" {
+     Z_ScavTaskPatrol "{5C476AD90D3CBBF0}" {
+      m_AIGroupPrefab "{5BEA04939D148B1D}Prefabs/Groups/INDFOR/Group_FIA_FireTeam.et"
      }
     }
    }

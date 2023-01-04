@@ -26,68 +26,57 @@ class Z_ScavTaskTitle : SCR_ContainerActionTitle
 	}
 };
 
-class Z_ScavTaskEntityStubItem
-{
-	vector origin;
-	vector yawPitchRoll;
-	bool alive = true;
-	
-	void Fill(IEntity ent)
-	{
-		origin = ent.GetOrigin();
-		yawPitchRoll = ent.GetYawPitchRoll();
-		
-		SCR_ChimeraCharacter char = SCR_ChimeraCharacter.Cast(ent);
-
-		if (! char) return;
-
-		CharacterControllerComponent characterController = CharacterControllerComponent.Cast(char.FindComponent(CharacterControllerComponent));
-		
-		if (! characterController) return;
-		
-		alive = ! characterController.IsDead();
-	}
-	
-	void Fill(AIAgent agent)
-	{
-		//
-	}
-};
-
-// refactor this to base class so it's simpler to define how an AI group is get/set
 class Z_ScavTaskEntityStub
 {
 	ResourceName resource;
 	vector origin;
-	
-	ref array<ref Z_ScavTaskEntityStubItem> items = new array<ref Z_ScavTaskEntityStubItem>();
-	
-	void Fill(IEntity ent)
+};
+
+class Z_ScavTask
+{
+	protected static ref map<typename, string> s_mMapping;
+
+	static void Set(typename taskType, string name)
 	{
-		resource = ent.GetPrefabData().GetPrefabName();
-		origin = ent.GetOrigin();
-		
-		SCR_AIGroup group = SCR_AIGroup.Cast(ent);
-		if (group) Fill(group);
+		if (!s_mMapping) s_mMapping = new map<typename, string>();
+		s_mMapping.Set(taskType, name);
 	}
-	
-	void Fill(AIGroup group)
+
+	static string Get(typename taskType)
 	{
-		array<AIAgent> agents = new array<AIAgent>();
-		group.GetAgents(agents);
-		
-		items.Clear();
-		
-		foreach (AIAgent agent : agents)
+		if (!taskType) return string.Empty;
+
+		if (!s_mMapping) s_mMapping = new map<typename, string>();
+
+		string result = s_mMapping.Get(taskType);
+
+		if (result.IsEmpty())
 		{
-			IEntity agentEnt = agent.GetControlledEntity();
-			
-			Z_ScavTaskEntityStubItem item = new Z_ScavTaskEntityStubItem();
-			item.Fill(agentEnt);
-			item.Fill(agent);
-			
-			items.Insert(item);
+			result = taskType.ToString();
+			s_mMapping.Set(taskType, result);
 		}
+
+		return result;
+	}
+
+	static typename GetTypeByName(string name)
+	{
+		if (!s_mMapping) s_mMapping = new map<typename, string>();
+
+		typename result = s_mMapping.GetKeyByValue(name);
+
+		if (!result)
+		{
+			result = name.ToType();
+			s_mMapping.Set(result, name);
+		}
+
+		return result;
+	}
+
+	void Z_ScavTask(typename taskType, string name)
+	{
+		Set(taskType, name);
 	}
 };
 
@@ -95,13 +84,9 @@ class Z_ScavTaskFactory
 {
 	static Z_ScavTaskBase Make(string type)
 	{
-		switch (type)
-		{
-			case Z_ScavTaskPatrol.NAME:
-				return new Z_ScavTaskPatrol();
-		}
+		typename taskType = Z_ScavTask.GetTypeByName(type);
 		
-		return null;
+		return Z_ScavTaskBase.Cast(taskType.Spawn());
 	}
 }
 
@@ -111,5 +96,9 @@ class Z_ScavTaskBase
 	[Attribute("100", UIWidgets.Auto, "Attrition cost of this task")]
 	int m_AttritionCost;
 	
-	void Spawn(inout Z_PersistentScavTask task, inout map<IEntity, ref Z_ScavTaskEntityStub> entities);
+	ref map<IEntity, ref Z_ScavTaskEntityStub> SpawnEntityStubs(array<ref Z_ScavTaskEntityStub> stubs);
+	
+	ref array<ref Z_ScavTaskEntityStub> UpdateEntityStubs(map<IEntity, ref Z_ScavTaskEntityStub> watchers);
+	
+	ref array<ref Z_ScavTaskEntityStub> GetEntityStubs(Z_PersistentScavTask task);
 };

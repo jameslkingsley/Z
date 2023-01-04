@@ -39,11 +39,13 @@ class Z_ScavGameModeComponent: SCR_BaseGameModeComponent
 		{
 			if (! region.m_Tasks.IsEmpty()) continue;
 			
-			Z_PersistentScavTask task = Z_PersistentScavTask.Create(Z_ScavTaskPatrol.NAME, Vector(1311.074, 39.011, 2746.414));
+			Z_ScavTaskBase taskType = region.m_AllowedTasks.GetRandomElement();
+			
+			Z_PersistentScavTask task = Z_PersistentScavTask.Create(taskType, Vector(1347.174, 37.803, 2969.852));
+			
+			task.Spawn(region.GetOwner());
 			
 			region.RegisterTask(task);
-			
-			task.Spawn();
 			
 			EL_PersistenceComponent persistence = EL_PersistenceComponent.Cast(region.GetOwner().FindComponent(EL_PersistenceComponent));
 			

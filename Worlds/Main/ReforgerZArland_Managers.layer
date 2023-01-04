@@ -1,8 +1,10 @@
-SCR_FactionManager FactionManager_Base1 : "{A242612865F2A48E}Prefabs/MP/Managers/Factions/FactionManager_Base.et" {
+SCR_FactionManager FactionManager_FFA1 : "{A1C54BBE72C5C696}Prefabs/MP/Managers/Factions/FactionManager_FFA.et" {
  Factions {
-  SCR_FreeForAllFaction "{5C4400B11B926FF2}" {
-   FactionKey "Gang"
+  SCR_FreeForAllFaction "{56B491183BEFD56B}" {
    m_bIsPlayable 0
+  }
+  SCR_FreeForAllFaction "{5C480BE3EA77A39B}" {
+   FactionKey "Survivors"
   }
  }
  m_bCanChangeFactionsPlayable 0

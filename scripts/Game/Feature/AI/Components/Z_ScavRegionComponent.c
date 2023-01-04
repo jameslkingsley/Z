@@ -79,6 +79,7 @@ class Z_ScavRegionComponent : ScriptComponent
 		}
 	}
 	
+	// TODO Convert this back into async
 	void LoadTasksAsync()
 	{
 		EL_PersistenceComponent persistence = EL_PersistenceComponent.Cast(GetOwner().FindComponent(EL_PersistenceComponent));
@@ -107,7 +108,7 @@ class Z_ScavRegionComponent : ScriptComponent
 		
 		foreach (ref Z_PersistentScavTask task : tasks)
 		{
-			task.Spawn();
+			task.Spawn(GetOwner());
 			
 			RegisterTask(task);
 		}
@@ -120,9 +121,9 @@ class Z_ScavRegionComponent : ScriptComponent
 		m_Tasks.Set(task.GetPersistentId(), task);
 	}
 	
-	void UnregisterTask(Z_PersistentScavTask task)
+	void UnregisterTask(string persistentId)
 	{
-		m_Tasks.Remove(task.GetPersistentId());
+		m_Tasks.Remove(persistentId);
 	}
 	
 	PolylineArea GetPolylineArea()
