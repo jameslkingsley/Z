@@ -112,8 +112,10 @@ $grp PolylineArea {
    Z_ScavRegionComponent "{5C44B0A6E39E8D43}" {
     m_Difficulty Insane
     m_AllowedTasks {
-     Z_ScavTaskPatrol "{5C476AD90D3CBBF0}" {
-      m_AIGroupPrefab "{5BEA04939D148B1D}Prefabs/Groups/INDFOR/Group_FIA_FireTeam.et"
+     Z_ScavTaskPatrol "{5C4938B5E669BDD2}" {
+      m_SoldierPrefabs {
+       "{84B40583F4D1B7A3}Prefabs/Characters/Factions/INDFOR/FIA/Character_FIA_Rifleman.et"
+      }
      }
     }
    }

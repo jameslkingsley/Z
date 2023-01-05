@@ -75,7 +75,7 @@ class Z_ScavRegionComponent : ScriptComponent
 			
 			gameMode.RegisterScavRegion(this);
 			
-			GetGame().GetCallqueue().CallLater(LoadTasksAsync, 500);
+			GetGame().GetCallqueue().CallLater(LoadTasksAsync, 2000);
 		}
 	}
 	
@@ -116,9 +116,9 @@ class Z_ScavRegionComponent : ScriptComponent
 		persistence.Save();
 	}
 	
-	Z_ScavTaskBase GetAllowedTaskByType(typename type)
+	ref Z_ScavTaskBase GetAllowedTaskByType(typename type)
 	{
-		foreach (Z_ScavTaskBase task : m_AllowedTasks)
+		foreach (ref Z_ScavTaskBase task : m_AllowedTasks)
 		{
 			if (task.Type() == type)
 			{

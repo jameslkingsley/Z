@@ -13,6 +13,21 @@ class Z_PersistentScavTask : EL_PersistentScriptedStateBase
 	vector m_Origin;
 	ref array<ref Z_ScavTaskEntityStub> m_EntityStubs;
 	
+	static Z_PersistentScavTask Create(typename taskType, vector origin)
+	{
+		Z_PersistentScavTask instance();
+		
+		string task = Z_ScavTask.Get(taskType);
+		
+		Z_ScavTaskBase taskInstance = Z_ScavTaskFactory.Make(task);
+		
+		instance.m_Task = task;
+		instance.m_Origin = origin;
+		instance.m_EntityStubs = taskInstance.GetEntityStubs(instance);
+		
+		return instance;
+	}
+	
 	static Z_PersistentScavTask Create(Z_ScavTaskBase task, vector origin)
 	{
 		Z_PersistentScavTask instance();
@@ -30,7 +45,7 @@ class Z_PersistentScavTask : EL_PersistentScriptedStateBase
 		
 		typename taskType = Z_ScavTask.GetTypeByName(m_Task);
 		
-		Z_ScavTaskBase task = regionComponent.GetAllowedTaskByType(taskType);
+		ref Z_ScavTaskBase task = regionComponent.GetAllowedTaskByType(taskType);
 		
 		ref map<IEntity, ref Z_ScavTaskEntityStub> entities = task.SpawnEntityStubs(m_Origin, m_EntityStubs);
 		
@@ -49,7 +64,7 @@ class Z_PersistentScavTask : EL_PersistentScriptedStateBase
 		
 		typename taskType = Z_ScavTask.GetTypeByName(m_Task);
 		
-		Z_ScavTaskBase task = regionComponent.GetAllowedTaskByType(taskType);
+		ref Z_ScavTaskBase task = regionComponent.GetAllowedTaskByType(taskType);
 		
 		m_EntityStubs = task.UpdateEntityStubs(entities);
 		

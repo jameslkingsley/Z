@@ -30,7 +30,21 @@ class Z_ScavTaskPatrol : Z_ScavTaskBase
 		
 		SCR_AIGroup group = SCR_AIGroup.Cast(GetGame().SpawnEntityPrefab(Resource.Load(m_GroupPrefab), GetGame().GetWorld(), grpParams));
 		
+		if (! group)
+		{
+			Print("Failed to spawn SCR_AIGroup", LogLevel.ERROR);
+			
+			return watchers;
+		}
+		
 		FactionManager facManager = GetGame().GetFactionManager();
+		
+		if (! facManager)
+		{
+			Print("Failed to find FactionManager in world", LogLevel.ERROR);
+			
+			return watchers;
+		}
 		
 		Faction faction = facManager.GetFactionByKey(m_Faction);
 		
@@ -55,19 +69,6 @@ class Z_ScavTaskPatrol : Z_ScavTaskBase
 			IEntity ai = GetGame().SpawnEntityPrefab(Resource.Load(stub.resource), GetGame().GetWorld(), params);
 			
 			if (!ai) continue;
-			
-			SCR_ChimeraCharacter char = SCR_ChimeraCharacter.Cast(ai);
-			
-			if (char)
-			{
-				CharacterControllerComponent charController = char.GetCharacterController();
-				
-				if (charController)
-				{
-					if (stub.direction) charController.SetMovementDirWorld(stub.direction);
-					if (stub.stance) charController.SetStanceChange(ConvertStanceToInt(stub.stance));
-				}
-			}
 			
 			group.AddAIEntityToGroup(ai, index);
 			
@@ -95,22 +96,10 @@ class Z_ScavTaskPatrol : Z_ScavTaskBase
 		{
 			if (! ent) continue;
 			
-			SCR_ChimeraCharacter char = SCR_ChimeraCharacter.Cast(ent);
-			
-			if (! char) continue;
-			
-			CharacterControllerComponent charController = char.GetCharacterController();
-			
-			if (! charController) continue;
-			
-			if (charController.IsDead()) continue;
-			
 			ref Z_ScavTaskEntityStub newStub();
 			
 			newStub.resource = stub.resource;
 			newStub.origin = ent.GetOrigin();
-			newStub.direction = charController.GetMovementDirWorld();
-			newStub.stance = charController.GetStance();
 			
 			stubs.Insert(newStub);
 		}
@@ -135,27 +124,11 @@ class Z_ScavTaskPatrol : Z_ScavTaskBase
 		
 			stub.resource = m_SoldierPrefabs.GetRandomElement();
 			stub.origin = task.m_Origin + Vector(i, 0, 0);
-			stub.direction = Vector(0, 0, 0);
-			stub.stance = ECharacterStance.STAND;
 		
 			stubs.Insert(stub);
 		}
 		
 		return stubs;
-	}
-	
-	protected int ConvertStanceToInt(ECharacterStance stance)
-	{
-		switch (stance)
-		{
-			case ECharacterStance.STAND:
-				return ECharacterStanceChange.STANCECHANGE_TOERECTED;
-			case ECharacterStance.CROUCH:
-				return ECharacterStanceChange.STANCECHANGE_TOCROUCH;
-			case ECharacterStance.PRONE:
-				return ECharacterStanceChange.STANCECHANGE_TOPRONE;
-		}
-		return 0;
 	}
 	
 	protected vector GetWaypointOrigin(vector from)

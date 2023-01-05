@@ -6,14 +6,6 @@ enum Z_ScavDifficulty
 	Insane
 };
 
-enum Z_ScavEncounterImportance
-{
-	//
-};
-
-class Z_ScavEncounter
-{};
-
 class Z_ScavTaskTitle : SCR_ContainerActionTitle
 {
 	override bool _WB_GetCustomTitle(BaseContainer source, out string title)
@@ -30,6 +22,8 @@ class Z_ScavTaskEntityStub
 {
 	ResourceName resource;
 	vector origin;
+	vector direction;
+	ECharacterStance stance;
 };
 
 class Z_ScavTask
@@ -80,23 +74,13 @@ class Z_ScavTask
 	}
 };
 
-class Z_ScavTaskFactory
-{
-	static Z_ScavTaskBase Make(string type)
-	{
-		typename taskType = Z_ScavTask.GetTypeByName(type);
-		
-		return Z_ScavTaskBase.Cast(taskType.Spawn());
-	}
-}
-
-[BaseContainerProps(), Z_ScavTaskTitle()]
+[Z_ScavTask(Z_ScavTaskBase, "Base"), Z_ScavTaskTitle(), BaseContainerProps()]
 class Z_ScavTaskBase
 {
 	[Attribute("100", UIWidgets.Auto, "Attrition cost of this task")]
 	int m_AttritionCost;
 	
-	ref map<IEntity, ref Z_ScavTaskEntityStub> SpawnEntityStubs(array<ref Z_ScavTaskEntityStub> stubs);
+	ref map<IEntity, ref Z_ScavTaskEntityStub> SpawnEntityStubs(vector origin, array<ref Z_ScavTaskEntityStub> stubs);
 	
 	ref array<ref Z_ScavTaskEntityStub> UpdateEntityStubs(map<IEntity, ref Z_ScavTaskEntityStub> watchers);
 	

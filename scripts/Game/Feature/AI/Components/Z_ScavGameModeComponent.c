@@ -20,9 +20,22 @@ class Z_ScavGameModeComponent: SCR_BaseGameModeComponent
 	{
 		if (! Replication.IsServer() || ! GetGame().InPlayMode()) return;
 		
-		GetGame().GetCallqueue().CallLater(TestTemp, 2000);
+		// GetGame().GetCallqueue().CallLater(TestTemp, 2000);
 		
 		Print("---- ReforgerZ Scav OnWorldPostProcess Complete ----");
+		
+		GetGame().GetCallqueue().CallLater(WorldGridTest, 1000);
+	}
+	
+	void WorldGridTest()
+	{
+		vector mins, maxs;
+		GetGame().GetWorld().GetBoundBox(mins, maxs);
+		
+		Print(mins);
+		Print(maxs);
+		
+		SCR_MapEntity mapEntity = SCR_MapEntity.GetMapInstance();
 	}
 	
 	void RegisterScavRegion(Z_ScavRegionComponent region)

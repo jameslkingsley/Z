@@ -1,10 +1,11 @@
-SCR_FactionManager FactionManager_FFA1 : "{A1C54BBE72C5C696}Prefabs/MP/Managers/Factions/FactionManager_FFA.et" {
+SCR_FactionManager FactionManager_USxUSSR1 : "{589540B35EBA8CDC}Prefabs/MP/Managers/Factions/FactionManager_USxUSSR.et" {
  Factions {
-  SCR_FreeForAllFaction "{56B491183BEFD56B}" {
-   m_bIsPlayable 0
-  }
-  SCR_FreeForAllFaction "{5C480BE3EA77A39B}" {
+  SCR_Faction "{56B2B46E999BF3BF}" {
    FactionKey "Survivors"
+  }
+  SCR_Faction "{56B2B46E9AF80999}" {
+   FactionKey "Scavs"
+   m_bIsPlayable 0
   }
  }
  m_bCanChangeFactionsPlayable 0

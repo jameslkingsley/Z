@@ -1,4 +1,4 @@
-EL_GameModeRoleplay GameMode_Survival1 : "{E87F79D982AFE933}Prefabs/MP/Modes/Roleplay/GameMode_Survival.et" {
+EL_GameModeRoleplay GameMode_Survival : "{E87F79D982AFE933}Prefabs/MP/Modes/Roleplay/GameMode_Survival.et" {
  components {
   EL_PersistenceManagerComponent "{59D28944F1C3532E}" {
    m_fInterval 300
@@ -6,8 +6,6 @@ EL_GameModeRoleplay GameMode_Survival1 : "{E87F79D982AFE933}Prefabs/MP/Modes/Rol
   EL_RespawnSytemComponent "{5A10698A884816E6}" {
    m_aDefaultCharacterItems {
    }
-  }
-  SCR_GameModeSFManager "{5C42B9DE9FE767A2}" {
   }
   SCR_NametagConfigComponent "{597514328498E41D}" {
    Enabled 0
