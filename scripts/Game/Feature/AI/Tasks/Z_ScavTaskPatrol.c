@@ -160,7 +160,7 @@ class Z_ScavTaskPatrol : Z_ScavTaskBase
 	
 	protected vector GetWaypointOrigin(vector from)
 	{
-		// TODO Use RandomGenerator.GenerateRandomPointInRadius()
-		return from + Vector(200, 0, 200);
+		RandomGenerator gen();
+		return gen.GenerateRandomPointInRadius(50, 300, from);
 	}
 };

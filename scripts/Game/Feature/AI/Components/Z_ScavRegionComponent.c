@@ -23,14 +23,14 @@ class Z_ScavRegionComponent : ScriptComponent
 	
 	int m_Attrition;
 	
-	ref array<ref Z_ScavEncounter> m_Encounters;
-	
 	ref map<string, ref Z_PersistentScavTask> m_Tasks;
+	
+	ref map<string, int> m_CellTaskCounts;
 	
 	void Z_ScavRegionComponent()
 	{
-		m_Encounters = new array<ref Z_ScavEncounter>();
 		m_Tasks = new map<string, ref Z_PersistentScavTask>();
+		m_CellTaskCounts = new map<string, int>();
 		m_Attrition = m_StartingAttrition;
 	}
 	
@@ -80,81 +80,106 @@ class Z_ScavRegionComponent : ScriptComponent
 			gameMode.RegisterScavRegion(this);
 			
 			GetGame().GetCallqueue().CallLater(LoadTasksAsync, 500);
-			
-			GetGame().GetCallqueue().CallLater(SpawnTasksAsync, 5000, true);
 		}
 	}
 	
-	float GetAttritionProbability()
+	void InitializeTasks(string cell, vector origin)
 	{
-		Tuple2<int, int> weights = Z_ScavGameModeComponent.GetInstance().GetScavRegionAttritionWeights();
+		if (! m_AllowedTasks || m_AllowedTasks.IsEmpty())
+		{
+			Print("Cell region has no defined tasks", LogLevel.WARNING);
+			
+			return;
+		}
 		
-		if (weights.param2 == 0) return 0;
+		// Task limit within a cell for this region
+		// TODO Add workbench attribute
+		if (m_CellTaskCounts.Contains(cell) && m_CellTaskCounts.Get(cell) >= 1)
+		{
+			Print("Cell has reached task limit", LogLevel.WARNING);
+			
+			return;
+		}
 		
-		return Math.InverseLerp(weights.param1, weights.param2, m_Attrition);
+		array<Z_ScavTaskBase> affordableTasks = GetAffordableTasks();
+		
+		if (affordableTasks.IsEmpty())
+		{
+			Print("Region does not have any affordable tasks left");
+			
+			return;
+		}
+		
+		array<float> weights = GetTasksAsWeights(affordableTasks);
+		
+		int index = SCR_ArrayHelper.GetWeightedIndex(weights, Math.RandomFloat01());
+		
+		if (! affordableTasks.IsIndexValid(index))
+		{
+			Print(string.Format("Chosen task has invalid index: %1 / %2", index, affordableTasks.Count()), LogLevel.ERROR);
+		}
+		
+		ref Z_ScavTaskBase task = affordableTasks.Get(index);
+		
+		RandomGenerator gen();
+		vector pos = gen.GenerateRandomPointInRadius(1, Z_HeatMap.CELL_SIZE_DIAGONAL, origin);
+		
+		vector finalPos;
+		SCR_WorldTools.FindEmptyTerrainPosition(finalPos, pos, Z_HeatMap.CELL_SIZE_DIAGONAL);
+		
+		Z_PersistentScavTask persistentTask = Z_PersistentScavTask.Create(task, finalPos);
+		
+		persistentTask.Spawn(GetOwner());
+		
+		RegisterTask(persistentTask);
+		
+		m_Attrition -= task.m_AttritionCost;
 	}
 	
-	vector GenerateRandomPositionInsideRegion()
-	{	
-		vector result;
-		SCR_WorldTools.FindEmptyTerrainPosition(result, GetOwner().CoordToParent(m_Centroid), 500);
+	array<float> GetTasksAsWeights(array<Z_ScavTaskBase> tasks)
+	{
+		array<int> weights();
+		array<float> result();
+		
+		if (tasks.IsEmpty()) return result;
+		
+		foreach (Z_ScavTaskBase task : tasks)
+		{
+			weights.Insert(task.m_AttritionCost);
+		}
+		
+		weights.Sort();
+		
+		int min = weights.Get(0);
+		int max = weights.Get(weights.Count() - 1);
+		
+		foreach (int w : weights)
+		{
+			float weightPercent = 1;
+			
+			if (min < max) weightPercent = Math.InverseLerp(min, max, w);
+			
+			result.Insert((float) weightPercent * 100);
+		}
+		
 		return result;
 	}
 	
-	void SpawnTasksAsync()
+	array<Z_ScavTaskBase> GetAffordableTasks()
 	{
-		// Gotta rethink this...
-		//
-		// Maybe iterate over all map grid cells and go from there
-		// Will be tricky to seed map with realistic encounters
-		// I suppose there could be a seed entity that can be dropped in to artificially seed encounters
-		// Can generate coords around entity to create encounters for
-		// Can then set some config on a singleton scripted state to remember we already seeded
-		// Then with a seeded world, we can properly figure out where to spawn
-		//
-		// Iterate all grid cells, each cell has its probability
-		// If rand float <= cell prob then we can decide if we should continue
-		// Check region attrition of cell and available tasks
-		// Spawn available task and deduct attrition
-		//
-		// Deciding task to spawn could use weighted array of lerp'd task attrition
-		// Filter tasks by cost (to affordable ones)
-		// Sort by cost ascending
-		// Lerp costs into percentage (max is highest cost in list)
-		// Multiply percentages by 100 to get weighted int
-		// Use array utils to make weighted array to pick task
-		// High cost (but affordable) tasks are higher prob than lower cost
-		//
-		// Spawn position would be within grid cell, could just do random radius coord + find empty terrain pos around that
-		// Regions can have a maximum task count to avoid over populated areas
-		// Might need to heap sort all grid cells to iterate them in random order, otherwise some places could get repeated when eating through attrition
-		// Cell probabilities drive the population, so it's important to have logarithmic scale to encounter's importance
+		array<Z_ScavTaskBase> tasks();
 		
-		vector origin = GenerateRandomPositionInsideRegion();
-		
-		string cell = SCR_MapEntity.GetGridPos(origin);
-		
-		float prob = Z_HeatMap.GetProbability(cell);
-		
-		if (Math.RandomFloat(0, 1) <= prob)
+		foreach (Z_ScavTaskBase task : m_AllowedTasks)
 		{
-			// TODO Change to high-low order when more tasks added
-			Z_ScavTaskBase taskType = m_AllowedTasks.GetRandomElement();
-			
-			if (m_Attrition < taskType.m_AttritionCost) return;
-			
-			Z_PersistentScavTask task = Z_PersistentScavTask.Create(taskType, origin);
-			
-			task.Spawn(GetOwner());
-			
-			RegisterTask(task);
-			
-			m_Attrition -= taskType.m_AttritionCost;
-			
-			Print("Spawned task inside region, new attrition: " + m_Attrition);
-			
-			Z_HeatMap.RecalculateProbability(cell, this);
+			if (task.m_AttritionCost <= m_Attrition)
+			{
+				tasks.Insert(task);
+			}
 		}
+		
+		SCR_Sorting<Z_ScavTaskBase, Z_ScavTaskBaseCompare>.HeapSort(tasks);
+		
+		return tasks;
 	}
 	
 	// TODO Convert this back into async
@@ -210,15 +235,50 @@ class Z_ScavRegionComponent : ScriptComponent
 	void RegisterTask(Z_PersistentScavTask task)
 	{
 		m_Tasks.Set(task.GetPersistentId(), task);
+		
+		string taskCell = SCR_MapEntity.GetGridPos(task.m_Origin);
+		
+		int count = 0;
+		
+		if (m_CellTaskCounts.Contains(taskCell))
+		{
+			count = m_CellTaskCounts.Get(taskCell);
+		}
+		
+		m_CellTaskCounts.Set(taskCell, count + 1);
 	}
 	
 	void UnregisterTask(string persistentId)
 	{
+		if (! m_Tasks.Contains(persistentId)) return;
+		
+		Z_PersistentScavTask task = m_Tasks.Get(persistentId);
+		
+		string taskCell = SCR_MapEntity.GetGridPos(task.m_Origin);
+		
+		if (m_CellTaskCounts.Contains(taskCell))
+		{
+			int count = m_CellTaskCounts.Get(taskCell);
+			
+			m_CellTaskCounts.Set(taskCell, count - 1);
+		}
+		
 		m_Tasks.Remove(persistentId);
 	}
 	
 	PolylineArea GetPolylineArea()
 	{
 		return PolylineArea.Cast(GetOwner());
+	}
+}
+
+class Z_ScavTaskBaseCompare : SCR_SortCompare<Z_ScavTaskBase>
+{
+	override static int Compare(Z_ScavTaskBase left, Z_ScavTaskBase right)
+	{		
+		if (left.m_AttritionCost < right.m_AttritionCost)
+			return 1;
+		else
+			return 0;
 	}
 }

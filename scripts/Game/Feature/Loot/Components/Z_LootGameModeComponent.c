@@ -129,7 +129,7 @@ class Z_LootGameModeComponent: SCR_BaseGameModeComponent
 	{
 		if (! Replication.Runtime()) return;
 		
-		Print("Total tracked lootables: " + GetLootableEntities().Count());
+		// Print("Total tracked lootables: " + GetLootableEntities().Count());
 		
 		array<int> players = {};
 		GetGame().GetPlayerManager().GetPlayers(players);

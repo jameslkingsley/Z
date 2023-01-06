@@ -20,11 +20,26 @@ class Z_ScavGameModeComponent: SCR_BaseGameModeComponent
 	{
 		if (! Replication.IsServer() || ! GetGame().InPlayMode()) return;
 		
-		// GetGame().GetCallqueue().CallLater(TestTemp, 2000);
+		if (! Z_Core.GetInstance().HasSeededScavEncounters())
+		{
+			GetGame().GetCallqueue().CallLater(FinishSeedingScavEncounters, 5000);
+			GetGame().GetCallqueue().CallLater(InitializeHeatMap, 6000);
+			GetGame().GetCallqueue().CallLater(InitializeTasks, 7000);
+		}
+		else
+		{
+			GetGame().GetCallqueue().CallLater(InitializeHeatMap, 1000);
+			GetGame().GetCallqueue().CallLater(InitializeTasks, 2000);
+		}
 		
 		Print("---- ReforgerZ Scav OnWorldPostProcess Complete ----");
+	}
+	
+	void FinishSeedingScavEncounters()
+	{
+		Z_Core.GetInstance().SetHasSeededScavEncounters(true);
 		
-		GetGame().GetCallqueue().CallLater(InitializeHeatMap, 10000, true);
+		Print("Seeded scav encounters - SHOULD ONLY HAPPEN ONCE ON FRESH WIPE", LogLevel.WARNING);
 	}
 	
 	void InitializeHeatMap()
@@ -36,28 +51,51 @@ class Z_ScavGameModeComponent: SCR_BaseGameModeComponent
 		Z_HeatMap.LoadProbabilities();
 	}
 	
-	void WorldGridTest()
+	void InitializeTasks()
 	{
-		Z_ScavEncounter.Create(Vector(1347.174, 37.803, 2969.852), Z_ScavEncounterImportance.High);
+		vector worldMin, worldMax;
+		GetGame().GetWorld().GetBoundBox(worldMin, worldMax);
+		
+		for (float x = 0; x < worldMax[0]; x += Z_HeatMap.CELL_SIZE)
+		{
+			for (float z = 0; z < worldMax[2]; z += Z_HeatMap.CELL_SIZE)
+			{
+				vector origin = Vector(x, 0, z);
+				string cell = SCR_MapEntity.GetGridPos(origin);
+				
+				float prob = Z_HeatMap.GetProbability(cell);
+				
+				// Random number needs to be below probability for us to consider spawning any tasks
+				if (Math.RandomFloat(0, 1) > prob) continue;
+				
+				Z_ScavRegionComponent region = GetScavRegionThatSurroundsOrigin(origin);
+				
+				// We can only spawn tasks that are inside a defined region
+				if (! region) continue;
+				
+				region.InitializeTasks(cell, origin);
+			}
+		}
+	}
+	
+	Z_ScavRegionComponent GetScavRegionThatSurroundsOrigin(vector origin)
+	{
+		foreach (Z_ScavRegionComponent region : GetScavRegions())
+		{
+			PolylineArea area = region.GetPolylineArea();
+			
+			if (! area) continue;
+			
+			if (region.GetPolylineArea().IsPosInside(origin))
+				return region;
+		}
+		
+		return null;
 	}
 	
 	ref array<Z_ScavRegionComponent> GetScavRegions()
 	{
 		return m_ScavRegions;
-	}
-	
-	ref Tuple2<int, int> GetScavRegionAttritionWeights()
-	{
-		int min = 0;
-		int max = 0;
-		
-		foreach (Z_ScavRegionComponent region : GetScavRegions())
-		{
-			if (region.m_Attrition < min) min = region.m_Attrition;
-			if (region.m_Attrition > max) max = region.m_Attrition;
-		}
-		
-		return new Tuple2<int, int>(min, max);
 	}
 	
 	void RegisterScavRegion(Z_ScavRegionComponent region)
