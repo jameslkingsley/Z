@@ -24,18 +24,40 @@ class Z_ScavGameModeComponent: SCR_BaseGameModeComponent
 		
 		Print("---- ReforgerZ Scav OnWorldPostProcess Complete ----");
 		
-		GetGame().GetCallqueue().CallLater(WorldGridTest, 1000);
+		GetGame().GetCallqueue().CallLater(InitializeHeatMap, 10000, true);
+	}
+	
+	void InitializeHeatMap()
+	{
+		Z_HeatMap.LoadEncounters();
+		
+		Z_HeatMap.LoadWeights();
+		
+		Z_HeatMap.LoadProbabilities();
 	}
 	
 	void WorldGridTest()
 	{
-		vector mins, maxs;
-		GetGame().GetWorld().GetBoundBox(mins, maxs);
+		Z_ScavEncounter.Create(Vector(1347.174, 37.803, 2969.852), Z_ScavEncounterImportance.High);
+	}
+	
+	ref array<Z_ScavRegionComponent> GetScavRegions()
+	{
+		return m_ScavRegions;
+	}
+	
+	ref Tuple2<int, int> GetScavRegionAttritionWeights()
+	{
+		int min = 0;
+		int max = 0;
 		
-		Print(mins);
-		Print(maxs);
+		foreach (Z_ScavRegionComponent region : GetScavRegions())
+		{
+			if (region.m_Attrition < min) min = region.m_Attrition;
+			if (region.m_Attrition > max) max = region.m_Attrition;
+		}
 		
-		SCR_MapEntity mapEntity = SCR_MapEntity.GetMapInstance();
+		return new Tuple2<int, int>(min, max);
 	}
 	
 	void RegisterScavRegion(Z_ScavRegionComponent region)
@@ -44,25 +66,5 @@ class Z_ScavGameModeComponent: SCR_BaseGameModeComponent
 			return;
 		
 		m_ScavRegions.Insert(region);
-	}
-	
-	void TestTemp()
-	{
-		foreach (Z_ScavRegionComponent region : m_ScavRegions)
-		{
-			if (! region.m_Tasks.IsEmpty()) continue;
-			
-			Z_ScavTaskBase taskType = region.m_AllowedTasks.GetRandomElement();
-			
-			Z_PersistentScavTask task = Z_PersistentScavTask.Create(taskType, Vector(1347.174, 37.803, 2969.852));
-			
-			task.Spawn(region.GetOwner());
-			
-			region.RegisterTask(task);
-			
-			EL_PersistenceComponent persistence = EL_PersistenceComponent.Cast(region.GetOwner().FindComponent(EL_PersistenceComponent));
-			
-			persistence.Save();
-		}
 	}
 }

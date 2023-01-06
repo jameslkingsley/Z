@@ -110,6 +110,7 @@ $grp PolylineArea {
     }
    }
    Z_ScavRegionComponent "{5C44B0A6E39E8D43}" {
+    m_Centroid 616.055 10.811 203.059
     m_Difficulty Insane
     m_AllowedTasks {
      Z_ScavTaskPatrol "{5C4938B5E669BDD2}" {
@@ -122,7 +123,7 @@ $grp PolylineArea {
    RplComponent "{5B3F08A6AF432A06}" {
    }
   }
-  coords 555.139 28.754 2463.326
+  coords 555.139 28.752 2463.326
   {
    PolylineShapeEntity {
     components {

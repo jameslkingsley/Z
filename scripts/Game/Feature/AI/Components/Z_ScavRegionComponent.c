@@ -4,6 +4,9 @@ class Z_ScavRegionComponentClass : ScriptComponentClass
 
 class Z_ScavRegionComponent : ScriptComponent
 {
+	[Attribute("0 0 0", UIWidgets.Coords, "Approximate center of the region", params: "inf inf 0 purpose=coords space=entity")]
+	vector m_Centroid;
+	
 	[Attribute("0", UIWidgets.ComboBox, "Difficulty of AI in this region", "", ParamEnumArray.FromEnum(Z_ScavDifficulty))]
 	Z_ScavDifficulty m_Difficulty;
 	
@@ -28,6 +31,7 @@ class Z_ScavRegionComponent : ScriptComponent
 	{
 		m_Encounters = new array<ref Z_ScavEncounter>();
 		m_Tasks = new map<string, ref Z_PersistentScavTask>();
+		m_Attrition = m_StartingAttrition;
 	}
 	
 	// Similar to loot volume - this class is responsible for choosing where to spawn things but does not do the spawning itself
@@ -76,6 +80,80 @@ class Z_ScavRegionComponent : ScriptComponent
 			gameMode.RegisterScavRegion(this);
 			
 			GetGame().GetCallqueue().CallLater(LoadTasksAsync, 500);
+			
+			GetGame().GetCallqueue().CallLater(SpawnTasksAsync, 5000, true);
+		}
+	}
+	
+	float GetAttritionProbability()
+	{
+		Tuple2<int, int> weights = Z_ScavGameModeComponent.GetInstance().GetScavRegionAttritionWeights();
+		
+		if (weights.param2 == 0) return 0;
+		
+		return Math.InverseLerp(weights.param1, weights.param2, m_Attrition);
+	}
+	
+	vector GenerateRandomPositionInsideRegion()
+	{	
+		vector result;
+		SCR_WorldTools.FindEmptyTerrainPosition(result, GetOwner().CoordToParent(m_Centroid), 500);
+		return result;
+	}
+	
+	void SpawnTasksAsync()
+	{
+		// Gotta rethink this...
+		//
+		// Maybe iterate over all map grid cells and go from there
+		// Will be tricky to seed map with realistic encounters
+		// I suppose there could be a seed entity that can be dropped in to artificially seed encounters
+		// Can generate coords around entity to create encounters for
+		// Can then set some config on a singleton scripted state to remember we already seeded
+		// Then with a seeded world, we can properly figure out where to spawn
+		//
+		// Iterate all grid cells, each cell has its probability
+		// If rand float <= cell prob then we can decide if we should continue
+		// Check region attrition of cell and available tasks
+		// Spawn available task and deduct attrition
+		//
+		// Deciding task to spawn could use weighted array of lerp'd task attrition
+		// Filter tasks by cost (to affordable ones)
+		// Sort by cost ascending
+		// Lerp costs into percentage (max is highest cost in list)
+		// Multiply percentages by 100 to get weighted int
+		// Use array utils to make weighted array to pick task
+		// High cost (but affordable) tasks are higher prob than lower cost
+		//
+		// Spawn position would be within grid cell, could just do random radius coord + find empty terrain pos around that
+		// Regions can have a maximum task count to avoid over populated areas
+		// Might need to heap sort all grid cells to iterate them in random order, otherwise some places could get repeated when eating through attrition
+		// Cell probabilities drive the population, so it's important to have logarithmic scale to encounter's importance
+		
+		vector origin = GenerateRandomPositionInsideRegion();
+		
+		string cell = SCR_MapEntity.GetGridPos(origin);
+		
+		float prob = Z_HeatMap.GetProbability(cell);
+		
+		if (Math.RandomFloat(0, 1) <= prob)
+		{
+			// TODO Change to high-low order when more tasks added
+			Z_ScavTaskBase taskType = m_AllowedTasks.GetRandomElement();
+			
+			if (m_Attrition < taskType.m_AttritionCost) return;
+			
+			Z_PersistentScavTask task = Z_PersistentScavTask.Create(taskType, origin);
+			
+			task.Spawn(GetOwner());
+			
+			RegisterTask(task);
+			
+			m_Attrition -= taskType.m_AttritionCost;
+			
+			Print("Spawned task inside region, new attrition: " + m_Attrition);
+			
+			Z_HeatMap.RecalculateProbability(cell, this);
 		}
 	}
 	
