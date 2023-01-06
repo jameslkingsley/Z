@@ -1,3 +1,6 @@
+Z_LootTableTestEntity {
+ coords 19.644 0.906 71.662
+}
 $grp GenericEntity : "{757FCCE8E756175C}Prefabs/Props/Furniture/MeetingTable_01.et" {
  {
   coords 33.821 0 71.71
@@ -21,7 +24,7 @@ $grp GenericEntity : "{757FCCE8E756175C}Prefabs/Props/Furniture/MeetingTable_01.
   coords 22.523 0 71.71
  }
  {
-  coords 20.279 -0 71.71
+  coords 20.279 0 71.71
  }
  {
   coords 65.346 0 71.71

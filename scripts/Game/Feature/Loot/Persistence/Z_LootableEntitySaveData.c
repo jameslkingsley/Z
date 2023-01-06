@@ -6,6 +6,8 @@ class Z_LootableEntitySaveData : EL_ComponentSaveDataBase
 	
 	override bool ReadFrom(notnull GenericComponent worldEntityComponent)
 	{
+		if (! super.ReadFrom(worldEntityComponent)) return false;
+		
 		Z_LootableComponent component = Z_LootableComponent.Cast(worldEntityComponent);
 		
 		m_InitialSpawnOrigin = component.GetInitialSpawnOrigin();
@@ -17,6 +19,8 @@ class Z_LootableEntitySaveData : EL_ComponentSaveDataBase
 
 	override bool ApplyTo(notnull GenericComponent worldEntityComponent)
 	{
+		if (! super.ApplyTo(worldEntityComponent)) return false;
+		
 		Z_LootableComponent lootable = Z_LootableComponent.Cast(worldEntityComponent);
 		
 		lootable.SetInitialSpawnOrigin(m_InitialSpawnOrigin);

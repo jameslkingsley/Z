@@ -1,7 +1,13 @@
-SCR_AIWorld : "{E0A05C76552E7F58}Prefabs/AI/SCR_AIWorld.et" {
- coords 0 9.358 0
-}
-SCR_FactionManager FactionManager_Base1 : "{A242612865F2A48E}Prefabs/MP/Managers/Factions/FactionManager_Base.et" {
+SCR_FactionManager FactionManager_USxUSSR1 : "{589540B35EBA8CDC}Prefabs/MP/Managers/Factions/FactionManager_USxUSSR.et" {
+ Factions {
+  SCR_Faction "{56B2B46E999BF3BF}" {
+   FactionKey "Survivors"
+  }
+  SCR_Faction "{56B2B46E9AF80999}" {
+   FactionKey "Scavs"
+   m_bIsPlayable 0
+  }
+ }
  m_bCanChangeFactionsPlayable 0
 }
 SCR_LoadoutManager : "{AA4E7419A1FF65B0}Prefabs/MP/Managers/Loadouts/LoadoutManager_Base.et" {

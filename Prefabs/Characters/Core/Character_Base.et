@@ -4,6 +4,8 @@ SCR_ChimeraCharacter {
   SCR_CharacterVicinityComponent "{529A70D96D401B33}" {
    DiscoveryRadius 3
   }
+  Z_CharacterMetabolismComponent "{5C42B9E2A25443D8}" {
+  }
   CharacterAnimationComponent "{520EA1D2F659C994}" {
    components {
     SCR_CharacterCommandHandlerComponent "{520EA1D2F659C99A}" {

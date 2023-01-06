@@ -1,6 +1,14 @@
 $grp PolylineArea {
  BeauregardLootRegion {
   components {
+   EL_PersistenceComponent "{5C4D186B8F749D2E}" {
+    m_pSaveData Z_RegionSaveData "{5C4D186B8CAE7B63}" {
+     m_aComponents {
+      Z_ScavRegionComponentSaveData "{5C4D186B8DDE25E9}" {
+      }
+     }
+    }
+   }
    Z_LootRegionComponent "{5B3E275492BA18F8}" {
     m_LootRegionTiers {
      Z_LootRegionTier "{5B3E2754B5B4EB96}" {
@@ -21,6 +29,16 @@ $grp PolylineArea {
       m_ProbabilityMax 0.08
       m_SpawnRangeLower 1
       m_SpawnRangeUpper 3
+     }
+    }
+   }
+   Z_ScavRegionComponent "{5C4D186BB4378976}" {
+    m_StartingAttrition 500
+    m_AllowedTasks {
+     Z_ScavTaskPatrol "{5C4D186BB099B12E}" {
+      m_SoldierPrefabs {
+       "{84B40583F4D1B7A3}Prefabs/Characters/Factions/INDFOR/FIA/Character_FIA_Rifleman.et"
+      }
      }
     }
    }
@@ -76,6 +94,14 @@ $grp PolylineArea {
  }
  AirfieldLootRegion {
   components {
+   EL_PersistenceComponent "{5C44B09F6163F8FB}" {
+    m_pSaveData Z_RegionSaveData "{5C453894370858A9}" {
+     m_aComponents {
+      Z_ScavRegionComponentSaveData "{5C453894356B3C94}" {
+      }
+     }
+    }
+   }
    Z_LootRegionComponent "{5B3F08A6AE3F9036}" {
     m_LootRegionTiers {
      Z_LootRegionTier "{5B3F08A6AD2AF8CD}" {
@@ -101,10 +127,21 @@ $grp PolylineArea {
      }
     }
    }
+   Z_ScavRegionComponent "{5C44B0A6E39E8D43}" {
+    m_Centroid 616.055 10.811 203.059
+    m_Difficulty Insane
+    m_AllowedTasks {
+     Z_ScavTaskPatrol "{5C4938B5E669BDD2}" {
+      m_SoldierPrefabs {
+       "{84B40583F4D1B7A3}Prefabs/Characters/Factions/INDFOR/FIA/Character_FIA_Rifleman.et"
+      }
+     }
+    }
+   }
    RplComponent "{5B3F08A6AF432A06}" {
    }
   }
-  coords 555.139 28.754 2463.326
+  coords 555.139 28.752 2463.326
   {
    PolylineShapeEntity {
     components {
@@ -192,6 +229,14 @@ $grp PolylineArea {
  }
  CoastalMilitaryLootRegion {
   components {
+   EL_PersistenceComponent "{5C4D186B899B59F9}" {
+    m_pSaveData Z_RegionSaveData "{5C4D186B86F61D59}" {
+     m_aComponents {
+      Z_ScavRegionComponentSaveData "{5C4D186B87DD39FB}" {
+      }
+     }
+    }
+   }
    Z_LootRegionComponent "{5B3F08A752DAB3C2}" {
     m_LootRegionTiers {
      Z_LootRegionTier "{5B3F08A753E8ED05}" {
@@ -214,6 +259,17 @@ $grp PolylineArea {
       m_ProbabilityMax 0.12
       m_SpawnRangeLower 1
       m_SpawnRangeUpper 4
+     }
+    }
+   }
+   Z_ScavRegionComponent "{5C4D186BC69475E8}" {
+    m_Difficulty High
+    m_StartingAttrition 500
+    m_AllowedTasks {
+     Z_ScavTaskPatrol "{5C4D186BC01DD0B4}" {
+      m_SoldierPrefabs {
+       "{84B40583F4D1B7A3}Prefabs/Characters/Factions/INDFOR/FIA/Character_FIA_Rifleman.et"
+      }
      }
     }
    }
@@ -287,6 +343,14 @@ $grp PolylineArea {
  }
  ArlevilleLootRegion {
   components {
+   EL_PersistenceComponent "{5C4D18687C5A9E1F}" {
+    m_pSaveData Z_RegionSaveData "{5C4D1868786EC798}" {
+     m_aComponents {
+      Z_ScavRegionComponentSaveData "{5C4D186879D60505}" {
+      }
+     }
+    }
+   }
    Z_LootRegionComponent "{5B3F08A73191486A}" {
     m_LootRegionTiers {
      Z_LootRegionTier "{5B3F08A74EB5FBCE}" {
@@ -309,6 +373,16 @@ $grp PolylineArea {
       m_ProbabilityMax 0.08
       m_SpawnRangeLower 1
       m_SpawnRangeUpper 3
+     }
+    }
+   }
+   Z_ScavRegionComponent "{5C4D186B800D66EB}" {
+    m_StartingAttrition 300
+    m_AllowedTasks {
+     Z_ScavTaskPatrol "{5C4D186B964E10A1}" {
+      m_SoldierPrefabs {
+       "{84B40583F4D1B7A3}Prefabs/Characters/Factions/INDFOR/FIA/Character_FIA_Rifleman.et"
+      }
      }
     }
    }
@@ -353,6 +427,101 @@ $grp PolylineArea {
      }
      ShapePoint "{5B3F08A7C2327C72}" {
       Position 134.488 0 45.82
+     }
+    }
+    IsClosed 1
+   }
+  }
+ }
+ ForestRegion {
+  components {
+   EL_PersistenceComponent "{5C4D186B3F5233DB}" {
+    m_pSaveData Z_RegionSaveData "{5C4D186B3C88DF21}" {
+     m_aComponents {
+      Z_ScavRegionComponentSaveData "{5C4D186B3D9CA251}" {
+      }
+     }
+    }
+   }
+   Z_ScavRegionComponent "{5C4D186B386424BC}" {
+    m_AllowedTasks {
+     Z_ScavTaskPatrol "{5C4D186B3418C1CE}" {
+      m_SoldierPrefabs {
+       "{84B40583F4D1B7A3}Prefabs/Characters/Factions/INDFOR/FIA/Character_FIA_Rifleman.et"
+      }
+      m_GroupSizeMin 1
+      m_GroupSizeMax 4
+     }
+    }
+   }
+   RplComponent "{5C4D186B250C49AE}" {
+   }
+  }
+  coords 2884.289 38.302 3164.929
+  {
+   PolylineShapeEntity {
+    components {
+     Hierarchy "{5C4D186B1A242BBE}" {
+     }
+    }
+    coords 0 0 0
+    Points {
+     ShapePoint "{5C4D186BF1B2E369}" {
+      Position 0 -0.011 0
+     }
+     ShapePoint "{5C4D186BF1B2E0BE}" {
+      Position 5 -0.117 0
+     }
+     ShapePoint "{5C4D186B0E03FA37}" {
+      Position -86.057 0 13.156
+     }
+     ShapePoint "{5C4D186B0ECC3418}" {
+      Position -296.474 0 -66.787
+     }
+     ShapePoint "{5C4D186B0C4638B1}" {
+      Position -451.745 0 -353.454
+     }
+     ShapePoint "{5C4D186B0D58F7EE}" {
+      Position -590.174 -0 -435.66
+     }
+     ShapePoint "{5C4D186B0DFDB263}" {
+      Position -641.792 0 -585.071
+     }
+     ShapePoint "{5C4D186B0B0C0CB9}" {
+      Position -655.494 0 -850.823
+     }
+     ShapePoint "{5C4D186B0BFB8F26}" {
+      Position -728.304 0 -1090.937
+     }
+     ShapePoint "{5C4D186B09B8E7DD}" {
+      Position -769.826 0 -1346.021
+     }
+     ShapePoint "{5C4D186B06279FB8}" {
+      Position -502.697 0 -1492.788
+     }
+     ShapePoint "{5C4D186B06B1D11C}" {
+      Position -301.013 0 -1410.963
+     }
+     ShapePoint "{5C4D186B072AF680}" {
+      Position -121.827 0 -1268.278
+     }
+     ShapePoint "{5C4D186B049E06EE}" {
+      Position -108.532 0 -1001.263
+     }
+     ShapePoint "{5C4D186B05782DA7}" {
+      Position -37.049 0 -775.886
+     }
+     ShapePoint "{5C4D186B02B87D8D}" {
+      Position 48.528 0 -440.926
+     }
+     ShapePoint "{5C4D186B035FE78A}" {
+      Position 163.448 0 -228.04
+     }
+     ShapePoint "{5C4D186B013CDD14}" {
+      Position 127.766 0 -63.818
+     }
+     ShapePoint "{5C4D186B01EBD0EA}" {
+      Position 23.366 0 -8.182
      }
     }
     IsClosed 1
