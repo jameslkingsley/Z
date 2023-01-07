@@ -1,0 +1,55 @@
+$grp Z_ScavSeederEntity {
+ {
+  coords 1867.438 47.887 2893.526
+  m_Importance High
+ }
+ {
+  coords 1437.51 33.178 3249.937
+ }
+ {
+  coords 1254.074 39.622 2885.979
+  m_Importance High
+ }
+ {
+  coords 1288.605 40.748 2422.606
+  m_Importance High
+ }
+ {
+  coords 2307.208 100.272 2274.762
+ }
+ {
+  coords 2864.762 43.755 3085.865
+ }
+ {
+  coords 3155.154 11.444 2770.815
+  m_NumberOfEncounters 20
+  m_Importance Medium
+ }
+ {
+  coords 2772.708 75.745 1631.046
+ }
+ {
+  coords 3105.678 34.202 2156.897
+ }
+ {
+  coords 2380.447 84.807 2069.385
+ }
+ {
+  coords 2237.577 87.622 1218.654
+ }
+ {
+  coords 1937.049 59.026 2307.811
+ }
+ {
+  coords 1182.329 14.07 1900.977
+  m_Importance Medium
+ }
+ {
+  coords 2604.383 112.855 2451.882
+  m_NumberOfEncounters 50
+ }
+ {
+  coords 2777.019 106.72 2859.814
+  m_NumberOfEncounters 50
+ }
+}

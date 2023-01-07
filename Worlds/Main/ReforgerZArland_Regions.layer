@@ -36,9 +36,6 @@ $grp PolylineArea {
     m_StartingAttrition 500
     m_AllowedTasks {
      Z_ScavTaskPatrol "{5C4D186BB099B12E}" {
-      m_SoldierPrefabs {
-       "{84B40583F4D1B7A3}Prefabs/Characters/Factions/INDFOR/FIA/Character_FIA_Rifleman.et"
-      }
      }
     }
    }
@@ -128,13 +125,10 @@ $grp PolylineArea {
     }
    }
    Z_ScavRegionComponent "{5C44B0A6E39E8D43}" {
-    m_Centroid 616.055 10.811 203.059
     m_Difficulty Insane
     m_AllowedTasks {
      Z_ScavTaskPatrol "{5C4938B5E669BDD2}" {
-      m_SoldierPrefabs {
-       "{84B40583F4D1B7A3}Prefabs/Characters/Factions/INDFOR/FIA/Character_FIA_Rifleman.et"
-      }
+      m_Faction Raiders
      }
     }
    }
@@ -267,9 +261,7 @@ $grp PolylineArea {
     m_StartingAttrition 500
     m_AllowedTasks {
      Z_ScavTaskPatrol "{5C4D186BC01DD0B4}" {
-      m_SoldierPrefabs {
-       "{84B40583F4D1B7A3}Prefabs/Characters/Factions/INDFOR/FIA/Character_FIA_Rifleman.et"
-      }
+      m_Faction Raiders
      }
     }
    }
@@ -380,9 +372,6 @@ $grp PolylineArea {
     m_StartingAttrition 300
     m_AllowedTasks {
      Z_ScavTaskPatrol "{5C4D186B964E10A1}" {
-      m_SoldierPrefabs {
-       "{84B40583F4D1B7A3}Prefabs/Characters/Factions/INDFOR/FIA/Character_FIA_Rifleman.et"
-      }
      }
     }
    }
@@ -446,9 +435,6 @@ $grp PolylineArea {
    Z_ScavRegionComponent "{5C4D186B386424BC}" {
     m_AllowedTasks {
      Z_ScavTaskPatrol "{5C4D186B3418C1CE}" {
-      m_SoldierPrefabs {
-       "{84B40583F4D1B7A3}Prefabs/Characters/Factions/INDFOR/FIA/Character_FIA_Rifleman.et"
-      }
       m_GroupSizeMin 1
       m_GroupSizeMax 4
      }
@@ -482,7 +468,7 @@ $grp PolylineArea {
       Position -451.745 0 -353.454
      }
      ShapePoint "{5C4D186B0D58F7EE}" {
-      Position -590.174 -0 -435.66
+      Position -590.174 0 -435.66
      }
      ShapePoint "{5C4D186B0DFDB263}" {
       Position -641.792 0 -585.071

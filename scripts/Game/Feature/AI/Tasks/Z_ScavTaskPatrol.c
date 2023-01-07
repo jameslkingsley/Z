@@ -7,12 +7,6 @@ class Z_ScavTaskPatrol : Z_ScavTaskBase
 	[Attribute("{22A875E30470BD4F}Prefabs/AI/Waypoints/AIWaypoint_Patrol.et", UIWidgets.ResourceNamePicker, "Waypoint prefab to use")]
 	ResourceName m_WaypointPrefab;
 	
-	[Attribute("Scavs", UIWidgets.EditBox, "Faction for the group (must be defined in FactionManager)")]
-	FactionKey m_Faction;
-	
-	[Attribute("", UIWidgets.ResourceNamePicker, "Soldier prefabs to use")]
-	ref array<ref ResourceName> m_SoldierPrefabs;
-	
 	[Attribute("2", UIWidgets.Auto, "Minimum number of soldiers in the group")]
 	int m_GroupSizeMin;
 	
@@ -32,11 +26,11 @@ class Z_ScavTaskPatrol : Z_ScavTaskBase
 		
 		FactionManager facManager = GetGame().GetFactionManager();
 		
-		Faction faction = facManager.GetFactionByKey(m_Faction);
+		Faction faction = facManager.GetFactionByKey(GetFactionKey());
 		
 		if (! faction)
 		{
-			Print("Failed to find faction with key:" + m_Faction, LogLevel.ERROR);
+			Print("Failed to find faction with key:" + GetFactionKey(), LogLevel.ERROR);
 			
 			return watchers;
 		}
@@ -74,17 +68,63 @@ class Z_ScavTaskPatrol : Z_ScavTaskBase
 			watchers.Set(ai, stub);
 		}
 		
+		AddWaypoint(group, origin);
+		
+		group.GetOnWaypointCompleted().Insert(OnWaypointCompleted);
+		
+		group.GetOnAgentRemoved().Insert(OnAgentRemoved);
+		
+		return watchers;
+	}
+	
+	void AddWaypoint(SCR_AIGroup group, vector origin)
+	{
 		EntitySpawnParams wpParams = EntitySpawnParams();
 		wpParams.TransformMode = ETransformMode.WORLD;
 		wpParams.Transform[3] = GetWaypointOrigin(origin);
 		
 		SCR_AIWaypoint wp = SCR_AIWaypoint.Cast(GetGame().SpawnEntityPrefabLocal(Resource.Load(m_WaypointPrefab), GetGame().GetWorld(), wpParams));
 		
-		if (!wp) return watchers;
+		if (!wp) return;
 		
 		group.AddWaypoint(wp);
+	}
+	
+	void OnWaypointCompleted(AIWaypoint wp)
+	{
+		IEntity ent = wp.GetParent();
 		
-		return watchers;
+		if (ent)
+		{
+			SCR_AIGroup group = SCR_AIGroup.Cast(ent);
+			
+			if (group)
+			{
+				Print("WP parent is group");
+			}
+			
+			AIAgent agent = AIAgent.Cast(ent);
+			
+			if (agent)
+			{
+				Print("WP parent is agent");
+			}
+		}
+	}
+	
+	void OnAgentRemoved(AIGroup group, AIAgent agent)
+	{
+		if (!agent) return;
+		
+		IEntity ent = agent.GetControlledEntity();
+		
+		if (!ent) return;
+		
+		if (! GetGame().InPlayMode()) return;
+		
+		Z_ScavEncounter.Create(ent.GetOrigin(), Z_ScavEncounterImportance.High);
+		
+		Print("Scav died, creating encounter: " + ent.GetOrigin());
 	}
 	
 	override ref array<ref Z_ScavTaskEntityStub> UpdateEntityStubs(map<IEntity, ref Z_ScavTaskEntityStub> watchers)
@@ -120,9 +160,11 @@ class Z_ScavTaskPatrol : Z_ScavTaskBase
 	
 	override ref array<ref Z_ScavTaskEntityStub> GetEntityStubs(Z_PersistentScavTask task)
 	{
-		if (! m_SoldierPrefabs || m_SoldierPrefabs.IsEmpty())
+		ref array<ref ResourceName> prefabs = Z_ScavGameModeComponent.GetInstance().GetConfig().GetSoldierPrefabs(m_Faction);
+		
+		if (prefabs.IsEmpty())
 		{
-			Debug.Error("Soldier prefabs in scav task is empty");
+			Debug.Error("Soldier prefabs in scav config is empty");
 		}
 		
 		ref array<ref Z_ScavTaskEntityStub> stubs();
@@ -133,7 +175,7 @@ class Z_ScavTaskPatrol : Z_ScavTaskBase
 		{
 			ref Z_ScavTaskEntityStub stub();
 		
-			stub.resource = m_SoldierPrefabs.GetRandomElement();
+			stub.resource = prefabs.GetRandomElement();
 			stub.origin = task.m_Origin + Vector(i, 0, 0);
 			stub.direction = Vector(0, 0, 0);
 			stub.stance = ECharacterStance.STAND;
@@ -161,6 +203,6 @@ class Z_ScavTaskPatrol : Z_ScavTaskBase
 	protected vector GetWaypointOrigin(vector from)
 	{
 		RandomGenerator gen();
-		return gen.GenerateRandomPointInRadius(50, 300, from);
+		return gen.GenerateRandomPointInRadius(50, 100, from);
 	}
 };

@@ -4,9 +4,6 @@ class Z_ScavRegionComponentClass : ScriptComponentClass
 
 class Z_ScavRegionComponent : ScriptComponent
 {
-	[Attribute("0 0 0", UIWidgets.Coords, "Approximate center of the region", params: "inf inf 0 purpose=coords space=entity")]
-	vector m_Centroid;
-	
 	[Attribute("0", UIWidgets.ComboBox, "Difficulty of AI in this region", "", ParamEnumArray.FromEnum(Z_ScavDifficulty))]
 	Z_ScavDifficulty m_Difficulty;
 	
@@ -18,8 +15,6 @@ class Z_ScavRegionComponent : ScriptComponent
 	
 	[Attribute("", UIWidgets.Auto, "List of allowed tasks within this region")]
 	ref array<ref Z_ScavTaskBase> m_AllowedTasks;
-	
-	// Persistent props below
 	
 	int m_Attrition;
 	
@@ -33,25 +28,6 @@ class Z_ScavRegionComponent : ScriptComponent
 		m_CellTaskCounts = new map<string, int>();
 		m_Attrition = m_StartingAttrition;
 	}
-	
-	// Similar to loot volume - this class is responsible for choosing where to spawn things but does not do the spawning itself
-	
-	// Spawn is determined using heat map of encounters
-	// Some randomisation is applied to that spawn position
-	// If heat map is not dense enough (ie no encounters) then choose random position inside region
-	// Position chosen must be nowhere near players
-	// Possibly have generous delay on game start before spawning AI, to cater for when a server restarts and players reconnect
-	// - don't want them spawning in into a firefight
-	
-	// AI is not persisted by default
-	// A ScavTask is a persisted entity that stores:
-	// - where it is (should automatically be handled for us)
-	// - task info (type, parameters etc)
-	// - how many scavs are left (started with 5, 2 died, so only spawn 3)
-	// - each scav's position so they can spawn back in same place
-	// - class can extend a base which manages the persistence
-	// - sub-class can just deal with waypointing
-	// - spawning is handled in base class (as it needs tracking)
 	
 	protected override void OnPostInit(IEntity owner)
 	{

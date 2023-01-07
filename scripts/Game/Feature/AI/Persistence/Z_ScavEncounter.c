@@ -52,7 +52,6 @@ class Z_ScavEncounter : EL_PersistentScriptedStateBase
 		instance.origin = o;
 		instance.importance = i;
 		
-		// Encounters don't need to be kept alive in memory, so just save it straight away
 		instance.Save();
 		
 		return instance;

@@ -4,7 +4,12 @@ class Z_ScavGameModeComponentClass: SCR_BaseGameModeComponentClass
 
 class Z_ScavGameModeComponent: SCR_BaseGameModeComponent
 {
+	[Attribute("{19994566F9D13227}Config/Z_ScavConfig.conf", UIWidgets.ResourceNamePicker, "Scav config")]
+	ResourceName m_ScavConfig;
+	
 	ref array<Z_ScavRegionComponent> m_ScavRegions = {};
+	
+	ref Z_ScavConfig m_ScavConfigCache;
 	
 	static Z_ScavGameModeComponent GetInstance()
 	{
@@ -14,6 +19,22 @@ class Z_ScavGameModeComponent: SCR_BaseGameModeComponent
 			return Z_ScavGameModeComponent.Cast(gameMode.FindComponent(Z_ScavGameModeComponent));
 		else
 			return null;
+	}
+	
+	ref Z_ScavConfig GetConfig()
+	{
+		if (m_ScavConfigCache)
+		{
+			return m_ScavConfigCache;
+		}
+		
+		Resource container = BaseContainerTools.LoadContainer(m_ScavConfig);
+					
+		m_ScavConfigCache = Z_ScavConfig.Cast(
+			BaseContainerTools.CreateInstanceFromContainer(container.GetResource().ToBaseContainer())
+		);
+		
+		return m_ScavConfigCache;
 	}
 	
 	override void OnWorldPostProcess(World world)
@@ -32,7 +53,19 @@ class Z_ScavGameModeComponent: SCR_BaseGameModeComponent
 			GetGame().GetCallqueue().CallLater(InitializeTasks, 2000);
 		}
 		
+		GetGame().GetCallqueue().CallLater(InitializeHeatMap, 1800 * 1000);
+		GetGame().GetCallqueue().CallLater(InitializeTasks, 1810 * 1000);
+		
 		Print("---- ReforgerZ Scav OnWorldPostProcess Complete ----");
+	}
+	
+	override void OnPlayerKilled(int playerId, IEntity player, IEntity killer)
+	{
+		if (! Replication.IsServer() || ! GetGame().InPlayMode()) return;
+		
+		Z_ScavEncounter.Create(player.GetOrigin(), Z_ScavEncounterImportance.Medium);
+		
+		Print("Player died, creating encounter: " + player.GetOrigin());
 	}
 	
 	void FinishSeedingScavEncounters()
@@ -44,6 +77,8 @@ class Z_ScavGameModeComponent: SCR_BaseGameModeComponent
 	
 	void InitializeHeatMap()
 	{
+		Z_HeatMap.Clear();
+		
 		Z_HeatMap.LoadEncounters();
 		
 		Z_HeatMap.LoadWeights();

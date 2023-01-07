@@ -7,6 +7,11 @@ EL_GameModeRoleplay GameMode_Survival : "{E87F79D982AFE933}Prefabs/MP/Modes/Role
    m_aDefaultCharacterItems {
    }
   }
+  EL_RespawnSytemComponent "{5B3E275AE32D97DA}" {
+   m_aDefaultCharacterPrefabs {
+    "{C465F15DDF56A6D8}Prefabs/Characters/Presets/Asian_Male_02.et" "{BFD6AFB8A1D8E2F9}Prefabs/Characters/Presets/Black_Male_02.et" "{CE23D4366B47E9B9}Prefabs/Characters/Presets/White_Male_01.et"
+   }
+  }
   SCR_NametagConfigComponent "{597514328498E41D}" {
    Enabled 0
   }

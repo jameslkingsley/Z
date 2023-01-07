@@ -80,9 +80,17 @@ class Z_ScavTaskBase
 	[Attribute("100", UIWidgets.Auto, "Attrition cost of this task")]
 	int m_AttritionCost;
 	
+	[Attribute("0", UIWidgets.ComboBox, "AI faction to spawn for this task", "", ParamEnumArray.FromEnum(Z_ScavFaction))]
+	Z_ScavFaction m_Faction;
+	
 	ref map<IEntity, ref Z_ScavTaskEntityStub> SpawnEntityStubs(vector origin, array<ref Z_ScavTaskEntityStub> stubs);
 	
 	ref array<ref Z_ScavTaskEntityStub> UpdateEntityStubs(map<IEntity, ref Z_ScavTaskEntityStub> watchers);
 	
 	ref array<ref Z_ScavTaskEntityStub> GetEntityStubs(Z_PersistentScavTask task);
+	
+	string GetFactionKey()
+	{
+		return Z_ScavGameModeComponent.GetInstance().GetConfig().GetFactionKey();
+	}
 };
