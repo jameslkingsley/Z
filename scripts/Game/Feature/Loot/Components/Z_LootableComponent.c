@@ -101,7 +101,7 @@ class Z_LootableComponent : ScriptComponent
 			
 		if (! gameMode) return false;
 		
-		int current = GetCurrentTimestampInHours();
+		int current = Z_Core.GetCurrentTimestampInHours();
 		
 		int diff = current - m_InitialSpawnTimestampInHours;
 		
@@ -114,26 +114,11 @@ class Z_LootableComponent : ScriptComponent
 	{
 		m_InitialSpawnOrigin = GetOwner().GetOrigin();
 		
-		m_InitialSpawnTimestampInHours = GetCurrentTimestampInHours();
+		m_InitialSpawnTimestampInHours = Z_Core.GetCurrentTimestampInHours();
 		
 		EL_PersistenceComponent persistence = EL_PersistenceComponent.Cast(GetOwner().FindComponent(EL_PersistenceComponent));
 		
 		persistence.Save();
-	}
-	
-	int GetCurrentTimestampInHours()
-	{
-		int epochYear = 2021;
-		int year, month, day, hour, minute, second;
-		
-		System.GetYearMonthDayUTC(year, month, day);
-		System.GetHourMinuteSecondUTC(hour, minute, second);
-		
-		year = (year - epochYear) * 8760;
-		month = month * 730;
-		day = day * 24;
-		
-		return year + month + day + hour;
 	}
 	
 	Z_LootTier GetLootTier()

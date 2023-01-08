@@ -68,48 +68,67 @@ class Z_ScavTaskPatrol : Z_ScavTaskBase
 			watchers.Set(ai, stub);
 		}
 		
-		AddWaypoint(group, origin);
+		// AddAllWaypoints(group, origin);
 		
-		group.GetOnWaypointCompleted().Insert(OnWaypointCompleted);
-		
-		group.GetOnAgentRemoved().Insert(OnAgentRemoved);
+		// group.GetOnAgentRemoved().Insert(OnAgentRemoved);
 		
 		return watchers;
 	}
 	
-	void AddWaypoint(SCR_AIGroup group, vector origin)
+	void AddAllWaypoints(SCR_AIGroup group, vector origin)
+	{
+		array<AIWaypoint> queueOfWaypoints = new array<AIWaypoint>();
+		
+		for (int i = 0; i < Math.RandomInt(2, 5); i++)
+		{
+			AIWaypoint wp = AddWaypoint(group, origin);
+			
+			if (! wp) continue;
+			
+			queueOfWaypoints.Insert(wp);
+		}
+		
+		if (queueOfWaypoints.IsEmpty())
+		{
+			Print("AI waypoints were empty", LogLevel.ERROR);
+			
+			return;
+		}
+		
+		AddCycleWaypoint(group, queueOfWaypoints.Get(0).GetOrigin(), queueOfWaypoints);
+	}
+	
+	AIWaypoint AddWaypoint(SCR_AIGroup group, vector origin)
 	{
 		EntitySpawnParams wpParams = EntitySpawnParams();
 		wpParams.TransformMode = ETransformMode.WORLD;
 		wpParams.Transform[3] = GetWaypointOrigin(origin);
 		
-		SCR_AIWaypoint wp = SCR_AIWaypoint.Cast(GetGame().SpawnEntityPrefabLocal(Resource.Load(m_WaypointPrefab), GetGame().GetWorld(), wpParams));
+		AIWaypoint wp = AIWaypoint.Cast(GetGame().SpawnEntityPrefab(Resource.Load(m_WaypointPrefab), GetGame().GetWorld(), wpParams));
 		
-		if (!wp) return;
+		if (!wp) return null;
 		
 		group.AddWaypoint(wp);
+		
+		return wp;
 	}
 	
-	void OnWaypointCompleted(AIWaypoint wp)
+	void AddCycleWaypoint(SCR_AIGroup group, vector origin, array<AIWaypoint> queueOfWaypoints)
 	{
-		IEntity ent = wp.GetParent();
+		EntitySpawnParams wpParams = new EntitySpawnParams();
+		wpParams.TransformMode = ETransformMode.WORLD;
+		wpParams.Transform[3] = origin;
+	
+		Resource res = Resource.Load("{35BD6541CBB8AC08}Prefabs/AI/Waypoints/AIWaypoint_Cycle.et");
 		
-		if (ent)
-		{
-			SCR_AIGroup group = SCR_AIGroup.Cast(ent);
-			
-			if (group)
-			{
-				Print("WP parent is group");
-			}
-			
-			AIAgent agent = AIAgent.Cast(ent);
-			
-			if (agent)
-			{
-				Print("WP parent is agent");
-			}
-		}
+		AIWaypointCycle wp = AIWaypointCycle.Cast(GetGame().SpawnEntityPrefab(res, null, wpParams));
+		
+		wp.SetWaypoints(queueOfWaypoints);
+		wp.SetRerunCounter(-1);
+		
+		group.AddWaypoint(wp);
+		
+		Print("Added cycle waypoint to group");
 	}
 	
 	void OnAgentRemoved(AIGroup group, AIAgent agent)
@@ -121,6 +140,8 @@ class Z_ScavTaskPatrol : Z_ScavTaskBase
 		if (!ent) return;
 		
 		if (! GetGame().InPlayMode()) return;
+		
+		if (ent.IsDeleted()) return;
 		
 		Z_ScavEncounter.Create(ent.GetOrigin(), Z_ScavEncounterImportance.High);
 		
@@ -203,6 +224,6 @@ class Z_ScavTaskPatrol : Z_ScavTaskBase
 	protected vector GetWaypointOrigin(vector from)
 	{
 		RandomGenerator gen();
-		return gen.GenerateRandomPointInRadius(50, 100, from);
+		return gen.GenerateRandomPointInRadius(5, 50, from);
 	}
 };

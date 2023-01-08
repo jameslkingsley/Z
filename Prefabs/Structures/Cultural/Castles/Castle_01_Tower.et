@@ -1,0 +1,79 @@
+SCR_DestructibleBuildingEntity : "{A43A100E3C377DB2}Prefabs/Structures/Core/Building_Base.et" {
+ ID "F0DBA538AC2A0552"
+ {
+  Z_LootVolumeEntity : "{17C64882547D5C48}Prefabs/Loot/Z_LootVolume_Barn.et" {
+   ID "5C4F308BEE5EA6A2"
+   coords 0 0 0
+  }
+  $grp Z_LootContainerEntity : "{EBE9660A3A74C747}Prefabs/Loot/Z_LootContainer_Base.et" {
+   {
+    ID "5C4F308BEE5EA6A9"
+    coords 2.659 33.04 -2.385
+   }
+   {
+    ID "5C4F308BEE5EA6C3"
+    coords 7.486 12.74 -2.987
+   }
+   {
+    ID "5C4F308BEE5EA6C9"
+    coords 7.473 12.76 -8.857
+   }
+   {
+    ID "5C4F308BEE5EA6CF"
+    coords -1.384 12.789 5.705
+   }
+   {
+    ID "5C4F308BEE5EA6E0"
+    coords -2.656 17.795 2.92
+   }
+   {
+    ID "5C4F308BEE5EA6EA"
+    coords 2.592 12.816 -2.301
+   }
+   {
+    ID "5C4F308BEE5EA6F4"
+    coords -0.167 12.816 -2.072
+   }
+   {
+    ID "5C4F308BEE5EA6FB"
+    coords 7.506 12.793 4.372
+   }
+   {
+    ID "5C4F308BEE5EA702"
+    coords 0.047 22.662 2.12
+   }
+   {
+    ID "5C4F308BEE5EA70E"
+    coords 3.093 22.661 1.955
+   }
+   {
+    ID "5C4F308BEE5EA717"
+    coords -2.293 17.806 0.088
+   }
+   {
+    ID "5C4F308BEE5EA722"
+    coords 3.246 33.04 2.313
+   }
+   {
+    ID "5C4F308BEE5EA72D"
+    coords -2.297 27.548 -2.18
+   }
+   {
+    ID "5C4F308BEE5EA736"
+    coords 0.312 27.553 -0.002
+   }
+   {
+    ID "5C4F308BEE5EA74C"
+    coords 0.012 33.018 -0.844
+   }
+   {
+    ID "5C4F308BEE5EA759"
+    coords -3.012 33.04 2.688
+   }
+   {
+    ID "5C4F308BEE5EA773"
+    coords -2.661 33.04 -2.491
+   }
+  }
+ }
+}

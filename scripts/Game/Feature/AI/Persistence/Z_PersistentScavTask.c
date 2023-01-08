@@ -12,6 +12,8 @@ class Z_PersistentScavTask : EL_PersistentScriptedStateBase
 	string m_Task;
 	vector m_Origin;
 	ref array<ref Z_ScavTaskEntityStub> m_EntityStubs;
+	bool m_DespawnOnNextUpdate;
+	bool m_HasSpawned;
 	
 	static Z_PersistentScavTask Create(Z_ScavTaskBase task, vector origin)
 	{
@@ -20,8 +22,30 @@ class Z_PersistentScavTask : EL_PersistentScriptedStateBase
 		instance.m_Task = Z_ScavTask.Get(task.Type());
 		instance.m_Origin = origin;
 		instance.m_EntityStubs = task.GetEntityStubs(instance);
+		instance.m_DespawnOnNextUpdate = false;
+		instance.m_HasSpawned = false;
 		
 		return instance;
+	}
+	
+	vector GetOrigin()
+	{
+		return m_Origin;
+	}
+	
+	string GetTaskType()
+	{
+		return m_Task;
+	}
+	
+	bool HasSpawned()
+	{
+		return m_HasSpawned;
+	}
+	
+	void DespawnOnNextUpdate(bool state = true)
+	{
+		m_DespawnOnNextUpdate = state;
 	}
 	
 	void Spawn(IEntity region)
@@ -33,6 +57,8 @@ class Z_PersistentScavTask : EL_PersistentScriptedStateBase
 		Z_ScavTaskBase task = regionComponent.GetAllowedTaskByType(taskType);
 		
 		ref map<IEntity, ref Z_ScavTaskEntityStub> entities = task.SpawnEntityStubs(m_Origin, m_EntityStubs);
+		
+		m_HasSpawned = true;
 		
 		Save();
 		
@@ -53,16 +79,34 @@ class Z_PersistentScavTask : EL_PersistentScriptedStateBase
 		
 		m_EntityStubs = task.UpdateEntityStubs(entities);
 		
-		if (! m_EntityStubs.IsEmpty()) return;
+		if (m_EntityStubs.IsEmpty())
+		{
+			GetGame().GetCallqueue().Remove(Watch);
 		
-		GetGame().GetCallqueue().Remove(Watch);
+			if (! region) return;
+			
+			string persistentId = GetPersistentId();
+			
+			Delete();
+			
+			GetGame().GetCallqueue().CallByName(regionComponent, "UnregisterTask", persistentId);
+			
+			return;
+		}
 		
-		if (! region) return;
-		
-		string persistentId = GetPersistentId();
-		
-		Delete();
-		
-		GetGame().GetCallqueue().CallByName(regionComponent, "UnregisterTask", persistentId);
+		if (m_DespawnOnNextUpdate)
+		{
+			Save();
+			
+			foreach (IEntity ent, ref Z_ScavTaskEntityStub entityStub : entities)
+			{
+				RplComponent.DeleteRplEntity(ent, false);
+			}
+			
+			GetGame().GetCallqueue().Remove(Watch);
+			
+			m_DespawnOnNextUpdate = false;
+			m_HasSpawned = false;
+		}
 	}
 }

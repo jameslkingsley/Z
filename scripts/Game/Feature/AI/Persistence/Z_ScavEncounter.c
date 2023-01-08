@@ -5,6 +5,13 @@ enum Z_ScavEncounterImportance
 	High = 13
 }
 
+enum Z_ScavEncounterExpiryTime
+{
+	Low = 12,
+	Medium = 48,
+	High = 168
+}
+
 // Iterate over grid positions of map and for each cell lookup the encounters matching grid
 // Iteration starts with mins of world bounds and increments Z until at maxs[2] 
 // Then Increments X until at maxs[0]
@@ -35,6 +42,7 @@ class Z_ScavEncounterSaveData : EL_ScriptedStateSaveDataBase
     string cell;
 	vector origin;
 	Z_ScavEncounterImportance importance;
+	int createdAtInHours;
 }
 
 [EL_PersistentScriptedStateSettings(Z_ScavEncounter, Z_ScavEncounterSaveData, autoSave: false, shutDownSave: false, selfDelete: false)]
@@ -43,6 +51,7 @@ class Z_ScavEncounter : EL_PersistentScriptedStateBase
 	string cell;
 	vector origin;
 	Z_ScavEncounterImportance importance;
+	int createdAtInHours;
 	
 	static Z_ScavEncounter Create(vector o, Z_ScavEncounterImportance i)
 	{
@@ -51,12 +60,34 @@ class Z_ScavEncounter : EL_PersistentScriptedStateBase
 		instance.cell = SCR_MapEntity.GetGridPos(o);
 		instance.origin = o;
 		instance.importance = i;
+		instance.createdAtInHours = Z_Core.GetCurrentTimestampInHours();
 		
 		instance.Save();
 		
 		return instance;
 	}
 	
+	bool HasExpired()
+	{
+		int current = Z_Core.GetCurrentTimestampInHours();
+		
+		int diff = current - createdAtInHours;
+		
+		int stalenessAgeInHours = GetExpiryTime();
+		
+		if (stalenessAgeInHours == -1) return false;
+		
+		return diff >= stalenessAgeInHours;
+	}
+	
+	int GetExpiryTime()
+	{
+		if (importance == Z_ScavEncounterImportance.Low) return Z_ScavEncounterExpiryTime.Low;
+		if (importance == Z_ScavEncounterImportance.Medium) return Z_ScavEncounterExpiryTime.Medium;
+		if (importance == Z_ScavEncounterImportance.High) return Z_ScavEncounterExpiryTime.High;
+		return -1;
+	}
+		
 	int CalculateHeat()
 	{
 		return importance;

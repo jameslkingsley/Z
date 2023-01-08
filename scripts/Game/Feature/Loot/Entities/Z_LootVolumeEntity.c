@@ -41,7 +41,7 @@ class Z_LootVolumeEntity: GenericEntity
 		
 		if (m_Categories.IsEmpty() || m_Locations.IsEmpty())
 		{
-			Print("Loot volume has no configured categories or locations", LogLevel.ERROR);
+			Log("Loot volume has no configured categories or locations", LogLevel.ERROR);
 			
 			m_IsSetup = true;
 			m_IsIgnored = true;
@@ -52,7 +52,7 @@ class Z_LootVolumeEntity: GenericEntity
 		CacheLootContainers();
 		
 		if (m_Containers)
-			Print("Cached loot containers: " + m_Containers.Count());
+			Log("Cached loot containers: " + m_Containers.Count());
 		
 		m_IsSetup = true;
 	}
@@ -63,7 +63,7 @@ class Z_LootVolumeEntity: GenericEntity
 		
 		if (! parent)
 		{
-			Print("No parent for volume", LogLevel.ERROR);
+			Log("No parent for volume", LogLevel.ERROR);
 			
 			m_IsIgnored = true;
 			
@@ -308,7 +308,7 @@ class Z_LootVolumeEntity: GenericEntity
 	{
 		if (! lootables)
 		{
-			Print("No lootables (null), returning all containers", LogLevel.WARNING);
+			Log("No lootables (null), returning all containers", LogLevel.WARNING);
 			
 			return m_Containers;
 		}

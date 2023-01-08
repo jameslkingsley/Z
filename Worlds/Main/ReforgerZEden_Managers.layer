@@ -1,0 +1,27 @@
+SCR_AIWorld : "{AFEEBEE81C34CD9C}Prefabs/MP/Modes/Z_AIWorld.et" {
+ components {
+  SCR_AISettingsComponent "{512CCCD0856CB4B9}" {
+  }
+ }
+}
+SCR_FactionManager Z_FactionManager1 : "{0A7D6E9CB503C82B}Prefabs/MP/Modes/Z_FactionManager.et" {
+}
+EL_GameModeRoleplay GameMode_Survival_Full1 : "{AEBB6248A13EDE3D}Prefabs/MP/Modes/GameMode_Survival_Full.et" {
+ components {
+  Z_LootGameModeComponent "{5B3B1D91A44EE9B8}" {
+  }
+  Z_ScavGameModeComponent "{5C44B0A84C473AE1}" {
+  }
+ }
+}
+PerceptionManager Z_PerceptionManager1 : "{E2E47F72122DA208}Prefabs/MP/Modes/Z_PerceptionManager.et" {
+}
+SCR_GarbageManager : "{335D390C413531EE}Prefabs/MP/Modes/Z_GarbageManager.et" {
+}
+SCR_LoadoutManager : "{418EB83B1CC187BF}Prefabs/MP/Modes/Z_LoadoutManager.et" {
+}
+HitRegistrationManager Z_HitregManager1 : "{F0E427921CA5CF11}Prefabs/MP/Modes/Z_HitregManager.et" {
+}
+EL_SpawnPoint : "{F380E0551C8682AF}Prefabs/MP/PlayerSpawn_01.et" {
+ coords 9968.761 2.532 1551.273
+}

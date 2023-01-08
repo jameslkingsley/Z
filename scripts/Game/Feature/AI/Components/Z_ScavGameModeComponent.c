@@ -7,6 +7,21 @@ class Z_ScavGameModeComponent: SCR_BaseGameModeComponent
 	[Attribute("{19994566F9D13227}Config/Z_ScavConfig.conf", UIWidgets.ResourceNamePicker, "Scav config")]
 	ResourceName m_ScavConfig;
 	
+	[Attribute("30", UIWidgets.Auto, "Minutes between heat map updates")]
+	int m_HeatMapGenerationInterval;
+	
+	[Attribute("10", UIWidgets.Auto, "Interval in seconds for when nearby scav tasks are spawned")]
+	int m_ScavTaskIntervalInSeconds;
+	
+	[Attribute("2500", UIWidgets.Auto, "Player distance to scav tasks before spawning")]
+	int m_ScavTaskSpawningDistance;
+	
+	[Attribute("10", UIWidgets.Auto, "Impact on attrition when player is killed inside region")]
+	int m_PlayerDeathAttritionImpact;
+	
+	[Attribute("-10", UIWidgets.Auto, "Impact on attrition when scav is killed inside region")]
+	int m_ScavDeathAttritionImpact;
+	
 	ref array<Z_ScavRegionComponent> m_ScavRegions = {};
 	
 	ref Z_ScavConfig m_ScavConfigCache;
@@ -41,6 +56,8 @@ class Z_ScavGameModeComponent: SCR_BaseGameModeComponent
 	{
 		if (! Replication.IsServer() || ! GetGame().InPlayMode()) return;
 		
+		GetGame().GetCallqueue().CallLater(ManageTasks, m_ScavTaskIntervalInSeconds * 1000, true);
+		
 		if (! Z_Core.GetInstance().HasSeededScavEncounters())
 		{
 			GetGame().GetCallqueue().CallLater(FinishSeedingScavEncounters, 5000);
@@ -53,10 +70,77 @@ class Z_ScavGameModeComponent: SCR_BaseGameModeComponent
 			GetGame().GetCallqueue().CallLater(InitializeTasks, 2000);
 		}
 		
-		GetGame().GetCallqueue().CallLater(InitializeHeatMap, 1800 * 1000);
-		GetGame().GetCallqueue().CallLater(InitializeTasks, 1810 * 1000);
+		// Possibly just do this on server restarts?
+		GetGame().GetCallqueue().CallLater(InitializeHeatMap, m_HeatMapGenerationInterval * 60 * 1000);
+		GetGame().GetCallqueue().CallLater(InitializeTasks, ((m_HeatMapGenerationInterval * 60) + 10) * 1000);
 		
 		Print("---- ReforgerZ Scav OnWorldPostProcess Complete ----");
+	}
+	
+	void ManageTasks()
+	{
+		foreach (Z_ScavRegionComponent region : GetScavRegions())
+		{
+			foreach (string gridCell, Z_PersistentScavTask task : region.GetTasks())
+			{
+				if (IsPlayerNear(task.GetOrigin(), m_ScavTaskSpawningDistance))
+				{
+					if (! task.HasSpawned())
+					{
+						task.Spawn(region.GetOwner());
+						Print("Spawning task (player near)");
+					}
+				}
+				else
+				{
+					if (task.HasSpawned())
+					{
+						task.DespawnOnNextUpdate(true);
+						Print("Despawning task (player not near)");
+					}
+				}
+			}
+		}
+	}
+	
+	bool IsPlayerNear(vector pos, float distance)
+	{
+		array<int> players();
+		GetGame().GetPlayerManager().GetPlayers(players);
+		
+		if (! players) return false;
+		
+		foreach (int playerId : players)
+		{
+			IEntity playerEnt = GetGame().GetPlayerManager().GetPlayerControlledEntity(playerId);
+			
+			if (! playerEnt) continue;
+			
+			if (vector.Distance(playerEnt.GetOrigin(), pos) <= distance)
+			{
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	override void OnControllableDestroyed(IEntity entity, IEntity instigator)
+	{
+		if (! Replication.IsServer() || ! GetGame().InPlayMode()) return;
+		
+		if (EntityUtils.IsPlayer(entity)) return;
+		
+		Z_ScavEncounter.Create(entity.GetOrigin(), Z_ScavEncounterImportance.High);
+		
+		Z_ScavRegionComponent region = GetScavRegionThatSurroundsOrigin(entity.GetOrigin());
+		
+		if (region)
+		{
+			region.ImpactAttrition(m_ScavDeathAttritionImpact);
+		}
+		
+		Print("Scav died, creating encounter: " + entity.GetOrigin());
 	}
 	
 	override void OnPlayerKilled(int playerId, IEntity player, IEntity killer)
@@ -64,6 +148,13 @@ class Z_ScavGameModeComponent: SCR_BaseGameModeComponent
 		if (! Replication.IsServer() || ! GetGame().InPlayMode()) return;
 		
 		Z_ScavEncounter.Create(player.GetOrigin(), Z_ScavEncounterImportance.Medium);
+		
+		Z_ScavRegionComponent region = GetScavRegionThatSurroundsOrigin(player.GetOrigin());
+		
+		if (region)
+		{
+			region.ImpactAttrition(m_PlayerDeathAttritionImpact);
+		}
 		
 		Print("Player died, creating encounter: " + player.GetOrigin());
 	}

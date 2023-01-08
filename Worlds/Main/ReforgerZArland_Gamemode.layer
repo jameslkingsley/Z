@@ -16,7 +16,6 @@ EL_GameModeRoleplay GameMode_Survival : "{E87F79D982AFE933}Prefabs/MP/Modes/Role
    Enabled 0
   }
   Z_LootGameModeComponent "{5B3B1D91A44EE9B8}" {
-   m_LootVolumeCollectionIntervalInSeconds 2
    m_LootVolumeCooldownInSeconds 1800
   }
   Z_LootRegionComponent "{5B3B1D91BA5A1071}" {
@@ -38,6 +37,7 @@ EL_GameModeRoleplay GameMode_Survival : "{E87F79D982AFE933}Prefabs/MP/Modes/Role
      m_SpawnRangeUpper 2
     }
    }
+   m_MinimumContainerUsePercentage 1
   }
   Z_ScavGameModeComponent "{5C44B0A84C473AE1}" {
   }

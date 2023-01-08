@@ -1,0 +1,67 @@
+$grp Z_ScavSeederEntity : "{007B9B7E452946B2}Prefabs/AI/Z_ScavSeeder_Base.et" {
+ {
+  coords 9732.814 10.822 1580.465
+  m_Radius 750
+  m_Importance High
+ }
+ {
+  coords 9260.32 57.691 2068.085
+  m_Importance High
+ }
+ {
+  coords 8812.787 95.017 2762.596
+  m_Importance Medium
+ }
+ {
+  coords 7514.477 166.061 4279.113
+  m_Importance High
+ }
+ {
+  coords 7474.812 138.284 4722.125
+ }
+ {
+  coords 7575.6 83.422 5532.14
+ }
+ {
+  coords 7086.258 136.915 6008.624
+ }
+ {
+  coords 7471.895 7.262 6731.607
+  m_Importance Medium
+ }
+ {
+  coords 5757.452 217.675 7077.969
+ }
+ {
+  coords 4824.799 177.3 7040.031
+  m_NumberOfEncounters 150
+  m_Radius 1000
+  m_Importance High
+ }
+ {
+  coords 5105.021 19.029 3984.903
+ }
+ {
+  coords 5256.207 63.927 5330.423
+ }
+ {
+  coords 4492.625 10.964 10803.369
+  m_Importance High
+ }
+ {
+  coords 4908.208 28.594 11848.625
+  m_Importance High
+ }
+ {
+  coords 4639.208 27.845 11173.261
+  m_Importance Medium
+ }
+ {
+  coords 7665.582 13.18 8146.203
+  m_Importance High
+ }
+ {
+  coords 7459.031 7.877 6730.914
+  m_Importance High
+ }
+}

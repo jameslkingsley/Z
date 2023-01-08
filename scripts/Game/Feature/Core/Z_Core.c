@@ -14,6 +14,21 @@ class Z_Core : EL_PersistentScriptedStateBase
 		return EL_PersistentScriptedStateLoader<Z_Core>.LoadSingleton();
 	}
 	
+	static int GetCurrentTimestampInHours()
+	{
+		int epochYear = 2021;
+		int year, month, day, hour, minute, second;
+		
+		System.GetYearMonthDayUTC(year, month, day);
+		System.GetHourMinuteSecondUTC(hour, minute, second);
+		
+		year = (year - epochYear) * 8760;
+		month = month * 730;
+		day = day * 24;
+		
+		return year + month + day + hour;
+	}
+	
 	bool HasSeededScavEncounters()
 	{
 		return m_HasSeededScavEncounters;

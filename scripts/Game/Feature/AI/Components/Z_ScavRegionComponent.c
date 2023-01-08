@@ -10,8 +10,13 @@ class Z_ScavRegionComponent : ScriptComponent
 	[Attribute("1000", UIWidgets.Auto, "Starting attrition for this region")]
 	int m_StartingAttrition;
 	
-	[Attribute("10", UIWidgets.Auto, "Attrition gained per hour (baseline)")]
+	[Attribute("1000", UIWidgets.Auto, "Maximum attrition for this region (gains won't stack)")]
+	int m_MaximumAttrition;
+	
+	[Attribute("1", UIWidgets.Auto, "Attrition gained per minute (baseline)")]
 	int m_BaseAttritionGain;
+	
+	// TODO Attrition gain modifiers (such as player destroying convoy = attrition deboost)
 	
 	[Attribute("", UIWidgets.Auto, "List of allowed tasks within this region")]
 	ref array<ref Z_ScavTaskBase> m_AllowedTasks;
@@ -56,7 +61,46 @@ class Z_ScavRegionComponent : ScriptComponent
 			gameMode.RegisterScavRegion(this);
 			
 			GetGame().GetCallqueue().CallLater(LoadTasksAsync, 500);
+			
+			GetGame().GetCallqueue().CallLater(AccrueAttrition, 60000, true);
 		}
+	}
+	
+	void ImpactAttrition(int impact)
+	{
+		int newAttrition = m_Attrition + impact;
+		
+		if (newAttrition >= m_MaximumAttrition)
+		{
+			Print(string.Format("Region %1 has reached maximum attrition of %2", GetOwner().GetName(), m_MaximumAttrition));
+			
+			return;
+		}
+		
+		Print(string.Format("Region %1 gained %2 attrition (from external force), total is now %3", GetOwner().GetName(), impact, newAttrition));
+		
+		m_Attrition = newAttrition;
+	}
+	
+	void AccrueAttrition()
+	{
+		int newAttrition = m_Attrition + m_BaseAttritionGain;
+		
+		if (newAttrition >= m_MaximumAttrition)
+		{
+			Print(string.Format("Region %1 has reached maximum attrition of %2", GetOwner().GetName(), m_MaximumAttrition));
+			
+			return;
+		}
+		
+		Print(string.Format("Region %1 gained %2 attrition, total is now %3", GetOwner().GetName(), m_BaseAttritionGain, newAttrition));
+		
+		m_Attrition = newAttrition;
+	}
+	
+	ref map<string, ref Z_PersistentScavTask> GetTasks()
+	{
+		return m_Tasks;
 	}
 	
 	void InitializeTasks(string cell, vector origin)
@@ -93,6 +137,8 @@ class Z_ScavRegionComponent : ScriptComponent
 		if (! affordableTasks.IsIndexValid(index))
 		{
 			Print(string.Format("Chosen task has invalid index: %1 / %2", index, affordableTasks.Count()), LogLevel.ERROR);
+			
+			return;
 		}
 		
 		ref Z_ScavTaskBase task = affordableTasks.Get(index);
@@ -105,7 +151,7 @@ class Z_ScavRegionComponent : ScriptComponent
 		
 		Z_PersistentScavTask persistentTask = Z_PersistentScavTask.Create(task, finalPos);
 		
-		persistentTask.Spawn(GetOwner());
+		persistentTask.Save();
 		
 		RegisterTask(persistentTask);
 		
@@ -187,8 +233,6 @@ class Z_ScavRegionComponent : ScriptComponent
 		
 		foreach (ref Z_PersistentScavTask task : tasks)
 		{
-			task.Spawn(GetOwner());
-			
 			RegisterTask(task);
 		}
 		

@@ -1,0 +1,18 @@
+SCR_AIWorld : "{E0A05C76552E7F58}Prefabs/AI/SCR_AIWorld.et" {
+ ID "50B2B8F35661FB44"
+ components {
+  NavmeshWorldComponent "{5584F30E67F617AD}" {
+   NavmeshSettings NavmeshWorld "{50FC63BEBE3973C5}" {
+    NavmeshFilesConfig BaseNavmeshFilesConfig "{5C4952AFE9D78C12}" {
+     NavmeshFile "{E0E9D55644237D27}worlds/MP/Navmeshes/CTI_Campaign_Arland.nmn"
+    }
+   }
+  }
+  SCR_AISettingsComponent "{512CCCD0856CB4B9}" {
+   m_EnableVisualization 0
+   m_AimingAccuracyModifier -3
+   m_SniperSkill REGULAR
+  }
+ }
+ coords 0 0 0
+}

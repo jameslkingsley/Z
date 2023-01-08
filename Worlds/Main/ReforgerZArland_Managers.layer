@@ -8,5 +8,11 @@ SCR_FactionManager FactionManager_USxUSSR1 : "{589540B35EBA8CDC}Prefabs/MP/Manag
  }
  m_bCanChangeFactionsPlayable 0
 }
+SCR_GarbageManager : "{9B883A7D8EBB282A}Prefabs/MP/Managers/GarbageManager.et" {
+ CharacterLifetime 3600
+ VehicleLifetime 3600
+ ItemLifetime 3600
+ m_bOnlyDestroyed 1
+}
 SCR_LoadoutManager : "{AA4E7419A1FF65B0}Prefabs/MP/Managers/Loadouts/LoadoutManager_Base.et" {
 }

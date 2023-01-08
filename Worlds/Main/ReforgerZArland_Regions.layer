@@ -36,6 +36,8 @@ $grp PolylineArea {
     m_StartingAttrition 500
     m_AllowedTasks {
      Z_ScavTaskPatrol "{5C4D186BB099B12E}" {
+      m_GroupSizeMin 1
+      m_GroupSizeMax 4
      }
     }
    }
@@ -126,9 +128,12 @@ $grp PolylineArea {
    }
    Z_ScavRegionComponent "{5C44B0A6E39E8D43}" {
     m_Difficulty Insane
+    m_StartingAttrition 2000
     m_AllowedTasks {
      Z_ScavTaskPatrol "{5C4938B5E669BDD2}" {
       m_Faction Raiders
+      m_GroupSizeMin 1
+      m_GroupSizeMax 4
      }
     }
    }
@@ -369,9 +374,11 @@ $grp PolylineArea {
     }
    }
    Z_ScavRegionComponent "{5C4D186B800D66EB}" {
-    m_StartingAttrition 300
+    m_StartingAttrition 500
     m_AllowedTasks {
      Z_ScavTaskPatrol "{5C4D186B964E10A1}" {
+      m_GroupSizeMin 1
+      m_GroupSizeMax 3
      }
     }
    }
@@ -433,6 +440,7 @@ $grp PolylineArea {
     }
    }
    Z_ScavRegionComponent "{5C4D186B386424BC}" {
+    m_StartingAttrition 2000
     m_AllowedTasks {
      Z_ScavTaskPatrol "{5C4D186B3418C1CE}" {
       m_GroupSizeMin 1

@@ -89,6 +89,15 @@ class Z_ScavEncounterCallback : EL_ScriptedStateLoaderCallbackMultiple<Z_ScavEnc
 	{
 		foreach (ref Z_ScavEncounter encounter : data)
 		{
+			if (encounter.HasExpired())
+			{
+				encounter.Delete();
+				
+				Print("Scav encounter expired, deleted");
+				
+				continue;
+			}
+			
 			int heat = 0;
 		
 			if (Z_HeatMap.m_HeatMap.Contains(encounter.cell))

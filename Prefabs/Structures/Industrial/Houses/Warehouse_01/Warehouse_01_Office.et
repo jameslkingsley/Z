@@ -1,0 +1,99 @@
+SCR_DestructibleBuildingEntity : "{E35EA41864A3B0ED}Prefabs/Structures/Industrial/Houses/Warehouse_01/Warehouse_01_Base.et" {
+ ID "51DEB81BB396EA93"
+ {
+  Z_LootVolumeEntity : "{356BE4AAF76476CD}Prefabs/Loot/Z_LootVolume_MilitaryBunker.et" {
+   ID "5C50CE8ACC39423A"
+   coords 0 0 0
+  }
+  $grp Z_LootContainerEntity : "{EBE9660A3A74C747}Prefabs/Loot/Z_LootContainer_Base.et" {
+   {
+    ID "5C500222E22BE626"
+    coords -1.618 1.986 -0.158
+   }
+   {
+    ID "5C500222E22BE62D"
+    coords -19.14 1.038 0.959
+   }
+   {
+    ID "5C500222E22BE647"
+    coords -3.383 0.435 2.945
+   }
+   {
+    ID "5C500222E22BE64E"
+    coords -3.353 1.635 2.94
+   }
+   {
+    ID "5C500222E22BE653"
+    coords -3.544 0.05 6.17
+   }
+   {
+    ID "5C500222E22BE65A"
+    coords 1.765 1.039 2.656
+   }
+   {
+    ID "5C500222E22BE664"
+    coords -3.305 1.635 -6.031
+   }
+   {
+    ID "5C500222E22BE66B"
+    coords -3.278 0.434 -6.007
+   }
+   {
+    ID "5C500222E22BE671"
+    coords -3.245 1.635 -3.219
+   }
+   {
+    ID "5C500222E22BE677"
+    coords -5.577 1.635 -3.131
+   }
+   {
+    ID "5C500222E22BE67D"
+    coords -5.433 1.635 -0.256
+   }
+   {
+    ID "5C500222E22BE686"
+    coords -7.239 0.434 -6.081
+   }
+   {
+    ID "5C500222E22BE68D"
+    coords -7.265 1.635 -6.061
+   }
+   {
+    ID "5C500222E22BE694"
+    coords -9.251 1.635 -6.104
+   }
+   {
+    ID "5C500222E22BE69C"
+    coords -5.235 1.635 -6.007
+   }
+   {
+    ID "5C500222E22BE6A0"
+    coords -9.381 0.435 -0.212
+   }
+   {
+    ID "5C500222E22BE6B3"
+    coords -9.34 1.635 -0.218
+   }
+   {
+    ID "5C500222E22BE6BE"
+    coords -7.298 0.434 -3.284
+   }
+   {
+    ID "5C500222E22BE6C0"
+    coords -9.469 1.635 2.931
+   }
+   {
+    ID "5C500222E22BE6CB"
+    coords -9.517 1.635 5.751
+   }
+   {
+    ID "5C500222E22BE6D5"
+    coords -7.501 0.434 5.73
+   }
+   {
+    ID "5C500222E22BE71F"
+    coords -9.701 0.434 2.838
+   }
+  }
+ }
+}

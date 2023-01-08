@@ -111,18 +111,60 @@ class Z_LootGameModeComponent: SCR_BaseGameModeComponent
 	
 	Z_LootRegionComponent GetLootRegionThatSurroundsEntity(IEntity ent)
 	{
+		Tuple2<Z_LootRegionComponent, float> current(null, -1);
+		
 		foreach (Z_LootRegionComponent region : m_LootRegions)
 		{
 			PolylineArea area = region.GetPolylineArea();
 			
-			if (! area)
-				continue;
+			if (! area) continue;
 			
-			if (region.GetPolylineArea().IsEntityInside(ent))
-				return region;
+			if (! region.GetPolylineArea().IsEntityInside(ent)) continue;
+			
+			float dist = GetDistanceToClosestPolylineAreaPoint(area, ent.GetOrigin());
+			
+			if (dist == -1) continue;
+			
+			if (current.param2 == -1 || dist < current.param2)
+			{
+				current.param1 = region;
+				current.param2 = dist;
+			}
 		}
 		
-		return null;
+		return current.param1;
+	}
+	
+	float GetDistanceToClosestPolylineAreaPoint(PolylineArea area, vector origin)
+	{
+		PolylineShapeEntity shape = PolylineShapeEntity.Cast(area.GetChildren());
+		
+		if (! shape)
+		{
+			Print(string.Format("PolylineArea %1 does not contain a PolylineShapeEntity", area.GetName()), LogLevel.ERROR);
+			
+			return -1;
+		}
+		
+		array<vector> points();
+		shape.GetPointsPositions(points);
+		
+		
+		float closest = -1;
+		
+		foreach (vector point : points)
+		{
+			vector pointInWorld = shape.CoordToParent(point);
+			
+			float dist = vector.DistanceXZ(origin, pointInWorld);
+			
+			if (closest == -1 || dist < closest)
+			{
+				closest = dist;
+			}
+		}
+		
+		return closest;
 	}
 	
 	void CollectLootVolumes()

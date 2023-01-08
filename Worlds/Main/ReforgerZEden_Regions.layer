@@ -1,0 +1,941 @@
+$grp PolylineArea {
+ SouthRegion {
+  components {
+   EL_PersistenceComponent "{5C500224E3318EA0}" {
+    m_pSaveData Z_RegionSaveData "{5C500224FCC9B3C4}" {
+     m_aComponents {
+      Z_ScavRegionComponentSaveData "{5C500224FA547A48}" {
+      }
+     }
+    }
+   }
+   Z_LootRegionComponent "{5C500224FE91F070}" {
+    m_LootRegionTiers {
+     Z_LootRegionTier "{5C500224F6CF0CC4}" {
+      m_LootTier Tier1
+      m_ProbabilityMin 0.28
+      m_ProbabilityMax 0.5
+      m_SpawnRangeLower 3
+      m_SpawnRangeUpper 8
+     }
+     Z_LootRegionTier "{5C500224F6D53CCA}" {
+      m_LootTier Tier2
+      m_ProbabilityMin 0.18
+      m_ProbabilityMax 0.28
+      m_SpawnRangeLower 2
+      m_SpawnRangeUpper 6
+     }
+     Z_LootRegionTier "{5C500224F7389546}" {
+      m_LootTier Tier3
+      m_ProbabilityMin 0.06
+      m_ProbabilityMax 0.18
+      m_SpawnRangeLower 1
+      m_SpawnRangeUpper 4
+     }
+    }
+   }
+   Z_ScavRegionComponent "{5C500224E111EEB3}" {
+    m_Difficulty High
+    m_StartingAttrition 5000
+    m_AllowedTasks {
+     Z_ScavTaskPatrol "{5C5002242D122AF2}" {
+      m_Faction Raiders
+      m_GroupSizeMin 1
+     }
+    }
+   }
+   RplComponent "{5C500224E5718459}" {
+   }
+  }
+  coords 6636.506 -1.366 4432.014
+  {
+   PolylineShapeEntity {
+    components {
+     Hierarchy "{5C500221F7E4DDA7}" {
+     }
+    }
+    coords 0 0 0
+    Points {
+     ShapePoint "{5C500221C19F8FA0}" {
+      Position 0 -0.001 0
+     }
+     ShapePoint "{5C500221C19F8CC4}" {
+      Position 5 0.046 0
+     }
+     ShapePoint "{5C500221DEC7259A}" {
+      Position 46.856 55.429 384.622
+     }
+     ShapePoint "{5C500221DAB42C2A}" {
+      Position 401.653 107.999 618.831
+     }
+     ShapePoint "{5C500221D80A7590}" {
+      Position 865.284 106.3 837.39
+     }
+     ShapePoint "{5C500221D9C169C4}" {
+      Position 1668.207 -2.588 1192.136
+     }
+     ShapePoint "{5C500221D7D2DB62}" {
+      Position 2724.308 -20.02 1617.089
+     }
+     ShapePoint "{5C500221D28A0910}" {
+      Position 3309.253 -26.886 1210.287
+     }
+     ShapePoint "{5C500221D02D94A7}" {
+      Position 3791.356 -39.675 206.771
+     }
+     ShapePoint "{5C500221D15398EC}" {
+      Position 3995.572 -13.703 -953.478
+     }
+     ShapePoint "{5C500221EEC8AB6E}" {
+      Position 4870.461 -8.668 -1435.695
+     }
+     ShapePoint "{5C500221EFB7E170}" {
+      Position 5384.507 -48.927 -2005.257
+     }
+     ShapePoint "{5C500221ECD2629B}" {
+      Position 5840.873 -61.694 -2719.13
+     }
+     ShapePoint "{5C500221EDD57B0B}" {
+      Position 5360.221 -47.118 -3443.404
+     }
+     ShapePoint "{5C500221E9D3DCC4}" {
+      Position 3912.995 -67.324 -4409.86
+     }
+     ShapePoint "{5C500221E7C9ABF1}" {
+      Position 2591.192 -60.008 -4385.957
+     }
+     ShapePoint "{5C500221E5573FE7}" {
+      Position 1657.312 -47.922 -3876.696
+     }
+     ShapePoint "{5C500221E2F1EFF2}" {
+      Position 689.044 -27.383 -3497.132
+     }
+     ShapePoint "{5C500221E0027883}" {
+      Position -493.494 -12.843 -2621.347
+     }
+     ShapePoint "{5C500221E1987354}" {
+      Position -253.725 -15.045 -1601.409
+     }
+     ShapePoint "{5C500221FFD59B55}" {
+      Position -54.606 -9.696 -496.434
+     }
+     ShapePoint "{5C500221FDCEE594}" {
+      Position -9.088 -2.006 -71.072
+     }
+    }
+    IsClosed 1
+   }
+  }
+ }
+ CenterRegion {
+  components {
+   EL_PersistenceComponent "{5C500226229F88B1}" {
+    m_pSaveData Z_RegionSaveData "{5C50022630AFFC43}" {
+     m_aComponents {
+      Z_ScavRegionComponentSaveData "{5C50022631B6F593}" {
+      }
+     }
+    }
+   }
+   Z_LootRegionComponent "{5C5002262049BF39}" {
+    m_LootRegionTiers {
+     Z_LootRegionTier "{5C5002264F34A27E}" {
+      m_LootTier Tier1
+      m_ProbabilityMin 0.26
+      m_ProbabilityMax 0.46
+      m_SpawnRangeLower 2
+      m_SpawnRangeUpper 4
+     }
+     Z_LootRegionTier "{5C5002264F019A91}" {
+      m_LootTier Tier2
+      m_ProbabilityMin 0.08
+      m_ProbabilityMax 0.26
+      m_SpawnRangeLower 2
+      m_SpawnRangeUpper 4
+     }
+     Z_LootRegionTier "{5C5002264F6F0ED2}" {
+      m_LootTier Tier3
+      m_ProbabilityMin 0.04
+      m_ProbabilityMax 0.08
+      m_SpawnRangeLower 1
+      m_SpawnRangeUpper 4
+     }
+    }
+   }
+   Z_ScavRegionComponent "{5C5002263E389472}" {
+    m_Difficulty Medium
+    m_StartingAttrition 3000
+    m_AllowedTasks {
+     Z_ScavTaskPatrol "{5C5002266D82EF55}" {
+      m_GroupSizeMin 1
+      m_GroupSizeMax 3
+     }
+    }
+   }
+   RplComponent "{5C500226252F8CD1}" {
+   }
+  }
+  coords 2574.433 -6.976 4058.159
+  {
+   PolylineShapeEntity {
+    components {
+     Hierarchy "{5C500220AD8C6FA5}" {
+     }
+    }
+    coords 0 0 0
+    Points {
+     ShapePoint "{5C500221125241C3}" {
+      Position 0 -0.001 0
+     }
+     ShapePoint "{5C500221125246E4}" {
+      Position 5 0.602 0
+     }
+     ShapePoint "{5C5002212BA590A2}" {
+      Position 166.533 77.799 562.944
+     }
+     ShapePoint "{5C50022155614CBC}" {
+      Position 343.119 119.011 1143.376
+     }
+     ShapePoint "{5C500221528C5559}" {
+      Position 597.664 134.46 1502.446
+     }
+     ShapePoint "{5C5002215199B2DC}" {
+      Position 571.116 149.566 1824.899
+     }
+     ShapePoint "{5C5002216E554B86}" {
+      Position 687.465 138.582 2114.498
+     }
+     ShapePoint "{5C5002216F1EC74D}" {
+      Position 907.979 104.746 2436.112
+     }
+     ShapePoint "{5C5002216BB94916}" {
+      Position 1173.998 87.871 2534.326
+     }
+     ShapePoint "{5C5002216869A367}" {
+      Position 1478.575 119.968 2662.066
+     }
+     ShapePoint "{5C50022164F43398}" {
+      Position 1850.737 133.685 3016.21
+     }
+     ShapePoint "{5C5002216552A90F}" {
+      Position 2298.936 161.295 3431.393
+     }
+     ShapePoint "{5C5002217FB8F03D}" {
+      Position 2729.775 146.897 3430.868
+     }
+     ShapePoint "{5C5002217C439595}" {
+      Position 3153.196 196.232 3453.29
+     }
+     ShapePoint "{5C5002217BA86F9E}" {
+      Position 3767.835 178.708 3629.152
+     }
+     ShapePoint "{5C500221798895DC}" {
+      Position 4094.133 158.727 3776.677
+     }
+     ShapePoint "{5C50022177FB64B0}" {
+      Position 4873.944 6.084 3974.92
+     }
+     ShapePoint "{5C5002208D412DAC}" {
+      Position 5022.679 -3.96 3555.172
+     }
+     ShapePoint "{5C5002208B263C2A}" {
+      Position 5176.05 -26.423 2580.683
+     }
+     ShapePoint "{5C5002209E2E5185}" {
+      Position 5676.671 4.399 1560.133
+     }
+     ShapePoint "{5C5002209C381701}" {
+      Position 4461.562 113.602 1009.181
+     }
+     ShapePoint "{5C5002209DF8EB9B}" {
+      Position 4097.447 61.202 769.989
+     }
+     ShapePoint "{5C5002209B1C76BC}" {
+      Position 4027.908 2.109 290.983
+     }
+     ShapePoint "{5C50022097E24DB0}" {
+      Position 3631.611 -4.102 -983.351
+     }
+     ShapePoint "{5C50022095156025}" {
+      Position 1954.465 -14.497 -1026.591
+     }
+     ShapePoint "{5C5002209009EAE2}" {
+      Position 498.02 -53.986 -773.847
+     }
+     ShapePoint "{5C50022091A44972}" {
+      Position -102.074 -12.065 -192.449
+     }
+    }
+    IsClosed 1
+   }
+  }
+ }
+ NorthRegion {
+  components {
+   Z_LootRegionComponent "{5C500227F070C287}" {
+    m_LootRegionTiers {
+     Z_LootRegionTier "{5C5002271CF46A87}" {
+      m_LootTier Tier1
+      m_ProbabilityMin 0.24
+      m_ProbabilityMax 0.5
+      m_SpawnRangeLower 3
+      m_SpawnRangeUpper 6
+     }
+     Z_LootRegionTier "{5C5002271CDEC54A}" {
+      m_LootTier Tier2
+      m_ProbabilityMin 0.12
+      m_ProbabilityMax 0.24
+      m_SpawnRangeLower 2
+      m_SpawnRangeUpper 4
+     }
+     Z_LootRegionTier "{5C5002271D2DB3DB}" {
+      m_LootTier Tier3
+      m_ProbabilityMin 0.04
+      m_ProbabilityMax 0.12
+      m_SpawnRangeLower 1
+      m_SpawnRangeUpper 4
+     }
+    }
+   }
+   RplComponent "{5C500227F4707243}" {
+   }
+  }
+  coords 4092.579 -7.793 9381.451
+  {
+   PolylineShapeEntity {
+    components {
+     Hierarchy "{5C500220F641FA1F}" {
+     }
+    }
+    coords 0 0 0
+    Points {
+     ShapePoint "{5C500220EDB4AC21}" {
+      Position 0 -0.001 0
+     }
+     ShapePoint "{5C500220EDB4AD42}" {
+      Position 5 0.49 0
+     }
+     ShapePoint "{5C500220EAB401F9}" {
+      Position 417.79 15.887 -135.94
+     }
+     ShapePoint "{5C500220E8263419}" {
+      Position 1074.941 41.661 -191.858
+     }
+     ShapePoint "{5C500220E944C5FB}" {
+      Position 1918.31 -6.156 -249.647
+     }
+     ShapePoint "{5C500220E703D267}" {
+      Position 2855.962 -19.703 270.164
+     }
+     ShapePoint "{5C500220E2294E93}" {
+      Position 2199.15 -10.049 1807.873
+     }
+     ShapePoint "{5C500220E37603BF}" {
+      Position 1437.941 -67.301 3250.521
+     }
+     ShapePoint "{5C500220E0DA7D7C}" {
+      Position 862.183 0 3598.451
+     }
+     ShapePoint "{5C500220E15C4601}" {
+      Position 262.464 -74.483 3291.892
+     }
+     ShapePoint "{5C500220FECB29B5}" {
+      Position -180.393 -2.928 2827.057
+     }
+     ShapePoint "{5C500220FCCC8C06}" {
+      Position -402.536 -5.592 1410.72
+     }
+     ShapePoint "{5C500220FAA5E2E8}" {
+      Position -72.24 -13.711 102.693
+     }
+    }
+    IsClosed 1
+   }
+  }
+ }
+ NorthAirfieldRegion {
+  components {
+   EL_PersistenceComponent "{5C500226FF57FFA6}" {
+    m_pSaveData Z_RegionSaveData "{5C500226F87A4CAA}" {
+     m_aComponents {
+      Z_ScavRegionComponentSaveData "{5C500226F966FAA5}" {
+      }
+     }
+    }
+   }
+   Z_LootRegionComponent "{5C500226FA7C50C3}" {
+    m_LootRegionTiers {
+     Z_LootRegionTier "{5C500226F6B50044}" {
+      m_LootTier Tier1
+      m_ProbabilityMin 0.14
+      m_ProbabilityMax 0.5
+      m_SpawnRangeLower 2
+      m_SpawnRangeUpper 4
+     }
+     Z_LootRegionTier "{5C500226F6818BFC}" {
+      m_LootTier Tier2
+      m_ProbabilityMin 0.08
+      m_ProbabilityMax 0.14
+      m_SpawnRangeLower 2
+      m_SpawnRangeUpper 4
+     }
+     Z_LootRegionTier "{5C500226F6EC2549}" {
+      m_LootTier Tier3
+      m_ProbabilityMin 0.03
+      m_ProbabilityMax 0.08
+      m_SpawnRangeLower 1
+      m_SpawnRangeUpper 3
+     }
+    }
+   }
+   Z_ScavRegionComponent "{5C500226FCCB03C1}" {
+    m_Difficulty Insane
+    m_AllowedTasks {
+     Z_ScavTaskPatrol "{5C50022616A5E62B}" {
+      m_GroupSizeMin 1
+      m_GroupSizeMax 6
+     }
+    }
+   }
+   RplComponent "{5C500226E15DFF09}" {
+   }
+  }
+  coords 4591.687 22.569 11104.76
+  {
+   PolylineShapeEntity {
+    components {
+     Hierarchy "{5C5002203DA0E6D8}" {
+     }
+    }
+    coords 0 0 0
+    Points {
+     ShapePoint "{5C50022019D3BF2D}" {
+      Position 0 -0.001 0
+     }
+     ShapePoint "{5C50022019D3BC49}" {
+      Position 5 0.429 0
+     }
+     ShapePoint "{5C5002201696C7E1}" {
+      Position -3.366 -2.693 167.52
+     }
+     ShapePoint "{5C5002201411A5B8}" {
+      Position 93.229 0.2 189.166
+     }
+     ShapePoint "{5C500220123F8C6B}" {
+      Position 81.531 4.449 1020.886
+     }
+     ShapePoint "{5C50022012805843}" {
+      Position 467.449 0.465 1040.72
+     }
+     ShapePoint "{5C5002202BE6EE7B}" {
+      Position 394.802 10.403 -78.499
+     }
+     ShapePoint "{5C50022028A12271}" {
+      Position 98.038 5.525 -34.671
+     }
+     ShapePoint "{5C50022026B3B00A}" {
+      Position 15.072 1.367 -6.743
+     }
+    }
+    IsClosed 1
+   }
+  }
+ }
+ NorthForestBaseRegion {
+  components {
+   EL_PersistenceComponent "{5C50022733ED0E01}" {
+    m_pSaveData Z_RegionSaveData "{5C5002274B24F4FD}" {
+     m_aComponents {
+      Z_ScavRegionComponentSaveData "{5C500227481FC97E}" {
+      }
+     }
+    }
+   }
+   Z_LootRegionComponent "{5C5002274E024448}" {
+    m_LootRegionTiers {
+     Z_LootRegionTier "{5C50022749833E28}" {
+      m_LootTier Tier1
+      m_ProbabilityMin 0.24
+      m_ProbabilityMax 0.36
+      m_SpawnRangeLower 2
+      m_SpawnRangeUpper 4
+     }
+     Z_LootRegionTier "{5C50022749EA165C}" {
+      m_LootTier Tier2
+      m_ProbabilityMin 0.12
+      m_ProbabilityMax 0.24
+      m_SpawnRangeLower 2
+      m_SpawnRangeUpper 4
+     }
+     Z_LootRegionTier "{5C50022749F4DDEC}" {
+      m_LootTier Tier3
+      m_ProbabilityMin 0.06
+      m_ProbabilityMax 0.12
+      m_SpawnRangeLower 1
+      m_SpawnRangeUpper 4
+     }
+    }
+   }
+   Z_ScavRegionComponent "{5C5002274FA3CD7D}" {
+    m_Difficulty High
+    m_StartingAttrition 300
+    m_AllowedTasks {
+     Z_ScavTaskPatrol "{5C5002276FECBC5E}" {
+      m_GroupSizeMin 1
+      m_GroupSizeMax 6
+     }
+    }
+   }
+   RplComponent "{5C50022735D91F09}" {
+   }
+  }
+  coords 5167.741 41.551 10523.582
+  {
+   PolylineShapeEntity {
+    components {
+     Hierarchy "{5C50022042B125D6}" {
+     }
+    }
+    coords 0 0 0
+    Points {
+     ShapePoint "{5C5002204D1D8F05}" {
+      Position 0 -0.001 0
+     }
+     ShapePoint "{5C5002204D1D8C7B}" {
+      Position 5 0.117 0
+     }
+     ShapePoint "{5C5002204DC5CE83}" {
+      Position 162.866 -2.538 120.018
+     }
+     ShapePoint "{5C5002204A470C56}" {
+      Position 346.604 0.152 145.42
+     }
+     ShapePoint "{5C5002204AF2040F}" {
+      Position 406.276 -2.673 18.385
+     }
+     ShapePoint "{5C5002204B5C3973}" {
+      Position 331.516 -0.725 -79.415
+     }
+     ShapePoint "{5C5002204BC5B44C}" {
+      Position 191.359 0.197 -89.563
+     }
+     ShapePoint "{5C500220495B7E12}" {
+      Position -0.695 -1.889 -113.217
+     }
+     ShapePoint "{5C50022049CEAF73}" {
+      Position -70.983 -1.929 -39.783
+     }
+     ShapePoint "{5C500220464A323C}" {
+      Position -18.367 -0.924 9.589
+     }
+    }
+    IsClosed 1
+   }
+  }
+ }
+ NorthFiringRangeRegion {
+  components {
+   EL_PersistenceComponent "{5C5002268B7F8D89}" {
+    m_pSaveData Z_RegionSaveData "{5C50022682C6B8E8}" {
+     m_aComponents {
+      Z_ScavRegionComponentSaveData "{5C50022683D34BC4}" {
+      }
+     }
+    }
+   }
+   Z_LootRegionComponent "{5C5002268644BDA0}" {
+    m_LootRegionTiers {
+     Z_LootRegionTier "{5C5002269E1FB4D5}" {
+      m_LootTier Tier1
+      m_ProbabilityMin 0.24
+      m_ProbabilityMax 0.36
+      m_SpawnRangeLower 2
+      m_SpawnRangeUpper 4
+     }
+     Z_LootRegionTier "{5C5002269E677E8A}" {
+      m_LootTier Tier2
+      m_ProbabilityMin 0.12
+      m_ProbabilityMax 0.24
+      m_SpawnRangeLower 2
+      m_SpawnRangeUpper 4
+     }
+     Z_LootRegionTier "{5C5002269E713D1D}" {
+      m_LootTier Tier3
+      m_ProbabilityMin 0.06
+      m_ProbabilityMax 0.12
+      m_SpawnRangeLower 1
+      m_SpawnRangeUpper 4
+     }
+    }
+   }
+   Z_ScavRegionComponent "{5C50022688CC81AB}" {
+    m_Difficulty Insane
+    m_StartingAttrition 400
+    m_AllowedTasks {
+     Z_ScavTaskPatrol "{5C500226A4553E96}" {
+      m_GroupSizeMin 1
+      m_GroupSizeMax 4
+     }
+    }
+   }
+   RplComponent "{5C5002268A2578F2}" {
+   }
+  }
+  coords 7645.467 20.15 8299.266
+  {
+   PolylineShapeEntity {
+    components {
+     Hierarchy "{5C500223A57F67E0}" {
+     }
+    }
+    coords 0 0 0
+    Points {
+     ShapePoint "{5C500223AF631947}" {
+      Position 0 -0.001 0
+     }
+     ShapePoint "{5C500223AF631E99}" {
+      Position 5 -0.861 0
+     }
+     ShapePoint "{5C500223AFD3A4AC}" {
+      Position 151.285 -6.861 -141.969
+     }
+     ShapePoint "{5C500223ACA9C0EA}" {
+      Position 20.346 -13.022 -287.504
+     }
+     ShapePoint "{5C500223AA3741F6}" {
+      Position -363.488 23.197 -701.716
+     }
+     ShapePoint "{5C500223AAA1C1B0}" {
+      Position -478.465 31.355 -614.915
+     }
+     ShapePoint "{5C500223ABF22423}" {
+      Position -118.304 7.557 -129.418
+     }
+    }
+    IsClosed 1
+   }
+  }
+ }
+ NorthCoastBaseRegion {
+  components {
+   EL_PersistenceComponent "{5C500226CA0847DC}" {
+    m_pSaveData Z_RegionSaveData "{5C500226C6F88598}" {
+     m_aComponents {
+      Z_ScavRegionComponentSaveData "{5C500226C7EC956F}" {
+      }
+     }
+    }
+   }
+   Z_LootRegionComponent "{5C500226C93B7933}" {
+    m_LootRegionTiers {
+     Z_LootRegionTier "{5C500226C537567A}" {
+      m_LootTier Tier1
+      m_ProbabilityMin 0.24
+      m_ProbabilityMax 0.36
+      m_SpawnRangeLower 2
+      m_SpawnRangeUpper 4
+     }
+     Z_LootRegionTier "{5C500226C50521E3}" {
+      m_LootTier Tier2
+      m_ProbabilityMin 0.12
+      m_ProbabilityMax 0.24
+      m_SpawnRangeLower 2
+      m_SpawnRangeUpper 4
+     }
+     Z_LootRegionTier "{5C500226C5107745}" {
+      m_LootTier Tier3
+      m_ProbabilityMin 0.06
+      m_ProbabilityMax 0.12
+      m_SpawnRangeLower 1
+      m_SpawnRangeUpper 4
+     }
+    }
+   }
+   Z_ScavRegionComponent "{5C500226CB9AC2C7}" {
+    m_Difficulty Insane
+    m_StartingAttrition 400
+    m_AllowedTasks {
+     Z_ScavTaskPatrol "{5C500226EBDAEABC}" {
+      m_GroupSizeMin 1
+      m_GroupSizeMax 6
+     }
+    }
+   }
+   RplComponent "{5C500226CCAB5745}" {
+   }
+  }
+  coords 7651.296 -5.278 6724.967
+  {
+   PolylineShapeEntity {
+    components {
+     Hierarchy "{5C500223CCCD9779}" {
+     }
+    }
+    coords 0 0 0
+    Points {
+     ShapePoint "{5C500223B49DD171}" {
+      Position 0 -0.001 0
+     }
+     ShapePoint "{5C500223B49DD6AC}" {
+      Position 5 -1.278 0
+     }
+     ShapePoint "{5C500223B561E220}" {
+      Position -136.083 -11.599 -309.667
+     }
+     ShapePoint "{5C500223B5C05E60}" {
+      Position -324.648 21.834 -18.704
+     }
+     ShapePoint "{5C500223B06BBF68}" {
+      Position -207.781 6.493 136.133
+     }
+    }
+    IsClosed 1
+   }
+  }
+ }
+ SouthBaseRegion {
+  components {
+   EL_PersistenceComponent "{5C500227AFEB2B10}" {
+    m_pSaveData Z_RegionSaveData "{5C500227A47F6699}" {
+     m_aComponents {
+      Z_ScavRegionComponentSaveData "{5C500227A5A9FF5D}" {
+      }
+     }
+    }
+   }
+   Z_LootRegionComponent "{5C500227AA94DA00}" {
+    m_LootRegionTiers {
+     Z_LootRegionTier "{5C500227A3B4DADA}" {
+      m_LootTier Tier1
+      m_ProbabilityMin 0.28
+      m_ProbabilityMax 0.4
+      m_SpawnRangeLower 2
+      m_SpawnRangeUpper 6
+     }
+     Z_LootRegionTier "{5C500227A381E90E}" {
+      m_LootTier Tier2
+      m_ProbabilityMin 0.18
+      m_ProbabilityMax 0.28
+      m_SpawnRangeLower 2
+      m_SpawnRangeUpper 4
+     }
+     Z_LootRegionTier "{5C500227A3EF195F}" {
+      m_LootTier Tier3
+      m_ProbabilityMin 0.08
+      m_ProbabilityMax 0.18
+      m_SpawnRangeLower 1
+      m_SpawnRangeUpper 4
+     }
+    }
+   }
+   Z_ScavRegionComponent "{5C500227AD0D2388}" {
+    m_Difficulty Insane
+    m_StartingAttrition 300
+    m_AllowedTasks {
+     Z_ScavTaskPatrol "{5C500227DC778581}" {
+      m_GroupSizeMin 1
+      m_GroupSizeMax 6
+     }
+    }
+   }
+   RplComponent "{5C50022791F061D6}" {
+   }
+  }
+  coords 7607.137 175.455 4121.848
+  {
+   PolylineShapeEntity {
+    components {
+     Hierarchy "{5C50022307C836E7}" {
+     }
+    }
+    coords 0 0 0
+    Points {
+     ShapePoint "{5C500223F9872C17}" {
+      Position 0 -0.001 0
+     }
+     ShapePoint "{5C500223F9872D93}" {
+      Position 5 1.715 0
+     }
+     ShapePoint "{5C500223F3A459DC}" {
+      Position -327.044 -12.057 77.389
+     }
+     ShapePoint "{5C500223F067E52B}" {
+      Position -368.375 -26.058 191.891
+     }
+     ShapePoint "{5C500223F0E6A3FC}" {
+      Position -240.661 -31.28 326.913
+     }
+     ShapePoint "{5C500223F16AB5F5}" {
+      Position -52.001 -11.177 294.36
+     }
+     ShapePoint "{5C5002230EB98582}" {
+      Position 66.357 7.205 201.82
+     }
+     ShapePoint "{5C5002230F7B88CE}" {
+      Position 22.396 -1.582 28.542
+     }
+    }
+    IsClosed 1
+   }
+  }
+ }
+ SouthCastleRegion {
+  components {
+   EL_PersistenceComponent "{5C5002244FA62D7C}" {
+    m_pSaveData Z_RegionSaveData "{5C50022449A3339B}" {
+     m_aComponents {
+      Z_ScavRegionComponentSaveData "{5C50022446E8C450}" {
+      }
+     }
+    }
+   }
+   Z_LootRegionComponent "{5C5002244A9591FE}" {
+    m_LootRegionTiers {
+     Z_LootRegionTier "{5C50022444D9DAA8}" {
+      m_LootTier Tier1
+      m_ProbabilityMin 0.24
+      m_ProbabilityMax 0.36
+      m_SpawnRangeLower 3
+      m_SpawnRangeUpper 6
+     }
+     Z_LootRegionTier "{5C50022445238317}" {
+      m_LootTier Tier2
+      m_ProbabilityMin 0.16
+      m_ProbabilityMax 0.24
+      m_SpawnRangeLower 2
+      m_SpawnRangeUpper 4
+     }
+     Z_LootRegionTier "{5C500224450ECB47}" {
+      m_LootTier Tier3
+      m_ProbabilityMin 0.06
+      m_ProbabilityMax 0.16
+      m_SpawnRangeLower 2
+      m_SpawnRangeUpper 5
+     }
+    }
+   }
+   Z_ScavRegionComponent "{5C5002244D0D4C55}" {
+    m_Difficulty Insane
+   }
+   RplComponent "{5C50022431EA640F}" {
+   }
+  }
+  coords 9275.986 200.876 1211.859
+  {
+   PolylineShapeEntity {
+    components {
+     Hierarchy "{5C5002233E9E316B}" {
+     }
+    }
+    coords 0 0 0
+    Points {
+     ShapePoint "{5C50022324C563F7}" {
+      Position 0 -0.001 0
+     }
+     ShapePoint "{5C50022324C5611A}" {
+      Position 5 -1.539 0
+     }
+     ShapePoint "{5C5002232543CF1B}" {
+      Position -15.135 -19.744 -151.988
+     }
+     ShapePoint "{5C50022325D9E251}" {
+      Position 181.984 -30.939 -138.883
+     }
+     ShapePoint "{5C500223224C7D87}" {
+      Position 203.339 -60.06 47.73
+     }
+     ShapePoint "{5C50022322F0397C}" {
+      Position 2.006 -2.492 21.738
+     }
+    }
+    IsClosed 1
+   }
+  }
+ }
+ StPierreRegion {
+  components {
+   EL_PersistenceComponent "{5C500225170975BC}" {
+    m_pSaveData Z_RegionSaveData "{5C50022512EC93A6}" {
+     m_aComponents {
+      Z_ScavRegionComponentSaveData "{5C500225107B6BBD}" {
+      }
+     }
+    }
+   }
+   Z_LootRegionComponent "{5C5002252AD82A39}" {
+    m_LootRegionTiers {
+     Z_LootRegionTier "{5C50022541E480C2}" {
+      m_LootTier Tier1
+      m_ProbabilityMin 0.36
+      m_ProbabilityMax 0.5
+      m_SpawnRangeLower 4
+      m_SpawnRangeUpper 8
+     }
+     Z_LootRegionTier "{5C5002255E1DDD06}" {
+      m_LootTier Tier2
+      m_ProbabilityMin 0.24
+      m_ProbabilityMax 0.36
+      m_SpawnRangeLower 4
+      m_SpawnRangeUpper 8
+     }
+     Z_LootRegionTier "{5C5002255E7A9E7C}" {
+      m_LootTier Tier3
+      m_ProbabilityMin 0.08
+      m_ProbabilityMax 0.24
+      m_SpawnRangeLower 3
+      m_SpawnRangeUpper 6
+     }
+    }
+   }
+   Z_ScavRegionComponent "{5C50022528FE2463}" {
+    m_Difficulty Insane
+    m_StartingAttrition 500
+    m_AllowedTasks {
+     Z_ScavTaskPatrol "{5C500224908ABCF3}" {
+      m_Faction Raiders
+      m_GroupSizeMax 6
+     }
+    }
+   }
+   RplComponent "{5C5002251911D838}" {
+   }
+  }
+  coords 10427.378 4.567 1582.291
+  {
+   PolylineShapeEntity {
+    components {
+     Hierarchy "{5C50022351136F6C}" {
+     }
+    }
+    coords 0 0 0
+    Points {
+     ShapePoint "{5C50022358121486}" {
+      Position 0 -0.001 0
+     }
+     ShapePoint "{5C500223581215FF}" {
+      Position 5 -1.261 0
+     }
+     ShapePoint "{5C500223593F0A01}" {
+      Position -393.981 2.577 -583.154
+     }
+     ShapePoint "{5C50022359B5DC38}" {
+      Position -737.724 30.955 -294.815
+     }
+     ShapePoint "{5C500223572B5567}" {
+      Position -1143.981 60.826 105.773
+     }
+     ShapePoint "{5C5002235743626E}" {
+      Position -927.324 53.456 374.342
+     }
+     ShapePoint "{5C500223548E2490}" {
+      Position -358.309 17.152 98.41
+     }
+     ShapePoint "{5C50022355E75CCE}" {
+      Position -50.273 4.896 22.184
+     }
+    }
+    IsClosed 1
+   }
+  }
+ }
+}
