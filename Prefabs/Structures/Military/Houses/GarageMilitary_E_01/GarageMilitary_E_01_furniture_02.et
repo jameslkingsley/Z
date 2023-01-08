@@ -1,0 +1,91 @@
+GenericEntity : "{28411B0C79460DF8}Prefabs/Structures/Core/BuildingFurniture_base.et" {
+ ID "56A8CBB92342240A"
+ {
+  $grp Z_LootContainerEntity : "{EBE9660A3A74C747}Prefabs/Loot/Z_LootContainer_Base.et" {
+   {
+    ID "5C51255BC770E4A2"
+    coords -13.561 1.246 -0.837
+   }
+   {
+    ID "5C51255BC770E4A8"
+    coords -15.009 2.062 -0.89
+   }
+   {
+    ID "5C51255BC770E4AD"
+    coords 2.184 3.005 7.108
+   }
+   {
+    ID "5C51255BC770E4B7"
+    coords 13.905 2.025 -4.128
+   }
+   {
+    ID "5C51255BC770E4C7"
+    coords 5.413 2.972 -2.346
+   }
+   {
+    ID "5C51255BC770E4CF"
+    coords 5.269 2.972 -5.982
+   }
+   {
+    ID "5C51255BC770E4D5"
+    coords 5.373 3.004 -4.032
+   }
+   {
+    ID "5C51255BC770E4DB"
+    coords -0.312 2.98 -4.369
+   }
+   {
+    ID "5C51255BC770E4E6"
+    coords 23.399 2.025 -6.296
+   }
+   {
+    ID "5C51255BC770E4F0"
+    coords 23.398 2.025 -4.247
+   }
+   {
+    ID "5C51255BC770E4F7"
+    coords 23.338 2.025 -2.175
+   }
+   {
+    ID "5C51255BC770E4FE"
+    coords 23.364 2.025 -0.149
+   }
+   {
+    ID "5C51255BC770E501"
+    coords 18.745 2.025 -6.271
+   }
+   {
+    ID "5C51255BC770E50A"
+    coords 23.45 0.824 -0.206
+   }
+   {
+    ID "5C51255BC770E514"
+    coords 23.408 0.824 -2.191
+   }
+   {
+    ID "5C51255BC770E51A"
+    coords 23.415 0.825 -4.212
+   }
+   {
+    ID "5C51255BC770E51F"
+    coords 23.437 0.824 -6.224
+   }
+   {
+    ID "5C51255BC770E521"
+    coords 18.643 0.824 -0.115
+   }
+   {
+    ID "5C51255BC770E52D"
+    coords 18.732 2.025 -0.164
+   }
+   {
+    ID "5C51255BC770E537"
+    coords 18.712 2.025 -4.225
+   }
+   {
+    ID "5C51255BC770E54A"
+    coords 13.958 2.025 -6.181
+   }
+  }
+ }
+}

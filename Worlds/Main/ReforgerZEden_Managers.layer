@@ -1,5 +1,12 @@
 SCR_AIWorld : "{AFEEBEE81C34CD9C}Prefabs/MP/Modes/Z_AIWorld.et" {
  components {
+  NavmeshWorldComponent "{5584F30E67F617AD}" {
+   NavmeshSettings NavmeshWorld "{50FC63BEBE3973C5}" {
+    NavmeshFilesConfig BaseNavmeshFilesConfig "{5C4952AFE9D78C12}" {
+     NavmeshFile "{A07353FE17EB2C49}worlds/MP/Navmeshes/CTI_Campaign_Eden.nmn"
+    }
+   }
+  }
   SCR_AISettingsComponent "{512CCCD0856CB4B9}" {
   }
  }
@@ -8,7 +15,21 @@ SCR_FactionManager Z_FactionManager1 : "{0A7D6E9CB503C82B}Prefabs/MP/Modes/Z_Fac
 }
 EL_GameModeRoleplay GameMode_Survival_Full1 : "{AEBB6248A13EDE3D}Prefabs/MP/Modes/GameMode_Survival_Full.et" {
  components {
+  EL_RespawnSytemComponent "{5B3E275AE32D97DA}" {
+   m_aDefaultCharacterItems {
+    EL_DefaultLoadoutItem "{5B3E275AFDF13F0C}" {
+     m_rPrefab "{5BA66581CD91B40E}Prefabs/Characters/Uniforms/Tops/short_sleeve_v2_FU_red.et"
+    }
+    EL_DefaultLoadoutItem "{5B3E275AFDDA2A89}" {
+     m_rPrefab "{4CE818FF4A86E19D}Prefabs/Characters/Uniforms/Pants/jeans_blue_washed.et"
+    }
+    EL_DefaultLoadoutItem "{5B3E275AFA2744C0}" {
+     m_rPrefab "{A9842546F979348A}Prefabs/Characters/Footwear/Air_one.et"
+    }
+   }
+  }
   Z_LootGameModeComponent "{5B3B1D91A44EE9B8}" {
+   m_LootTableConfig "{A9A9A205E193F5AC}Config/Z_LootTableConfig_Modded.conf"
   }
   Z_ScavGameModeComponent "{5C44B0A84C473AE1}" {
   }
@@ -21,7 +42,4 @@ SCR_GarbageManager : "{335D390C413531EE}Prefabs/MP/Modes/Z_GarbageManager.et" {
 SCR_LoadoutManager : "{418EB83B1CC187BF}Prefabs/MP/Modes/Z_LoadoutManager.et" {
 }
 HitRegistrationManager Z_HitregManager1 : "{F0E427921CA5CF11}Prefabs/MP/Modes/Z_HitregManager.et" {
-}
-EL_SpawnPoint : "{F380E0551C8682AF}Prefabs/MP/PlayerSpawn_01.et" {
- coords 9968.761 2.532 1551.273
 }

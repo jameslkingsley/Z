@@ -36,11 +36,11 @@ $grp PolylineArea {
    }
    Z_ScavRegionComponent "{5C500224E111EEB3}" {
     m_Difficulty High
-    m_StartingAttrition 5000
+    m_StartingAttrition 6000
+    m_MaximumAttrition 2000
     m_AllowedTasks {
      Z_ScavTaskPatrol "{5C5002242D122AF2}" {
       m_Faction Raiders
-      m_GroupSizeMin 1
      }
     }
    }
@@ -733,7 +733,7 @@ $grp PolylineArea {
     m_StartingAttrition 300
     m_AllowedTasks {
      Z_ScavTaskPatrol "{5C500227DC778581}" {
-      m_GroupSizeMin 1
+      m_Faction Raiders
       m_GroupSizeMax 6
      }
     }

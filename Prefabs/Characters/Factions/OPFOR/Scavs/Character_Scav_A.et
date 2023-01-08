@@ -23,6 +23,7 @@ SCR_ChimeraCharacter : "{5346CF7E39A65A6B}Prefabs/Characters/Factions/OPFOR/USSR
   CharacterGrenadeSlotComponent "{520EA1D2F659CE6E}" {
   }
   CharacterWeaponSlotComponent "{520EA1D2F659CFAB}" {
+   WeaponTemplate "{96A2309CE280198F}Prefabs/Weapons/Rifles/Vz52/Rifle_Vz52.et"
    WeaponSlotIndex 0
   }
   CharacterWeaponSlotComponent "{520EA1D2F659CFB7}" {
@@ -33,32 +34,45 @@ SCR_ChimeraCharacter : "{5346CF7E39A65A6B}Prefabs/Characters/Factions/OPFOR/USSR
   }
   BaseLoadoutManagerComponent "{520EA1D2DB11821E}" {
    Slots {
+    LoadoutSlotInfo Watch {
+     Prefab "{6FD6C96121905202}Prefabs/Items/Equipment/Watches/Watch_Vostok.et"
+    }
+    LoadoutSlotInfo Boots {
+     Prefab "{A5AC18C1DA89F35D}Prefabs/Characters/Footwear/verg_ones_black.et"
+    }
+    LoadoutSlotInfo Jacket {
+     Prefab "{7A0C78BBC9E5EDD1}Prefabs/Characters/Uniforms/Tops/Jacket_black_grey.et"
+    }
+    LoadoutSlotInfo Pants {
+     Prefab "{785F4A26DB826D34}Prefabs/Characters/Uniforms/Pants/jeans_black_washed.et"
+    }
     LoadoutSlotInfo Hat {
-     Enabled 0
+     Prefab "{9B0E5FA910BC11B3}Prefabs/Characters/HeadGear/Ballcap/ballcap_black.et"
     }
     LoadoutSlotInfo Back {
-     Prefab ""
     }
     LoadoutSlotInfo Vest {
-     Prefab "{9713FE6DDCC9510D}Prefabs/Characters/Vests/Vest_Lifchik/Vest_Lifchik.et"
+     Prefab "{ED5574EA7F63B457}Prefabs/Characters/Vests/Vest_Type56/Vest_Type56.et"
     }
    }
   }
   SCR_InventoryStorageManagerComponent "{520EA1D2DB118DE5}" {
    InitialInventoryItems {
     ItemsInitConfigurationItem "{5A24CC173771408E}" {
+     TargetStorage "Prefabs/Characters/Uniforms/Tops/Jacket_black_grey.et"
      PrefabsToSpawn {
       "{7CEF68E2BC68CE71}Prefabs/Items/Equipment/Compass/Compass_Adrianov.et" "{13772C903CB5E4F7}Prefabs/Items/Equipment/Maps/PaperMap_01_folded.et" "{C3F1FA1E2EC2B345}Prefabs/Items/Medicine/FieldDressing_USSR_01.et" "{C3F1FA1E2EC2B345}Prefabs/Items/Medicine/FieldDressing_USSR_01.et"
      }
     }
-    ItemsInitConfigurationItem "{5C4EF04074879D19}" {
-     TargetStorage "Prefabs/Characters/Vests/Vest_Lifchik/Vest_Lifchik.et"
+    ItemsInitConfigurationItem "{5C510ACCE5140278}" {
+     TargetStorage "Prefabs/Characters/Vests/Vest_Type56/Vest_Type56.et"
      PrefabsToSpawn {
-      "{645C73791ECA1698}Prefabs/Weapons/Grenades/Grenade_RGD5.et" "{8B853CDD11BA916E}Prefabs/Weapons/Magazines/Magazine_9x18_PM_8rnd_Ball.et" "{8B853CDD11BA916E}Prefabs/Weapons/Magazines/Magazine_9x18_PM_8rnd_Ball.et" "{8B853CDD11BA916E}Prefabs/Weapons/Magazines/Magazine_9x18_PM_8rnd_Ball.et"
+      "{645C73791ECA1698}Prefabs/Weapons/Grenades/Grenade_RGD5.et" "{8B853CDD11BA916E}Prefabs/Weapons/Magazines/Magazine_9x18_PM_8rnd_Ball.et" "{4B0D5960ECE64D82}Prefabs/Weapons/Magazines/Vz52/Magazine_762x39_Vz52_10rnd.et" "{4B0D5960ECE64D82}Prefabs/Weapons/Magazines/Vz52/Magazine_762x39_Vz52_10rnd.et" "{4B0D5960ECE64D82}Prefabs/Weapons/Magazines/Vz52/Magazine_762x39_Vz52_10rnd.et" "{4B0D5960ECE64D82}Prefabs/Weapons/Magazines/Vz52/Magazine_762x39_Vz52_10rnd.et"
      }
     }
     ItemsInitConfigurationItem "{5A24CC173897B74F}" {
-     TargetStorage "Prefabs/Characters/Vests/Vest_Lifchik/Vest_Lifchik.et"
+     TargetStorage "Prefabs/Characters/Uniforms/Pants/jeans_black_washed.et"
+     TargetPurpose 1
     }
    }
   }

@@ -5,5 +5,83 @@ SCR_DestructibleBuildingEntity : "{E35EA41864A3B0ED}Prefabs/Structures/Industria
    ID "5C50CE8AD843F526"
    coords 0 0 0
   }
+  $grp Z_LootContainerEntity : "{EBE9660A3A74C747}Prefabs/Loot/Z_LootContainer_Base.et" {
+   {
+    ID "5C51255B12D79206"
+    coords -2.145 0.438 -0.576
+   }
+   {
+    ID "5C51255B12D7920F"
+    coords -2.185 1.633 -0.627
+   }
+   {
+    ID "5C51255B12D79217"
+    coords -1.824 0.432 3.633
+   }
+   {
+    ID "5C51255B12D7922F"
+    coords -6.472 1.633 -0.594
+   }
+   {
+    ID "5C51255B12D79D80"
+    coords -6.479 0.432 -0.716
+   }
+   {
+    ID "5C51255B12D79DA6"
+    coords -6.581 2.832 3.539
+   }
+   {
+    ID "5C51255B12D79DAC"
+    coords -16.197 2.584 -5.01
+   }
+   {
+    ID "5C51255B12D79DB2"
+    coords -13.621 2.585 -1.992
+   }
+   {
+    ID "5C51255B12D79DB8"
+    coords -13.618 2.581 -5.307
+   }
+   {
+    ID "5C51255B12D79DC6"
+    coords -6.496 0.432 3.155
+   }
+   {
+    ID "5C51255B12D79DCE"
+    coords -6.396 1.633 3.448
+   }
+   {
+    ID "5C51255B12D79DD4"
+    coords -8.081 2.581 5.629
+   }
+   {
+    ID "5C51255B12D79DDA"
+    coords -8.884 2.581 4.603
+   }
+   {
+    ID "5C51255B12D79DDF"
+    coords -6.585 2.832 5.571
+   }
+   {
+    ID "5C51255B12D79DE0"
+    coords -1.733 0.433 5.492
+   }
+   {
+    ID "5C51255B12D79DEA"
+    coords -1.703 1.633 5.469
+   }
+   {
+    ID "5C51255B12D79DF1"
+    coords -1.832 1.633 3.477
+   }
+   {
+    ID "5C51255B12D79DF8"
+    coords -2 0.432 1.846
+   }
+   {
+    ID "5C51255B12D79DFE"
+    coords -2.038 1.633 1.408
+   }
+  }
  }
 }

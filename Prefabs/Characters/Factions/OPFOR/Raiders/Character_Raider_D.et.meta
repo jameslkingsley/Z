@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{11DC464F0D645D8C}Prefabs/Characters/Factions/OPFOR/Raiders/Character_Raider_D.et"
+ Configurations {
+  EntityTemplateResourceClass PC {
+  }
+  EntityTemplateResourceClass XBOX_ONE : PC {
+  }
+  EntityTemplateResourceClass XBOX_SERIES : PC {
+  }
+  EntityTemplateResourceClass PS4 : PC {
+  }
+  EntityTemplateResourceClass HEADLESS : PC {
+  }
+ }
+}

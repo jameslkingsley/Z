@@ -23,6 +23,8 @@ class Z_LootTableTestEntity : GenericEntity
 		
 		foreach (Z_LootTable table : tables)
 		{
+			if (! table.m_Resource) continue;
+			
 			EntitySpawnParams spawnParams = EntitySpawnParams();
 			spawnParams.TransformMode = ETransformMode.WORLD;
 			spawnParams.Transform[3] = GetSpawnOrigin(table) + Vector(currentOffset, 0, 0);

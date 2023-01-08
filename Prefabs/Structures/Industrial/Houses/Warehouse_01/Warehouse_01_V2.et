@@ -5,5 +5,127 @@ SCR_DestructibleBuildingEntity : "{E35EA41864A3B0ED}Prefabs/Structures/Industria
    ID "5C50CE8ADE6028AD"
    coords 0 0 0
   }
+  $grp Z_LootContainerEntity : "{EBE9660A3A74C747}Prefabs/Loot/Z_LootContainer_Base.et" {
+   {
+    ID "5C51255B6F2569C1"
+    coords 12.044 0.431 -3.614
+   }
+   {
+    ID "5C51255B6F2569E7"
+    coords -10.872 0.431 -3.61
+   }
+   {
+    ID "5C51255B6F2569EC"
+    coords -12.694 0.124 -4.827
+   }
+   {
+    ID "5C51255B6F2569F3"
+    coords -13.261 0.116 -3.829
+   }
+   {
+    ID "5C51255B6F2569F9"
+    coords -18.604 2.585 -4.982
+   }
+   {
+    ID "5C51255B6F256E09"
+    coords -6.317 1.632 -5.644
+   }
+   {
+    ID "5C51255B6F256E10"
+    coords -6.319 1.632 -3.604
+   }
+   {
+    ID "5C51255B6F256E15"
+    coords -10.848 0.431 -5.681
+   }
+   {
+    ID "5C51255B6F256E1A"
+    coords -10.864 1.632 -5.651
+   }
+   {
+    ID "5C51255B6F256E1F"
+    coords -10.852 1.632 -3.578
+   }
+   {
+    ID "5C51255B6F256E23"
+    coords 2.732 0.431 3.088
+   }
+   {
+    ID "5C51255B6F256E28"
+    coords -1.754 1.632 5.304
+   }
+   {
+    ID "5C51255B6F256E2E"
+    coords -1.774 0.431 4.704
+   }
+   {
+    ID "5C51255B6F256E36"
+    coords -6.326 0.431 -5.641
+   }
+   {
+    ID "5C51255B6F256E3C"
+    coords -6.392 0.431 -3.657
+   }
+   {
+    ID "5C51255B6F256E41"
+    coords 7.245 1.624 5.462
+   }
+   {
+    ID "5C51255B6F256E46"
+    coords 7.189 1.632 3.342
+   }
+   {
+    ID "5C51255B6F256E4C"
+    coords 7.207 0.432 3.363
+   }
+   {
+    ID "5C51255B6F256E56"
+    coords 2.789 1.632 3.301
+   }
+   {
+    ID "5C51255B6F256E5C"
+    coords 2.782 0.431 5.368
+   }
+   {
+    ID "5C51255B6F256E65"
+    coords 2.765 1.632 -3.635
+   }
+   {
+    ID "5C51255B6F256E70"
+    coords 2.779 0.431 -3.606
+   }
+   {
+    ID "5C51255B6F256E79"
+    coords -1.714 1.632 -5.564
+   }
+   {
+    ID "5C51255B6F256E82"
+    coords 7.354 0.431 -5.73
+   }
+   {
+    ID "5C51255B6F256E88"
+    coords 7.371 1.632 -5.712
+   }
+   {
+    ID "5C51255B6F256E91"
+    coords 2.783 0.431 -5.662
+   }
+   {
+    ID "5C51255B6F256E9D"
+    coords 2.75 1.632 -5.741
+   }
+   {
+    ID "5C51255B6F256EAC"
+    coords 12.041 1.632 -5.66
+   }
+   {
+    ID "5C51255B6F256EBA"
+    coords 12.054 1.632 -3.583
+   }
+   {
+    ID "5C51255B6F256ECF"
+    coords 12.003 0.431 -5.694
+   }
+  }
  }
 }

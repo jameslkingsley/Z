@@ -1,4 +1,9 @@
 EL_GameModeRoleplay GameMode_Survival1 : "{E87F79D982AFE933}Prefabs/MP/Modes/Roleplay/GameMode_Survival.et" {
+ components {
+  Z_LootGameModeComponent "{5B3B1D91A44EE9B8}" {
+   m_LootTableConfig "{A9A9A205E193F5AC}Config/Z_LootTableConfig_Modded.conf"
+  }
+ }
  coords 49.105 0 0
 }
 SCR_LoadoutManager : "{A7986593CF41C82B}Prefabs/MP/LoadoutManager.et" {
