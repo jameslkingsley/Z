@@ -70,8 +70,6 @@ class Z_ScavTaskPatrol : Z_ScavTaskBase
 		
 		// AddAllWaypoints(group, origin);
 		
-		// group.GetOnAgentRemoved().Insert(OnAgentRemoved);
-		
 		return watchers;
 	}
 	
@@ -129,23 +127,6 @@ class Z_ScavTaskPatrol : Z_ScavTaskBase
 		group.AddWaypoint(wp);
 		
 		Print("Added cycle waypoint to group");
-	}
-	
-	void OnAgentRemoved(AIGroup group, AIAgent agent)
-	{
-		if (!agent) return;
-		
-		IEntity ent = agent.GetControlledEntity();
-		
-		if (!ent) return;
-		
-		if (! GetGame().InPlayMode()) return;
-		
-		if (ent.IsDeleted()) return;
-		
-		Z_ScavEncounter.Create(ent.GetOrigin(), Z_ScavEncounterImportance.High);
-		
-		Print("Scav died, creating encounter: " + ent.GetOrigin());
 	}
 	
 	override ref array<ref Z_ScavTaskEntityStub> UpdateEntityStubs(map<IEntity, ref Z_ScavTaskEntityStub> watchers)

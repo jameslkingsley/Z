@@ -29,9 +29,11 @@ enum Z_LootLocation
 
 enum Z_LootTier
 {
-	Tier1,
-	Tier2,
-	Tier3
+	Tier1 = 0,
+	Tier2 = 1,
+	Tier3 = 2,
+	Tier4 = 3,
+	Tier5 = 4
 }
 
 [BaseContainerProps(description: "Loot Table")]

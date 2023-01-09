@@ -8,10 +8,13 @@ SCR_AIWorld : "{AFEEBEE81C34CD9C}Prefabs/MP/Modes/Z_AIWorld.et" {
    }
   }
   SCR_AISettingsComponent "{512CCCD0856CB4B9}" {
+   m_EnableVisualization 1
   }
  }
 }
 SCR_FactionManager Z_FactionManager1 : "{0A7D6E9CB503C82B}Prefabs/MP/Modes/Z_FactionManager.et" {
+ components {
+ }
 }
 EL_GameModeRoleplay GameMode_Survival_Full1 : "{AEBB6248A13EDE3D}Prefabs/MP/Modes/GameMode_Survival_Full.et" {
  components {

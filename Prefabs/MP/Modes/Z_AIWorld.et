@@ -10,8 +10,6 @@ SCR_AIWorld : "{E0A05C76552E7F58}Prefabs/AI/SCR_AIWorld.et" {
   }
   SCR_AISettingsComponent "{512CCCD0856CB4B9}" {
    m_EnableVisualization 0
-   m_AimingAccuracyModifier -3
-   m_SniperSkill REGULAR
   }
  }
  coords 0 0 0

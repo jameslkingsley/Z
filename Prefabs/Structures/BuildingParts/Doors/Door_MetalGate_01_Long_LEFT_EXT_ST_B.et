@@ -1,8 +1,0 @@
-GenericEntity : "{F1793FE006FDF888}Prefabs/Structures/BuildingParts/Doors/Door_Base.et" {
- ID "52827BD7726889D9"
- components {
-  DoorComponent "{221C667A9F7D4B69}" {
-   ClosedAngle -90
-  }
- }
-}
