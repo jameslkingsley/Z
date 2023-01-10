@@ -11,7 +11,7 @@
     "game": {
         "name": "ReforgerZ Arland",
         "password": "",
-        "scenarioId": "{C1A19ED967A2924D}Missions/Eden.conf",
+        "scenarioId": "{4B07590703633AC0}Missions/Debug.conf",
         "playerCountLimit": 64,
         "autoJoinable": false,
         "visible": true,
@@ -26,7 +26,7 @@
         "mods": [
             {
                 "modId": "5B34DB3A897B8B2B",
-                "name": "ReforgerZ"
+                "name": "Raider"
             }
         ]
     }

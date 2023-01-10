@@ -4,6 +4,13 @@ SCR_FactionManager Z_FactionManager1 : "{0A7D6E9CB503C82B}Prefabs/MP/Modes/Z_Fac
 }
 EL_GameModeRoleplay GameMode_Survival_Full1 : "{AEBB6248A13EDE3D}Prefabs/MP/Modes/GameMode_Survival_Full.et" {
  components {
+  EL_PersistenceManagerComponent "{59D28944F1C3532E}" {
+   m_fInterval 300
+  }
+  EL_RespawnSytemComponent "{5A10698A884816E6}" {
+   m_aDefaultCharacterItems {
+   }
+  }
   EL_RespawnSytemComponent "{5B3E275AE32D97DA}" {
    m_aDefaultCharacterItems {
     EL_DefaultLoadoutItem "{5C551A645CFFFB43}" {
@@ -15,6 +22,11 @@ EL_GameModeRoleplay GameMode_Survival_Full1 : "{AEBB6248A13EDE3D}Prefabs/MP/Mode
      }
     }
    }
+  }
+  SCR_NametagConfigComponent "{597514328498E41D}" {
+   Enabled 0
+  }
+  Z_BaseBuildingGameModeComponent "{5C551A6E8CF71833}" {
   }
   Z_LootGameModeComponent "{5B3B1D91A44EE9B8}" {
   }
