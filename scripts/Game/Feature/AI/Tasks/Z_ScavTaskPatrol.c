@@ -68,51 +68,32 @@ class Z_ScavTaskPatrol : Z_ScavTaskBase
 			watchers.Set(ai, stub);
 		}
 		
-		// AddAllWaypoints(group, origin);
+		AddWaypoints(group, origin);
 		
 		return watchers;
 	}
 	
-	void AddAllWaypoints(SCR_AIGroup group, vector origin)
+	void AddWaypoints(SCR_AIGroup group, vector origin)
 	{
 		array<AIWaypoint> queueOfWaypoints = new array<AIWaypoint>();
 		
-		for (int i = 0; i < Math.RandomInt(2, 5); i++)
+		for (int i = 0; i < Math.RandomInt(3, 6); i++)
 		{
-			AIWaypoint wp = AddWaypoint(group, origin);
+			vector wpPos = GetWaypointOrigin(origin);
 			
-			if (! wp) continue;
+			if (wpPos == vector.Zero) continue;
 			
-			queueOfWaypoints.Insert(wp);
+			EntitySpawnParams wpParams = EntitySpawnParams();
+			wpParams.TransformMode = ETransformMode.WORLD;
+			wpParams.Transform[3] = wpPos;
+			
+			AIWaypoint wp = AIWaypoint.Cast(GetGame().SpawnEntityPrefab(Resource.Load(m_WaypointPrefab), null, wpParams));
+			
+			if (wp) queueOfWaypoints.Insert(wp);
 		}
 		
-		if (queueOfWaypoints.IsEmpty())
-		{
-			Print("AI waypoints were empty", LogLevel.ERROR);
-			
-			return;
-		}
+		queueOfWaypoints.Insert(queueOfWaypoints[0]);
 		
-		AddCycleWaypoint(group, queueOfWaypoints.Get(0).GetOrigin(), queueOfWaypoints);
-	}
-	
-	AIWaypoint AddWaypoint(SCR_AIGroup group, vector origin)
-	{
-		EntitySpawnParams wpParams = EntitySpawnParams();
-		wpParams.TransformMode = ETransformMode.WORLD;
-		wpParams.Transform[3] = GetWaypointOrigin(origin);
-		
-		AIWaypoint wp = AIWaypoint.Cast(GetGame().SpawnEntityPrefab(Resource.Load(m_WaypointPrefab), GetGame().GetWorld(), wpParams));
-		
-		if (!wp) return null;
-		
-		group.AddWaypoint(wp);
-		
-		return wp;
-	}
-	
-	void AddCycleWaypoint(SCR_AIGroup group, vector origin, array<AIWaypoint> queueOfWaypoints)
-	{
 		EntitySpawnParams wpParams = new EntitySpawnParams();
 		wpParams.TransformMode = ETransformMode.WORLD;
 		wpParams.Transform[3] = origin;
@@ -124,9 +105,7 @@ class Z_ScavTaskPatrol : Z_ScavTaskBase
 		wp.SetWaypoints(queueOfWaypoints);
 		wp.SetRerunCounter(-1);
 		
-		group.AddWaypoint(wp);
-		
-		Print("Added cycle waypoint to group");
+		group.AddWaypointAt(wp, 0);
 	}
 	
 	override ref array<ref Z_ScavTaskEntityStub> UpdateEntityStubs(map<IEntity, ref Z_ScavTaskEntityStub> watchers)
@@ -202,9 +181,29 @@ class Z_ScavTaskPatrol : Z_ScavTaskBase
 		return 0;
 	}
 	
-	protected vector GetWaypointOrigin(vector from)
+	protected vector GetWaypointOrigin(vector from, int iterations = 20)
 	{
+		if (iterations <= 0)
+		{
+			return vector.Zero;
+		}
+		
 		RandomGenerator gen();
-		return gen.GenerateRandomPointInRadius(5, 50, from);
+		vector pos = gen.GenerateRandomPointInRadius(10, 300, from);
+		
+		vector finalPos;
+		bool posFound = SCR_WorldTools.FindEmptyTerrainPosition(finalPos, pos, 50);
+		
+		if (posFound)
+		{
+			posFound = ! Z_Core.IsUnderwater(finalPos);
+		}
+		
+		if (! posFound)
+		{
+			return GetWaypointOrigin(from, iterations - 1);
+		}
+		
+		return finalPos;
 	}
 };

@@ -32,6 +32,20 @@ $grp PolylineArea {
       m_SpawnRangeLower 1
       m_SpawnRangeUpper 4
      }
+     Z_LootRegionTier "{5C531A43EDC047E2}" {
+      m_LootTier Tier4
+      m_ProbabilityMin 0.02
+      m_ProbabilityMax 0.06
+      m_SpawnRangeLower 1
+      m_SpawnRangeUpper 3
+     }
+     Z_LootRegionTier "{5C531A43EA2FF2FB}" {
+      m_LootTier Tier5
+      m_ProbabilityMin 0.005
+      m_ProbabilityMax 0.02
+      m_SpawnRangeLower 1
+      m_SpawnRangeUpper 2
+     }
     }
    }
    Z_ScavRegionComponent "{5C500224E111EEB3}" {
@@ -155,10 +169,24 @@ $grp PolylineArea {
      }
      Z_LootRegionTier "{5C5002264F6F0ED2}" {
       m_LootTier Tier3
-      m_ProbabilityMin 0.04
+      m_ProbabilityMin 0.025
       m_ProbabilityMax 0.08
       m_SpawnRangeLower 1
       m_SpawnRangeUpper 4
+     }
+     Z_LootRegionTier "{5C531A5800CCD811}" {
+      m_LootTier Tier4
+      m_ProbabilityMin 0.01
+      m_ProbabilityMax 0.025
+      m_SpawnRangeLower 1
+      m_SpawnRangeUpper 3
+     }
+     Z_LootRegionTier "{5C531A58012C9965}" {
+      m_LootTier Tier5
+      m_ProbabilityMin 0.001
+      m_ProbabilityMax 0.01
+      m_SpawnRangeLower 1
+      m_SpawnRangeUpper 2
      }
     }
    }
@@ -295,6 +323,20 @@ $grp PolylineArea {
       m_SpawnRangeLower 1
       m_SpawnRangeUpper 4
      }
+     Z_LootRegionTier "{5C531A4384AD68A9}" {
+      m_LootTier Tier4
+      m_ProbabilityMin 0.01
+      m_ProbabilityMax 0.04
+      m_SpawnRangeLower 1
+      m_SpawnRangeUpper 3
+     }
+     Z_LootRegionTier "{5C531A4384BA7E39}" {
+      m_LootTier Tier5
+      m_ProbabilityMin 0.001
+      m_ProbabilityMax 0.01
+      m_SpawnRangeLower 1
+      m_SpawnRangeUpper 1
+     }
     }
    }
    RplComponent "{5C500227F4707243}" {
@@ -386,6 +428,18 @@ $grp PolylineArea {
       m_SpawnRangeLower 1
       m_SpawnRangeUpper 3
      }
+     Z_LootRegionTier "{5C531A420AC121C5}" {
+      m_LootTier Tier4
+      m_ProbabilityMin 0.001
+      m_ProbabilityMax 0.03
+      m_SpawnRangeLower 1
+      m_SpawnRangeUpper 3
+     }
+     Z_LootRegionTier "{5C531A420B28B05B}" {
+      m_LootTier Tier5
+      m_SpawnRangeLower 1
+      m_SpawnRangeUpper 3
+     }
     }
    }
    Z_ScavRegionComponent "{5C500226FCCB03C1}" {
@@ -473,6 +527,20 @@ $grp PolylineArea {
       m_ProbabilityMax 0.12
       m_SpawnRangeLower 1
       m_SpawnRangeUpper 4
+     }
+     Z_LootRegionTier "{5C531A4265AE3403}" {
+      m_LootTier Tier4
+      m_ProbabilityMin 0.01
+      m_ProbabilityMax 0.06
+      m_SpawnRangeLower 1
+      m_SpawnRangeUpper 3
+     }
+     Z_LootRegionTier "{5C531A4265BFE048}" {
+      m_LootTier Tier5
+      m_ProbabilityMin 0.001
+      m_ProbabilityMax 0.005
+      m_SpawnRangeLower 1
+      m_SpawnRangeUpper 1
      }
     }
    }
@@ -566,6 +634,20 @@ $grp PolylineArea {
       m_SpawnRangeLower 1
       m_SpawnRangeUpper 4
      }
+     Z_LootRegionTier "{5C531A4242586AD9}" {
+      m_LootTier Tier4
+      m_ProbabilityMin 0.01
+      m_ProbabilityMax 0.06
+      m_SpawnRangeLower 1
+      m_SpawnRangeUpper 3
+     }
+     Z_LootRegionTier "{5C531A4242A4AA2F}" {
+      m_LootTier Tier5
+      m_ProbabilityMin 0.001
+      m_ProbabilityMax 0.005
+      m_SpawnRangeLower 1
+      m_SpawnRangeUpper 1
+     }
     }
    }
    Z_ScavRegionComponent "{5C50022688CC81AB}" {
@@ -649,6 +731,20 @@ $grp PolylineArea {
       m_SpawnRangeLower 1
       m_SpawnRangeUpper 4
      }
+     Z_LootRegionTier "{5C531A423DCC007B}" {
+      m_LootTier Tier4
+      m_ProbabilityMin 0.01
+      m_ProbabilityMax 0.06
+      m_SpawnRangeLower 1
+      m_SpawnRangeUpper 3
+     }
+     Z_LootRegionTier "{5C531A423DDAA6E9}" {
+      m_LootTier Tier5
+      m_ProbabilityMin 0.001
+      m_ProbabilityMax 0.005
+      m_SpawnRangeLower 1
+      m_SpawnRangeUpper 1
+     }
     }
    }
    Z_ScavRegionComponent "{5C500226CB9AC2C7}" {
@@ -725,6 +821,20 @@ $grp PolylineArea {
       m_ProbabilityMax 0.18
       m_SpawnRangeLower 1
       m_SpawnRangeUpper 4
+     }
+     Z_LootRegionTier "{5C531A43A8740C81}" {
+      m_LootTier Tier4
+      m_ProbabilityMin 0.02
+      m_ProbabilityMax 0.08
+      m_SpawnRangeLower 1
+      m_SpawnRangeUpper 3
+     }
+     Z_LootRegionTier "{5C531A43A843DC2D}" {
+      m_LootTier Tier5
+      m_ProbabilityMin 0.005
+      m_ProbabilityMax 0.02
+      m_SpawnRangeLower 1
+      m_SpawnRangeUpper 2
      }
     }
    }
@@ -812,6 +922,20 @@ $grp PolylineArea {
       m_SpawnRangeLower 2
       m_SpawnRangeUpper 5
      }
+     Z_LootRegionTier "{5C531A43B0DA4FBB}" {
+      m_LootTier Tier4
+      m_ProbabilityMin 0.02
+      m_ProbabilityMax 0.06
+      m_SpawnRangeLower 1
+      m_SpawnRangeUpper 3
+     }
+     Z_LootRegionTier "{5C531A43B128D287}" {
+      m_LootTier Tier5
+      m_ProbabilityMin 0.005
+      m_ProbabilityMax 0.02
+      m_SpawnRangeLower 1
+      m_SpawnRangeUpper 2
+     }
     }
    }
    Z_ScavRegionComponent "{5C5002244D0D4C55}" {
@@ -884,6 +1008,20 @@ $grp PolylineArea {
       m_ProbabilityMax 0.24
       m_SpawnRangeLower 3
       m_SpawnRangeUpper 6
+     }
+     Z_LootRegionTier "{5C531A43F9500095}" {
+      m_LootTier Tier4
+      m_ProbabilityMin 0.04
+      m_ProbabilityMax 0.08
+      m_SpawnRangeLower 2
+      m_SpawnRangeUpper 4
+     }
+     Z_LootRegionTier "{5C531A43F9BF559A}" {
+      m_LootTier Tier5
+      m_ProbabilityMin 0.01
+      m_ProbabilityMax 0.04
+      m_SpawnRangeLower 1
+      m_SpawnRangeUpper 3
      }
     }
    }

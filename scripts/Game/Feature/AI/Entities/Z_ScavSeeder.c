@@ -30,6 +30,8 @@ class Z_ScavSeederEntity: GenericEntity
 			
 			vector origin = gen.GenerateRandomPointInRadius(1, m_Radius, GetOrigin(), false);
 			
+			if (Z_Core.IsUnderwater(origin)) continue;
+			
 			Z_ScavEncounter.Create(origin, m_Importance);
 		}
 	}

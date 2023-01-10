@@ -29,6 +29,23 @@ class Z_Core : EL_PersistentScriptedStateBase
 		return year + month + day + hour;
 	}
 	
+	static bool IsUnderwater(vector origin)
+	{
+		vector outWaterSurfacePoint;
+		EWaterSurfaceType outType;
+		vector transformWS[4];
+		vector obbExtents;
+		
+		float y = GetGame().GetWorld().GetSurfaceY(origin[0], origin[2]);
+                    
+		if (y > 0)
+		{
+		    origin[1] = y;
+		}
+		
+		return ChimeraWorldUtils.TryGetWaterSurface(GetGame().GetWorld(), origin, outWaterSurfacePoint, outType, transformWS, obbExtents);
+	}
+	
 	bool HasSeededScavEncounters()
 	{
 		return m_HasSeededScavEncounters;

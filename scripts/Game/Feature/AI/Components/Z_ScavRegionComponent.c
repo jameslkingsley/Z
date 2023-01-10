@@ -149,6 +149,8 @@ class Z_ScavRegionComponent : ScriptComponent
 		vector finalPos;
 		SCR_WorldTools.FindEmptyTerrainPosition(finalPos, pos, Z_HeatMap.CELL_SIZE_DIAGONAL);
 		
+		if (Z_Core.IsUnderwater(finalPos)) return;
+		
 		Z_PersistentScavTask persistentTask = Z_PersistentScavTask.Create(task, finalPos);
 		
 		persistentTask.Save();

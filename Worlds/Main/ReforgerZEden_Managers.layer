@@ -34,6 +34,22 @@ EL_GameModeRoleplay GameMode_Survival_Full1 : "{AEBB6248A13EDE3D}Prefabs/MP/Mode
   Z_LootGameModeComponent "{5B3B1D91A44EE9B8}" {
    m_LootTableConfig "{A9A9A205E193F5AC}Config/Z_LootTableConfig_Modded.conf"
   }
+  Z_LootRegionComponent "{5B3B1D91BA5A1071}" {
+   m_LootRegionTiers {
+    Z_LootRegionTier "{5C531A43063B8BD7}" {
+     m_LootTier Tier4
+     m_ProbabilityMin 0.001
+     m_ProbabilityMax 0.01
+     m_SpawnRangeLower 1
+     m_SpawnRangeUpper 1
+    }
+    Z_LootRegionTier "{5C531A43060531DC}" {
+     m_LootTier Tier5
+     m_SpawnRangeLower 1
+     m_SpawnRangeUpper 1
+    }
+   }
+  }
   Z_ScavGameModeComponent "{5C44B0A84C473AE1}" {
   }
  }
