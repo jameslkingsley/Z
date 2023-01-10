@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{69866F7F642722D4}Prefabs/Items/Medicine/Gauze_02/Z_SmallConstructionTool.et"
+ Configurations {
+  EntityTemplateResourceClass PC {
+  }
+  EntityTemplateResourceClass XBOX_ONE : PC {
+  }
+  EntityTemplateResourceClass XBOX_SERIES : PC {
+  }
+  EntityTemplateResourceClass PS4 : PC {
+  }
+  EntityTemplateResourceClass HEADLESS : PC {
+  }
+ }
+}

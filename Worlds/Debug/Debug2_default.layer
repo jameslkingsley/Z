@@ -1,0 +1,39 @@
+SCR_AIWorld : "{AFEEBEE81C34CD9C}Prefabs/MP/Modes/Z_AIWorld.et" {
+}
+SCR_FactionManager Z_FactionManager1 : "{0A7D6E9CB503C82B}Prefabs/MP/Modes/Z_FactionManager.et" {
+}
+EL_GameModeRoleplay GameMode_Survival_Full1 : "{AEBB6248A13EDE3D}Prefabs/MP/Modes/GameMode_Survival_Full.et" {
+ components {
+  EL_RespawnSytemComponent "{5B3E275AE32D97DA}" {
+   m_aDefaultCharacterItems {
+    EL_DefaultLoadoutItem "{5C551A645CFFFB43}" {
+     m_rPrefab "{5C5C6EE05EE2FF1A}Prefabs/Items/Equipment/Backpacks/Backpack_ALICE_Medium_assembled.et"
+     m_aStoredItems {
+      EL_DefaultLoadoutItem "{5C551A646802B9CC}" {
+       m_rPrefab "{69866F7F642722D4}Prefabs/BaseBuilding/Z_SmallConstructionTool.et"
+      }
+     }
+    }
+   }
+  }
+  Z_LootGameModeComponent "{5B3B1D91A44EE9B8}" {
+  }
+  Z_LootRegionComponent "{5B3B1D91BA5A1071}" {
+   Enabled 0
+  }
+  Z_ScavGameModeComponent "{5C44B0A84C473AE1}" {
+   Enabled 0
+  }
+ }
+}
+PerceptionManager Z_PerceptionManager1 : "{E2E47F72122DA208}Prefabs/MP/Modes/Z_PerceptionManager.et" {
+}
+SCR_GarbageManager : "{335D390C413531EE}Prefabs/MP/Modes/Z_GarbageManager.et" {
+}
+SCR_LoadoutManager : "{418EB83B1CC187BF}Prefabs/MP/Modes/Z_LoadoutManager.et" {
+}
+HitRegistrationManager Z_HitregManager1 : "{F0E427921CA5CF11}Prefabs/MP/Modes/Z_HitregManager.et" {
+}
+EL_SpawnPoint : "{F380E0551C8682AF}Prefabs/MP/PlayerSpawn_01.et" {
+ coords 125.414 1.001 133.727
+}

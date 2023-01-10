@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{A733AFB2235F69DA}Worlds/Debug/Debug2.ent"
+ Configurations {
+  ENTResourceClass PC {
+  }
+  ENTResourceClass XBOX_ONE : PC {
+  }
+  ENTResourceClass XBOX_SERIES : PC {
+  }
+  ENTResourceClass PS4 : PC {
+  }
+  ENTResourceClass HEADLESS : PC {
+  }
+ }
+}

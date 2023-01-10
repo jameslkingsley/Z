@@ -1,0 +1,53 @@
+GenericEntity : "{42894F191BC9EDE1}Prefabs/Props/Core/AmmoBox_Base.et" {
+ ID "F0DBA538AC2A0552"
+ components {
+  EL_PersistenceComponent "{5C53660081B16C59}" {
+   m_pSaveData EL_ItemSaveData "{5C536600AC43A668}" {
+    m_aComponents {
+     EL_TransformationSaveData "{5C536600A4D69652}" {
+     }
+     EL_BaseInventoryStorageComponentSaveData "{5C536600A3BA16FF}" {
+     }
+    }
+   }
+  }
+  MeshObject "{5872F0EB7FA40561}" {
+   Object "{8D5B5539D34FC9CF}Assets/Structures/Military/Camps/TentSmallUS_01/TentSmallUS_01.xob"
+  }
+  SCR_UniversalInventoryStorageComponent "{5476A2F100DF4EFF}" {
+   Attributes SCR_ItemAttributeCollection "{5476CDB2EAD8225E}" {
+    ItemDisplayName UIInfo "{54F48AF1F3C103C1}" {
+     Name "Small Tent"
+     Description "Small Tent"
+    }
+    m_Size SLOT_3x3
+    m_bDraggable 0
+   }
+   UseCapacityCoefficient 0
+   MaxCumulativeVolume 100000
+   m_fMaxWeight 4540
+  }
+  Z_AssemblyComponent "{5C536613D5308CD8}" {
+  }
+  ActionsManagerComponent "{5476B36C403D4CC0}" {
+   ActionContexts {
+    UserActionContext "{5476B36C47B0461A}" {
+     Radius 2
+    }
+   }
+   additionalActions {
+    Z_DisassemblePrefabAction "{5C53661390A3F318}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo UIInfo "{5C536613AD844A00}" {
+      Name "Pack Small Tent"
+      Description "Pack Small Tent"
+     }
+     Duration 5
+     "Sort Priority" 1
+    }
+   }
+  }
+ }
+}

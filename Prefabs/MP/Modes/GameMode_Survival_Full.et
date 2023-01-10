@@ -16,6 +16,8 @@ EL_GameModeRoleplay : "{E87F79D982AFE933}Prefabs/MP/Modes/Roleplay/GameMode_Surv
   SCR_NametagConfigComponent "{597514328498E41D}" {
    Enabled 0
   }
+  Z_BaseBuildingGameModeComponent "{5C551A6E8CF71833}" {
+  }
   Z_LootGameModeComponent "{5B3B1D91A44EE9B8}" {
    m_LootVolumeCooldownInSeconds 1800
   }

@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{3B270A7C30B41C62}Config/Z_BaseBuildingConfig.conf"
+ Configurations {
+  CONFResourceClass PC {
+  }
+  CONFResourceClass XBOX_ONE : PC {
+  }
+  CONFResourceClass XBOX_SERIES : PC {
+  }
+  CONFResourceClass PS4 : PC {
+  }
+  CONFResourceClass HEADLESS : PC {
+  }
+ }
+}

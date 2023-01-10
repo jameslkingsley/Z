@@ -1,0 +1,56 @@
+GenericEntity : "{AF3411AAF94D18C2}Prefabs/Items/Medicine/Gauze_02/Gauze_02.et" {
+ ID "51F66EC33748B84D"
+ components {
+  SoundComponent "{5A7C70054E8FBE18}" {
+   Filenames {
+    "{0026043E3CD828D0}Sounds/Items/_SharedData/PickUp/Items_PickUp_Generic_Metallic.acp" "{CC0E5A1324E761C1}Sounds/Items/_SharedData/Drop/Items_Drop_Generic.acp"
+   }
+  }
+  InventoryItemComponent "{5222EB4D0C73006B}" {
+   Attributes SCR_ItemAttributeCollection "{5222EB4D0A2B466B}" {
+    ItemDisplayName UIInfo "{5222EB4D07D865FA}" {
+     Name "Small Construction Tool"
+     Description "Small Construction Tool"
+     Icon ""
+    }
+    ItemPhysAttributes ItemPhysicalAttributes PhysicalAttributes {
+     Weight 10
+    }
+    CustomAttributes {
+     SCR_ItemOfInterestAttribute "{554E95CAC60BB241}" {
+      m_InterestType NONE
+     }
+    }
+    CommonItemType "NONE"
+    m_Size SLOT_2x2
+   }
+  }
+  MeshObject "{51F66EC3C5BC700D}" {
+   Object "{2AACD9F538FAE162}Assets/Items/Equipment/Accessories/ETool_ALICE/ETool_ALICE_carrier.xob"
+  }
+  SCR_ConsumableItemComponent "{5943631460899505}" {
+   Enabled 0
+   m_bAlternativeModelOnAction 0
+  }
+  Z_AssemblyComponent "{5C5366153937593D}" {
+  }
+  ActionsManagerComponent "{508AB5952B584B2E}" {
+   ActionContexts {
+   }
+   additionalActions {
+    Z_AssemblePrefabAction "{5C5366091552F5A7}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo UIInfo "{5C53660911FE57A7}" {
+      Name "Pitch Small Tent"
+      Description "Pitch Small Tent"
+     }
+     Duration 5
+     "Sort Priority" 1
+     m_Buildable "{0C616DEC41648AA5}Prefabs/BaseBuilding/Z_SmallTent_US.et"
+    }
+   }
+  }
+ }
+}
