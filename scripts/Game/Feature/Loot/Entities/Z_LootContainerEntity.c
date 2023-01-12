@@ -42,7 +42,6 @@ class Z_LootContainerEntity: GenericEntity
 		
 		if (table.m_TransformOffset)
 		{
-			// Might need converting to world space...
 			origin = origin + table.m_TransformOffset;
 		}
 		

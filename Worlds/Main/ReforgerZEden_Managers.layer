@@ -22,6 +22,11 @@ EL_GameModeRoleplay GameMode_Survival_Full1 : "{AEBB6248A13EDE3D}Prefabs/MP/Mode
    m_aDefaultCharacterItems {
     EL_DefaultLoadoutItem "{5B3E275AFDF13F0C}" {
      m_rPrefab "{5BA66581CD91B40E}Prefabs/Characters/Uniforms/Tops/short_sleeve_v2_FU_red.et"
+     m_aStoredItems {
+      EL_DefaultLoadoutItem "{5C5752069A0134CF}" {
+       m_rPrefab "{13772C903CB5E4F7}Prefabs/Items/Equipment/Maps/PaperMap_01_folded.et"
+      }
+     }
     }
     EL_DefaultLoadoutItem "{5B3E275AFDDA2A89}" {
      m_rPrefab "{4CE818FF4A86E19D}Prefabs/Characters/Uniforms/Pants/jeans_blue_washed.et"
@@ -29,9 +34,18 @@ EL_GameModeRoleplay GameMode_Survival_Full1 : "{AEBB6248A13EDE3D}Prefabs/MP/Mode
     EL_DefaultLoadoutItem "{5B3E275AFA2744C0}" {
      m_rPrefab "{A9842546F979348A}Prefabs/Characters/Footwear/Air_one.et"
     }
+    EL_DefaultLoadoutItem "{5C575213BBAE4C3D}" {
+     m_rPrefab "{5C5C6EE05EE2FF1A}Prefabs/Items/Equipment/Backpacks/Backpack_ALICE_Medium_assembled.et"
+     m_aStoredItems {
+      EL_DefaultLoadoutItem "{5C575213C827691B}" {
+       m_rPrefab "{69866F7F642722D4}Prefabs/BaseBuilding/Z_SmallConstructionTool.et"
+      }
+     }
+    }
    }
   }
   Z_LootGameModeComponent "{5B3B1D91A44EE9B8}" {
+   m_LootVolumeCollectionIntervalInSeconds 2
    m_LootTableConfig "{A9A9A205E193F5AC}Config/Z_LootTableConfig_Modded.conf"
   }
   Z_LootRegionComponent "{5B3B1D91BA5A1071}" {

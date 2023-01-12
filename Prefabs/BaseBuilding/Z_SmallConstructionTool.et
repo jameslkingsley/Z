@@ -46,7 +46,7 @@ GenericEntity : "{AF3411AAF94D18C2}Prefabs/Items/Medicine/Gauze_02/Gauze_02.et" 
       Name "Pitch Small Tent"
       Description "Pitch Small Tent"
      }
-     Duration 5
+     Duration 1
      "Sort Priority" 1
      m_Buildable "{0C616DEC41648AA5}Prefabs/BaseBuilding/Z_SmallTent_US.et"
     }

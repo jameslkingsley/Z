@@ -2,7 +2,7 @@ SCR_ChimeraCharacter {
  ID "520EC961A090B1EE"
  components {
   SCR_CharacterVicinityComponent "{529A70D96D401B33}" {
-   DiscoveryRadius 3
+   DiscoveryRadius 1
   }
   Z_CharacterMetabolismComponent "{5C42B9E2A25443D8}" {
   }

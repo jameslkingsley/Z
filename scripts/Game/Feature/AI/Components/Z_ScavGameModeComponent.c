@@ -16,6 +16,9 @@ class Z_ScavGameModeComponent: SCR_BaseGameModeComponent
 	[Attribute("2500", UIWidgets.Auto, "Player distance to scav tasks before spawning")]
 	int m_ScavTaskSpawningDistance;
 	
+	[Attribute("500", UIWidgets.Auto, "Player distance to scav tasks before holding spawns (so players don't see AI spawning)")]
+	int m_ScavTaskSpawnFreezeDistance;
+	
 	[Attribute("10", UIWidgets.Auto, "Impact on attrition when player is killed inside region")]
 	int m_PlayerDeathAttritionImpact;
 	
@@ -83,12 +86,15 @@ class Z_ScavGameModeComponent: SCR_BaseGameModeComponent
 		{
 			foreach (string gridCell, Z_PersistentScavTask task : region.GetTasks())
 			{
-				if (IsPlayerNear(task.GetOrigin(), m_ScavTaskSpawningDistance))
+				if (Z_Core.IsPlayerNear(task.GetOrigin(), m_ScavTaskSpawningDistance))
 				{
 					if (! task.HasSpawned())
 					{
-						task.Spawn(region.GetOwner());
-						Print("Spawning task (player near)");
+						if (! Z_Core.IsPlayerNear(task.GetOrigin(), m_ScavTaskSpawnFreezeDistance))
+						{
+							task.Spawn(region.GetOwner());
+							Print("Spawning task (player near)");
+						}
 					}
 				}
 				else
@@ -101,28 +107,6 @@ class Z_ScavGameModeComponent: SCR_BaseGameModeComponent
 				}
 			}
 		}
-	}
-	
-	bool IsPlayerNear(vector pos, float distance)
-	{
-		array<int> players();
-		GetGame().GetPlayerManager().GetPlayers(players);
-		
-		if (! players) return false;
-		
-		foreach (int playerId : players)
-		{
-			IEntity playerEnt = GetGame().GetPlayerManager().GetPlayerControlledEntity(playerId);
-			
-			if (! playerEnt) continue;
-			
-			if (vector.Distance(playerEnt.GetOrigin(), pos) <= distance)
-			{
-				return true;
-			}
-		}
-		
-		return false;
 	}
 	
 	override void OnControllableDestroyed(IEntity entity, IEntity instigator)

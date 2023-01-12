@@ -14,6 +14,52 @@ class Z_Core : EL_PersistentScriptedStateBase
 		return EL_PersistentScriptedStateLoader<Z_Core>.LoadSingleton();
 	}
 	
+	static bool IsPlayerNear(vector pos, float distance)
+	{
+		array<int> players();
+		GetGame().GetPlayerManager().GetPlayers(players);
+		
+		if (! players) return false;
+		
+		foreach (int playerId : players)
+		{
+			IEntity playerEnt = GetGame().GetPlayerManager().GetPlayerControlledEntity(playerId);
+			
+			if (! playerEnt) continue;
+			
+			if (vector.Distance(playerEnt.GetOrigin(), pos) <= distance)
+			{
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	static bool IsPlayerInsideCell(string cell)
+	{
+		array<int> players();
+		GetGame().GetPlayerManager().GetPlayers(players);
+		
+		if (! players) return false;
+		
+		foreach (int playerId : players)
+		{
+			IEntity playerEnt = GetGame().GetPlayerManager().GetPlayerControlledEntity(playerId);
+			
+			if (! playerEnt) continue;
+			
+			string playerCell = SCR_MapEntity.GetGridPos(playerEnt.GetOrigin());
+			
+			if (cell == playerCell)
+			{
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
 	static int GetCurrentTimestampInHours()
 	{
 		int epochYear = 2021;

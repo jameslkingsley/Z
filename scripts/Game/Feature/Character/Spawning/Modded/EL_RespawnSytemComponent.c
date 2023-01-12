@@ -4,7 +4,9 @@ modded class EL_RespawnSytemComponent : SCR_RespawnSystemComponent
 	{
 		GenericEntity player = super.RequestSpawn(playerId);
 		
-		FactionAffiliationComponent affiliationComp = FactionAffiliationComponent.Cast(player.FindComponent(FactionAffiliationComponent));
+		FactionAffiliationComponent affiliationComp = FactionAffiliationComponent.Cast(
+			player.FindComponent(FactionAffiliationComponent)
+		);
 		
 		if (affiliationComp)
 		{
@@ -30,5 +32,16 @@ modded class EL_RespawnSytemComponent : SCR_RespawnSystemComponent
 		}
 		
 		return player;
+	}
+	
+	override int GetFactionPlayerCount(Faction faction)
+	{
+		if (!faction) return 0;
+
+		int index = GetFactionIndex(faction);
+		if (index != SCR_PlayerRespawnInfo.RESPAWN_INFO_INVALID_INDEX && m_aFactionPlayerCount.IsIndexValid(index))
+			return m_aFactionPlayerCount[index];
+
+		return 0;
 	}
 }

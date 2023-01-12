@@ -26,7 +26,11 @@ class Z_LootGameModeComponent: SCR_BaseGameModeComponent
 	
 	ref array<Z_LootRegionComponent> m_LootRegions = {};
 	
-	ref array<IEntity> m_LootableEntities = {};
+	ref map<string, ref array<IEntity>> m_LootableEntities = new ref map<string, ref array<IEntity>>();
+	
+	ref map<string, ref array<IEntity>> m_LootVolumeEntities = new ref map<string, ref array<IEntity>>();
+	
+	ref array<int> m_PlayerIds = {};
 	
 	static Z_LootGameModeComponent GetInstance()
 	{
@@ -85,28 +89,78 @@ class Z_LootGameModeComponent: SCR_BaseGameModeComponent
 		
 		m_LootRegions.Insert(region);
 	}
+	
+	void RegisterLootVolume(IEntity ent)
+	{
+		string cell = SCR_MapEntity.GetGridPos(ent.GetOrigin());
+		
+		if (m_LootVolumeEntities.Contains(cell))
+		{
+			if (! m_LootVolumeEntities.Get(cell).Contains(ent))
+			{
+				m_LootVolumeEntities.Get(cell).Insert(ent);
+			}
+		}
+		else
+		{
+			ref array<IEntity> ents();
+			ents.Insert(ent);
+			m_LootVolumeEntities.Set(cell, ents);
+		}
+	}
 
 	void RegisterLootableEntity(IEntity ent)
 	{
-		if (m_LootableEntities.Contains(ent))
-			return;
+		string cell = SCR_MapEntity.GetGridPos(ent.GetOrigin());
 		
-		m_LootableEntities.Insert(ent);
+		if (m_LootableEntities.Contains(cell))
+		{
+			if (! m_LootableEntities.Get(cell).Contains(ent))
+			{
+				m_LootableEntities.Get(cell).Insert(ent);
+			}
+		}
+		else
+		{
+			ref array<IEntity> ents();
+			ents.Insert(ent);
+			m_LootableEntities.Set(cell, ents);
+		}
 	}
 	
 	void UnregisterLootableEntity(IEntity ent)
 	{
-		int index = m_LootableEntities.Find(ent);
+		string cell = SCR_MapEntity.GetGridPos(ent.GetOrigin());
 		
-		if (index > -1)
+		if (m_LootableEntities.Contains(cell))
 		{
-			m_LootableEntities.Remove(index);
+			int index = m_LootableEntities.Get(cell).Find(ent);
+		
+			if (index > -1)
+			{
+				m_LootableEntities.Get(cell).Remove(index);
+			}
 		}
 	}
-
-	ref array<IEntity> GetLootableEntities()
+	
+	ref array<IEntity> GetLootVolumeEntitiesInCell(string cell)
 	{
-		return m_LootableEntities;
+		if (m_LootVolumeEntities.Contains(cell))
+		{
+			return m_LootVolumeEntities.Get(cell);
+		}
+		
+		return new ref array<IEntity>();
+	}
+
+	ref array<IEntity> GetLootableEntitiesInCell(string cell)
+	{
+		if (m_LootableEntities.Contains(cell))
+		{
+			return m_LootableEntities.Get(cell);
+		}
+		
+		return new ref array<IEntity>();
 	}
 	
 	Z_LootRegionComponent GetLootRegionThatSurroundsEntity(IEntity ent)
@@ -171,19 +225,41 @@ class Z_LootGameModeComponent: SCR_BaseGameModeComponent
 	{
 		if (! Replication.Runtime()) return;
 		
-		// Print("Total tracked lootables: " + GetLootableEntities().Count());
+		foreach (string cell, ref array<IEntity> volumes : m_LootVolumeEntities)
+		{
+			// Add second arg to specify number of grid cells around cell arg to check
+			// Split string and add/subtract to surround the player cell arg
+			if (Z_Core.IsPlayerInsideCell(cell))
+			{
+				// Load loot volume
+				// After checking whether to load (check if already loaded, ignored etc)
+				// If previously loaded then tell all containers to load
+				// Containers store loot table instance on them + entity
+				// Container needs to store spawn origin so it can know when item is looted
+				// Possibly just use lootable component to determine this since most logic is already written there
+				// Lastly call existing code for filling volume - loaded containers will be excluded from empty list
+				// Mark volume as loaded + previously loaded
+			}
+			else
+			{
+				// Unload loot volume
+				// Loop all containers and if they have a tracked entity then store the table and delete the entity + unregister from lootables
+				// Delete remaining lootables in cell (that haven't been moved by players)
+				// Mark volume as unloaded
+			}
+		}
 		
-		array<int> players = {};
-		GetGame().GetPlayerManager().GetPlayers(players);
+		m_PlayerIds.Clear();
+		GetGame().GetPlayerManager().GetPlayers(m_PlayerIds);
 		
-		if (! players) return;
+		if (! m_PlayerIds) return;
 		
 		// TODO Group players together by position
 		// No point running near enough the same query if two players are together
 		
-		for (int i = 0, count = players.Count(); i < count; i++)
+		for (int i = 0, count = m_PlayerIds.Count(); i < count; i++)
 		{
-			IEntity playerEnt = GetGame().GetPlayerManager().GetPlayerControlledEntity(players.Get(i));
+			IEntity playerEnt = GetGame().GetPlayerManager().GetPlayerControlledEntity(m_PlayerIds.Get(i));
 			
 			if (! playerEnt) continue;
 			
@@ -197,6 +273,21 @@ class Z_LootGameModeComponent: SCR_BaseGameModeComponent
 		}
 	}
 	
+	void LoadLootVolume(Z_LootVolumeEntity vol)
+	{
+		if (! vol.IsSetup()) vol.Setup();
+		
+		if (vol.IsIgnored() || vol.IsInCooldown()) return;
+		
+		if (vol.HasPlayersInside(m_PlayerIds)) return;
+		
+		ref array<IEntity> lootables();
+		
+		if (vol.HasSufficientLoot(lootables)) return;
+		
+		vol.Refill(lootables);
+	}
+	
 	bool GetLootVolumeEntity(IEntity ent)
 	{
 		if (ent.Type() == Z_LootVolumeEntity)
@@ -207,9 +298,9 @@ class Z_LootGameModeComponent: SCR_BaseGameModeComponent
 			
 			if (vol.IsIgnored() || vol.IsInCooldown()) return true;
 			
-			if (vol.HasPlayersInside()) return true;
+			if (vol.HasPlayersInside(m_PlayerIds)) return true;
 			
-			ref array<IEntity> lootables = new ref array<IEntity>();
+			ref array<IEntity> lootables();
 			
 			if (vol.HasSufficientLoot(lootables)) return true;
 			

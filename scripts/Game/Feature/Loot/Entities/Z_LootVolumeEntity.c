@@ -23,6 +23,18 @@ class Z_LootVolumeEntity: GenericEntity
 	
 	private bool m_DebugLogs = false;
 	
+	void Z_LootVolumeEntity(IEntitySource src, IEntity parent)
+	{
+		SetEventMask(EntityEvent.INIT);
+	}
+	
+	override protected void EOnInit(IEntity owner)
+	{
+		super.EOnInit(owner);
+		
+		Z_LootGameModeComponent.GetInstance().RegisterLootVolume(owner);
+	}
+	
 	private void Log(string message, LogLevel level = LogLevel.NORMAL)
 	{
 		if (! m_DebugLogs) return;
@@ -122,17 +134,14 @@ class Z_LootVolumeEntity: GenericEntity
 		return IsPointInsideBBox(mins[0], maxs[2], maxs[0], mins[2], origin[0], origin[2]);
 	}
 	
-	bool HasPlayersInside()
+	bool HasPlayersInside(notnull array<int> playerIds)
 	{
-		array<int> players = {};
-		GetGame().GetPlayerManager().GetPlayers(players);
-		
 		vector mins, maxs;
 		GetParent().GetWorldBounds(mins, maxs);
 		
-		for (int i = 0, count = players.Count(); i < count; i++)
+		for (int i = 0, count = playerIds.Count(); i < count; i++)
 		{
-			IEntity playerEnt = GetGame().GetPlayerManager().GetPlayerControlledEntity(players.Get(i));
+			IEntity playerEnt = GetGame().GetPlayerManager().GetPlayerControlledEntity(playerIds.Get(i));
 			
 			if (! playerEnt) continue;
 			
@@ -160,11 +169,13 @@ class Z_LootVolumeEntity: GenericEntity
 		
 		GetParent().GetWorldBounds(mins, maxs);
 		
-		ref array<IEntity> entities = Z_LootGameModeComponent.GetInstance().GetLootableEntities();
+		Z_LootGameModeComponent gameMode = Z_LootGameModeComponent.GetInstance();
 		
-		float insufficiency = Z_LootGameModeComponent.GetInstance().GetVolumeInsufficiencyPercentage();
+		float insufficiency = gameMode.GetVolumeInsufficiencyPercentage();
 		
-		foreach (IEntity ent : entities)
+		Print(string.Format("Checking %1 lootables in cell %2 for volume", gameMode.GetLootableEntitiesInCell(GetCell()).Count(), GetCell()));
+		
+		foreach (IEntity ent : gameMode.GetLootableEntitiesInCell(GetCell()))
 		{
 			if (! ent) continue;
 			
@@ -182,6 +193,11 @@ class Z_LootVolumeEntity: GenericEntity
 		float percent = (float) emptyContainers / (float) m_Containers.Count();
 		
 		return percent < insufficiency;
+	}
+	
+	string GetCell()
+	{
+		return SCR_MapEntity.GetGridPos(GetOrigin());
 	}
 	
 	void Refill(array<IEntity> lootables)

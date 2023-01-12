@@ -8,8 +8,6 @@ GenericEntity : "{42894F191BC9EDE1}Prefabs/Props/Core/AmmoBox_Base.et" {
      }
      EL_BaseInventoryStorageComponentSaveData "{5C551A709E0FC4FA}" {
      }
-     Z_AssemblyComponentSaveData "{5C55482DA943458C}" {
-     }
     }
    }
   }
@@ -49,7 +47,7 @@ GenericEntity : "{42894F191BC9EDE1}Prefabs/Props/Core/AmmoBox_Base.et" {
       Name "Pack Small Tent"
       Description "Pack Small Tent"
      }
-     Duration 5
+     Duration 1
      "Sort Priority" 1
     }
    }
