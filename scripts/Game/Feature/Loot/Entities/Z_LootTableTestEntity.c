@@ -23,6 +23,7 @@ class Z_LootTableTestEntity : GenericEntity
 		
 		foreach (Z_LootTable table : tables)
 		{
+			if (! table.m_Enabled) continue;
 			if (! table.m_Resource) continue;
 			
 			EntitySpawnParams spawnParams = EntitySpawnParams();
