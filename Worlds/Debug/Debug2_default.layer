@@ -40,6 +40,9 @@ EL_GameModeRoleplay GameMode_Survival_Full1 : "{AEBB6248A13EDE3D}Prefabs/MP/Mode
 }
 PerceptionManager Z_PerceptionManager1 : "{E2E47F72122DA208}Prefabs/MP/Modes/Z_PerceptionManager.et" {
 }
+Z_LootTableTestEntity {
+ coords 0.339 1.907 221.024
+}
 SCR_GarbageManager : "{335D390C413531EE}Prefabs/MP/Modes/Z_GarbageManager.et" {
 }
 SCR_LoadoutManager : "{418EB83B1CC187BF}Prefabs/MP/Modes/Z_LoadoutManager.et" {
