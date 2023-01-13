@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{C833DB3BA3ECA91A}Prefabs/M4Peacemaker/Rifle_M4Peacemaker_URGI_black.et"
+ Configurations {
+  EntityTemplateResourceClass PC {
+  }
+  EntityTemplateResourceClass XBOX_ONE : PC {
+  }
+  EntityTemplateResourceClass XBOX_SERIES : PC {
+  }
+  EntityTemplateResourceClass PS4 : PC {
+  }
+  EntityTemplateResourceClass HEADLESS : PC {
+  }
+ }
+}
