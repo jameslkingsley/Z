@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{A9A9A205E193F5AC}Config/Z_LootTableConfig_Modded.conf"
+ Name "{E51F8E0F6586E0E9}Config/Tables/RHS/Clothing.conf"
  Configurations {
   CONFResourceClass PC {
   }

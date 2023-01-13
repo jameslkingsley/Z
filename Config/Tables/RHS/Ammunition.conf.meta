@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{E38CC58E6B17EDD6}Config/Tables/RHS/Ammunition.conf"
+ Configurations {
+  CONFResourceClass PC {
+  }
+  CONFResourceClass XBOX_ONE : PC {
+  }
+  CONFResourceClass XBOX_SERIES : PC {
+  }
+  CONFResourceClass PS4 : PC {
+  }
+  CONFResourceClass HEADLESS : PC {
+  }
+ }
+}
