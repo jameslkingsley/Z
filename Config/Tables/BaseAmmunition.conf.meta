@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{B2E9B0408BEB0194}Config/Tables/BaseAmmunition.conf"
+ Configurations {
+  CONFResourceClass PC {
+  }
+  CONFResourceClass XBOX_ONE : PC {
+  }
+  CONFResourceClass XBOX_SERIES : PC {
+  }
+  CONFResourceClass PS4 : PC {
+  }
+  CONFResourceClass HEADLESS : PC {
+  }
+ }
+}

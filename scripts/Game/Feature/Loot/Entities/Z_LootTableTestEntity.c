@@ -19,7 +19,7 @@ class Z_LootTableTestEntity : GenericEntity
 	{
 		ref array<ref Z_LootTable> tables = Z_LootGameModeComponent.GetInstance().GetLootTables();
 		
-		int currentOffset = 0;
+		float currentOffset = 0;
 		
 		foreach (Z_LootTable table : tables)
 		{
@@ -38,7 +38,7 @@ class Z_LootTableTestEntity : GenericEntity
 			
 			ent.SetYawPitchRoll(GetSpawnYawPitchRoll(table));
 			
-			currentOffset++;
+			currentOffset += 0.66;
 		}
 		
 		Print("Spawned entire loot table for testing", LogLevel.WARNING);

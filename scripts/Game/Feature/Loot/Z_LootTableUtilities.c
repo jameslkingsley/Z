@@ -30,9 +30,6 @@ class Z_LootTableUtilities
 		
 		foreach (ref Z_LootTable table : tables)
 		{
-			if (! table.m_Enabled)
-				continue;
-			
 			if (! tiers.Contains(table.m_Tier))
 				continue;
 			

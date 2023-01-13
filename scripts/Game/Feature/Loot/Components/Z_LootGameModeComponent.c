@@ -18,11 +18,11 @@ class Z_LootGameModeComponent: SCR_BaseGameModeComponent
 	
 	[Attribute("2", UIWidgets.Auto, "Age of a lootable in hours before it is considered stale (and will be cleaned up on next restart)", "1 168")]
 	int m_LootableStaleAgeInHours;
-
-	[Attribute("{82F1EADE5E5A0569}Config/Z_LootTableConfig.conf", UIWidgets.ResourceNamePicker, "Loot table config")]
-	ResourceName m_LootTableConfig;
 	
-	ref Z_LootTableConfig m_LootTableConfigCache;
+	[Attribute("", UIWidgets.ResourceNamePicker, "Loot table configs")]
+	ref array<ref ResourceName> m_LootTableConfigs;
+	
+	ref Z_LootTableConfigInternal m_LootTableConfigCache;
 	
 	ref array<Z_LootRegionComponent> m_LootRegions = {};
 	
@@ -78,11 +78,20 @@ class Z_LootGameModeComponent: SCR_BaseGameModeComponent
 			return m_LootTableConfigCache.m_LootTables;
 		}
 		
-		Resource container = BaseContainerTools.LoadContainer(m_LootTableConfig);
+		Z_LootTableConfigInternal conf();
+		
+		foreach (ResourceName res : m_LootTableConfigs)
+		{
+			Resource container = BaseContainerTools.LoadContainer(res);
 					
-		m_LootTableConfigCache = Z_LootTableConfig.Cast(
-			BaseContainerTools.CreateInstanceFromContainer(container.GetResource().ToBaseContainer())
-		);
+			Z_LootTableConfig config = Z_LootTableConfig.Cast(
+				BaseContainerTools.CreateInstanceFromContainer(container.GetResource().ToBaseContainer())
+			);
+			
+			conf.Merge(config.m_LootTables);
+		}
+					
+		m_LootTableConfigCache = conf;
 		
 		return m_LootTableConfigCache.m_LootTables;
 	}
