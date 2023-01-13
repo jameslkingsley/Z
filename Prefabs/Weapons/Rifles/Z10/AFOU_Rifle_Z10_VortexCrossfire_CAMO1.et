@@ -1,0 +1,19 @@
+GenericEntity : "{029A723C422B5E27}Prefabs/Weapons/Rifles/Z10/AFOU_Rifle_Z10_VortexCrossfire.et" {
+ ID "525494E72B1E90FD"
+ components {
+  WeaponComponent "{CFBAA4B706BA66E8}" {
+   components {
+    AttachmentSlotComponent "{5472D211BFD78F81}" {
+     AttachmentSlot InventoryStorageSlot Dovetail {
+      Prefab ""
+     }
+    }
+    AttachmentSlotComponent "{597D1113F5F54761}" {
+     AttachmentSlot InventoryStorageSlot underbarrel {
+      Prefab ""
+     }
+    }
+   }
+  }
+ }
+}

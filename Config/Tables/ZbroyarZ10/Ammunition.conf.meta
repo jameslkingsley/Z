@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{ABC8F8FA0E501719}Config/Tables/ZbroyarZ10/Ammunition.conf"
+ Configurations {
+  CONFResourceClass PC {
+  }
+  CONFResourceClass XBOX_ONE : PC {
+  }
+  CONFResourceClass XBOX_SERIES : PC {
+  }
+  CONFResourceClass PS4 : PC {
+  }
+  CONFResourceClass HEADLESS : PC {
+  }
+ }
+}

@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{1CA8C9D42D3F8680}Config/Tables/ZbroyarZ10/Attachments.conf"
+ Configurations {
+  CONFResourceClass PC {
+  }
+  CONFResourceClass XBOX_ONE : PC {
+  }
+  CONFResourceClass XBOX_SERIES : PC {
+  }
+  CONFResourceClass PS4 : PC {
+  }
+  CONFResourceClass HEADLESS : PC {
+  }
+ }
+}

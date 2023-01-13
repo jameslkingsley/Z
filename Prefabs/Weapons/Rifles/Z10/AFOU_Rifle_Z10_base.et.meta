@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{BBEE1756E8E20DB6}Prefabs/Weapons/Rifles/Z10/AFOU_Rifle_Z10_base.et"
+ Configurations {
+  EntityTemplateResourceClass PC {
+  }
+  EntityTemplateResourceClass XBOX_ONE : PC {
+  }
+  EntityTemplateResourceClass XBOX_SERIES : PC {
+  }
+  EntityTemplateResourceClass PS4 : PC {
+  }
+  EntityTemplateResourceClass HEADLESS : PC {
+  }
+ }
+}

@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{069D61D48208B10F}Config/Tables/M1A1Tompson/Weapons.conf"
+ Configurations {
+  CONFResourceClass PC {
+  }
+  CONFResourceClass XBOX_ONE : PC {
+  }
+  CONFResourceClass XBOX_SERIES : PC {
+  }
+  CONFResourceClass PS4 : PC {
+  }
+  CONFResourceClass HEADLESS : PC {
+  }
+ }
+}
