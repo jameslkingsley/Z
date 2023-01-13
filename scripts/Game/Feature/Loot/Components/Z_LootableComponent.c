@@ -7,6 +7,7 @@ class Z_LootableComponent : ScriptComponent
 {
 	vector m_InitialSpawnOrigin;
 	int m_InitialSpawnTimestampInHours;
+	bool m_Looted;
 	
 	protected override void OnPostInit(IEntity owner)
 	{
@@ -14,7 +15,9 @@ class Z_LootableComponent : ScriptComponent
 		
 		if (rplComponent && rplComponent.Role() == RplRole.Authority)
 		{
-			SetupLootable();
+			// TODO Handle stale looted items
+			if (! m_Looted)
+				SetupLootable();
 		}
 	}
 	
@@ -30,6 +33,16 @@ class Z_LootableComponent : ScriptComponent
 			
 			if (gameMode) gameMode.UnregisterLootableEntity(owner);
 		}
+	}
+	
+	bool IsLooted()
+	{
+		return (bool) m_Looted;
+	}
+	
+	void MarkAsLooted()
+	{
+		m_Looted = true;
 	}
 	
 	void SetupLootable()
@@ -70,6 +83,11 @@ class Z_LootableComponent : ScriptComponent
 	{
 		m_InitialSpawnTimestampInHours = hours;
 	}
+	
+	bool HasMovedFromSpawnOrigin()
+	{
+		return GetOwner().GetOrigin() != m_InitialSpawnOrigin;
+	}
 
 	bool CleanupIfStale()
 	{
@@ -79,7 +97,7 @@ class Z_LootableComponent : ScriptComponent
 		
 		// If the current position is different from the initially spawned position,
 		// then do not cleanup the item. This likely means a player moved it.
-		if (GetOwner().GetOrigin() != m_InitialSpawnOrigin) return false;
+		if (HasMovedFromSpawnOrigin()) return false;
 		
 		GetGame().GetCallqueue().Call(DeleteLootable);
 		
@@ -129,9 +147,7 @@ class Z_LootableComponent : ScriptComponent
 		
 		if (! gameMode) return null;
 		
-		ref array<ref Z_LootTable> tables = gameMode.GetLootTables();
-		
-		foreach (ref Z_LootTable table : tables)
+		foreach (ref Z_LootTable table : gameMode.GetLootTables())
 		{
 			if (table.m_Resource == resource)
 			{

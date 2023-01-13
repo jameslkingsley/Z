@@ -4,6 +4,42 @@ class Z_LootContainerEntityClass: GenericEntityClass
 
 class Z_LootContainerEntity: GenericEntity
 {
+	IEntity m_Entity;
+	ref Z_LootTable m_Table;
+	
+	void Load()
+	{
+		if (! m_Table) return;
+		if (m_Entity) return;
+		
+		SpawnLootable(m_Table);
+	}
+	
+	void Unload()
+	{
+		if (! m_Entity) return;
+		
+		Z_LootableComponent lootableComponent = Z_LootableComponent.Cast(m_Entity.FindComponent(Z_LootableComponent));
+		
+		if (! lootableComponent) return;
+		
+		if (lootableComponent.HasMovedFromSpawnOrigin())
+		{
+			lootableComponent.MarkAsLooted();
+			
+			m_Table = null;
+			m_Entity = null;
+			
+			return;
+		}
+		
+		Z_LootGameModeComponent.GetInstance().UnregisterLootableEntity(this);
+		
+		RplComponent.DeleteRplEntity(m_Entity, false);
+		
+		if (m_Entity) m_Entity = null;
+	}
+	
 	IEntity SpawnLootable(Z_LootTable table)
 	{
 		IEntity ent;
@@ -32,6 +68,9 @@ class Z_LootContainerEntity: GenericEntity
 		}
 		
 		lootableComponent.SetInitialSpawnState();
+		
+		m_Entity = ent;
+		m_Table = table;
 		
 		return ent;
 	}

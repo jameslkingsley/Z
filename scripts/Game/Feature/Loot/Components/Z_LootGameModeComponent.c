@@ -51,6 +51,11 @@ class Z_LootGameModeComponent: SCR_BaseGameModeComponent
 		Print("---- ReforgerZ Loot OnWorldPostProcess Complete ----");
 	}
 	
+	ref array<int> GetPlayerIds()
+	{
+		return m_PlayerIds;
+	}
+	
 	int GetLootVolumeCooldown()
 	{
 		return m_LootVolumeCooldownInSeconds;
@@ -225,6 +230,11 @@ class Z_LootGameModeComponent: SCR_BaseGameModeComponent
 	{
 		if (! Replication.Runtime()) return;
 		
+		m_PlayerIds.Clear();
+		GetGame().GetPlayerManager().GetPlayers(m_PlayerIds);
+		
+		if (! m_PlayerIds) return;
+		
 		foreach (string cell, ref array<IEntity> volumes : m_LootVolumeEntities)
 		{
 			// Add second arg to specify number of grid cells around cell arg to check
@@ -232,91 +242,37 @@ class Z_LootGameModeComponent: SCR_BaseGameModeComponent
 			if (Z_Core.IsPlayerInsideCell(cell))
 			{
 				// Load loot volume
-				// After checking whether to load (check if already loaded, ignored etc)
-				// If previously loaded then tell all containers to load
-				// Containers store loot table instance on them + entity
-				// Container needs to store spawn origin so it can know when item is looted
-				// Possibly just use lootable component to determine this since most logic is already written there
-				// Lastly call existing code for filling volume - loaded containers will be excluded from empty list
-				// Mark volume as loaded + previously loaded
+				foreach (IEntity ent : volumes)
+				{
+					Z_LootVolumeEntity volume = Z_LootVolumeEntity.Cast(ent);
+					
+					if (! volume)
+					{
+						Print("Entity tracked in loot volumes is not a loot volume", LogLevel.ERROR);
+						
+						continue;
+					}
+					
+					volume.Load();
+				}
 			}
 			else
 			{
 				// Unload loot volume
-				// Loop all containers and if they have a tracked entity then store the table and delete the entity + unregister from lootables
-				// Delete remaining lootables in cell (that haven't been moved by players)
-				// Mark volume as unloaded
+				foreach (IEntity ent : volumes)
+				{
+					Z_LootVolumeEntity volume = Z_LootVolumeEntity.Cast(ent);
+					
+					if (! volume)
+					{
+						Print("Entity tracked in loot volumes is not a loot volume", LogLevel.ERROR);
+						
+						continue;
+					}
+					
+					volume.Unload();
+				}
 			}
 		}
-		
-		m_PlayerIds.Clear();
-		GetGame().GetPlayerManager().GetPlayers(m_PlayerIds);
-		
-		if (! m_PlayerIds) return;
-		
-		// TODO Group players together by position
-		// No point running near enough the same query if two players are together
-		
-		for (int i = 0, count = m_PlayerIds.Count(); i < count; i++)
-		{
-			IEntity playerEnt = GetGame().GetPlayerManager().GetPlayerControlledEntity(m_PlayerIds.Get(i));
-			
-			if (! playerEnt) continue;
-			
-			GetGame().GetWorld().QueryEntitiesBySphere(
-				playerEnt.GetOrigin(),
-				m_LootVolumeQueryRadius,
-				GetLootVolumeEntity,
-				FilterLootVolumeEntities,
-				EQueryEntitiesFlags.ALL
-			);
-		}
-	}
-	
-	void LoadLootVolume(Z_LootVolumeEntity vol)
-	{
-		if (! vol.IsSetup()) vol.Setup();
-		
-		if (vol.IsIgnored() || vol.IsInCooldown()) return;
-		
-		if (vol.HasPlayersInside(m_PlayerIds)) return;
-		
-		ref array<IEntity> lootables();
-		
-		if (vol.HasSufficientLoot(lootables)) return;
-		
-		vol.Refill(lootables);
-	}
-	
-	bool GetLootVolumeEntity(IEntity ent)
-	{
-		if (ent.Type() == Z_LootVolumeEntity)
-		{
-			Z_LootVolumeEntity vol = Z_LootVolumeEntity.Cast(ent);
-			
-			if (! vol.IsSetup()) vol.Setup();
-			
-			if (vol.IsIgnored() || vol.IsInCooldown()) return true;
-			
-			if (vol.HasPlayersInside(m_PlayerIds)) return true;
-			
-			ref array<IEntity> lootables();
-			
-			if (vol.HasSufficientLoot(lootables)) return true;
-			
-			vol.Refill(lootables);
-		}
-
-		return true;
-	}
-	
-	bool FilterLootVolumeEntities(IEntity ent)
-	{
-		if (ent.Type() == Z_LootVolumeEntity)
-		{
-			return true;
-		}
-
-		return false;
 	}
 }

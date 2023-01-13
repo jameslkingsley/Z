@@ -19,6 +19,8 @@ class Z_LootVolumeEntity: GenericEntity
 	
 	bool m_IsSetup = false;
 	
+	bool m_IsLoaded = false;
+	
 	int m_RefilledAtTimestampInSeconds;
 	
 	private bool m_DebugLogs = false;
@@ -32,7 +34,83 @@ class Z_LootVolumeEntity: GenericEntity
 	{
 		super.EOnInit(owner);
 		
-		Z_LootGameModeComponent.GetInstance().RegisterLootVolume(owner);
+		if (! owner) return;
+		
+		Z_LootGameModeComponent gameMode = Z_LootGameModeComponent.GetInstance();
+		
+		if (! gameMode) return;
+		
+		gameMode.RegisterLootVolume(owner);
+	}
+	
+	void Load()
+	{
+		Z_LootGameModeComponent gameMode = Z_LootGameModeComponent.GetInstance();
+		
+		if (! IsSetup()) Setup();
+		
+		if (IsIgnored()) return;
+		
+		if (! IsVolumeLoaded())
+		{
+			LoadContainers();
+			
+			m_IsLoaded = true;
+		}
+		
+		if (IsInCooldown()) return;
+		
+		if (HasPlayersInside(gameMode.GetPlayerIds())) return;
+		
+		ref array<IEntity> lootables();
+		if (HasSufficientLoot(lootables)) return;
+		
+		Refill(lootables);
+		
+		// After checking whether to load (check if already loaded, ignored etc)
+		// If previously loaded then tell all containers to load
+		// Containers store loot table instance on them + entity
+		// Container needs to store spawn origin so it can know when item is looted
+		// Possibly just use lootable component to determine this since most logic is already written there
+		// Lastly call existing code for filling volume - loaded containers will be excluded from empty list
+		// Mark volume as loaded + previously loaded
+	}
+	
+	void Unload()
+	{
+		UnloadContainers();
+		
+		m_IsLoaded = false;
+		// Loop all containers and if they have a tracked entity then store the table and delete the entity + unregister from lootables
+		// Delete remaining lootables in cell (that haven't been moved by players)
+		// Mark volume as unloaded
+	}
+	
+	void LoadContainers()
+	{
+		if (! m_Containers) return;
+		if (m_Containers.IsEmpty()) return;
+		
+		foreach (Z_LootContainerEntity container : m_Containers)
+		{
+			container.Load();
+		}
+	}
+	
+	void UnloadContainers()
+	{
+		if (! m_Containers) return;
+		if (m_Containers.IsEmpty()) return;
+		
+		foreach (Z_LootContainerEntity container : m_Containers)
+		{
+			container.Unload();
+		}
+	}
+	
+	bool IsVolumeLoaded()
+	{
+		return m_IsLoaded;
 	}
 	
 	private void Log(string message, LogLevel level = LogLevel.NORMAL)

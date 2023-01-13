@@ -3,6 +3,7 @@ class Z_LootableEntitySaveData : EL_ComponentSaveDataBase
 {
 	vector m_InitialSpawnOrigin;
 	int m_InitialSpawnTimestampInHours;
+	bool m_Looted;
 	
 	override bool ReadFrom(notnull GenericComponent worldEntityComponent)
 	{
@@ -13,6 +14,8 @@ class Z_LootableEntitySaveData : EL_ComponentSaveDataBase
 		m_InitialSpawnOrigin = component.GetInitialSpawnOrigin();
 		
 		m_InitialSpawnTimestampInHours = component.GetInitialSpawnTimestampInHours();
+		
+		m_Looted = component.IsLooted();
 		
 		return true;
 	}
@@ -26,6 +29,8 @@ class Z_LootableEntitySaveData : EL_ComponentSaveDataBase
 		lootable.SetInitialSpawnOrigin(m_InitialSpawnOrigin);
 		
 		lootable.SetInitialSpawnTimestampInHours(m_InitialSpawnTimestampInHours);
+		
+		lootable.m_Looted = m_Looted;
 		
 		return true;
 	}

@@ -84,8 +84,12 @@ class Z_ScavGameModeComponent: SCR_BaseGameModeComponent
 	{
 		foreach (Z_ScavRegionComponent region : GetScavRegions())
 		{
+			if (! region) continue;
+			
 			foreach (string gridCell, Z_PersistentScavTask task : region.GetTasks())
 			{
+				if (! task) continue;
+				
 				if (Z_Core.IsPlayerNear(task.GetOrigin(), m_ScavTaskSpawningDistance))
 				{
 					if (! task.HasSpawned())

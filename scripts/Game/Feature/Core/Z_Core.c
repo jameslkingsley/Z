@@ -51,13 +51,52 @@ class Z_Core : EL_PersistentScriptedStateBase
 			
 			string playerCell = SCR_MapEntity.GetGridPos(playerEnt.GetOrigin());
 			
-			if (cell == playerCell)
+			if (IsCellInsideCell(playerCell, cell))
 			{
 				return true;
 			}
 		}
 		
 		return false;
+	}
+	
+	static bool IsCellInsideCell(string innerCell, string outerCell)
+	{
+		return innerCell == outerCell;
+		
+		/*
+		if (! buffer)
+		{
+			return innerCell == outerCell;
+		}
+		
+		array<string> coords();
+		outerCell.Split(" ", coords, true);
+				
+		int x = coords[0].ToInt();
+		int y = coords[1].ToInt();
+		
+		array<string> buffered();
+		
+		buffered.Insert(string.Format("%1 %2", (x - 1).ToString(3), (y + 1).ToString(3)));
+		buffered.Insert(string.Format("%1 %2", (x).ToString(3), (y + 1).ToString(3)));
+		buffered.Insert(string.Format("%1 %2", (x + 1).ToString(3), (y + 1).ToString(3)));
+		buffered.Insert(string.Format("%1 %2", (x - 1).ToString(3), (y).ToString(3)));
+		buffered.Insert(string.Format("%1 %2", (x + 1).ToString(3), (y).ToString(3)));
+		buffered.Insert(string.Format("%1 %2", (x - 1).ToString(3), (y - 1).ToString(3)));
+		buffered.Insert(string.Format("%1 %2", (x).ToString(3), (y - 1).ToString(3)));
+		buffered.Insert(string.Format("%1 %2", (x + 1).ToString(3), (y - 1).ToString(3)));
+		
+		foreach (string bCell : buffered)
+		{
+			if (innerCell == bCell)
+			{
+				return true;
+			}
+		}
+		
+		return false;
+		*/
 	}
 	
 	static int GetCurrentTimestampInHours()
