@@ -97,7 +97,6 @@ class Z_ScavGameModeComponent: SCR_BaseGameModeComponent
 						if (! Z_Core.IsPlayerNear(task.GetOrigin(), m_ScavTaskSpawnFreezeDistance))
 						{
 							task.Spawn(region.GetOwner());
-							Print("Spawning task (player near)");
 						}
 					}
 				}
@@ -106,7 +105,6 @@ class Z_ScavGameModeComponent: SCR_BaseGameModeComponent
 					if (task.HasSpawned())
 					{
 						task.DespawnOnNextUpdate(true);
-						Print("Despawning task (player not near)");
 					}
 				}
 			}

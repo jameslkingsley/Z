@@ -72,12 +72,12 @@ class Z_ScavRegionComponent : ScriptComponent
 		
 		if (newAttrition >= m_MaximumAttrition)
 		{
-			Print(string.Format("Region %1 has reached maximum attrition of %2", GetOwner().GetName(), m_MaximumAttrition));
+			// Print(string.Format("Region %1 has reached maximum attrition of %2", GetOwner().GetName(), m_MaximumAttrition));
 			
 			return;
 		}
 		
-		Print(string.Format("Region %1 gained %2 attrition (from external force), total is now %3", GetOwner().GetName(), impact, newAttrition));
+		// Print(string.Format("Region %1 gained %2 attrition (from external force), total is now %3", GetOwner().GetName(), impact, newAttrition));
 		
 		m_Attrition = newAttrition;
 	}
@@ -88,12 +88,12 @@ class Z_ScavRegionComponent : ScriptComponent
 		
 		if (newAttrition >= m_MaximumAttrition)
 		{
-			Print(string.Format("Region %1 has reached maximum attrition of %2", GetOwner().GetName(), m_MaximumAttrition));
+			// Print(string.Format("Region %1 has reached maximum attrition of %2", GetOwner().GetName(), m_MaximumAttrition));
 			
 			return;
 		}
 		
-		Print(string.Format("Region %1 gained %2 attrition, total is now %3", GetOwner().GetName(), m_BaseAttritionGain, newAttrition));
+		// Print(string.Format("Region %1 gained %2 attrition, total is now %3", GetOwner().GetName(), m_BaseAttritionGain, newAttrition));
 		
 		m_Attrition = newAttrition;
 	}
@@ -107,7 +107,7 @@ class Z_ScavRegionComponent : ScriptComponent
 	{
 		if (! m_AllowedTasks || m_AllowedTasks.IsEmpty())
 		{
-			Print("Cell region has no defined tasks", LogLevel.WARNING);
+			// Print("Cell region has no defined tasks", LogLevel.WARNING);
 			
 			return;
 		}
@@ -116,7 +116,7 @@ class Z_ScavRegionComponent : ScriptComponent
 		// TODO Add workbench attribute
 		if (m_CellTaskCounts.Contains(cell) && m_CellTaskCounts.Get(cell) >= 1)
 		{
-			Print("Cell has reached task limit", LogLevel.WARNING);
+			// Print("Cell has reached task limit", LogLevel.WARNING);
 			
 			return;
 		}
@@ -125,7 +125,7 @@ class Z_ScavRegionComponent : ScriptComponent
 		
 		if (affordableTasks.IsEmpty())
 		{
-			Print("Region does not have any affordable tasks left");
+			// Print("Region does not have any affordable tasks left");
 			
 			return;
 		}
@@ -213,7 +213,7 @@ class Z_ScavRegionComponent : ScriptComponent
 		
 		if (m_Tasks.IsEmpty())
 		{
-			Print("Scav region has no tasks in persistence", LogLevel.WARNING);
+			// Print("Scav region has no tasks in persistence", LogLevel.WARNING);
 			
 			return;
 		}
