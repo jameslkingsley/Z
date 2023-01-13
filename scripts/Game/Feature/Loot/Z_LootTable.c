@@ -56,4 +56,7 @@ class Z_LootTable
 	
 	[Attribute("0 0 0", UIWidgets.Coords, "Yaw pitch roll the item should have when spawned in")]
 	vector m_YawPitchRoll;
+	
+	[Attribute("1", UIWidgets.CheckBox, "Enable or disable this loot item")]
+	bool m_Enabled;
 }
