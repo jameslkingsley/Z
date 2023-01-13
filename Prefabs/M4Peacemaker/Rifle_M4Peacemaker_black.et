@@ -1,0 +1,23 @@
+GenericEntity : "{699B3B8C7D8271DB}Prefabs/M4Peacemaker/Rifle_M4Peacemaker_c.et" {
+ ID "CFBAA4B725411E45"
+ components {
+  BEAR_SuppressableMuzzleComponent "{59A47CAE74E00571}" {
+  }
+  BaconSuppressors_WeaponSuppressionComponent "{5B0721BA543289C0}" {
+  }
+  WeaponComponent "{CFBAA4B706BA66E8}" {
+   components {
+    AttachmentSlotComponent "{56DE9C900611C1AF}" {
+     AttachmentSlot InventoryStorageSlot Handguard {
+      Prefab ""
+     }
+    }
+    AttachmentSlotComponent "{5ABCF22761CEF629}" {
+     AttachmentSlot InventoryStorageSlot risattachment_top {
+      Prefab ""
+     }
+    }
+   }
+  }
+ }
+}
