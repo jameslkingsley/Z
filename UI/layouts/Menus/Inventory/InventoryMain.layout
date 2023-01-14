@@ -1,0 +1,27 @@
+FrameWidgetClass {
+ {
+  OverlayWidgetClass "{5660FB819599A1F5}" {
+   Prefab "{5660FB819599A1F5}"
+   {
+    ScaleWidgetClass "{552C9A0CDA9BDCA0}" {
+     Prefab "{552C9A0CDA9BDCA0}"
+     {
+      ImageWidgetClass "{552C8E22202CDD06}" {
+       Prefab "{552C8E22202CDD06}"
+       "Is Visible" 0
+      }
+     }
+    }
+    VerticalLayoutWidgetClass "{552CC287E0710A74}" {
+     Prefab "{552CC287E0710A74}"
+     {
+      ImageWidgetClass "{552CCA33CA467933}" {
+       Prefab "{552CCA33CA467933}"
+       "Is Visible" 0
+      }
+     }
+    }
+   }
+  }
+ }
+}
