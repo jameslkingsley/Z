@@ -1,0 +1,14 @@
+GenericEntity : "{C63227C0E70EA62E}Prefabs/Weapons/Rifles/M16/Rifle_M16A2_base.et" {
+ ID "CFBAA4B725411E45"
+ components {
+  WeaponComponent "{CFBAA4B706BA66E8}" {
+   components {
+    AttachmentSlotComponent "{59DD2A4BEE184F9F}" {
+     AttachmentSlot LoadoutSlotInfo ironsight {
+      Prefab "{D2F5EE73D943C74D}Prefabs/Weapons/Attachments/Optics/MK18_Ironsight/MK18_Ironsight.et"
+     }
+    }
+   }
+  }
+ }
+}

@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{71C8A289180EBCF7}Config/Tables/RISLaserAttachments/Attachments.conf"
+ Configurations {
+  CONFResourceClass PC {
+  }
+  CONFResourceClass XBOX_ONE : PC {
+  }
+  CONFResourceClass XBOX_SERIES : PC {
+  }
+  CONFResourceClass PS4 : PC {
+  }
+  CONFResourceClass HEADLESS : PC {
+  }
+ }
+}

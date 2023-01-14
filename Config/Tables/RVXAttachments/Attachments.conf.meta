@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{6AE6D4035B633711}Config/Tables/RVXAttachments/Attachments.conf"
+ Configurations {
+  CONFResourceClass PC {
+  }
+  CONFResourceClass XBOX_ONE : PC {
+  }
+  CONFResourceClass XBOX_SERIES : PC {
+  }
+  CONFResourceClass PS4 : PC {
+  }
+  CONFResourceClass HEADLESS : PC {
+  }
+ }
+}
