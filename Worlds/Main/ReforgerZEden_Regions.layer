@@ -6,6 +6,8 @@ $grp PolylineArea {
      m_aComponents {
       Z_ScavRegionComponentSaveData "{5C500224FA547A48}" {
       }
+      Z_VehicleRegionComponentSaveData "{5C5CBDCEF435B42E}" {
+      }
      }
     }
    }
@@ -55,6 +57,21 @@ $grp PolylineArea {
     m_AllowedTasks {
      Z_ScavTaskPatrol "{5C5002242D122AF2}" {
       m_Faction Raiders
+     }
+    }
+   }
+   Z_VehicleRegionComponent "{5C5CBDCEFF34BB79}" {
+    m_VehicleSpawnConfigs {
+     Z_VehicleRegionSpawnConfig "{5C5CBDCEFFD2A3C4}" {
+      m_Amount 12
+     }
+     Z_VehicleRegionSpawnConfig "{5C5CBDCEFC3F96D6}" {
+      m_Tier Tier2
+      m_Amount 6
+     }
+     Z_VehicleRegionSpawnConfig "{5C5CBDCEFCB92817}" {
+      m_Tier Tier3
+      m_Amount 3
      }
     }
    }
@@ -148,6 +165,8 @@ $grp PolylineArea {
      m_aComponents {
       Z_ScavRegionComponentSaveData "{5C50022631B6F593}" {
       }
+      Z_VehicleRegionComponentSaveData "{5C5CBDCED442628A}" {
+      }
      }
     }
    }
@@ -197,6 +216,13 @@ $grp PolylineArea {
      Z_ScavTaskPatrol "{5C5002266D82EF55}" {
       m_GroupSizeMin 1
       m_GroupSizeMax 3
+     }
+    }
+   }
+   Z_VehicleRegionComponent "{5C5CBDCEDE15A331}" {
+    m_VehicleSpawnConfigs {
+     Z_VehicleRegionSpawnConfig "{5C5CBDCEDF0AAE73}" {
+      m_Amount 10
      }
     }
    }
@@ -300,6 +326,14 @@ $grp PolylineArea {
  }
  NorthRegion {
   components {
+   EL_PersistenceComponent "{5C5CBDCEB7923CF0}" {
+    m_pSaveData Z_RegionSaveData "{5C5CBDCEB55C82C6}" {
+     m_aComponents {
+      Z_VehicleRegionComponentSaveData "{5C5CBDCEB39881CE}" {
+      }
+     }
+    }
+   }
    Z_LootRegionComponent "{5C500227F070C287}" {
     m_LootRegionTiers {
      Z_LootRegionTier "{5C5002271CF46A87}" {
@@ -336,6 +370,17 @@ $grp PolylineArea {
       m_ProbabilityMax 0.01
       m_SpawnRangeLower 1
       m_SpawnRangeUpper 1
+     }
+    }
+   }
+   Z_VehicleRegionComponent "{5C5CBDCEB152E714}" {
+    m_VehicleSpawnConfigs {
+     Z_VehicleRegionSpawnConfig "{5C5CBDCECE64F5BB}" {
+      m_Amount 6
+     }
+     Z_VehicleRegionSpawnConfig "{5C5CBDCECE73CF1D}" {
+      m_Tier Tier2
+      m_Amount 2
      }
     }
    }
@@ -402,6 +447,8 @@ $grp PolylineArea {
      m_aComponents {
       Z_ScavRegionComponentSaveData "{5C500226F966FAA5}" {
       }
+      Z_VehicleRegionComponentSaveData "{5C5CBDC97C588416}" {
+      }
      }
     }
    }
@@ -448,6 +495,15 @@ $grp PolylineArea {
      Z_ScavTaskPatrol "{5C50022616A5E62B}" {
       m_GroupSizeMin 1
       m_GroupSizeMax 6
+     }
+    }
+   }
+   Z_VehicleRegionComponent "{5C5CBDC978C0CCC4}" {
+    m_VehicleSpawnConfigs {
+     Z_VehicleRegionSpawnConfig "{5C5CBDC9771FC97D}" {
+     }
+     Z_VehicleRegionSpawnConfig "{5C5CBDC975FBE954}" {
+      m_Tier Tier2
      }
     }
    }
@@ -502,6 +558,8 @@ $grp PolylineArea {
      m_aComponents {
       Z_ScavRegionComponentSaveData "{5C500227481FC97E}" {
       }
+      Z_VehicleRegionComponentSaveData "{5C5CBDCE9A073B5F}" {
+      }
      }
     }
    }
@@ -551,6 +609,15 @@ $grp PolylineArea {
      Z_ScavTaskPatrol "{5C5002276FECBC5E}" {
       m_GroupSizeMin 1
       m_GroupSizeMax 6
+     }
+    }
+   }
+   Z_VehicleRegionComponent "{5C5CBDCE9BFE95DD}" {
+    m_VehicleSpawnConfigs {
+     Z_VehicleRegionSpawnConfig "{5C5CBDCE989DE928}" {
+     }
+     Z_VehicleRegionSpawnConfig "{5C5CBDCE98E7F485}" {
+      m_Tier Tier2
      }
     }
    }
@@ -796,6 +863,8 @@ $grp PolylineArea {
      m_aComponents {
       Z_ScavRegionComponentSaveData "{5C500227A5A9FF5D}" {
       }
+      Z_VehicleRegionComponentSaveData "{5C5CBDCEE6DA4BA3}" {
+      }
      }
     }
    }
@@ -845,6 +914,16 @@ $grp PolylineArea {
      Z_ScavTaskPatrol "{5C500227DC778581}" {
       m_Faction Raiders
       m_GroupSizeMax 6
+     }
+    }
+   }
+   Z_VehicleRegionComponent "{5C5CBDCEEFF62BEB}" {
+    m_VehicleSpawnConfigs {
+     Z_VehicleRegionSpawnConfig "{5C5CBDCEEC9D911A}" {
+      m_Tier Tier3
+     }
+     Z_VehicleRegionSpawnConfig "{5C5CBDCEEAB07BF1}" {
+      m_Tier Tier2
      }
     }
    }
@@ -983,6 +1062,8 @@ $grp PolylineArea {
      m_aComponents {
       Z_ScavRegionComponentSaveData "{5C500225107B6BBD}" {
       }
+      Z_VehicleRegionComponentSaveData "{5C5CBDCEF0E28198}" {
+      }
      }
     }
    }
@@ -1032,6 +1113,20 @@ $grp PolylineArea {
      Z_ScavTaskPatrol "{5C500224908ABCF3}" {
       m_Faction Raiders
       m_GroupSizeMax 6
+     }
+    }
+   }
+   Z_VehicleRegionComponent "{5C5CBDCE0E58F0C0}" {
+    m_VehicleSpawnConfigs {
+     Z_VehicleRegionSpawnConfig "{5C5CBDCE0F7EDD05}" {
+      m_Amount 6
+     }
+     Z_VehicleRegionSpawnConfig "{5C5CBDCE0F4DED51}" {
+      m_Tier Tier2
+      m_Amount 2
+     }
+     Z_VehicleRegionSpawnConfig "{5C5CBDCE0F5BA18D}" {
+      m_Tier Tier3
      }
     }
    }

@@ -47,8 +47,6 @@ class Z_LootGameModeComponent: SCR_BaseGameModeComponent
 		if (! Replication.IsServer() || ! GetGame().InPlayMode()) return;
 		
 		GetGame().GetCallqueue().CallLater(CollectLootVolumes, m_LootVolumeCollectionIntervalInSeconds * 1000, true);
-		
-		Print("---- ReforgerZ Loot OnWorldPostProcess Complete ----");
 	}
 	
 	ref array<int> GetPlayerIds()

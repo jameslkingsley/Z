@@ -54,5 +54,7 @@ EL_GameModeRoleplay : "{E87F79D982AFE933}Prefabs/MP/Modes/Roleplay/GameMode_Surv
   }
   Z_ScavGameModeComponent "{5C44B0A84C473AE1}" {
   }
+  Z_VehicleGameModeComponent "{5C5CBDCE18A97FED}" {
+  }
  }
 }

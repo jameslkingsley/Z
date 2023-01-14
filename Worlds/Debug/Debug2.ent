@@ -1,9 +1,12 @@
 SubScene {
  Parent "{96A8AF57260A7392}worlds/MP/MpTest.ent"
 }
-Layer default {
+Layer Core {
  Index 0
 }
 Layer Tables {
  Index 1
+}
+Layer Vehicles {
+ Index 2
 }

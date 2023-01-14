@@ -26,6 +26,10 @@ EL_GameModeRoleplay GameMode_Survival_Full1 : "{AEBB6248A13EDE3D}Prefabs/MP/Mode
   SCR_NametagConfigComponent "{597514328498E41D}" {
    Enabled 0
   }
+  SCR_TimeAndWeatherHandlerComponent "{5C5C00F5A21B2E26}" {
+   m_bRandomStartingDaytime 0
+   m_bRandomStartingWeather 0
+  }
   Z_BaseBuildingGameModeComponent "{5C551A6E8CF71833}" {
   }
   Z_LootGameModeComponent "{5B3B1D91A44EE9B8}" {
@@ -34,10 +38,11 @@ EL_GameModeRoleplay GameMode_Survival_Full1 : "{AEBB6248A13EDE3D}Prefabs/MP/Mode
    }
   }
   Z_LootRegionComponent "{5B3B1D91BA5A1071}" {
-   Enabled 0
   }
   Z_ScavGameModeComponent "{5C44B0A84C473AE1}" {
    Enabled 0
+  }
+  Z_VehicleGameModeComponent "{5C5CBDF9FF0EC6F8}" {
   }
  }
 }
@@ -49,9 +54,6 @@ Z_LootTableTestEntity {
 SCR_GarbageManager : "{335D390C413531EE}Prefabs/MP/Modes/Z_GarbageManager.et" {
 }
 SCR_LoadoutManager : "{418EB83B1CC187BF}Prefabs/MP/Modes/Z_LoadoutManager.et" {
-}
-SCR_DestructibleBuildingEntity : "{A548C1C5370D0734}Prefabs/Structures/Houses/Garage/Garage_E_01/Garage_E_01.et" {
- coords 118.384 0.001 120.746
 }
 HitRegistrationManager Z_HitregManager1 : "{F0E427921CA5CF11}Prefabs/MP/Modes/Z_HitregManager.et" {
 }

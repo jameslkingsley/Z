@@ -1,0 +1,31 @@
+SCR_DestructibleBuildingEntity : "{A548C1C5370D0734}Prefabs/Structures/Houses/Garage/Garage_E_01/Garage_E_01.et" {
+ coords 118.384 0.001 120.746
+ angleY -54.01
+ {
+  GenericEntity {
+   ID "5566F7B6D62F071B"
+   components {
+    DoorComponent "{221C667A9F7D4B69}" {
+     OpenTime 2
+    }
+   }
+  }
+  GenericEntity {
+   ID "5566F7B6D62F07F6"
+   components {
+    DoorComponent "{221C667A9F7D4B69}" {
+     OpenTime 3
+    }
+   }
+  }
+ }
+}
+Vehicle M151A1 : "{F649585ABB3706C4}Prefabs/Vehicles/Wheeled/M151A2/M151A2.et" {
+ components {
+  SCR_VehicleDamageManagerComponent "{141326E9FD94FE40}" {
+   m_fVehicleDestroyDamage 8980.1
+  }
+ }
+ coords 118.528 1.001 130.482
+ angleY -80.922
+}

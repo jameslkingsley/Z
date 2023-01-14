@@ -5,5 +5,9 @@ SCR_DestructibleBuildingEntity : "{A43A100E3C377DB2}Prefabs/Structures/Core/Buil
    ID "5B3E27560F4F7CBB"
    coords 0 0 0
   }
+  Z_VehicleContainerEntity : "{DE252D663DE2991B}Prefabs/Vehicles/Z_VehicleContainer_Base.et" {
+   ID "5C5CBDD0673C2B2E"
+   coords 8.294 0 0.075
+  }
  }
 }
