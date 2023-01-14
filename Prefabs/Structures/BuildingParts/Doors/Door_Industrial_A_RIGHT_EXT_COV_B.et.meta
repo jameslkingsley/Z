@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{511CA894BC764A75}Prefabs/Structures/BuildingParts/Doors/Door_Industrial_A_RIGHT_EXT_COV_B.et"
+ Configurations {
+  EntityTemplateResourceClass PC {
+  }
+  EntityTemplateResourceClass XBOX_ONE : PC {
+  }
+  EntityTemplateResourceClass XBOX_SERIES : PC {
+  }
+  EntityTemplateResourceClass PS4 : PC {
+  }
+  EntityTemplateResourceClass HEADLESS : PC {
+  }
+ }
+}

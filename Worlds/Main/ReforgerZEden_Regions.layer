@@ -63,15 +63,15 @@ $grp PolylineArea {
    Z_VehicleRegionComponent "{5C5CBDCEFF34BB79}" {
     m_VehicleSpawnConfigs {
      Z_VehicleRegionSpawnConfig "{5C5CBDCEFFD2A3C4}" {
-      m_Amount 12
+      m_Amount 4
      }
      Z_VehicleRegionSpawnConfig "{5C5CBDCEFC3F96D6}" {
       m_Tier Tier2
-      m_Amount 6
+      m_Amount 3
      }
      Z_VehicleRegionSpawnConfig "{5C5CBDCEFCB92817}" {
       m_Tier Tier3
-      m_Amount 3
+      m_Amount 2
      }
     }
    }
@@ -222,7 +222,7 @@ $grp PolylineArea {
    Z_VehicleRegionComponent "{5C5CBDCEDE15A331}" {
     m_VehicleSpawnConfigs {
      Z_VehicleRegionSpawnConfig "{5C5CBDCEDF0AAE73}" {
-      m_Amount 10
+      m_Amount 6
      }
     }
    }
@@ -376,7 +376,7 @@ $grp PolylineArea {
    Z_VehicleRegionComponent "{5C5CBDCEB152E714}" {
     m_VehicleSpawnConfigs {
      Z_VehicleRegionSpawnConfig "{5C5CBDCECE64F5BB}" {
-      m_Amount 6
+      m_Amount 4
      }
      Z_VehicleRegionSpawnConfig "{5C5CBDCECE73CF1D}" {
       m_Tier Tier2
@@ -1119,7 +1119,7 @@ $grp PolylineArea {
    Z_VehicleRegionComponent "{5C5CBDCE0E58F0C0}" {
     m_VehicleSpawnConfigs {
      Z_VehicleRegionSpawnConfig "{5C5CBDCE0F7EDD05}" {
-      m_Amount 6
+      m_Amount 3
      }
      Z_VehicleRegionSpawnConfig "{5C5CBDCE0F4DED51}" {
       m_Tier Tier2

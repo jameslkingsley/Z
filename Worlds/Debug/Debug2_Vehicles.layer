@@ -1,3 +1,6 @@
+SCR_DestructibleBuildingEntity : "{A4D0B331414901A5}Prefabs/Structures/Commercial/FuelStations/FuelStation_E_01/FuelStation_E_01_tankpistol.et" {
+ coords 112.642 0.001 134.475
+}
 SCR_DestructibleBuildingEntity : "{A548C1C5370D0734}Prefabs/Structures/Houses/Garage/Garage_E_01/Garage_E_01.et" {
  coords 118.384 0.001 120.746
  angleY -54.01
@@ -22,10 +25,17 @@ SCR_DestructibleBuildingEntity : "{A548C1C5370D0734}Prefabs/Structures/Houses/Ga
 }
 Vehicle M151A1 : "{F649585ABB3706C4}Prefabs/Vehicles/Wheeled/M151A2/M151A2.et" {
  components {
+  FuelManagerComponent "{5622A70CD78A9E2C}" {
+   FuelNodes {
+    SCR_FuelNode "{5622A70CD4036C5A}" {
+     m_fInitialFuelTankState 10
+    }
+   }
+  }
   SCR_VehicleDamageManagerComponent "{141326E9FD94FE40}" {
    m_fVehicleDestroyDamage 8980.1
   }
  }
- coords 118.528 1.001 130.482
+ coords 111.869 1.001 132.164
  angleY -80.922
 }

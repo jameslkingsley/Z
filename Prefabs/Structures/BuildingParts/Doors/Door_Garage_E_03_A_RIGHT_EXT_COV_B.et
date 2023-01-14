@@ -1,0 +1,8 @@
+GenericEntity : "{F1793FE006FDF888}Prefabs/Structures/BuildingParts/Doors/Door_Base.et" {
+ ID "51DEB81099ECC6EF"
+ components {
+  DoorComponent "{221C667A9F7D4B69}" {
+   OpenTime 3
+  }
+ }
+}

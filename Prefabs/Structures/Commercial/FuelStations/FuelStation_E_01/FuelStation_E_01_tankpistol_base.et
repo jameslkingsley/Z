@@ -1,0 +1,21 @@
+SCR_DestructibleBuildingEntity : "{A43A100E3C377DB2}Prefabs/Structures/Core/Building_Base.et" {
+ ID "F0DBA538AC2A0552"
+ components {
+  Z_VehicleRefuelingComponent "{5C5CBDDA5CA8C8A4}" {
+  }
+  ActionsManagerComponent "{59F28EE6E3CC7031}" {
+   additionalActions {
+    Z_RefuelAction "{5C5CBDD7E11DBC70}" {
+     ParentContextList {
+      "nozzle_l_out"
+     }
+     UIInfo UIInfo "{5C5CBDD7FD9C9659}" {
+      Name "Refuel"
+      Description "Refuel"
+     }
+     Duration 30
+    }
+   }
+  }
+ }
+}

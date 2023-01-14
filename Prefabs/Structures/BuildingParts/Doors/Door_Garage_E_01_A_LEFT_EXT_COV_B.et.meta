@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{83D0D6400E94237D}Prefabs/Structures/BuildingParts/Doors/Door_Garage_E_01_A_LEFT_EXT_COV_B.et"
+ Configurations {
+  EntityTemplateResourceClass PC {
+  }
+  EntityTemplateResourceClass XBOX_ONE : PC {
+  }
+  EntityTemplateResourceClass XBOX_SERIES : PC {
+  }
+  EntityTemplateResourceClass PS4 : PC {
+  }
+  EntityTemplateResourceClass HEADLESS : PC {
+  }
+ }
+}

@@ -11,6 +11,13 @@ SCR_DestructibleBuildingEntity : "{E35EA41864A3B0ED}Prefabs/Structures/Industria
     3 5
    }
   }
+  Z_VehicleContainerEntity : "{DE252D663DE2991B}Prefabs/Vehicles/Z_VehicleContainer_Base.et" {
+   ID "5C5CBDD144234C72"
+   coords 7.498 0.05 -2.268
+   angleY 81.496
+   Flags 1027
+   m_Size Large
+  }
   $grp Z_LootContainerEntity : "{EBE9660A3A74C747}Prefabs/Loot/Z_LootContainer_Base.et" {
    {
     ID "5B3CE41125C71184"

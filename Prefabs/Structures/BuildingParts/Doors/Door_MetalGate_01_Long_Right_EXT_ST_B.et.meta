@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{E6D1441D7FB333DE}Prefabs/Structures/BuildingParts/Doors/Door_MetalGate_01_Long_Right_EXT_ST_B.et"
+ Configurations {
+  EntityTemplateResourceClass PC {
+  }
+  EntityTemplateResourceClass XBOX_ONE : PC {
+  }
+  EntityTemplateResourceClass XBOX_SERIES : PC {
+  }
+  EntityTemplateResourceClass PS4 : PC {
+  }
+  EntityTemplateResourceClass HEADLESS : PC {
+  }
+ }
+}
