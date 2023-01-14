@@ -1,0 +1,19 @@
+GameEntity {
+ ID "5ABD2ACA02D0E182"
+ components {
+  EL_PersistenceComponent "{5C5CBDE3D17E1A07}" {
+   m_pSaveData EL_ItemSaveData "{5C5CBDE3ED04B599}" {
+    m_aComponents {
+     EL_TransformationSaveData "{5C5CBDE3EB56A91A}" {
+     }
+     EL_BaseInventoryStorageComponentSaveData "{5C5CBDE3E84D8DB9}" {
+     }
+     Z_LootableEntitySaveData "{5C5CBDE3E9AD4504}" {
+     }
+    }
+   }
+  }
+  Z_LootableComponent "{5C5CBDE3EF36AAD1}" {
+  }
+ }
+}

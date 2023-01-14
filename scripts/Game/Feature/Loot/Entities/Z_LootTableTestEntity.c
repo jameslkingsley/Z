@@ -36,6 +36,12 @@ class Z_LootTableTestEntity : GenericEntity
 				spawnParams
 			);
 			
+			if (! ent.FindComponent(Z_LootableComponent) || ! ent.FindComponent(EL_PersistenceComponent))
+			{
+				ent.SetOrigin(ent.GetOrigin() + Vector(0, 1, 0));
+				Print("Loot table item is missing core components", LogLevel.ERROR);
+			}
+			
 			ent.SetYawPitchRoll(GetSpawnYawPitchRoll(table));
 			
 			currentOffset += 0.66;

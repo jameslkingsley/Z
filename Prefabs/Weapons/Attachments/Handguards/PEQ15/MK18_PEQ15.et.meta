@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{6FD33179BFF2C518}Prefabs/Weapons/Attachments/Handguards/PEQ15/MK18_PEQ15.et"
+ Configurations {
+  EntityTemplateResourceClass PC {
+  }
+  EntityTemplateResourceClass XBOX_ONE : PC {
+  }
+  EntityTemplateResourceClass XBOX_SERIES : PC {
+  }
+  EntityTemplateResourceClass PS4 : PC {
+  }
+  EntityTemplateResourceClass HEADLESS : PC {
+  }
+ }
+}

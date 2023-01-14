@@ -1,0 +1,19 @@
+GenericEntity : "{FB1A7F5BC7D935E2}Prefabs/Weapons/Attachments/Handguards/Handguard_M16A2/Handguard_M16.et" {
+ ID "557E85EEE1B603F1"
+ components {
+  EL_PersistenceComponent "{5C5CBDE30B47EC37}" {
+   m_pSaveData EL_ItemSaveData "{5C5CBDE3073C365B}" {
+    m_aComponents {
+     EL_BaseInventoryStorageComponentSaveData "{5C5CBDE30449BEBB}" {
+     }
+     EL_TransformationSaveData "{5C5CBDE305A99710}" {
+     }
+     Z_LootableEntitySaveData "{5C5CBDE3029E0684}" {
+     }
+    }
+   }
+  }
+  Z_LootableComponent "{5C5CBDE308D55217}" {
+  }
+ }
+}

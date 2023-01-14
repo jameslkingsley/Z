@@ -1,0 +1,19 @@
+GenericEntity {
+ ID "59850A0C0D1693DD"
+ components {
+  EL_PersistenceComponent "{5C5CBDE390CCD01F}" {
+   m_pSaveData EL_ItemSaveData "{5C5CBDE3AE9E13A4}" {
+    m_aComponents {
+     EL_TransformationSaveData "{5C5CBDE3AC8B09F2}" {
+     }
+     EL_BaseInventoryStorageComponentSaveData "{5C5CBDE3AB46E8BB}" {
+     }
+     Z_LootableEntitySaveData "{5C5CBDE3A8B7A719}" {
+     }
+    }
+   }
+  }
+  Z_LootableComponent "{5C5CBDE2640FBBD2}" {
+  }
+ }
+}

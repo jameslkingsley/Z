@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{1302D4CAF36E7E03}Prefabs/Weapons/Attachments/Barrel/Suppressors/AFOU_Barrrel_Suppressor_base.et"
+ Configurations {
+  EntityTemplateResourceClass PC {
+  }
+  EntityTemplateResourceClass XBOX_ONE : PC {
+  }
+  EntityTemplateResourceClass XBOX_SERIES : PC {
+  }
+  EntityTemplateResourceClass PS4 : PC {
+  }
+  EntityTemplateResourceClass HEADLESS : PC {
+  }
+ }
+}
