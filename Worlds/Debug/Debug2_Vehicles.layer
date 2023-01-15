@@ -1,4 +1,13 @@
 SCR_DestructibleBuildingEntity : "{A4D0B331414901A5}Prefabs/Structures/Commercial/FuelStations/FuelStation_E_01/FuelStation_E_01_tankpistol.et" {
+ components {
+  ActionsManagerComponent "{59F28EE6E3CC7031}" {
+   additionalActions {
+    Z_RefuelAction "{5C5CBDD7E11DBC70}" {
+     Duration 2
+    }
+   }
+  }
+ }
  coords 112.642 0.001 134.475
 }
 SCR_DestructibleBuildingEntity : "{A548C1C5370D0734}Prefabs/Structures/Houses/Garage/Garage_E_01/Garage_E_01.et" {

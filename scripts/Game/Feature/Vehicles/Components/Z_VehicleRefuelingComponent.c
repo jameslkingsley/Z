@@ -21,7 +21,7 @@ class Z_VehicleRefuelingComponent: ScriptComponent
 		Rpc(RpcDo_RequestRefuel, rplComponent.Id());
 	}
 	
-	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
+	[RplRpc(RplChannel.Reliable, RplRcver.Owner)]
 	void RpcDo_RequestRefuel(RplId rplCompId)
 	{
 		RplComponent rplComp = RplComponent.Cast(Replication.FindItem(rplCompId));
@@ -35,12 +35,6 @@ class Z_VehicleRefuelingComponent: ScriptComponent
 		
 		Refuel(vehicle);
 		Repair(vehicle);
-		
-		EL_PersistenceComponent persistenceComponent = EL_PersistenceComponent.Cast(vehicle.FindComponent(EL_PersistenceComponent));
-		
-		if (! persistenceComponent) return;
-		
-		persistenceComponent.Save();
 	}
 	
 	void Repair(IEntity ent)
@@ -63,7 +57,10 @@ class Z_VehicleRefuelingComponent: ScriptComponent
 		
 		foreach (BaseFuelNode node : fuelNodes)
 		{
-			node.SetFuel(1);
+			if (node.GetFuel() == node.GetMaxFuel())
+				continue;
+			
+			node.SetFuel(node.GetMaxFuel());
 		}
 	}
 	
