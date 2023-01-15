@@ -12,8 +12,6 @@ class Z_PersistentScavTask : EL_PersistentScriptedStateBase
 	string m_Task;
 	vector m_Origin;
 	ref array<ref Z_ScavTaskEntityStub> m_EntityStubs;
-	bool m_DespawnOnNextUpdate;
-	bool m_HasSpawned;
 	
 	static Z_PersistentScavTask Create(Z_ScavTaskBase task, vector origin)
 	{
@@ -22,8 +20,6 @@ class Z_PersistentScavTask : EL_PersistentScriptedStateBase
 		instance.m_Task = Z_ScavTask.Get(task.Type());
 		instance.m_Origin = origin;
 		instance.m_EntityStubs = task.GetEntityStubs(instance);
-		instance.m_DespawnOnNextUpdate = false;
-		instance.m_HasSpawned = false;
 		
 		return instance;
 	}
@@ -38,14 +34,57 @@ class Z_PersistentScavTask : EL_PersistentScriptedStateBase
 		return m_Task;
 	}
 	
-	bool HasSpawned()
+	bool IsEmpty()
 	{
-		return m_HasSpawned;
+		return m_EntityStubs.IsEmpty();
 	}
 	
-	void DespawnOnNextUpdate(bool state = true)
+	bool HasSpawned()
 	{
-		m_DespawnOnNextUpdate = state;
+		string persistentId = GetPersistentId();
+		
+		if (! persistentId)
+		{
+			return false;
+		}
+		
+		return Z_ScavGameModeComponent.GetInstance().GetManagedTasks().Contains(persistentId);
+	}
+	
+	void Despawn(IEntity region)
+	{
+		Z_ScavRegionComponent regionComponent = Z_ScavRegionComponent.Cast(region.FindComponent(Z_ScavRegionComponent));
+		
+		string persistentId = GetPersistentId();
+		
+		if (! persistentId)
+		{
+			return;
+		}
+		
+		Z_ScavGameModeComponent gameMode = Z_ScavGameModeComponent.GetInstance();
+		
+		if (! gameMode) return;
+		
+		if (! gameMode.GetManagedTasks().Contains(persistentId)) return;
+		
+		array<ref Z_ScavTaskEntityStubInternal> internalStubs = gameMode.GetManagedTasks().Get(persistentId);
+		
+		Update(internalStubs);
+		
+		foreach (Z_ScavTaskEntityStubInternal stub : internalStubs)
+		{
+			SCR_EntityHelper.DeleteEntityAndChildren(stub.ent);
+		}
+		
+		gameMode.GetManagedTasks().Remove(persistentId);
+		
+		if (IsEmpty())
+		{
+			Delete();
+			
+			regionComponent.UnregisterTask(persistentId);
+		}
 	}
 	
 	void Spawn(IEntity region)
@@ -56,57 +95,81 @@ class Z_PersistentScavTask : EL_PersistentScriptedStateBase
 		
 		Z_ScavTaskBase task = regionComponent.GetAllowedTaskByType(taskType);
 		
-		ref map<IEntity, ref Z_ScavTaskEntityStub> entities = task.SpawnEntityStubs(m_Origin, m_EntityStubs);
+		SCR_AIGroup.IgnoreSpawning(true);
 		
-		m_HasSpawned = true;
+		array<ref Z_ScavTaskEntityStubInternal> internalStubs = task.SpawnEntityStubs(m_Origin, m_EntityStubs);
 		
-		Save();
+		SCR_AIGroup.IgnoreSpawning(false);
 		
-		GetGame().GetCallqueue().CallLater(Watch, 2000, true, region, entities);
-	}
-	
-	void Watch(IEntity region, map<IEntity, ref Z_ScavTaskEntityStub> entities)
-	{
-		if (entities.IsEmpty()) return;
+		string persistentId = GetPersistentId();
 		
-		Z_ScavRegionComponent regionComponent = Z_ScavRegionComponent.Cast(region.FindComponent(Z_ScavRegionComponent));
-		
-		if (! regionComponent) return;
-		
-		typename taskType = Z_ScavTask.GetTypeByName(m_Task);
-		
-		Z_ScavTaskBase task = regionComponent.GetAllowedTaskByType(taskType);
-		
-		m_EntityStubs = task.UpdateEntityStubs(entities);
-		
-		if (m_EntityStubs.IsEmpty())
-		{
-			GetGame().GetCallqueue().Remove(Watch);
-		
-			if (! region) return;
-			
-			string persistentId = GetPersistentId();
-			
-			Delete();
-			
-			GetGame().GetCallqueue().CallByName(regionComponent, "UnregisterTask", persistentId);
-			
-			return;
-		}
-		
-		if (m_DespawnOnNextUpdate)
+		if (! persistentId)
 		{
 			Save();
 			
-			foreach (IEntity ent, ref Z_ScavTaskEntityStub entityStub : entities)
-			{
-				RplComponent.DeleteRplEntity(ent, false);
-			}
-			
-			GetGame().GetCallqueue().Remove(Watch);
-			
-			m_DespawnOnNextUpdate = false;
-			m_HasSpawned = false;
+			persistentId = GetPersistentId();
 		}
+		
+		Z_ScavGameModeComponent.GetInstance().GetManagedTasks().Set(persistentId, internalStubs);
+	}
+	
+	void Update(notnull array<ref Z_ScavTaskEntityStubInternal> internalStubs)
+	{
+		array<ref Z_ScavTaskEntityStub> newStubs();
+		
+		foreach (Z_ScavTaskEntityStubInternal stub : internalStubs)
+		{
+			if (! stub.ent) continue;
+			
+			SCR_ChimeraCharacter char = SCR_ChimeraCharacter.Cast(stub.ent);
+				
+			if (! char) continue;
+			
+			CharacterControllerComponent charController = char.GetCharacterController();
+			
+			if (! charController) continue;
+			
+			if (charController.IsDead()) continue;
+			
+			Z_ScavTaskEntityStub newStub();
+			
+			newStub.resource = stub.resource;
+			newStub.origin = stub.ent.GetOrigin();
+			newStub.direction = charController.GetMovementDirWorld();
+			newStub.stance = charController.GetStance();
+			
+			newStubs.Insert(newStub);
+		}
+		
+		m_EntityStubs = newStubs;
+	}
+	
+	override EL_ScriptedStateSaveDataBase Save()
+	{
+		if (EL_PersistenceManager.GetInstance().GetState() == EL_EPersistenceManagerState.SHUTDOWN)
+		{
+			string persistentId = GetPersistentId();
+		
+			if (persistentId)
+			{
+				Z_ScavGameModeComponent gameMode = Z_ScavGameModeComponent.GetInstance();
+			
+				if (gameMode && gameMode.GetManagedTasks().Contains(persistentId))
+				{
+					array<ref Z_ScavTaskEntityStubInternal> internalStubs = gameMode.GetManagedTasks().Get(persistentId);
+				
+					Update(internalStubs);
+					
+					if (IsEmpty())
+					{
+						Delete();
+						
+						return null;
+					}
+				}
+			}
+		}
+		
+		return super.Save();
 	}
 }

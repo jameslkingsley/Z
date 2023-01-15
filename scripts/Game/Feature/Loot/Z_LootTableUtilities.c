@@ -5,9 +5,9 @@ class Z_LootTableUtilities
 		Z_LootTier tier
 	)
 	{
-		ref array<ref Z_LootTable> filtered = {};
+		array<ref Z_LootTable> filtered = {};
 		
-		foreach (ref Z_LootTable table : tables)
+		foreach (Z_LootTable table : tables)
 		{
 			if (table.m_Tier == tier)
 				filtered.Insert(table);
@@ -26,9 +26,9 @@ class Z_LootTableUtilities
 	)
 	{
 		ref array<ref Z_LootTable> result = {};
-		ref array<ref Z_LootTable> tables = Z_LootGameModeComponent.GetInstance().GetLootTables();
+		array<ref Z_LootTable> tables = Z_LootGameModeComponent.GetInstance().GetLootTables();
 		
-		foreach (ref Z_LootTable table : tables)
+		foreach (Z_LootTable table : tables)
 		{
 			if (! tiers.Contains(table.m_Tier))
 				continue;

@@ -11,7 +11,7 @@ class Z_LootTableConfigInternal
 	
 	void Merge(array<ref Z_LootTable> tables)
 	{
-		foreach (ref Z_LootTable tbl : tables)
+		foreach (Z_LootTable tbl : tables)
 		{
 			if (! tbl.m_Enabled) continue;
 			

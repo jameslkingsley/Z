@@ -62,7 +62,7 @@ class Z_LootVolumeEntity: GenericEntity
 		
 		if (HasPlayersInside(gameMode.GetPlayerIds())) return;
 		
-		ref array<IEntity> lootables();
+		array<IEntity> lootables();
 		if (HasSufficientLoot(lootables)) return;
 		
 		Refill(lootables);
@@ -310,7 +310,7 @@ class Z_LootVolumeEntity: GenericEntity
 		
 		vector pos = GetOrigin();
 		
-		ref array<Z_LootContainerEntity> emptyContainers = GetEmptyContainers(lootables);
+		array<Z_LootContainerEntity> emptyContainers = GetEmptyContainers(lootables);
 		
 		int countOfContainersToUse = Math.RandomInt(
 			(int) Math.Ceil(emptyContainers.Count() * region.GetMinimumContainerUsePercentage()),
@@ -327,7 +327,7 @@ class Z_LootVolumeEntity: GenericEntity
 			
 			array<ref Z_LootTier> acceptableTiers = GetAcceptableTiers(region);
 			
-			ref array<ref Z_LootTable> tables = Z_LootTableUtilities.GetTablesHaving(
+			array<ref Z_LootTable> tables = Z_LootTableUtilities.GetTablesHaving(
 				// TODO Add acceptable category limit as well
 				m_Categories, m_Locations, acceptableTiers
 			);

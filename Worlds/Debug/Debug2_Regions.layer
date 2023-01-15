@@ -1,0 +1,124 @@
+PolylineArea TestRegion {
+ components {
+  EL_PersistenceComponent "{5C5EB7DDAEDA0531}" {
+   m_pSaveData Z_RegionSaveData "{5C5EB7DDA466EE98}" {
+    m_aComponents {
+     Z_ScavRegionComponentSaveData "{5C5EB7DDA3F4C69A}" {
+     }
+    }
+   }
+  }
+  Z_ScavRegionComponent "{5C5EB7DDAD60266F}" {
+   m_StartingAttrition 100
+   m_MaximumAttrition 100
+   m_AllowedTasks {
+    Z_ScavTaskPatrol "{5C5EB7DDBA6B7DE3}" {
+     m_GroupSizeMax 4
+    }
+   }
+  }
+  RplComponent "{5C5EB7DD9376AAF9}" {
+  }
+ }
+ coords 242.625 1.001 19.809
+ {
+  PolylineShapeEntity {
+   components {
+    Hierarchy "{5C5EB7DD9DACE20B}" {
+    }
+   }
+   coords 0 0 0
+   Points {
+    ShapePoint "{5C5EB7DD8F5EBE2A}" {
+     Position 0 -0.001 0
+    }
+    ShapePoint "{5C5EB7DD8F5EBF26}" {
+     Position 5 -0.001 0
+    }
+    ShapePoint "{5C5EB7DD8CA8E805}" {
+     Position -75.123 -0.001 -0.749
+    }
+    ShapePoint "{5C5EB7DD8D623C56}" {
+     Position -78.266 0 107.83
+    }
+    ShapePoint "{5C5EB7DD8A37C4C8}" {
+     Position 2.181 0 107.023
+    }
+   }
+   IsClosed 1
+  }
+ }
+}
+Z_ScavSeederEntity {
+ coords 205.37 1.001 73.068
+ m_Radius 25
+ m_Importance High
+}
+$grp SCR_DestructibleEntity : "{33DCA1071EEC37F5}Prefabs/Structures/Walls/Concrete/SilageWall_02/SilageWall_02_corner.et" {
+ {
+  coords 243.945 0.001 127.161
+  angleY -88.354
+ }
+ {
+  coords 165.324 0.001 129.42
+  angleY 179.264
+ }
+ {
+  coords 166.756 0.001 17.972
+  angleY 90.956
+ }
+ {
+  coords 241.556 0.001 16.724
+  angleY 2.628
+ }
+ {
+  coords 195.572 0.001 75.63
+  angleY -90.783
+ }
+ {
+  coords 195.692 0.001 68.757
+  angleY -0.994
+ }
+ {
+  coords 188.806 0.001 75.516
+  angleY 179.132
+ }
+ {
+  coords 188.911 0.001 68.643
+  angleY 89.344
+ }
+}
+$grp SCR_DestructibleEntity : "{3AB68F44A671469E}Prefabs/Structures/Walls/Concrete/SilageWall_02/SilageWall_02_12m_A.et" {
+ {
+  coords 164.296 0.001 125.789
+  angleY 89.148
+ }
+ {
+  coords 164.494 0.001 112.49
+  angleY 89.148
+ }
+ {
+  coords 164.687 0.001 99.489
+  angleY 89.148
+ }
+ {
+  coords 164.877 0.001 86.736
+  angleY 89.148
+ }
+ {
+  coords 165.071 0.001 73.7
+  angleY 89.148
+ }
+ {
+  coords 165.261 0.001 60.893
+  angleY 89.148
+ }
+ {
+  coords 165.451 0.001 48.117
+  angleY 89.148
+ }
+ {
+  coords 165.65 0.001 34.731
+  angleY 89.148
+ }
+}

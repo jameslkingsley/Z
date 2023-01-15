@@ -112,7 +112,7 @@ class Z_VehicleRegionComponent : ScriptComponent
 	
 	ref Z_Vehicle GetRandomVehicleInTier(Z_VehicleTier tier)
 	{
-		ref array<ref Z_Vehicle> vehicles = Z_VehicleGameModeComponent.GetInstance().GetVehicleConfig().FilterByTier(tier);
+		array<ref Z_Vehicle> vehicles = Z_VehicleGameModeComponent.GetInstance().GetVehicleConfig().FilterByTier(tier);
 		
 		if (vehicles.IsEmpty()) return null;
 		
@@ -192,7 +192,7 @@ class Z_VehicleRegionComponent : ScriptComponent
 	
 	Z_VehicleContainerEntity GetRandomVehicleContainerBySize(Z_VehicleContainerSize size)
 	{
-		ref array<Z_VehicleContainerEntity> filtered();
+		array<Z_VehicleContainerEntity> filtered();
 		
 		foreach (Z_VehicleContainerEntity container : GetVehicleContainersInRegion())
 		{

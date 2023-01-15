@@ -26,6 +26,24 @@ class Z_ScavTaskEntityStub
 	ECharacterStance stance;
 };
 
+class Z_ScavTaskEntityStubInternal : Z_ScavTaskEntityStub
+{
+	IEntity ent;
+	
+	static Z_ScavTaskEntityStubInternal FromStub(Z_ScavTaskEntityStub stub, IEntity entity)
+	{
+		Z_ScavTaskEntityStubInternal instance();
+		
+		instance.ent = entity;
+		instance.resource = stub.resource;
+		instance.origin = stub.origin;
+		instance.direction = stub.direction;
+		instance.stance = stub.stance;
+		
+		return instance;
+	}
+};
+
 class Z_ScavTask
 {
 	protected static ref map<typename, string> s_mMapping;
@@ -83,9 +101,7 @@ class Z_ScavTaskBase
 	[Attribute("0", UIWidgets.ComboBox, "AI faction to spawn for this task", "", ParamEnumArray.FromEnum(Z_ScavFaction))]
 	Z_ScavFaction m_Faction;
 	
-	ref map<IEntity, ref Z_ScavTaskEntityStub> SpawnEntityStubs(vector origin, array<ref Z_ScavTaskEntityStub> stubs);
-	
-	ref array<ref Z_ScavTaskEntityStub> UpdateEntityStubs(map<IEntity, ref Z_ScavTaskEntityStub> watchers);
+	ref array<ref Z_ScavTaskEntityStubInternal> SpawnEntityStubs(vector origin, array<ref Z_ScavTaskEntityStub> stubs);
 	
 	ref array<ref Z_ScavTaskEntityStub> GetEntityStubs(Z_PersistentScavTask task);
 	

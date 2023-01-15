@@ -2,7 +2,7 @@
 class Z_ScavGameModeComponentClass: SCR_BaseGameModeComponentClass
 {}
 
-class Z_ScavGameModeComponent: SCR_BaseGameModeComponent
+class Z_ScavGameModeComponent : SCR_BaseGameModeComponent
 {
 	[Attribute("{19994566F9D13227}Config/Z_ScavConfig.conf", UIWidgets.ResourceNamePicker, "Scav config")]
 	ResourceName m_ScavConfig;
@@ -13,7 +13,7 @@ class Z_ScavGameModeComponent: SCR_BaseGameModeComponent
 	[Attribute("10", UIWidgets.Auto, "Interval in seconds for when nearby scav tasks are spawned")]
 	int m_ScavTaskIntervalInSeconds;
 	
-	[Attribute("2500", UIWidgets.Auto, "Player distance to scav tasks before spawning")]
+	[Attribute("1500", UIWidgets.Auto, "Player distance to scav tasks before spawning")]
 	int m_ScavTaskSpawningDistance;
 	
 	[Attribute("500", UIWidgets.Auto, "Player distance to scav tasks before holding spawns (so players don't see AI spawning)")]
@@ -25,7 +25,13 @@ class Z_ScavGameModeComponent: SCR_BaseGameModeComponent
 	[Attribute("-10", UIWidgets.Auto, "Impact on attrition when scav is killed inside region")]
 	int m_ScavDeathAttritionImpact;
 	
-	ref array<Z_ScavRegionComponent> m_ScavRegions = {};
+	[Attribute("0", UIWidgets.CheckBox, "For debug use only")]
+	bool m_IgnoreProbabilities;
+	
+	ref array<Z_ScavRegionComponent> m_ScavRegions = new ref array<Z_ScavRegionComponent>();
+	
+	// Persistent IDs to array of Z_ScavTaskEntityStubInternal
+	ref map<string, ref array<ref Z_ScavTaskEntityStubInternal>> m_ManagedTasks = new ref map<string, ref array<ref Z_ScavTaskEntityStubInternal>>();
 	
 	ref Z_ScavConfig m_ScavConfigCache;
 	
@@ -76,8 +82,11 @@ class Z_ScavGameModeComponent: SCR_BaseGameModeComponent
 		// Possibly just do this on server restarts?
 		GetGame().GetCallqueue().CallLater(InitializeHeatMap, m_HeatMapGenerationInterval * 60 * 1000);
 		GetGame().GetCallqueue().CallLater(InitializeTasks, ((m_HeatMapGenerationInterval * 60) + 10) * 1000);
-		
-		Print("---- ReforgerZ Scav OnWorldPostProcess Complete ----");
+	}
+	
+	ref map<string, ref array<ref Z_ScavTaskEntityStubInternal>> GetManagedTasks()
+	{
+		return m_ManagedTasks;
 	}
 	
 	void ManageTasks()
@@ -96,7 +105,7 @@ class Z_ScavGameModeComponent: SCR_BaseGameModeComponent
 					{
 						if (! Z_Core.IsPlayerNear(task.GetOrigin(), m_ScavTaskSpawnFreezeDistance))
 						{
-							task.Spawn(region.GetOwner());
+							GetGame().GetCallqueue().CallByName(task, "Spawn", region.GetOwner());
 						}
 					}
 				}
@@ -104,7 +113,7 @@ class Z_ScavGameModeComponent: SCR_BaseGameModeComponent
 				{
 					if (task.HasSpawned())
 					{
-						task.DespawnOnNextUpdate(true);
+						GetGame().GetCallqueue().CallByName(task, "Despawn", region.GetOwner());
 					}
 				}
 			}
@@ -175,10 +184,13 @@ class Z_ScavGameModeComponent: SCR_BaseGameModeComponent
 				vector origin = Vector(x, 0, z);
 				string cell = SCR_MapEntity.GetGridPos(origin);
 				
-				float prob = Z_HeatMap.GetProbability(cell);
+				if (! m_IgnoreProbabilities)
+				{
+					float prob = Z_HeatMap.GetProbability(cell);
 				
-				// Random number needs to be below probability for us to consider spawning any tasks
-				if (Math.RandomFloat(0, 1) > prob) continue;
+					// Random number needs to be below probability for us to consider spawning any tasks
+					if (Math.RandomFloat(0, 1) > prob) continue;
+				}
 				
 				Z_ScavRegionComponent region = GetScavRegionThatSurroundsOrigin(origin);
 				

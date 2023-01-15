@@ -13,9 +13,9 @@ class Z_ScavTaskPatrol : Z_ScavTaskBase
 	[Attribute("8", UIWidgets.Auto, "Maximum number of soldiers in the group")]
 	int m_GroupSizeMax;
 	
-	override ref map<IEntity, ref Z_ScavTaskEntityStub> SpawnEntityStubs(vector origin, array<ref Z_ScavTaskEntityStub> stubs)
+	override ref array<ref Z_ScavTaskEntityStubInternal> SpawnEntityStubs(vector origin, array<ref Z_ScavTaskEntityStub> stubs)
 	{
-		ref map<IEntity, ref Z_ScavTaskEntityStub> watchers();
+		ref array<ref Z_ScavTaskEntityStubInternal> result();
 		
 		// Create AI group
 		EntitySpawnParams grpParams = EntitySpawnParams();
@@ -32,12 +32,12 @@ class Z_ScavTaskPatrol : Z_ScavTaskBase
 		{
 			Print("Failed to find faction with key:" + GetFactionKey(), LogLevel.ERROR);
 			
-			return watchers;
+			return result;
 		}
 		
 		group.SetFaction(faction);
 		
-		foreach (ref Z_ScavTaskEntityStub stub : stubs)
+		foreach (Z_ScavTaskEntityStub stub : stubs)
 		{
 			// Spawn soldier and add to group
 			EntitySpawnParams params = EntitySpawnParams();
@@ -65,12 +65,12 @@ class Z_ScavTaskPatrol : Z_ScavTaskBase
 			
 			group.AddAIEntityToGroup(ai, index);
 			
-			watchers.Set(ai, stub);
+			result.Insert(Z_ScavTaskEntityStubInternal.FromStub(stub, ai));
 		}
 		
 		AddWaypoints(group, origin);
 		
-		return watchers;
+		return result;
 	}
 	
 	void AddWaypoints(SCR_AIGroup group, vector origin)
@@ -81,7 +81,12 @@ class Z_ScavTaskPatrol : Z_ScavTaskBase
 		{
 			vector wpPos = GetWaypointOrigin(origin);
 			
-			if (wpPos == vector.Zero) continue;
+			if (wpPos == vector.Zero)
+			{
+				Print("Waypoint origin was invalid", LogLevel.WARNING);
+				
+				continue;
+			}
 			
 			EntitySpawnParams wpParams = EntitySpawnParams();
 			wpParams.TransformMode = ETransformMode.WORLD;
@@ -90,6 +95,13 @@ class Z_ScavTaskPatrol : Z_ScavTaskBase
 			AIWaypoint wp = AIWaypoint.Cast(GetGame().SpawnEntityPrefab(Resource.Load(m_WaypointPrefab), null, wpParams));
 			
 			if (wp) queueOfWaypoints.Insert(wp);
+		}
+		
+		if (queueOfWaypoints.IsEmpty())
+		{
+			Print("AI waypoints queue is empty", LogLevel.WARNING);
+			
+			return;
 		}
 		
 		queueOfWaypoints.Insert(queueOfWaypoints[0]);
@@ -108,40 +120,9 @@ class Z_ScavTaskPatrol : Z_ScavTaskBase
 		group.AddWaypointAt(wp, 0);
 	}
 	
-	override ref array<ref Z_ScavTaskEntityStub> UpdateEntityStubs(map<IEntity, ref Z_ScavTaskEntityStub> watchers)
-	{
-		ref array<ref Z_ScavTaskEntityStub> stubs();
-		
-		foreach (IEntity ent, ref Z_ScavTaskEntityStub stub : watchers)
-		{
-			if (! ent) continue;
-			
-			SCR_ChimeraCharacter char = SCR_ChimeraCharacter.Cast(ent);
-			
-			if (! char) continue;
-			
-			CharacterControllerComponent charController = char.GetCharacterController();
-			
-			if (! charController) continue;
-			
-			if (charController.IsDead()) continue;
-			
-			ref Z_ScavTaskEntityStub newStub();
-			
-			newStub.resource = stub.resource;
-			newStub.origin = ent.GetOrigin();
-			newStub.direction = charController.GetMovementDirWorld();
-			newStub.stance = charController.GetStance();
-			
-			stubs.Insert(newStub);
-		}
-		
-		return stubs;
-	}
-	
 	override ref array<ref Z_ScavTaskEntityStub> GetEntityStubs(Z_PersistentScavTask task)
 	{
-		ref array<ref ResourceName> prefabs = Z_ScavGameModeComponent.GetInstance().GetConfig().GetSoldierPrefabs(m_Faction);
+		array<ref ResourceName> prefabs = Z_ScavGameModeComponent.GetInstance().GetConfig().GetSoldierPrefabs(m_Faction);
 		
 		if (prefabs.IsEmpty())
 		{

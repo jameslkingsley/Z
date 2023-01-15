@@ -17,7 +17,7 @@ class Z_LootTableTestEntity : GenericEntity
 	
 	void DoSpawn()
 	{
-		ref array<ref Z_LootTable> tables = Z_LootGameModeComponent.GetInstance().GetLootTables();
+		array<ref Z_LootTable> tables = Z_LootGameModeComponent.GetInstance().GetLootTables();
 		
 		float currentOffset = 0;
 		

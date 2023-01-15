@@ -115,7 +115,7 @@ class Z_LootGameModeComponent: SCR_BaseGameModeComponent
 		}
 		else
 		{
-			ref array<IEntity> ents();
+			array<IEntity> ents();
 			ents.Insert(ent);
 			m_LootVolumeEntities.Set(cell, ents);
 		}

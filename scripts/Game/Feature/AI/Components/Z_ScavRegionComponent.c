@@ -105,30 +105,15 @@ class Z_ScavRegionComponent : ScriptComponent
 	
 	void InitializeTasks(string cell, vector origin)
 	{
-		if (! m_AllowedTasks || m_AllowedTasks.IsEmpty())
-		{
-			// Print("Cell region has no defined tasks", LogLevel.WARNING);
-			
-			return;
-		}
+		if (! m_AllowedTasks || m_AllowedTasks.IsEmpty()) return;
 		
 		// Task limit within a cell for this region
 		// TODO Add workbench attribute
-		if (m_CellTaskCounts.Contains(cell) && m_CellTaskCounts.Get(cell) >= 1)
-		{
-			// Print("Cell has reached task limit", LogLevel.WARNING);
-			
-			return;
-		}
+		if (m_CellTaskCounts.Contains(cell) && m_CellTaskCounts.Get(cell) >= 1) return;
 		
 		array<Z_ScavTaskBase> affordableTasks = GetAffordableTasks();
 		
-		if (affordableTasks.IsEmpty())
-		{
-			// Print("Region does not have any affordable tasks left");
-			
-			return;
-		}
+		if (affordableTasks.IsEmpty()) return;
 		
 		array<float> weights = GetTasksAsWeights(affordableTasks);
 		
@@ -141,7 +126,7 @@ class Z_ScavRegionComponent : ScriptComponent
 			return;
 		}
 		
-		ref Z_ScavTaskBase task = affordableTasks.Get(index);
+		Z_ScavTaskBase task = affordableTasks.Get(index);
 		
 		RandomGenerator gen();
 		vector pos = gen.GenerateRandomPointInRadius(1, Z_HeatMap.CELL_SIZE_DIAGONAL, origin);
@@ -211,12 +196,7 @@ class Z_ScavRegionComponent : ScriptComponent
 	{
 		EL_PersistenceComponent persistence = EL_PersistenceComponent.Cast(GetOwner().FindComponent(EL_PersistenceComponent));
 		
-		if (m_Tasks.IsEmpty())
-		{
-			// Print("Scav region has no tasks in persistence", LogLevel.WARNING);
-			
-			return;
-		}
+		if (m_Tasks.IsEmpty()) return;
 		
 		array<string> taskIds();
 		foreach (string id, ref Z_PersistentScavTask task : m_Tasks)
@@ -228,12 +208,12 @@ class Z_ScavRegionComponent : ScriptComponent
 		
 		if (tasks.IsEmpty())
 		{
-			Print("Scav region could not resolve tasks from database", LogLevel.ERROR);
+			Print("Scav region could not resolve tasks from database", LogLevel.WARNING);
 			
 			return;
 		}
 		
-		foreach (ref Z_PersistentScavTask task : tasks)
+		foreach (Z_PersistentScavTask task : tasks)
 		{
 			RegisterTask(task);
 		}

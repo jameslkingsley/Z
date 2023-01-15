@@ -34,7 +34,7 @@ class Z_VehicleConfig
 	{
 		ref array<ref Z_Vehicle> filtered();
 		
-		foreach (ref Z_Vehicle vehicle : m_Vehicles)
+		foreach (Z_Vehicle vehicle : m_Vehicles)
 		{
 			if (vehicle.GetTier() == tier)
 			{
