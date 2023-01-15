@@ -13,7 +13,7 @@ SCR_DestructibleBuildingEntity : "{A43A100E3C377DB2}Prefabs/Structures/Core/Buil
       Name "Refuel"
       Description "Refuel"
      }
-     Duration 30
+     Duration 10
     }
    }
   }

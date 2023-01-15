@@ -44,13 +44,18 @@ SCR_ChimeraCharacter {
    components {
     SCR_CharacterCommandHandlerComponent "{520EA1D2F659C99A}" {
      MoveSettings ScriptCharacterCommandMoveSettings "{520EA1D2F659C99B}" {
-      OnTurnSpeedReducFactor 8
-      OnTurnNoReducAngle 7
-      m_fSpeed_Erect_Normal_Strafe 2.3
-      m_fSpeed_Erect_Fast_Strafe 3.8
+      SpeedVariableInterpolation 20
+      OnTurnSpeedReducFactor 3
+      OnTurnNoReducAngle 6
+      m_fSpeed_Erect_Normal_Strafe 3
+      m_fSpeed_Erect_Fast_Forward 5
+      m_fSpeed_Erect_Fast_Strafe 4
       SpeedMultiplierADS 0.4
       InnertiaCurve {
-       0.002 0.806 0.249 0.79 0.492 0.561 0.757 0.477 0.998 0.271
+       0 0.403 0.293 0.516 0.492 0.561 0.757 0.477 1 0.181
+      }
+      HeadingAdjustmentSpeedReduction {
+       0 0 0.234 0.052 0.462 0.219 0.721 0.413 1 0.503
       }
       AutoAlignHeadingOffsetThreshold 90
      }

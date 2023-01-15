@@ -41,6 +41,7 @@ EL_GameModeRoleplay GameMode_Survival_Full1 : "{AEBB6248A13EDE3D}Prefabs/MP/Mode
   Z_LootRegionComponent "{5B3B1D91BA5A1071}" {
   }
   Z_ScavGameModeComponent "{5C44B0A84C473AE1}" {
+   Enabled 0
    m_ScavTaskIntervalInSeconds 1
    m_ScavTaskSpawningDistance 100
    m_ScavTaskSpawnFreezeDistance 5
